@@ -1,14 +1,26 @@
 import './App.css';
 import React, {Component} from 'react';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
-import illinois_counties from './illinois_counties.json';
-import illinois_zipcodes from './illinois_zipcodes.json'
-import {county, selectedCounty, zipcode} from './LayerStyles';
+import illinois_counties from './GeoJSON/illinois_counties.json';
+import illinois_zipcodes from './GeoJSON/illinois_zipcodes.json'
+import {county, selectedCounty, zipcode} from './GeoJSON/LayerStyles';
 
-class App extends Component {
+
+export default class App extends Component {
+  /**
+   * State of the app. 
+   * 
+   * illinois_counties = County GeoJSON and county level data.
+   * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
+   * countyFilter = MapBox filter, used to select the couny that the mouse is hovered on
+   * viewport = Determines the size of the map, and initial centered position and zoom-level
+   * x,y = current location of mouse over the map
+   * hoveredCounty = county layer object, currently being hovered over by the mouse
+   */
   state = {
-    data: null,
-    filter: ['in', 'COUNTY', ''],
+    illinois_counties: null,
+    illinois_zipcodes: null,
+    countyFilter: ['in', 'COUNTY', ''],
     viewport: {
       latitude: 40.150196,
       longitude: -89.367848, 
@@ -18,14 +30,20 @@ class App extends Component {
     },
     x: null,
     y: null,
-    hoveredFeature: null
+    hoveredCounty: null
   }
 
+  
   componentDidMount() {
-    // API Call to get data (not implemented yet)
-    this.setState({data: this.loadCensusAreaRange(illinois_counties)})
+    // TODO: API Call to get data (not implemented yet)
+    this.setState({illinois_counties: this.loadCensusAreaRange(illinois_counties)})
+    this.setState({illinois_zipcodes: illinois_zipcodes})
   }
 
+  /**
+   * For Proof-of-Concept purposes only
+   * @param {*} featureCollection 
+   */
   loadCensusAreaRange(featureCollection) {
     const {features} = featureCollection;
     return {
@@ -60,30 +78,46 @@ class App extends Component {
     };
   }
 
-
+  /**
+   * onHover - Called by ReactMapGL's onHover function.
+   * @param event - Contains x,y coordinates of mouse over the map, as well as a list
+   * of the features that it is hovering over. 
+   * 
+   * At the moment -> This function sets the 'x','y' coords in state based on the event parameter,
+   * and if their is a hovered feature with a 'county' id, then the 'hoveredCounty' in state is 
+   * updated to match the given one.
+   */
   onHover = event => {
+    // Extract the list of features and x,y coords from the event parameter
     const {
       features,
       srcEvent: {offsetX, offsetY}
     } = event;
+
+    // Select the feature and corresponding countyId from the list of features if one exists
     const hoveredFeature = features && features.find(f => f.layer.id === 'county');
     var countyId = '';
     if (hoveredFeature) {
       countyId = hoveredFeature.properties.COUNTY;
     }
-    this.setState({hoveredFeature: hoveredFeature, x: offsetX, y: offsetY, filter: ['in', 'COUNTY', countyId]});
-    console.log(this.state);
+    // Set state with the updated information
+    this.setState({hoveredCounty: hoveredFeature, x: offsetX, y: offsetY, countyFilter: ['in', 'COUNTY', countyId]});
   };
 
+
+  /**
+   * Returns a component that displays some county information for the currently hovered county
+   */
   renderTooltip() {
-    const {hoveredFeature, x, y} = this.state;
+    const {hoveredCounty, x, y} = this.state;
 
     return (
-      hoveredFeature && (
+      // Only returns the tool tip if there is a currently hovered county
+      hoveredCounty && (
         <div className="tooltip" style={{left: x, top: y}}>
-          <div>County: {hoveredFeature.properties.NAME}</div>
-          <div>FIPS: {hoveredFeature.properties.COUNTY}</div>
-          <div>Area square miles: {hoveredFeature.properties.CENSUSAREA}</div>
+          <div>County: {hoveredCounty.properties.NAME}</div>
+          <div>FIPS: {hoveredCounty.properties.COUNTY}</div>
+          <div>Area square miles: {hoveredCounty.properties.CENSUSAREA}</div>
         </div>
       )
     );
@@ -98,23 +132,23 @@ class App extends Component {
           onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
           onHover={this.onHover}
         >
-          <Source id="counties" type="geojson" data={this.state.data}>
+          {/*County Level*/}
+          <Source id="counties" type="geojson" data={this.state.illinois_counties}>
             <Layer {...county}></Layer>
-            <Layer {...selectedCounty} filter={this.state.filter}></Layer>
+            <Layer {...selectedCounty} filter={this.state.countyFilter}></Layer>
           </Source>
           
+          {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
           {this.state.viewport.zoom > 7 && (
-            <Source id="zipcodes" type="geojson" data={illinois_zipcodes}>
+            <Source id="zipcodes" type="geojson" data={this.state.illinois_zipcodes}>
               <Layer {...zipcode}></Layer>
             </Source>
           )} 
           
+          {/*Tool-tip*/}
           {this.renderTooltip()} 
-          
         </ReactMapGL>
       </div>
     );
   }
 }
-
-export default App;
