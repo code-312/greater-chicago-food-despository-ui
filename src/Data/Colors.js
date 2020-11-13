@@ -1,16 +1,8 @@
 /**
  * Variables referring to colors.
  */
-
-export const yellow = "#f1c40f";
-
-export const greenColorScale = [
-    '#d5f5e3',
-    '#abebc6',
-    '#82e0aa',
-    '#58d68d',
-    '#2ecc71',
-    '#28b463',
-    '#239b56',
-    '#1d8348',
-    '#186a3b']
+export const highlight = "#f1c40f";
+export const countyFill = "#aed6f1";
+export const countyOutline = "#3498db";
+export const zipcodeFill = "#d5f5e3";
+export const zipcodeOutline = "#2ecc71";

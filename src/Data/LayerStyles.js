@@ -16,7 +16,7 @@
  *          line-width = width of outline
  */
 
- import {yellow, greenColorScale} from './Colors'
+ import {highlight, countyFill, countyOutline, zipcodeFill, zipcodeOutline} from './Colors'
 
 /**
  * Base styling for county layer objects
@@ -25,21 +25,9 @@ export const county = {
     id: 'county',
     type: 'fill',
     paint:{
-        'fill-color': {
-            property: 'rangeValue',
-            stops: [
-            [0, greenColorScale[0]],
-            [1, greenColorScale[1]],
-            [2, greenColorScale[2]],
-            [3, greenColorScale[3]],
-            [4, greenColorScale[4]],
-            [5, greenColorScale[5]],
-            [6, greenColorScale[6]],
-            [7, greenColorScale[7]],
-            [8, greenColorScale[8]]]
-        },
+        'fill-color': countyFill,
         "fill-opacity": 0.5, 
-        "fill-outline-color": "#2e86c1"
+        "fill-outline-color": countyOutline
     }
 };
 
@@ -50,9 +38,9 @@ export const selectedCounty = {
     id: 'selectedCounty',
     type: 'line',
     paint:{
-        "line-opacity": 0.5, 
-        "line-color": yellow,
-        "line-width": 5
+        "line-opacity": 0.75, 
+        "line-color": highlight,
+        "line-width": 3
     }
 };
 
@@ -63,8 +51,21 @@ export const zipcode = {
     id: 'zipcode',
     type: 'fill',
     paint:{
-        'fill-color': "#5dade2",
-        "fill-opacity": 0.3, 
-        "fill-outline-color": "#21618c"
+        'fill-color': zipcodeFill,
+        "fill-opacity": 0.5, 
+        "fill-outline-color": zipcodeOutline
     }
 }
+
+/**
+ * Styling for selected zipcode layer object (mouse is hovering over it)
+ */
+export const selectedZipcode = {
+    id: 'selectedZipcode',
+    type: 'line',
+    paint:{
+        "line-opacity": 0.75, 
+        "line-color": highlight,
+        "line-width": 1
+    }
+};

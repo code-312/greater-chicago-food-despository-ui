@@ -1,26 +1,38 @@
 import './App.css';
 import React, {Component} from 'react';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
-import illinois_counties from './GeoJSON/illinois_counties.json';
-import illinois_zipcodes from './GeoJSON/illinois_zipcodes.json'
-import {county, selectedCounty, zipcode} from './GeoJSON/LayerStyles';
+import illinois_counties from './Data/illinois_counties.json';
+import illinois_zipcodes from './Data/illinois_zipcodes.json'
+import {county, selectedCounty, zipcode, selectedZipcode} from './Data/LayerStyles';
 
-
+/**
+ * Main component of the application. 
+ * 
+ * NOTE: Currently, this component renders the MapBox map directly. 
+ * As the application grows, it will be important to extract the map into its own component.
+ */
 export default class App extends Component {
   /**
    * State of the app. 
    * 
+   * NOTE: Consider using Redux to manage app state.
+   * 
    * illinois_counties = County GeoJSON and county level data.
    * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
-   * countyFilter = MapBox filter, used to select the couny that the mouse is hovered on
+   * highlightCounty = filter used to select the county that the mouse is hovered on
+   * highlightZipcode = filter used to select the zipcode that the mouse is hovered on
+   * filterZipcodeByCounty = filter used to only display counties within the currently selected county
    * viewport = Determines the size of the map, and initial centered position and zoom-level
    * x,y = current location of mouse over the map
-   * hoveredCounty = county layer object, currently being hovered over by the mouse
+   * hoveredCounty = county feature currently being hovered over by the mouse
+   * hoveredZipcode = zipcode feature currently being hovered over by the mouse
    */
   state = {
     illinois_counties: null,
     illinois_zipcodes: null,
-    countyFilter: ['in', 'COUNTY', ''],
+    highlightCounty: ['in', 'COUNTY', ''],
+    highlightZipcode: ['in', 'ZCTA', ''],
+    filterZipcodeByCounty: ['in', 'COUNTY', ''],
     viewport: {
       latitude: 40.150196,
       longitude: -89.367848, 
@@ -30,62 +42,29 @@ export default class App extends Component {
     },
     x: null,
     y: null,
-    hoveredCounty: null
+    hoveredCounty: null,
+    hoveredZipCode: null,
   }
 
   
+  /**
+   * Fires before "constructor" and "getDerivedStateFromProps" methods, but after the "render" method.
+   * NOTE: API Call to get data (not implemented yet)
+   * ALT: If using Redux, api calls should be made by middleware (https://redux.js.org/tutorials/essentials/part-5-async-logic)
+   */
   componentDidMount() {
-    // TODO: API Call to get data (not implemented yet)
-    this.setState({illinois_counties: this.loadCensusAreaRange(illinois_counties)})
+    this.setState({illinois_counties: illinois_counties})
     this.setState({illinois_zipcodes: illinois_zipcodes})
   }
 
-  /**
-   * For Proof-of-Concept purposes only
-   * @param {*} featureCollection 
-   */
-  loadCensusAreaRange(featureCollection) {
-    const {features} = featureCollection;
-    return {
-      type: 'FeatureCollection',
-      features: features.map(f => {
-        var rangeValue;
-        if (f.properties.CENSUSAREA <= 200.0) {
-          rangeValue = 0;
-        } else if (f.properties.CENSUSAREA <= 300.0) {
-          rangeValue = 1;
-        } else if (f.properties.CENSUSAREA <= 400.0) {
-          rangeValue = 2;
-        } else if (f.properties.CENSUSAREA <= 500.0) {
-          rangeValue = 3;
-        } else if (f.properties.CENSUSAREA <= 600.0) {
-          rangeValue = 4;
-        } else if (f.properties.CENSUSAREA <= 700.0) {
-          rangeValue = 5;
-        } else if (f.properties.CENSUSAREA <= 800.0) {
-          rangeValue = 6;
-        } else if (f.properties.CENSUSAREA <= 900.0) {
-          rangeValue = 7
-        } else if (f.properties.CENSUSAREA > 900.0) {
-          rangeValue = 8;
-        }
-        const properties = {
-          ...f.properties,
-          rangeValue: rangeValue
-        };
-        return {...f, properties};
-      })
-    };
-  }
 
   /**
-   * onHover - Called by ReactMapGL's onHover function.
-   * @param event - Contains x,y coordinates of mouse over the map, as well as a list
-   * of the features that it is hovering over. 
+   * Called by ReactMapGL's onHover function when the mouse hovers over the MapBox map.
+   * Updates the application's state based on the position of the mouse and the underlying features.
    * 
-   * At the moment -> This function sets the 'x','y' coords in state based on the event parameter,
-   * and if their is a hovered feature with a 'county' id, then the 'hoveredCounty' in state is 
-   * updated to match the given one.
+   * @param event = Information related to hover-event.
+   * event.x,event.y = coordinates of mouse over the map
+   * event.features = List of the features that are currently being hovered over. 
    */
   onHover = event => {
     // Extract the list of features and x,y coords from the event parameter
@@ -95,21 +74,38 @@ export default class App extends Component {
     } = event;
 
     // Select the feature and corresponding countyId from the list of features if one exists
-    const hoveredFeature = features && features.find(f => f.layer.id === 'county');
-    var countyId = '';
-    if (hoveredFeature) {
-      countyId = hoveredFeature.properties.COUNTY;
+    const hoveredCounty = features && features.find(f => f.layer.id === 'county');
+    const hoveredZipCode = features && features.find(f => f.layer.id === 'zipcode');
+
+    // Given the currently hovered features, determine the zipcode and county filters:
+    var zipcodeFilter = '';
+    var county = '';
+    var zipcode = '';
+    if (hoveredCounty) {
+      county = hoveredCounty.properties.COUNTY;
+      zipcodeFilter = hoveredCounty.properties.STATE + county;
     }
+    if (hoveredZipCode) {zipcode = hoveredZipCode.properties.ZCTA}
+
     // Set state with the updated information
-    this.setState({hoveredCounty: hoveredFeature, x: offsetX, y: offsetY, countyFilter: ['in', 'COUNTY', countyId]});
+    this.setState({
+      hoveredCounty: hoveredCounty, 
+      hoveredZipCode: hoveredZipCode,
+      x: offsetX, 
+      y: offsetY, 
+      highlightCounty: ['in', 'COUNTY', county],
+      highlightZipcode: ['in', 'ZCTA', zipcode],
+      filterZipcodeByCounty: ['in', 'COUNTY', zipcodeFilter]
+    });
   };
 
 
   /**
-   * Returns a component that displays some county information for the currently hovered county
+   * Returns a component that displays: the county name, and FIPS number.
+   * If a zipcode is also highlighted, then also displays zipcode number.
    */
   renderTooltip() {
-    const {hoveredCounty, x, y} = this.state;
+    const {hoveredCounty, hoveredZipCode, x, y} = this.state;
 
     return (
       // Only returns the tool tip if there is a currently hovered county
@@ -117,31 +113,38 @@ export default class App extends Component {
         <div className="tooltip" style={{left: x, top: y}}>
           <div>County: {hoveredCounty.properties.NAME}</div>
           <div>FIPS: {hoveredCounty.properties.COUNTY}</div>
-          <div>Area square miles: {hoveredCounty.properties.CENSUSAREA}</div>
+          {hoveredZipCode != null &&
+            <div>Zipcode: {hoveredZipCode.properties.ZCTA}</div>
+          }
         </div>
       )
     );
   }
 
+  /**
+   * Fires after the "constructor" and "getDerivedStateFromProps" methods, but before "componentDidMount."
+   * Returns the HTML object to be rendered by App component.
+   */
   render() {
     return (
       <div className="App">
         <ReactMapGL
           {...this.state.viewport}
-          mapboxApiAccessToken={"pk.eyJ1IjoiZWdhYnJpZWxzZSIsImEiOiJja2d2ZDZua2QwMWI3M2JwajA0Z3lqbDdmIn0.sAaMKjFMEglTFxZwKyU75Q"}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
           onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
           onHover={this.onHover}
         >
           {/*County Level*/}
           <Source id="counties" type="geojson" data={this.state.illinois_counties}>
             <Layer {...county}></Layer>
-            <Layer {...selectedCounty} filter={this.state.countyFilter}></Layer>
+            <Layer {...selectedCounty} filter={this.state.highlightCounty}></Layer>
           </Source>
           
           {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
           {this.state.viewport.zoom > 7 && (
             <Source id="zipcodes" type="geojson" data={this.state.illinois_zipcodes}>
-              <Layer {...zipcode}></Layer>
+              <Layer {...zipcode} filter={this.state.filterZipcodeByCounty}></Layer>
+              <Layer {...selectedZipcode} filter={this.state.highlightZipcode}></Layer>
             </Source>
           )} 
           
