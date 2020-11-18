@@ -1,3 +1,50 @@
+# Greater Chicago Food Depository - Frontend UI
+
+## JSON Format for data consumed by the frontend:
+Data for both counties and zipcodes should be in the form of a list of key,value pairs.
+of the corresponding data to that county.
+
+### County Level Format: 
+The keys for counties should be the State + County FIPS codes in string format:
+State FIPS codes are two digits (Illinois' is "17") and the County FIPS codes are always 3 digits.
+Not all datasets will combine these two, so in processing data it may be necessary to do this step.
+In the example below, the first key is "17001" which equals Illinois + Adams County.
+
+    {
+        "17001": {
+            "metric_one": 1234,
+            "metric_two": 4321,
+            ...
+        }, 
+        "17002": {
+            "metric_one": 1234,
+            "metric_two": 4321,
+            ...
+        }, 
+        ...
+    }
+
+### Zipcode Level Format: 
+The keys for zipcodes should be the 5-digit long zipcode number in string format.
+
+    {
+        "60610": {
+            "metric_one": 1234,
+            "metric_two": 4321,
+            ...
+        }, 
+        "60611": {
+            "metric_one": 1234,
+            "metric_two": 4321,
+            ...
+        }, 
+        ...
+    }
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
