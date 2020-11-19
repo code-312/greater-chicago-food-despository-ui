@@ -1,5 +1,17 @@
 # Greater Chicago Food Depository - Frontend UI
 
+## Local API Key Configuration
+To protect any API keys during production they should not be hard-coded into the application. 
+Any API Keys should instead be stored at the root of the project directory in a .env file, which are already 
+setup to be ignored by git. Variables in a .env file can be accessed anywhere throught the app as: 
+
+    process.env.REACT_APP_API_VARIABLE_NAME.
+
+For more info on .env files: https://create-react-app.dev/docs/adding-custom-environment-variables/
+
+### API Keys and Corresponding Variable Names: 
+- MapBox: REACT_APP_MAPBOX_API_KEY
+
 ## JSON Format for data consumed by the frontend:
 Data for both counties and zipcodes should be in the form of a list of key,value pairs.
 of the corresponding data to that county.
