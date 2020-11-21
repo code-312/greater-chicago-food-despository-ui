@@ -5,15 +5,9 @@
  * id = Used to filter or select a layer. 
  * type...  fill = layer object is outline and filled in
  *          line = layer object is outlined only
- * paint... 
- *      "fill" type:
- *          fill-color = color that fills in the layer object
- *          fill-opacity = how transparent the fill color is
- *          fill-outline-color = color of the outline
- *      "line" type:
- *          line-opacity = how transparent the outline is
- *          line-color = color of the outline
- *          line-width = width of outline
+ * 
+ * Descriptions of layer styling:
+ * https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/
  */
 
  import {highlight, countyFill, countyOutline, zipcodeFill, zipcodeOutline} from './Colors'
