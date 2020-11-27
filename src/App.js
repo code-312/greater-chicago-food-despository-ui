@@ -1,9 +1,9 @@
 import './App.css';
 import React, {Component} from 'react';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
-import illinois_counties from './Data/illinois_counties.json';
-import illinois_zipcodes from './Data/illinois_zipcodes.json'
-import {county, selectedCounty, zipcode, selectedZipcode} from './Data/LayerStyles';
+import illinois_counties from './mock_data/illinois_counties.json';
+import illinois_zipcodes from './mock_data/illinois_zipcodes.json'
+import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
 
 /**
  * Main component of the application. 
