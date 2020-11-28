@@ -2,9 +2,11 @@ import React from 'react'
 import './SharedStyles.css'
 
 /**
- * Overlay that displays information and metrics regarding the currently selected zip code.
- * @param {zipCodeProperties} props => Zip code information and metrics.
- */
+  * Overlay that displays information and metrics regarding the currently selected zip code.
+  * @param zipCodeProperties => Zip code information and metrics.
+  * @param x => Left-aligned pixel-coordinate of where to display the overlay.
+  * @param y => Top-aligned pixel-coordinate of where to display the overlay.
+  */
 const ZipCodeSnapshotOverlay = ({zipCodeProperties, x, y}) => {
     if (zipCodeProperties) {
         return (

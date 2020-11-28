@@ -1,10 +1,12 @@
 import React from 'react'
 import './SharedStyles.css'
 
-/**
- * Overlay that displays information and metrics regarding the currently selected county.
- * @param {countyProperties} props => County information and metrics.
- */
+ /**
+  * Overlay that displays information and metrics regarding the currently selected county.
+  * @param countyProperties => County information and metrics.
+  * @param x => Left-aligned pixel-coordinate of where to display the overlay.
+  * @param y => Top-aligned pixel-coordinate of where to display the overlay.
+  */
 const CountySnapshotOverlay = ({countyProperties,x,y}) => {
     if (countyProperties) {
         return (
