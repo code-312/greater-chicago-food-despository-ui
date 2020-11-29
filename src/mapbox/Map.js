@@ -131,7 +131,7 @@ export default class Map extends Component {
                 )} 
 
                 {/*Tool-tip*/}
-                {this.renderTooltip()} 
+                {this.renderOverlay()} 
             </ReactMapGL>
         );
     }
