@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
 import illinois_counties from './mock_data/illinois_counties.json';
 import illinois_zipcodes from './mock_data/illinois_zipcodes.json'
+import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
 
 /**
@@ -121,6 +122,31 @@ export default class App extends Component {
     );
   }
 
+  updateViewport = (newViewport) => {
+    const {viewport} = this.state;
+    this.setState({
+      viewport: {
+        ...viewport,
+        longitude: newViewport.longitude,
+        latitude: newViewport.latitude,
+        zoom: newViewport.zoom,
+      }
+    });
+  }
+
+  getIllinoisCountyFeatures = () => {
+    if (this.state.illinois_counties != null) {
+      var countyFeatures =  this.state.illinois_counties.features.map((feature) => {
+        return feature;
+      })
+      const sortedCountyFeatures = countyFeatures.sort((a,b) => (a.properties.NAME > b.properties.NAME) ? 1 : -1);
+
+      return sortedCountyFeatures;
+    } else {
+      return [];
+    }
+  }
+
   /**
    * Fires after the "constructor" and "getDerivedStateFromProps" methods, but before "componentDidMount."
    * Returns the HTML object to be rendered by App component.
@@ -128,6 +154,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
+        <ZoomToBoundsMenu currentViewport={this.state.viewport} countyFeatures={this.getIllinoisCountyFeatures()} updateViewport={this.updateViewport}/>
         <ReactMapGL
           {...this.state.viewport}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
