@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {LinearInterpolator, WebMercatorViewport} from 'react-map-gl';
 import bbox from '@turf/bbox';
 import ZoomToBoundsButton from './ZoomToBoundsButton';
@@ -36,8 +36,6 @@ const ZoomToBoundsMenu = ({currentViewport, countyFeatures, updateViewport}) => 
             {countyButtons(countyFeatures)}
         </div>
     )
-    
-    
 }
 
 export default ZoomToBoundsMenu;

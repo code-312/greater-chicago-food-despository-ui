@@ -9,3 +9,10 @@
     z-index: 9;
     pointer-events: none;
 }
+
+.zoom_button {
+    background-color:'white';
+    border-color:'black';
+    border-width:1; 
+    padding:10;
+}

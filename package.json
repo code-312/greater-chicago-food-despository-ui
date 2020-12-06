@@ -5,7 +5,6 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "@turf/bbox": "^6.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -37,5 +36,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^7.28.1",
+    "@testing-library/user-event": "^12.5.0"
   }
 }
