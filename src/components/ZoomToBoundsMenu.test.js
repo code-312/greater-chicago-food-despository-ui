@@ -1,7 +1,36 @@
 import React from 'react';
 import { render} from '@testing-library/react';
-import ZoomToBoundsButton from './ZoomToBoundsButton'
+import ZoomToBoundsMenu, {ZoomToBoundsButton} from './ZoomToBoundsMenu'
 import userEvent from '@testing-library/user-event'
+
+/**
+ * Tests for the ZoomToBoundsButton component.
+ */
+describe("ZoomToBoundsMenu", () => {
+    /**
+     * Variables used across multiple tests:
+     */
+    const setUpGenericProps = () => {
+        return {
+            currentViewport: null,
+            countyFeatures: null,
+            updateViewport: jest.fn(),
+        }
+    }
+
+    /**
+     * Tests to verify that the component renderes as expected.
+     */
+    describe("Layout", () => {
+        test("renders without error", () => {
+            const {container} = render(<ZoomToBoundsMenu {...setUpGenericProps()} />
+            );
+        })
+
+        
+    })
+})
+
 
 /**
  * Tests for the ZoomToBoundsButton component.
