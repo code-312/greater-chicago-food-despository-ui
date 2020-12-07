@@ -2,7 +2,7 @@ import React from 'react';
 import {updateViewportToFitBounds} from '../mapbox/Util';
 
 /**
- * ZoomToBoundsMenu
+ * COMPONENT: ZoomToBoundsMenu
  * 
  * @param currentViewport 
  * @param countyFeatures 
@@ -25,16 +25,29 @@ const ZoomToBoundsMenu = ({currentViewport, countyFeatures, updateViewport}) => 
                 const label = feature.properties.NAME + ' County';
                 const newViewport = updateViewportToFitBounds(currentViewport,feature);
     
-                return (<ZoomToBoundsButton label={label} newViewport={newViewport} updateViewport={updateViewport}/>);
+                return (<ZoomToBoundsButton 
+                    key={feature.properties.NAME} 
+                    keyValue={feature.properties.NAME}
+                    label={label} newViewport={newViewport} 
+                    updateViewport={updateViewport}
+                />);
             })
         } else {
             return null;
         }
     }
     
+    // Returns a button to re-orientate the map around the state, followed by an alphabetized 
+    // list of buttons that re-orientate the map around a county
     return (
         <div style={styles.zoom_menu}>
-            <ZoomToBoundsButton label="County Map" newViewport={origin} updateViewport={updateViewport}/>
+            <ZoomToBoundsButton 
+                key="Illinois" 
+                keyValue="Illinois"
+                label="County Map" 
+                newViewport={origin} 
+                updateViewport={updateViewport}
+            />
             <div style={styles.button_scroll_bar}>
                 {countyButtons(countyFeatures)}
             </div>    
@@ -45,18 +58,19 @@ export default ZoomToBoundsMenu;
 
 
 /**
- * ZoomToBoundsButton
+ * COMPONENT: ZoomToBoundsButton
  * 
- * @param {String} label 
- * @param newViewport
- * @param {Function} updateViewport
+ * @param {String} keyValue => Used to identify buttons
+ * @param {String} label => Text label for the button
+ * @param newViewport => parameter 
+ * @param {Function} updateViewport => callback function to update the viewport
  */
-export const ZoomToBoundsButton = ({label, newViewport, updateViewport}) => {
+export const ZoomToBoundsButton = ({keyValue, label, newViewport, updateViewport}) => {
     return (
         <button
             style={styles.zoom_button}
             onClick={() => updateViewport(newViewport)}
-            data-testid={"zoom_to_bounds_button: " + label}
+            data-testid={"zoom_to_bounds_button_" + keyValue}
         >{label}</button>
     )
 }
