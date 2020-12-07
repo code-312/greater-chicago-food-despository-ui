@@ -33,11 +33,9 @@ const ZoomToBoundsMenu = ({currentViewport, countyFeatures, updateViewport}) => 
     }
     
     return (
-        <div>
-            <div>
-                <ZoomToBoundsButton label="County Map" newViewport={origin} updateViewport={updateViewport}/>
-            </div>
-            <div style={{display:"flex", flexDirection:'column', overflowY:'auto', maxHeight:300}}>
+        <div style={styles.zoom_menu}>
+            <ZoomToBoundsButton label="County Map" newViewport={origin} updateViewport={updateViewport}/>
+            <div style={styles.button_scroll_bar}>
                 {countyButtons(countyFeatures)}
             </div>    
         </div>
@@ -54,10 +52,8 @@ export default ZoomToBoundsMenu;
  * @param {Function} updateViewport
  */
 export const ZoomToBoundsButton = ({label, newViewport, updateViewport}) => {
-
     return (
         <button
-            className="zoom_button"
             style={styles.zoom_button}
             onClick={() => updateViewport(newViewport)}
             data-testid={"zoom_to_bounds_button: " + label}
@@ -70,9 +66,23 @@ export const ZoomToBoundsButton = ({label, newViewport, updateViewport}) => {
  */
 const styles = {
     zoom_button: {
+        display:"flex",
+        flexDirection:'column',
         backgroundColor:'white',
         borderColor:'black',
         borderWidth:1,
         padding:10,
     },
+
+    zoom_menu: {
+        display:"flex",
+        flexDirection:'column',
+        maxHeight:'100vh',
+    },
+
+    button_scroll_bar: {
+        display:'flex',
+        flexDirection:'column',
+        overflowY:'scroll',
+    }
 }
