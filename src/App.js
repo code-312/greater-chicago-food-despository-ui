@@ -134,6 +134,10 @@ export default class App extends Component {
     );
   }
 
+  /**
+   * Callback function to update "viewport" in state
+   * @param newViewport 
+   */
   updateViewport = (newViewport) => {
     const {viewport} = this.state;
     this.setState({
@@ -146,6 +150,9 @@ export default class App extends Component {
     });
   }
 
+  /**
+   * Returns a list of the county GeoJSON features
+   */
   getIllinoisCountyFeatures = () => {
     if (this.state.illinois_counties != null) {
       var countyFeatures =  this.state.illinois_counties.features.map((feature) => {
@@ -165,12 +172,15 @@ export default class App extends Component {
    */
   render() {
     return (
-
       <div className="container-fluid">
         <div className="row">
+
+          {/*Column 1: Left-hand menu (Zoom Control)*/}
           <div className="col-md-2 pl-0 pr-0">
             <ZoomToBoundsMenu currentViewport={this.state.viewport} countyFeatures={this.getIllinoisCountyFeatures()} updateViewport={this.updateViewport}/>
           </div>
+
+          {/*Column 2: MapBox map */}
           <div className="col-md-6 pl-0 pr-0">
             <ReactMapGL
               {...this.state.viewport}
@@ -196,9 +206,13 @@ export default class App extends Component {
               {this.renderTooltip()} 
             </ReactMapGL>
           </div>
+
+          {/*Column 3: Right-hand menu*/}
           <div className="col-md-4 pl-0 pr-0">
             RightHandMenu
           </div>
+
+
         </div>
       </div>
     );
