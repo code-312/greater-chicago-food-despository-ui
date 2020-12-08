@@ -153,14 +153,11 @@ export default class App extends Component {
    */
   getIllinoisCountyFeatures = () => {
     if (this.state.illinois_counties != null) {
-      var countyFeatures =  this.state.illinois_counties.features.map((feature) => {
-        return feature;
-      })
+      var countyFeatures =  this.state.illinois_counties.features.map((feature) => {return feature;})
+      
       const sortedCountyFeatures = countyFeatures.sort((a,b) => (a.properties.NAME > b.properties.NAME) ? 1 : -1);
 
       return sortedCountyFeatures;
-    } else {
-      return [];
     }
   }
 
