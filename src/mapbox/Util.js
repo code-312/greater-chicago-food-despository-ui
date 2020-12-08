@@ -1,5 +1,5 @@
 import bbox from '@turf/bbox';
-import {LinearInterpolator, WebMercatorViewport} from 'react-map-gl';
+import {FlyToInterpolator, WebMercatorViewport} from 'react-map-gl';
 
 
 /**
@@ -16,5 +16,11 @@ export const updateViewportToFitBounds = (currentViewport, feature) => {
     const [minLng, minLat, maxLng, maxLat] = bbox(feature); 
     const webMercatorViewport = new WebMercatorViewport(currentViewport);
     const {longitude, latitude, zoom} = webMercatorViewport.fitBounds([[minLng, minLat], [maxLng, maxLat]], {padding: 40});
-    return {longitude: longitude,  latitude: latitude, zoom: zoom};
+    return {
+      longitude: longitude,
+      latitude: latitude,
+      zoom: zoom,
+      transitionInterpolator: new FlyToInterpolator(),
+      transitionDuration: 1000
+    };
 }
