@@ -1,6 +1,6 @@
 import './App.css';
 import React, {Component} from 'react';
-import ReactMapGL, {Source, Layer} from 'react-map-gl';
+import ReactMapGL, {Source, Layer, FlyToInterpolator} from 'react-map-gl';
 import illinois_counties from './mock_data/illinois_counties.json';
 import illinois_zipcodes from './mock_data/illinois_zipcodes.json'
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
@@ -187,6 +187,8 @@ export default class App extends Component {
               mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
               onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
               onHover={this.onHover}
+              transitionDuration={1000}
+              transitionInterpolator={new FlyToInterpolator()}
             >
               {/*County Level*/}
               <Source id="counties" type="geojson" data={this.state.illinois_counties}>
