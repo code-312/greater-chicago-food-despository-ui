@@ -171,9 +171,9 @@ export default class App extends Component {
         <div className="row">
 
           {/*Column 1: Left-hand menu (Zoom Control)*/}
-          <div className="col-md-2 pl-0 pr-0">
+          <nav className="col-md-2 pl-0 pr-0">
             <ZoomToBoundsMenu currentViewport={this.state.viewport} countyFeatures={this.getIllinoisCountyFeatures()} updateViewport={this.updateViewport}/>
-          </div>
+          </nav>
 
           {/*Column 2: MapBox map */}
           <div className="col-md-6 pl-0 pr-0">
