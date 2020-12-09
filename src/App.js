@@ -39,7 +39,9 @@ export default class App extends Component {
       longitude: -89.367848, 
       zoom: 6,
       width: "50vw",
-      height: "100vh"
+      height: "100vh",
+      transitionInterpolator: null,
+      transitionDuration: null
     },
     x: null,
     y: null,
