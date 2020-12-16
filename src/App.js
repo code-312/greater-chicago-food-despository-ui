@@ -2,6 +2,7 @@ import './App.css';
 import React, {Component} from 'react';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
 import axios from 'axios';
+import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
 
 /**
@@ -116,11 +117,23 @@ export default class App extends Component {
    */
   renderTooltip() {
     const {hoveredCounty, hoveredZipCode, x, y} = this.state;
+    const style = {
+      position:'absolute',
+      margin: 8,
+      padding: 4,
+      backgroundColor: 'lightgray',
+      maxWidth: 300,
+      fontSize: 10,
+      zIndex: 9,
+      pointerEvents: 'none',
+      left: x,
+      top: y
+    }
 
     return (
       // Only returns the tool tip if there is a currently hovered county
       hoveredCounty && (
-        <div className="tooltip" style={{left: x, top: y}}>
+        <div style={style}>
           <div>County: {hoveredCounty.properties.NAME}</div>
           <div>FIPS: {hoveredCounty.properties.COUNTY}</div>
           {hoveredZipCode != null &&
@@ -132,35 +145,80 @@ export default class App extends Component {
   }
 
   /**
+   * Callback function to update "viewport" in state
+   * @param newViewport 
+   */
+  updateViewport = (newViewport) => {
+    const {viewport} = this.state;
+    this.setState({
+      viewport: {
+        ...viewport,
+        ...newViewport,
+      }
+    });
+  }
+
+  /**
+   * Returns a list of the county GeoJSON features
+   */
+  getIllinoisCountyFeatures = () => {
+    if (this.state.illinois_counties != null) {
+      var countyFeatures =  this.state.illinois_counties.features.map((feature) => {return feature;})
+      
+      const sortedCountyFeatures = countyFeatures.sort((a,b) => (a.properties.NAME > b.properties.NAME) ? 1 : -1);
+
+      return sortedCountyFeatures;
+    }
+  }
+
+  /**
    * Fires after the "constructor" and "getDerivedStateFromProps" methods, but before "componentDidMount."
    * Returns the HTML object to be rendered by App component.
    */
   render() {
     return (
-      <div className="App">
-        <ReactMapGL
-          {...this.state.viewport}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
-          onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
-          onHover={this.onHover}
-        >
-          {/*County Level*/}
-          <Source id="counties" type="geojson" data={this.state.illinois_counties}>
-            <Layer {...county}></Layer>
-            <Layer {...selectedCounty} filter={this.state.highlightCounty}></Layer>
-          </Source>
-          
-          {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
-          {this.state.viewport.zoom > 7 && (
-            <Source id="zipcodes" type="geojson" data={this.state.illinois_zipcodes}>
-              <Layer {...zipcode} filter={this.state.filterZipcodeByCounty}></Layer>
-              <Layer {...selectedZipcode} filter={this.state.highlightZipcode}></Layer>
-            </Source>
-          )} 
-          
-          {/*Tool-tip*/}
-          {this.renderTooltip()} 
-        </ReactMapGL>
+      <div className="container-fluid">
+        <div className="row">
+
+          {/*Column 1: Left-hand menu (Zoom Control)*/}
+          <nav className="col-md-2 pl-0 pr-0">
+            <ZoomToBoundsMenu currentViewport={this.state.viewport} countyFeatures={this.getIllinoisCountyFeatures()} updateViewport={this.updateViewport}/>
+          </nav>
+
+          {/*Column 2: MapBox map */}
+          <div className="col-md-6 pl-0 pr-0">
+            <ReactMapGL
+              {...this.state.viewport}
+              mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
+              onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
+              onHover={this.onHover}
+            >
+              {/*County Level*/}
+              <Source id="counties" type="geojson" data={this.state.illinois_counties}>
+                <Layer {...county}></Layer>
+                <Layer {...selectedCounty} filter={this.state.highlightCounty}></Layer>
+              </Source>
+              
+              {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
+              {this.state.viewport.zoom > 7 && (
+                <Source id="zipcodes" type="geojson" data={this.state.illinois_zipcodes}>
+                  <Layer {...zipcode} filter={this.state.filterZipcodeByCounty}></Layer>
+                  <Layer {...selectedZipcode} filter={this.state.highlightZipcode}></Layer>
+                </Source>
+              )} 
+              
+              {/*Tool-tip*/}
+              {this.renderTooltip()} 
+            </ReactMapGL>
+          </div>
+
+          {/*Column 3: Right-hand menu*/}
+          <div className="col-md-4 pl-0 pr-0">
+            RightHandMenu
+          </div>
+
+
+        </div>
       </div>
     );
   }
