@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
+import axios from 'axios';
 import {county, selectedCounty, zipcode, selectedZipcode} from './LayerStyles';
 import CountySnapshotOverlay from '../components/CountySnapshotOverlay';
 import ZipCodeSnapshotOverlay from '../components/ZipCodeSnapshotOverlay';
-
-// TEMPORARY: State should be managed through Redux
-import illinois_counties from '../mock_data/illinois_counties.json';
-import illinois_zipcodes from '../mock_data/illinois_zipcodes.json';
 
 export default class Map extends Component {
     /**
@@ -45,9 +42,20 @@ export default class Map extends Component {
      * Fires before "constructor" and "getDerivedStateFromProps" methods, but after the "render" method.
      */
     componentDidMount() {
-        // TEMPORARY: State should be managed through Redux
-        this.setState({illinois_counties: illinois_counties})
-        this.setState({illinois_zipcodes: illinois_zipcodes})
+      const getData = async path => {
+        const url = "http://localhost:3001/" + path
+        const key = "illinois_" + path
+        await axios
+          .get(url)
+          .then(res => {
+            this.setState({[key]: res.data});
+          })
+          .catch(error => {
+            throw error;
+          });
+        };
+      getData("counties");
+      getData("zipcodes");
     }
 
     /**
