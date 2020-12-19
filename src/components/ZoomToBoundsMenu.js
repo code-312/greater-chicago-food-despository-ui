@@ -1,14 +1,17 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateVP } from '../app/viewportReducer';
 import {updateViewportToFitBounds} from '../mapbox/Util';
 
 /**
  * COMPONENT: ZoomToBoundsMenu
- * 
- * @param currentViewport 
  * @param countyFeatures 
- * @param updateViewport 
  */
-const ZoomToBoundsMenu = ({currentViewport, countyFeatures, updateViewport}) => {
+const ZoomToBoundsMenu = ({countyFeatures}) => {
+    //useSelector gets viewport state from Redux store
+    const useCurrentViewport = () => useSelector(state => state.viewport);
+    const currentViewport = useCurrentViewport();
+    
     const origin = {
         latitude: 40.150196,
         longitude: -89.367848, 
@@ -24,12 +27,11 @@ const ZoomToBoundsMenu = ({currentViewport, countyFeatures, updateViewport}) => 
             return countyFeatures.map((feature) => {
                 const label = feature.properties.NAME + ' County';
                 const newViewport = updateViewportToFitBounds(currentViewport,feature);
-    
+                
                 return (<ZoomToBoundsButton 
                     key={feature.properties.NAME} 
                     keyValue={feature.properties.NAME}
                     label={label} newViewport={newViewport} 
-                    updateViewport={updateViewport}
                 />);
             })
         } else {
@@ -46,7 +48,6 @@ const ZoomToBoundsMenu = ({currentViewport, countyFeatures, updateViewport}) => 
                 keyValue="Illinois"
                 label="County Map" 
                 newViewport={origin} 
-                updateViewport={updateViewport}
             />
             <div style={styles.button_scroll_bar}>
                 {countyButtons(countyFeatures)}
@@ -63,9 +64,10 @@ export default ZoomToBoundsMenu;
  * @param {String} keyValue => Used to identify buttons
  * @param {String} label => Text label for the button
  * @param newViewport => parameter 
- * @param {Function} updateViewport => callback function to update the viewport
  */
-export const ZoomToBoundsButton = ({keyValue, label, newViewport, updateViewport}) => {
+export const ZoomToBoundsButton = ({keyValue, label, newViewport}) => {
+    const dispatch = useDispatch();
+    const updateViewport = (vp) => dispatch(updateVP(vp));
     return (
         <button
             style={styles.zoom_button}
