@@ -1,8 +1,7 @@
 import './App.css';
 import React, {Component} from 'react';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
-import illinois_counties from './mock_data/illinois_counties.json';
-import illinois_zipcodes from './mock_data/illinois_zipcodes.json'
+import axios from 'axios';
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
 
@@ -52,14 +51,25 @@ export default class App extends Component {
   
   /**
    * Fires before "constructor" and "getDerivedStateFromProps" methods, but after the "render" method.
-   * NOTE: API Call to get data (not implemented yet)
+   * NOTE: Mock API Call to get data (to be replaced when back end is added)
    * ALT: If using Redux, api calls should be made by middleware (https://redux.js.org/tutorials/essentials/part-5-async-logic)
    */
   componentDidMount() {
-    this.setState({illinois_counties: illinois_counties})
-    this.setState({illinois_zipcodes: illinois_zipcodes})
+      const getData = async path => {
+        const url = "http://localhost:3001/" + path
+        const key = "illinois_" + path
+        await axios
+          .get(url)
+          .then(res => {
+            this.setState({[key]: res.data});
+          })
+          .catch(error => {
+            throw error;
+          });
+        };
+      getData("counties");
+      getData("zipcodes");
   }
-
 
   /**
    * Called by ReactMapGL's onHover function when the mouse hovers over the MapBox map.
