@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
 import './App.css';
-import ReactMapGL, {Source, Layer, FlyToInterpolator} from 'react-map-gl';
-import illinois_counties from './mock_data/illinois_counties.json';
-import illinois_zipcodes from './mock_data/illinois_zipcodes.json'
+import ReactMapGL, {Source, Layer} from 'react-map-gl';
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
 import { connect } from 'react-redux';
-import { updateVP } from './app/viewportReducer';
-import { updateFilters } from './app/filterReducer';
-import { countyFetch } from './app/countyReducer';
+import { updateVP } from './redux/viewportReducer';
+import { updateFilters } from './redux/filterReducer';
+import { countyFetch } from './redux/countyReducer';
+import { zipFetch } from './redux/zipReducer';
 
 //these props are passed to the App component
 const mapStateToProps = state => {
-  const { viewport, filters, illinois_counties } = state;
-  return { viewport, filters, illinois_counties }
+  const { viewport, filters, illinois_counties, illinois_zipcodes } = state;
+  return { viewport, filters, illinois_counties, illinois_zipcodes }
 }
 /**
  * Main component of the application. 
@@ -23,28 +22,24 @@ const mapStateToProps = state => {
  */
 class App extends Component {
   /**
-   * State of the app. 
-
    * illinois_counties = County GeoJSON and county level data.
    * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
    */
 
    constructor(props) {
      super(props);
-
-    //  this.state = {
-    //   illinois_counties: null,
-    //   illinois_zipcodes: null,
-    // }
    }
   
   /**
    * Fires before "constructor" and "getDerivedStateFromProps" methods, but after the "render" method.
-   * NOTE: API Call to get data (not implemented yet)
-   * ALT: If using Redux, api calls should be made by middleware (https://redux.js.org/tutorials/essentials/part-5-async-logic)
    */
   componentDidMount() {
-    dispatch(countyFetch());
+    //props.dispatch sends updated viewport information to Redux store 
+    //dispatch is added to props automatically when connect is used without mapDispatchToProps
+    //countyFetch and zipFetch are both async thunks from countyReducer.js and zipReducer.js, respectively
+    //They dispatch the most current API call to the Redux store
+    this.props.dispatch(countyFetch());
+    this.props.dispatch(zipFetch());
   }
 
   /**
@@ -127,17 +122,6 @@ class App extends Component {
   }
 
   /**
-   * Returns a list of the county GeoJSON features
-   */
-  getIllinoisCountyFeatures = () => {
-    if (this.props.illinois_counties != null) {
-      var countyFeatures =  this.props.illinois_counties.features;
-      const sortedCountyFeatures = countyFeatures.sort((a,b) => (a.properties.NAME > b.properties.NAME) ? 1 : -1);
-      return sortedCountyFeatures;
-    }
-  }
-
-  /**
    * Fires after the "constructor" and "getDerivedStateFromProps" methods, but before "componentDidMount."
    * Returns the HTML object to be rendered by App component.
    */
@@ -148,7 +132,7 @@ class App extends Component {
 
           {/*Column 1: Left-hand menu (Zoom Control)*/}
           <nav className="col-md-2 pl-0 pr-0">
-            <ZoomToBoundsMenu  countyFeatures={this.getIllinoisCountyFeatures()} /> 
+            <ZoomToBoundsMenu /> 
           </nav>
 
           {/*Column 2: MapBox map */}
@@ -156,8 +140,6 @@ class App extends Component {
             <ReactMapGL
               {...this.props.viewport}
               mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
-              //props.dispatch sends updated viewport information to Redux store 
-              //(dispatch is added to props automatically when connect is used without mapStateToProps)
               //deletes are temporary fix to non-serialized values in Redux store
               onViewportChange={(newViewport) => {
                 delete newViewport.transitionInterpolator;
@@ -167,14 +149,14 @@ class App extends Component {
               onHover={this.onHover}
             >
               {/*County Level*/}
-              <Source id="counties" type="geojson" data={this.props.illinois_counties}>
+              <Source id="counties" type="geojson" data={this.props.illinois_counties.counties}>
                 <Layer {...county}></Layer>
                 <Layer {...selectedCounty} filter={this.props.filters.highlightCounty}></Layer>
               </Source>
               
               {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
               {this.props.viewport.zoom > 7 && (
-                <Source id="zipcodes" type="geojson" data={this.state.illinois_zipcodes}>
+                <Source id="zipcodes" type="geojson" data={this.props.illinois_zipcodes.zipcodes}>
                   <Layer {...zipcode} filter={this.props.filters.filterZipcodeByCounty}></Layer>
                   <Layer {...selectedZipcode} filter={this.props.filters.highlightZipcode}></Layer>
                 </Source>
@@ -189,8 +171,6 @@ class App extends Component {
           <div className="col-md-4 pl-0 pr-0">
             RightHandMenu
           </div>
-
-
         </div>
       </div>
     );

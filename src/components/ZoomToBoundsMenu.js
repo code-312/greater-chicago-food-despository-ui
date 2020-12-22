@@ -1,22 +1,34 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateVP } from '../app/viewportReducer';
+import { updateVP } from '../redux/viewportReducer';
 import {updateViewportToFitBounds} from '../mapbox/Util';
 
 /**
  * COMPONENT: ZoomToBoundsMenu
- * @param countyFeatures 
  */
-const ZoomToBoundsMenu = ({countyFeatures}) => {
+const ZoomToBoundsMenu = () => {
     //useSelector gets viewport state from Redux store
-    const useCurrentViewport = () => useSelector(state => state.viewport);
-    const currentViewport = useCurrentViewport();
+    const currentViewport = useSelector(state => state.viewport);
     
     const origin = {
         latitude: 40.150196,
         longitude: -89.367848, 
         zoom: 6,
     };
+
+    /**
+   * Selector function
+   * Returns a list of the county GeoJSON features
+   */
+   const countyFeatures = useSelector(state => {
+       const { counties } = state.illinois_counties;
+        if(Object.keys(counties).length !== 0) {
+            let { features } = counties;
+            const sortedCountyFeatures = [...features].sort((a,b) => (a.properties.NAME > b.properties.NAME) ? 1 : -1);
+            return sortedCountyFeatures;
+        }
+        return [];
+    });
 
     /**
      * Maps a list of GeoJSOn features to a list of ZoomToBoundsButton components
@@ -34,9 +46,8 @@ const ZoomToBoundsMenu = ({countyFeatures}) => {
                     label={label} newViewport={newViewport} 
                 />);
             })
-        } else {
-            return null;
-        }
+        } 
+        return null;
     }
     
     // Returns a button to re-orientate the map around the state, followed by an alphabetized 

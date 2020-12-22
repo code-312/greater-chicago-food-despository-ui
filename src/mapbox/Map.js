@@ -1,140 +1,180 @@
 import React, {Component} from 'react';
+import './App.css';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
-import {county, selectedCounty, zipcode, selectedZipcode} from './LayerStyles';
-import CountySnapshotOverlay from '../components/CountySnapshotOverlay';
-import ZipCodeSnapshotOverlay from '../components/ZipCodeSnapshotOverlay';
+import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
+import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
+import { connect } from 'react-redux';
+import { updateVP } from './redux/viewportReducer';
+import { updateFilters } from './redux/filterReducer';
+import { countyFetch } from './redux/countyReducer';
+import { zipFetch } from './redux/zipReducer';
 
-// TEMPORARY: State should be managed through Redux
-import illinois_counties from '../mock_data/illinois_counties.json';
-import illinois_zipcodes from '../mock_data/illinois_zipcodes.json';
+//these props are passed to the App component
+const mapStateToProps = state => {
+  const { viewport, filters, illinois_counties, illinois_zipcodes } = state;
+  return { viewport, filters, illinois_counties, illinois_zipcodes }
+}
+/**
+ * Main component of the application. 
+ * 
+ * NOTE: Currently, this component renders the MapBox map directly. 
+ * As the application grows, it will be important to extract the map into its own component.
+ */
+class App extends Component {
+  /**
+   * illinois_counties = County GeoJSON and county level data.
+   * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
+   */
 
-export default class Map extends Component {
-    /**
-     * TEMPORARY: State should be managed through Redux
-     * 
-     * illinois_counties = County GeoJSON and county level data.
-     * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
-     * highlightCounty = filter used to select the county that the mouse is hovered on
-     * highlightZipcode = filter used to select the zipcode that the mouse is hovered on
-     * filterZipcodeByCounty = filter used to only display counties within the currently selected county
-     * viewport = Determines the size of the map, and initial centered position and zoom-level
-     * x,y = current location of mouse over the map
-     * hoveredCounty = county feature currently being hovered over by the mouse
-     * hoveredZipcode = zipcode feature currently being hovered over by the mouse
-     */
-    state = {
-        illinois_counties: null,
-        illinois_zipcodes: null,
-        highlightCounty: ['in', 'COUNTY', ''],
-        highlightZipcode: ['in', 'ZCTA', ''],
-        filterZipcodeByCounty: ['in', 'COUNTY', ''],
-        viewport: {
-            latitude: 40.150196,
-            longitude: -89.367848, 
-            zoom: 6,
-            width: "50vw",
-            height: "100vh"
-        },
-        x: null,
-        y: null,
-        hoveredCounty: null,
-        hoveredZipCode: null,
+   constructor(props) {
+     super(props);
+   }
+  
+  /**
+   * Fires before "constructor" and "getDerivedStateFromProps" methods, but after the "render" method.
+   */
+  componentDidMount() {
+    //props.dispatch sends updated viewport information to Redux store 
+    //dispatch is added to props automatically when connect is used without mapDispatchToProps
+    //countyFetch and zipFetch are both async thunks from countyReducer.js and zipReducer.js, respectively
+    //They dispatch the most current API call to the Redux store
+    this.props.dispatch(countyFetch());
+    this.props.dispatch(zipFetch());
+  }
+
+  /**
+   * Called by ReactMapGL's onHover function when the mouse hovers over the MapBox map.
+   * Updates the application's state based on the position of the mouse and the underlying features.
+   * 
+   * @param event = Information related to hover-event.
+   * event.x,event.y = coordinates of mouse over the map
+   * event.features = List of the features that are currently being hovered over. 
+   */
+  onHover = event => {
+    // Extract the list of features and x,y coords from the event parameter
+    const {
+      features,
+      srcEvent: {offsetX, offsetY}
+    } = event;
+    
+    // Select the feature and corresponding countyId from the list of features if one exists
+    const countyFeature = features && features.find(f => f.layer.id === 'county');
+    const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode');
+
+    //this object is more condensed and contains only non-serialized values -  for Redux
+    const currentCounty = countyFeature ? countyFeature.properties : null;
+    const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null;
+
+    // Given the currently hovered features, determine the zipcode and county filters:
+    let zipcodeFilter = '';
+    let county = '';
+    let zipcode = '';
+    if (currentCounty) {
+      county = currentCounty.COUNTY;
+      zipcodeFilter = currentCounty.STATE + county;
+    }
+    if (currentZipCode) {zipcode = currentZipCode.ZCTA}
+
+    // Dispatch the updated information to the redux store
+    this.props.dispatch(updateFilters({
+      hoveredCounty: currentCounty || null, 
+      hoveredZipCode: currentZipCode || null,
+      x: offsetX, 
+      y: offsetY, 
+      highlightCounty: ['in', 'COUNTY', county],
+      highlightZipcode: ['in', 'ZCTA', zipcode],
+      filterZipcodeByCounty: ['in', 'COUNTY', zipcodeFilter]
+    }));
+  };
+
+
+  /**
+   * Returns a component that displays: the county name, and FIPS number.
+   * If a zipcode is also highlighted, then also displays zipcode number.
+   */
+  renderTooltip() {
+    const {hoveredCounty, hoveredZipCode, x, y} = this.props.filters;
+    const style = {
+      position:'absolute',
+      margin: 8,
+      padding: 4,
+      backgroundColor: 'lightgray',
+      maxWidth: 300,
+      fontSize: 10,
+      zIndex: 9,
+      pointerEvents: 'none',
+      left: x,
+      top: y
     }
 
-    /**
-     * Fires before "constructor" and "getDerivedStateFromProps" methods, but after the "render" method.
-     */
-    componentDidMount() {
-        // TEMPORARY: State should be managed through Redux
-        this.setState({illinois_counties: illinois_counties})
-        this.setState({illinois_zipcodes: illinois_zipcodes})
-    }
+    return (
+      // Only returns the tool tip if there is a currently hovered county
+      hoveredCounty && (
+        <div style={style}>
+          <div>County: {hoveredCounty.NAME}</div>
+          <div>FIPS: {hoveredCounty.COUNTY}</div>
+          {hoveredZipCode != null &&
+            <div>Zipcode: {hoveredZipCode.ZCTA}</div>
+          }
+        </div>
+      )
+    );
+  }
 
-    /**
-     * Called by ReactMapGL's onHover function when the mouse hovers over the MapBox map.
-     * Updates the application's state based on the position of the mouse and the underlying features.
-     * 
-     * @param event = Information related to hover-event.
-     * event.x,event.y = coordinates of mouse over the map
-     * event.features = List of the features that are currently being hovered over. 
-     */
-    onHover = event => {
-        // Extract the list of features and x,y coords from the event parameter
-        const {features, srcEvent: {offsetX, offsetY}} = event;
+  /**
+   * Fires after the "constructor" and "getDerivedStateFromProps" methods, but before "componentDidMount."
+   * Returns the HTML object to be rendered by App component.
+   */
+  render() {
+    return (
+      <div className="container-fluid">
+        <div className="row">
 
-        // Select the feature and corresponding countyId from the list of features if one exists
-        const hoveredCounty = features && features.find(f => f.layer.id === 'county');
-        const hoveredZipCode = features && features.find(f => f.layer.id === 'zipcode');
+          {/*Column 1: Left-hand menu (Zoom Control)*/}
+          <nav className="col-md-2 pl-0 pr-0">
+            <ZoomToBoundsMenu /> 
+          </nav>
 
-        // Given the currently hovered features, determine the zipcode and county filters:
-        var zipcodeFilter = '';
-        var county = '';
-        var zipcode = '';
-        if (hoveredCounty) {
-            county = hoveredCounty.properties.COUNTY;
-            zipcodeFilter = hoveredCounty.properties.STATE + county;
-        }
-        if (hoveredZipCode) {zipcode = hoveredZipCode.properties.ZCTA}
-
-        // Set state with the updated information
-        this.setState({
-            hoveredCounty: hoveredCounty, 
-            hoveredZipCode: hoveredZipCode,
-            x: offsetX, 
-            y: offsetY, 
-            highlightCounty: ['in', 'COUNTY', county],
-            highlightZipcode: ['in', 'ZCTA', zipcode],
-            filterZipcodeByCounty: ['in', 'COUNTY', zipcodeFilter]
-        });
-    };
-
-    /**
-     * Returns a component that displays either...  
-     *      - County name, and FIPS number of the highlighted county
-     *      - Zipcode of the highlighted zipcode
-     */
-    renderOverlay() {
-        const {hoveredCounty, hoveredZipCode, x, y, viewport} = this.state;
-        if (viewport.zoom >= 7 && hoveredZipCode) {
-            // Only returns overlay if there is a currently hovered zipcode and is zoomed-in:
-            return (<ZipCodeSnapshotOverlay zipCodeProperties={hoveredZipCode.properties} x={x} y={y}/>);
-        } else if (viewport.zoom < 7 && hoveredCounty) {
-            // Only returns overlay if there is a currently hovered zip code and is zoomed-out:
-            return (<CountySnapshotOverlay countyProperties={hoveredCounty.properties} x={x} y={y}/>);
-        }
-    }
-
-    /**
-     * Fires after the "constructor" and "getDerivedStateFromProps" methods, but before "componentDidMount."
-     * Returns the HTML object to be rendered by App component.
-     */
-    render() {
-        return (
+          {/*Column 2: MapBox map */}
+          <div className="col-md-6 pl-0 pr-0">
             <ReactMapGL
-                {...this.state.viewport}
-                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
-                onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
-                onHover={this.onHover}
+              {...this.props.viewport}
+              mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
+              //deletes are temporary fix to non-serialized values in Redux store
+              onViewportChange={(newViewport) => {
+                delete newViewport.transitionInterpolator;
+                delete newViewport.transitionEasing;
+                this.props.dispatch(updateVP(newViewport))
+              }}
+              onHover={this.onHover}
             >
-                {/*County Level*/}
-                <Source id="counties" type="geojson" data={this.state.illinois_counties}>
-                    <Layer {...county}></Layer>
-                    <Layer {...selectedCounty} filter={this.state.highlightCounty}></Layer>
+              {/*County Level*/}
+              <Source id="counties" type="geojson" data={this.props.illinois_counties.counties}>
+                <Layer {...county}></Layer>
+                <Layer {...selectedCounty} filter={this.props.filters.highlightCounty}></Layer>
+              </Source>
+              
+              {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
+              {this.props.viewport.zoom > 7 && (
+                <Source id="zipcodes" type="geojson" data={this.props.illinois_zipcodes.zipcodes}>
+                  <Layer {...zipcode} filter={this.props.filters.filterZipcodeByCounty}></Layer>
+                  <Layer {...selectedZipcode} filter={this.props.filters.highlightZipcode}></Layer>
                 </Source>
-
-                {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
-                {this.state.viewport.zoom > 7 && (
-                    <Source id="zipcodes" type="geojson" data={this.state.illinois_zipcodes}>
-                        <Layer {...zipcode} filter={this.state.filterZipcodeByCounty}></Layer>
-                        <Layer {...selectedZipcode} filter={this.state.highlightZipcode}></Layer>
-                    </Source>
-                )} 
-
-                {/*Tool-tip*/}
-                {this.renderOverlay()} 
+              )} 
+              
+              {/*Tool-tip*/}
+              {this.renderTooltip()} 
             </ReactMapGL>
-        );
-    }
+          </div>
+
+          {/*Column 3: Right-hand menu*/}
+          <div className="col-md-4 pl-0 pr-0">
+            RightHandMenu
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-  
+export default connect(mapStateToProps)(App);
