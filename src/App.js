@@ -149,13 +149,14 @@ class App extends Component {
               onHover={this.onHover}
             >
               {/*County Level*/}
-              <Source id="counties" type="geojson" data={this.props.illinois_counties.counties}>
-                <Layer {...county}></Layer>
-                <Layer {...selectedCounty} filter={this.props.filters.highlightCounty}></Layer>
-              </Source>
-              
+              {this.props.illinois_counties.status !== 'pending' &&
+                <Source id="counties" type="geojson" data={this.props.illinois_counties.counties}>
+                  <Layer {...county}></Layer>
+                  <Layer {...selectedCounty} filter={this.props.filters.highlightCounty}></Layer>
+                </Source>
+              }
               {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
-              {this.props.viewport.zoom > 7 && (
+              {this.props.viewport.zoom > 7 && this.props.illinois_zipcodes.status !== 'pending' && (
                 <Source id="zipcodes" type="geojson" data={this.props.illinois_zipcodes.zipcodes}>
                   <Layer {...zipcode} filter={this.props.filters.filterZipcodeByCounty}></Layer>
                   <Layer {...selectedZipcode} filter={this.props.filters.highlightZipcode}></Layer>
