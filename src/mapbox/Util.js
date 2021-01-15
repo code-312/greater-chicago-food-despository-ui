@@ -1,5 +1,5 @@
 import bbox from '@turf/bbox';
-import {FlyToInterpolator, WebMercatorViewport} from 'react-map-gl';
+import { WebMercatorViewport } from 'react-map-gl';
 
 
 /**
@@ -19,8 +19,6 @@ export const updateViewportToFitBounds = (currentViewport, feature) => {
     return {
       longitude: longitude,
       latitude: latitude,
-      zoom: zoom,
-      transitionInterpolator: new FlyToInterpolator(),
-      transitionDuration: 1000
+      zoom: zoom
     };
 }

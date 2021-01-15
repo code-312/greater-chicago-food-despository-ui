@@ -1,72 +1,45 @@
-import './App.css';
 import React, {Component} from 'react';
+import './App.css';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
-import axios from 'axios';
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
+import { connect } from 'react-redux';
+import { updateVP } from './redux/viewportReducer';
+import { updateFilters } from './redux/filterReducer';
+import { countyFetch } from './redux/countyReducer';
+import { zipFetch } from './redux/zipReducer';
 
+//these props are passed to the App component
+const mapStateToProps = state => {
+  const { viewport, filters, illinois_counties, illinois_zipcodes } = state;
+  return { viewport, filters, illinois_counties, illinois_zipcodes }
+}
 /**
  * Main component of the application. 
  * 
  * NOTE: Currently, this component renders the MapBox map directly. 
  * As the application grows, it will be important to extract the map into its own component.
  */
-export default class App extends Component {
+class App extends Component {
   /**
-   * State of the app. 
-   * 
-   * NOTE: Consider using Redux to manage app state.
-   * 
    * illinois_counties = County GeoJSON and county level data.
    * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
-   * highlightCounty = filter used to select the county that the mouse is hovered on
-   * highlightZipcode = filter used to select the zipcode that the mouse is hovered on
-   * filterZipcodeByCounty = filter used to only display counties within the currently selected county
-   * viewport = Determines the size of the map, and initial centered position and zoom-level
-   * x,y = current location of mouse over the map
-   * hoveredCounty = county feature currently being hovered over by the mouse
-   * hoveredZipcode = zipcode feature currently being hovered over by the mouse
    */
-  state = {
-    illinois_counties: null,
-    illinois_zipcodes: null,
-    highlightCounty: ['in', 'COUNTY', ''],
-    highlightZipcode: ['in', 'ZCTA', ''],
-    filterZipcodeByCounty: ['in', 'COUNTY', ''],
-    viewport: {
-      latitude: 40.150196,
-      longitude: -89.367848, 
-      zoom: 6,
-      width: "50vw",
-      height: "100vh"
-    },
-    x: null,
-    y: null,
-    hoveredCounty: null,
-    hoveredZipCode: null,
-  }
 
+   constructor(props) {
+     super(props);
+   }
   
   /**
    * Fires before "constructor" and "getDerivedStateFromProps" methods, but after the "render" method.
-   * NOTE: Mock API Call to get data (to be replaced when back end is added)
-   * ALT: If using Redux, api calls should be made by middleware (https://redux.js.org/tutorials/essentials/part-5-async-logic)
    */
   componentDidMount() {
-      const getData = async path => {
-        const url = "http://localhost:3001/" + path
-        const key = "illinois_" + path
-        await axios
-          .get(url)
-          .then(res => {
-            this.setState({[key]: res.data});
-          })
-          .catch(error => {
-            throw error;
-          });
-        };
-      getData("counties");
-      getData("zipcodes");
+    //props.dispatch sends updated viewport information to Redux store 
+    //dispatch is added to props automatically when connect is used without mapDispatchToProps
+    //countyFetch and zipFetch are both async thunks from countyReducer.js and zipReducer.js, respectively
+    //They dispatch the most current API call to the Redux store
+    this.props.dispatch(countyFetch());
+    this.props.dispatch(zipFetch());
   }
 
   /**
@@ -83,31 +56,35 @@ export default class App extends Component {
       features,
       srcEvent: {offsetX, offsetY}
     } = event;
-
+    
     // Select the feature and corresponding countyId from the list of features if one exists
-    const hoveredCounty = features && features.find(f => f.layer.id === 'county');
-    const hoveredZipCode = features && features.find(f => f.layer.id === 'zipcode');
+    const countyFeature = features && features.find(f => f.layer.id === 'county');
+    const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode');
+
+    //this object is more condensed and contains only non-serialized values -  for Redux
+    const currentCounty = countyFeature ? countyFeature.properties : null;
+    const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null;
 
     // Given the currently hovered features, determine the zipcode and county filters:
-    var zipcodeFilter = '';
-    var county = '';
-    var zipcode = '';
-    if (hoveredCounty) {
-      county = hoveredCounty.properties.COUNTY;
-      zipcodeFilter = hoveredCounty.properties.STATE + county;
+    let zipcodeFilter = '';
+    let county = '';
+    let zipcode = '';
+    if (currentCounty) {
+      county = currentCounty.COUNTY;
+      zipcodeFilter = currentCounty.STATE + county;
     }
-    if (hoveredZipCode) {zipcode = hoveredZipCode.properties.ZCTA}
+    if (currentZipCode) {zipcode = currentZipCode.ZCTA}
 
-    // Set state with the updated information
-    this.setState({
-      hoveredCounty: hoveredCounty, 
-      hoveredZipCode: hoveredZipCode,
+    // Dispatch the updated information to the redux store
+    this.props.dispatch(updateFilters({
+      hoveredCounty: currentCounty || null, 
+      hoveredZipCode: currentZipCode || null,
       x: offsetX, 
       y: offsetY, 
       highlightCounty: ['in', 'COUNTY', county],
       highlightZipcode: ['in', 'ZCTA', zipcode],
       filterZipcodeByCounty: ['in', 'COUNTY', zipcodeFilter]
-    });
+    }));
   };
 
 
@@ -116,7 +93,7 @@ export default class App extends Component {
    * If a zipcode is also highlighted, then also displays zipcode number.
    */
   renderTooltip() {
-    const {hoveredCounty, hoveredZipCode, x, y} = this.state;
+    const {hoveredCounty, hoveredZipCode, x, y} = this.props.filters;
     const style = {
       position:'absolute',
       margin: 8,
@@ -134,41 +111,14 @@ export default class App extends Component {
       // Only returns the tool tip if there is a currently hovered county
       hoveredCounty && (
         <div style={style}>
-          <div>County: {hoveredCounty.properties.NAME}</div>
-          <div>FIPS: {hoveredCounty.properties.COUNTY}</div>
+          <div>County: {hoveredCounty.NAME}</div>
+          <div>FIPS: {hoveredCounty.COUNTY}</div>
           {hoveredZipCode != null &&
-            <div>Zipcode: {hoveredZipCode.properties.ZCTA}</div>
+            <div>Zipcode: {hoveredZipCode.ZCTA}</div>
           }
         </div>
       )
     );
-  }
-
-  /**
-   * Callback function to update "viewport" in state
-   * @param newViewport 
-   */
-  updateViewport = (newViewport) => {
-    const {viewport} = this.state;
-    this.setState({
-      viewport: {
-        ...viewport,
-        ...newViewport,
-      }
-    });
-  }
-
-  /**
-   * Returns a list of the county GeoJSON features
-   */
-  getIllinoisCountyFeatures = () => {
-    if (this.state.illinois_counties != null) {
-      var countyFeatures =  this.state.illinois_counties.features.map((feature) => {return feature;})
-      
-      const sortedCountyFeatures = countyFeatures.sort((a,b) => (a.properties.NAME > b.properties.NAME) ? 1 : -1);
-
-      return sortedCountyFeatures;
-    }
   }
 
   /**
@@ -182,28 +132,34 @@ export default class App extends Component {
 
           {/*Column 1: Left-hand menu (Zoom Control)*/}
           <nav className="col-md-2 pl-0 pr-0">
-            <ZoomToBoundsMenu currentViewport={this.state.viewport} countyFeatures={this.getIllinoisCountyFeatures()} updateViewport={this.updateViewport}/>
+            <ZoomToBoundsMenu /> 
           </nav>
 
           {/*Column 2: MapBox map */}
           <div className="col-md-6 pl-0 pr-0">
             <ReactMapGL
-              {...this.state.viewport}
+              {...this.props.viewport}
               mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
-              onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
+              //deletes are temporary fix to non-serialized values in Redux store
+              onViewportChange={(newViewport) => {
+                delete newViewport.transitionInterpolator;
+                delete newViewport.transitionEasing;
+                this.props.dispatch(updateVP(newViewport))
+              }}
               onHover={this.onHover}
             >
               {/*County Level*/}
-              <Source id="counties" type="geojson" data={this.state.illinois_counties}>
-                <Layer {...county}></Layer>
-                <Layer {...selectedCounty} filter={this.state.highlightCounty}></Layer>
-              </Source>
-              
+              {this.props.illinois_counties.status !== 'pending' &&
+                <Source id="counties" type="geojson" data={this.props.illinois_counties.counties}>
+                  <Layer {...county}></Layer>
+                  <Layer {...selectedCounty} filter={this.props.filters.highlightCounty}></Layer>
+                </Source>
+              }
               {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
-              {this.state.viewport.zoom > 7 && (
-                <Source id="zipcodes" type="geojson" data={this.state.illinois_zipcodes}>
-                  <Layer {...zipcode} filter={this.state.filterZipcodeByCounty}></Layer>
-                  <Layer {...selectedZipcode} filter={this.state.highlightZipcode}></Layer>
+              {this.props.viewport.zoom > 7 && this.props.illinois_zipcodes.status !== 'pending' && (
+                <Source id="zipcodes" type="geojson" data={this.props.illinois_zipcodes.zipcodes}>
+                  <Layer {...zipcode} filter={this.props.filters.filterZipcodeByCounty}></Layer>
+                  <Layer {...selectedZipcode} filter={this.props.filters.highlightZipcode}></Layer>
                 </Source>
               )} 
               
@@ -216,10 +172,10 @@ export default class App extends Component {
           <div className="col-md-4 pl-0 pr-0">
             RightHandMenu
           </div>
-
-
         </div>
       </div>
     );
   }
 }
+
+export default connect(mapStateToProps)(App);
