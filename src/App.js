@@ -131,7 +131,7 @@ class App extends Component {
         <div className="row">
 
           {/*Column 1: Left-hand menu (Zoom Control)*/}
-          <nav className="col-md-2 pl-0 pr-0">
+          <nav className="menu col-md-2 pl-0 pr-0">
             <ZoomToBoundsMenu /> 
           </nav>
 
@@ -169,7 +169,7 @@ class App extends Component {
           </div>
 
           {/*Column 3: Right-hand menu*/}
-          <div className="col-md-4 pl-0 pr-0">
+          <div className="menu col-md-4 pl-0 pr-0">
             RightHandMenu
           </div>
         </div>

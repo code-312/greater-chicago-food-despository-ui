@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.menu {
+   /*Futura font, imported from Adobe Fonts*/
+    font-family: futura-pt, sans-serif;
+    font-weight: 600;
+    font-style: normal; 
+}
