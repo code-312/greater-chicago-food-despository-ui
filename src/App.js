@@ -40,7 +40,6 @@ class App extends Component {
     //They dispatch the most current API call to the Redux store
     this.props.dispatch(countyFetch());
     this.props.dispatch(zipFetch());
-    console.log('zoom:', this )
   }
 
   /**
@@ -148,7 +147,6 @@ class App extends Component {
                 this.props.dispatch(updateVP(newViewport))
               }}
               onHover={this.onHover}
-              // min and max zoom sets the amount map zooms in and out, So that map is not too small or large.
               maxZoom={11}
               minZoom={6}
             >

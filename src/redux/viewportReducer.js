@@ -17,10 +17,26 @@ export const viewportSlice = createSlice({
     reducers: {
         updateVP(state, action) {
             const { latitude, longitude, zoom } = action.payload;
-            return {...state, latitude, longitude, zoom};
+            return {
+                ...state,
+                latitude,
+                longitude,
+                zoom: maxMinZoom(zoom)
+            };
         }
     }
 });
+
+// Confine zoom within maxZoom(11), minZoom(6)
+const maxMinZoom = (zoom) => {
+    if(zoom > 11) {
+        return 11
+    }
+    if(zoom < 6) {
+        return 6
+    }
+    return zoom
+}
 
 export const { updateVP } = viewportSlice.actions;
 
