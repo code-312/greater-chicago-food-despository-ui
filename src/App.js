@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import ReactMapGL, {Source, Layer} from 'react-map-gl';
+import ReactMapGL, {Source, Layer, NavigationControl} from 'react-map-gl';
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
 import { connect } from 'react-redux';
@@ -40,6 +40,7 @@ class App extends Component {
     //They dispatch the most current API call to the Redux store
     this.props.dispatch(countyFetch());
     this.props.dispatch(zipFetch());
+    console.log('zoom:', this )
   }
 
   /**
@@ -147,6 +148,9 @@ class App extends Component {
                 this.props.dispatch(updateVP(newViewport))
               }}
               onHover={this.onHover}
+              // min and max zoom sets the amount map zooms in and out, So that map is not too small or large.
+              maxZoom={11}
+              minZoom={6}
             >
               {/*County Level*/}
               {this.props.illinois_counties.status !== 'pending' &&
@@ -165,6 +169,9 @@ class App extends Component {
               
               {/*Tool-tip*/}
               {this.renderTooltip()} 
+              <div style={{position: 'absolute', left: 20, top: 20}}>
+                <NavigationControl showCompass={false} />
+              </div>
             </ReactMapGL>
           </div>
 
