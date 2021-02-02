@@ -1,19 +1,34 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateVP } from '../redux/viewportReducer';
 import {updateViewportToFitBounds} from '../mapbox/Util';
 
 /**
  * COMPONENT: ZoomToBoundsMenu
- * 
- * @param currentViewport 
- * @param countyFeatures 
- * @param updateViewport 
  */
-const ZoomToBoundsMenu = ({currentViewport, countyFeatures, updateViewport}) => {
+const ZoomToBoundsMenu = () => {
+    //useSelector gets viewport state from Redux store
+    const currentViewport = useSelector(state => state.viewport);
+    
     const origin = {
         latitude: 40.150196,
         longitude: -89.367848, 
         zoom: 6,
     };
+
+    /**
+   * Selector function
+   * Returns a list of the county GeoJSON features
+   */
+   const countyFeatures = useSelector(state => {
+       const { counties } = state.illinois_counties;
+        if(Object.keys(counties).length !== 0) {
+            let { features } = counties;
+            const sortedCountyFeatures = [...features].sort((a,b) => (a.properties.NAME > b.properties.NAME) ? 1 : -1);
+            return sortedCountyFeatures;
+        }
+        return [];
+    });
 
     /**
      * Maps a list of GeoJSOn features to a list of ZoomToBoundsButton components
@@ -24,17 +39,15 @@ const ZoomToBoundsMenu = ({currentViewport, countyFeatures, updateViewport}) => 
             return countyFeatures.map((feature) => {
                 const label = feature.properties.NAME + ' County';
                 const newViewport = updateViewportToFitBounds(currentViewport,feature);
-    
+                
                 return (<ZoomToBoundsButton 
                     key={feature.properties.NAME} 
                     keyValue={feature.properties.NAME}
                     label={label} newViewport={newViewport} 
-                    updateViewport={updateViewport}
                 />);
             })
-        } else {
-            return null;
-        }
+        } 
+        return null;
     }
     
     // Returns a button to re-orientate the map around the state, followed by an alphabetized 
@@ -46,7 +59,6 @@ const ZoomToBoundsMenu = ({currentViewport, countyFeatures, updateViewport}) => 
                 keyValue="Illinois"
                 label="County Map" 
                 newViewport={origin} 
-                updateViewport={updateViewport}
             />
             <div style={styles.button_scroll_bar}>
                 {countyButtons(countyFeatures)}
@@ -63,9 +75,10 @@ export default ZoomToBoundsMenu;
  * @param {String} keyValue => Used to identify buttons
  * @param {String} label => Text label for the button
  * @param newViewport => parameter 
- * @param {Function} updateViewport => callback function to update the viewport
  */
-export const ZoomToBoundsButton = ({keyValue, label, newViewport, updateViewport}) => {
+export const ZoomToBoundsButton = ({keyValue, label, newViewport}) => {
+    const dispatch = useDispatch();
+    const updateViewport = (vp) => dispatch(updateVP(vp));
     return (
         <button
             style={styles.zoom_button}
