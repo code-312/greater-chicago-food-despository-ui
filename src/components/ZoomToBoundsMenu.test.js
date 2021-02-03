@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event'
 /**
  * Tests for the ZoomToBoundsButton component.
  */
-describe("ZoomToBoundsMenu", () => {
+describe.skip("ZoomToBoundsMenu", () => {
     /**
      * Variables used across multiple tests:
      */
@@ -84,7 +84,7 @@ describe("ZoomToBoundsMenu", () => {
 /**
  * Tests for the ZoomToBoundsButton component.
  */
-describe("ZoomToBoundsButton", () => {
+describe.skip("ZoomToBoundsButton", () => {
     /**
      * Variables used across multiple tests:
      */
