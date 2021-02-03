@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import './App.css';
+import '../App.css';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
-import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
-import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
+import ZoomToBoundsMenu from '../components/ZoomToBoundsMenu';
+import {county, selectedCounty, zipcode, selectedZipcode} from './LayerStyles';
 import { connect } from 'react-redux';
-import { updateVP } from './redux/viewportReducer';
-import { updateFilters } from './redux/filterReducer';
-import { countyFetch } from './redux/countyReducer';
-import { zipFetch } from './redux/zipReducer';
+import { updateVP } from '../redux/viewportReducer';
+import { updateFilters } from '../redux/filterReducer';
+import { countyFetch } from '../redux/countyReducer';
+import { zipFetch } from '../redux/zipReducer';
 
 //these props are passed to the App component
 const mapStateToProps = state => {
