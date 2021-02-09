@@ -21,21 +21,27 @@ export const viewportSlice = createSlice({
                 ...state,
                 latitude,
                 longitude,
-                zoom: maxMinZoom(zoom)
+                zoom: maxMinZoom(zoom, {...state})
             };
         }
     }
 });
 
-// Confine zoom within maxZoom(11), minZoom(6)
-const maxMinZoom = (zoom) => {
-    if(zoom > 11) {
-        return 11
+// Confine zoom within maxZoom(15), minZoom(5.5), each button cause 0.5 increase or decrease in zoom level 
+const maxMinZoom = (zoom, state) => {
+    let zoomUpdate = 0
+    if(zoom > 15) {
+        zoomUpdate = 15
+    } else if (zoom < 5.5) {
+        zoomUpdate = 5.5
+    } else if ((zoom - state.zoom) === 1) {
+        zoomUpdate = zoom - 0.5
+    } else if ((zoom - state.zoom) === -1) {
+        zoomUpdate = zoom + 0.5
+    } else {
+        zoomUpdate = zoom
     }
-    if(zoom < 6) {
-        return 6
-    }
-    return zoom
+    return zoomUpdate
 }
 
 export const { updateVP } = viewportSlice.actions;
