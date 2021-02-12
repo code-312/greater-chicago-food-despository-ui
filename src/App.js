@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
-import ReactMapGL, {Source, Layer} from 'react-map-gl';
+import ReactMapGL, {Source, Layer, NavigationControl} from 'react-map-gl';
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import {county, selectedCounty, zipcode, selectedZipcode} from './mapbox/LayerStyles';
+import {navControlStyles} from './mapbox/NavigationControlsStyles'
 import { connect } from 'react-redux';
 import { updateVP } from './redux/viewportReducer';
 import { updateFilters } from './redux/filterReducer';
@@ -147,6 +148,9 @@ class App extends Component {
                 this.props.dispatch(updateVP(newViewport))
               }}
               onHover={this.onHover}
+              maxZoom={15}
+              minZoom={5.5}
+              transitionDuration={500}
             >
               {/*County Level*/}
               {this.props.illinois_counties.status !== 'pending' &&
@@ -165,6 +169,9 @@ class App extends Component {
               
               {/*Tool-tip*/}
               {this.renderTooltip()} 
+              <div style={navControlStyles}>
+                <NavigationControl showCompass={false} />
+              </div>
             </ReactMapGL>
           </div>
 
