@@ -53,14 +53,14 @@ const ZoomToBoundsMenu = () => {
     // Returns a button to re-orientate the map around the state, followed by an alphabetized 
     // list of buttons that re-orientate the map around a county
     return (
-        <div style={styles.zoom_menu}>
+        <div>
             <ZoomToBoundsButton 
                 key="Illinois" 
                 keyValue="Illinois"
                 label="County Map" 
                 newViewport={origin} 
             />
-            <div style={styles.button_scroll_bar}>
+            <div className="scroll">
                 {countyButtons(countyFeatures)}
             </div>    
         </div>
@@ -81,35 +81,8 @@ export const ZoomToBoundsButton = ({keyValue, label, newViewport}) => {
     const updateViewport = (vp) => dispatch(updateVP(vp));
     return (
         <button
-            style={styles.zoom_button}
             onClick={() => updateViewport(newViewport)}
             data-testid={"zoom_to_bounds_button_" + keyValue}
         >{label}</button>
     )
-}
-
-/**
- * In-line styles for ZoomToBounds components
- */
-const styles = {
-    zoom_button: {
-        display:"flex",
-        flexDirection:'column',
-        backgroundColor:'white',
-        borderColor:'black',
-        borderWidth:1,
-        padding:10,
-    },
-
-    zoom_menu: {
-        display:"flex",
-        flexDirection:'column',
-        maxHeight:'100vh',
-    },
-
-    button_scroll_bar: {
-        display:'flex',
-        flexDirection:'column',
-        overflowY:'scroll',
-    }
 }

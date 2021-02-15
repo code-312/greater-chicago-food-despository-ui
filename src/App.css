@@ -28,18 +28,6 @@
   color: #61dafb;
 }
 
-.tooltip {
-  position: absolute;
-  margin: 8px;
-  padding: 4px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  max-width: 300px;
-  font-size: 10px;
-  z-index: 9;
-  pointer-events: none;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -47,4 +35,38 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/****Left Hand Menu Styles (other than font styles)****/
+nav div {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+}
+
+nav button {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #059713; 
+    background: #fff;
+    border-bottom: 1px solid #F3AD1C;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    padding: 20px 0 20px 25px;
+}
+
+nav button:hover {
+    background-color: #F3F2D8;
+}
+
+nav button:focus {
+    background-color: #F3F2D8;
+}
+
+nav .scroll {
+   display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
 }
