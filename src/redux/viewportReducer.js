@@ -5,7 +5,7 @@ const initialVPState = {
     latitude: 40.150196,
     longitude: -89.367848, 
     zoom: 6,
-    width: window.innerWidth/2,
+    width: window.innerWidth,
     height: window.innerHeight,
     //transitionInterpolator: new FlyToInterpolator(),
     //transitionDuration: 1000
