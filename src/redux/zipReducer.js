@@ -7,7 +7,7 @@ export const zipFetch = createAsyncThunk(
   'zipcodes/zipFetch',
   //payload creator
   async () => {
-    const url = "http://localhost:3001/zipcodes"
+    const url = "https://cfc-gcfd-default-rtdb.firebaseio.com/zipcodes.json"
     try {
       const res = await axios.get(url);
       return res.data; 
