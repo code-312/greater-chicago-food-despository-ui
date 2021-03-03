@@ -1,14 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FlyToInterpolator } from 'react-map-gl';
 
-const initialVPState = {
+export const initialVPState = {
     latitude: 40.150196,
     longitude: -89.367848, 
     zoom: 6,
     width: window.innerWidth,
     height: window.innerHeight,
-    //transitionInterpolator: new FlyToInterpolator(),
-    //transitionDuration: 1000
   }
 
 export const viewportSlice = createSlice({
@@ -28,7 +25,7 @@ export const viewportSlice = createSlice({
 });
 
 // Confine zoom within maxZoom(15), minZoom(5.5), each button cause 0.5 increase or decrease in zoom level 
-const maxMinZoom = (zoom, state) => {
+export const maxMinZoom = (zoom, state) => {
     let zoomUpdate = 0
     if(zoom > 15) {
         zoomUpdate = 15
