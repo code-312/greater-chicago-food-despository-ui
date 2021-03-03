@@ -70,3 +70,82 @@ nav .scroll {
     flex-direction: column;
     overflow-y: scroll;
 }
+
+/****Right Hand Menu Styles (other than font styles)****/
+#right-menu {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 255px;
+    background: white;
+    padding: 10px;
+    border-radius: 9px;
+    color: #059713;
+}
+
+#right-menu h2 {
+    font-size: 2em;
+    text-align: center;
+}
+
+#right-menu label {
+    width: 235px;
+    margin: 8px 0 0 0;
+    padding: 5px;
+    background-color: #F3F2D8;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#right-menu #right-menu-county {
+    display: visible;
+}
+
+#right-menu #right-menu-zipcode {
+    display: none;
+}
+
+/*toggle button*/
+#right-menu input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;   
+}
+
+#right-menu .toggle {
+    height: 20px;
+    width: 42px;
+    border-radius: 16px;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    border: 2px solid #059713;
+    background-color: #F5F5F5;
+}      
+
+#right-menu .toggle:after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #059713;
+    background: white;
+    box-shadow: 0 1px 2px rgba(44,44,44,.2);   transition: all .3s ease;
+
+}
+
+#right-menu .toggle:checked {
+    border-color: #059713;
+    background-color: #059713;
+}
+
+#right-menu .toggle:checked:after {
+    transition: all .3s ease;
+    transform: translatex(20px);
+}
