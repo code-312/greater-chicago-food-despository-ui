@@ -12,7 +12,7 @@ const ZoomToBoundsMenu = () => {
     
     const origin = {
         latitude: 40.150196,
-        longitude: -89.367848, 
+        longitude: -89.367848,
         zoom: 6,
     };
 
@@ -54,7 +54,7 @@ const ZoomToBoundsMenu = () => {
     // list of buttons that re-orientate the map around a county
     return (
         <div>
-            <ZoomToBoundsButton 
+            <ZoomToBoundsButton
                 key="Illinois" 
                 keyValue="Illinois"
                 label="County Map" 
@@ -62,7 +62,7 @@ const ZoomToBoundsMenu = () => {
             />
             <div className="scroll">
                 {countyButtons(countyFeatures)}
-            </div>    
+            </div>
         </div>
     )
 }
