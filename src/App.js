@@ -35,10 +35,9 @@ class App extends Component {
           </div>
 
           {/* Column 3: Right-hand menu */}
-          { /* <nav className="menu col-2 pl-0 pre-0">
+          <nav className="menu col-2 pl-0 pre-0">
             <RightHandMenu />
-          </nav> */
-          }
+          </nav>
         </div>
       </div>
     );
