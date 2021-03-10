@@ -102,9 +102,7 @@ nav .scroll {
     display: visible;
 }
 
-#right-menu #right-menu-zipcode {
-    display: none;
-}
+
 
 /*toggle button*/
 #right-menu input[type="checkbox"] {
