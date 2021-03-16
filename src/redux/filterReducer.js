@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialFilterState = {
+export const initialFilterState = {
     highlightCounty: ['in', 'COUNTY', ''],
     highlightZipcode: ['in', 'ZCTA', ''],
     filterZipcodeByCounty: ['in', 'COUNTY', ''],
