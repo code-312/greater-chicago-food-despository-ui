@@ -3,7 +3,9 @@ import './App.css';
 
 import { connect } from 'react-redux';
 import { countyFetch } from './redux/countyReducer';
+import { countyDataFetch } from './redux/countyDataReducer';
 import { zipFetch } from './redux/zipReducer';
+import { zipDataFetch } from './redux/zipCodeDataReducer';
 
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import RightHandMenu from './components/RightHandMenu';
@@ -17,6 +19,8 @@ class App extends Component {
     //They dispatch the most current API call to the Redux store
     this.props.dispatch(countyFetch());
     this.props.dispatch(zipFetch());
+    this.props.dispatch(countyDataFetch());
+    this.props.dispatch(zipDataFetch())
   }
 
   render() {
