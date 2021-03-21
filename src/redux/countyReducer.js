@@ -7,12 +7,12 @@ export const countyFetch = createAsyncThunk(
   'counties/countyFetch',
   //payload creator
   async () => {
-    const url = "http://localhost:3001/counties"
+    const url = "https://cfc-gcfd-default-rtdb.firebaseio.com/counties.json"
     try {
       const res = await axios.get(url);
       return res.data; 
     } catch(err) {
-        console.error("There was a problem fetching county data" + err);
+        console.error("There was a problem fetching county data: " + err);
         return [];
     }  
   }
