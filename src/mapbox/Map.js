@@ -17,8 +17,8 @@ import { navControlStyles } from './NavigationControlsStyles'
    * viewport = viewport showing map of current coordinate
    */
 const mapStateToProps = state => {
-  const { viewport, illinois_counties, illinois_zipcodes } = state;
-  return { viewport, illinois_counties, illinois_zipcodes }
+  const { viewport, illinois_counties, illinois_zipcodes,  county_data, zip_data } = state;
+  return { viewport, illinois_counties, illinois_zipcodes, county_data, zip_data }
 }
 
 class Map extends Component {
@@ -75,6 +75,7 @@ class Map extends Component {
 
 
   render() {
+    console.log('data', this.props.zip_data.zipData, this.props.county_data.countyData)
     return (
       <ReactMapGL
       {...this.props.viewport}
