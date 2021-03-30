@@ -1,34 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactMapGL, { NavigationControl } from 'react-map-gl';
 
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateVP } from './../redux/viewportReducer';
 import { updateFilters } from './../redux/filterReducer';
 
-import CountyLayer from './CountyLayer'
+import CountyLayer from './CountyLayer';
 import ZipcodeLayer from './ZipcodeLayer';
 import RenderToolTip from '../components/RenderToolTip';
-import { navControlStyles } from './NavigationControlsStyles'
+import { navControlStyles } from './NavigationControlsStyles';
 
 
+
+const Map = () => {
+  const dispatch = useDispatch()
   /**
    * illinois_counties = County GeoJSON and county level data.
    * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
    * viewport = viewport showing map of current coordinate
    */
-const mapStateToProps = state => {
-  const { viewport, illinois_counties, illinois_zipcodes,  county_data, zip_data } = state;
-  return { viewport, illinois_counties, illinois_zipcodes, county_data, zip_data }
-}
-
-class Map extends Component {
+  const viewport = useSelector(state => state.viewport)
+  const illinois_counties = useSelector(state => state.illinois_counties)
+  const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
+  const county_data = useSelector(state => state.county_data)
+  const zip_data = useSelector(state => state.zip_data)
+  
 
   //deletes are temporary fix to non-serialized values in Redux store
   // dispatch newViewPort to store
-  handleViewportChange = (newViewport) => {
+  const handleViewportChange = (newViewport) => {
     delete newViewport.transitionInterpolator;
     delete newViewport.transitionEasing;
-    this.props.dispatch(updateVP(newViewport))
+    dispatch(updateVP(newViewport))
   }
 
   // grab features and coord where hovering and dispatch the data to store.
@@ -39,7 +42,7 @@ class Map extends Component {
    * event.x,event.y = coordinates of mouse over the map
    * event.features = List of the features that are currently being hovered over. 
    */
-  onHover = event => {
+  const onHover = event => {
     // Extract the list of features and x,y coords from the event
     const { features, srcEvent: {offsetX, offsetY} } = event
     
@@ -62,7 +65,7 @@ class Map extends Component {
     if (currentZipCode) {zipcode = currentZipCode.ZCTA}
 
     // Dispatch the updated information to the redux store
-    this.props.dispatch(updateFilters({
+    dispatch(updateFilters({
       hoveredCounty: currentCounty || null, 
       hoveredZipCode: currentZipCode || null,
       x: offsetX, 
@@ -73,22 +76,20 @@ class Map extends Component {
     }));
   };
 
-
-  render() {
-    console.log('data', this.props.zip_data.zipData, this.props.county_data.countyData)
+    console.log('data', zip_data.zipData, county_data.countyData)
     return (
       <ReactMapGL
-      {...this.props.viewport}
+      {...viewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
-      onViewportChange={this.handleViewportChange}
-      onHover={this.onHover}
+      onViewportChange={handleViewportChange}
+      onHover={onHover}
       maxZoom={15}
       minZoom={5.5} >
 
         {/*County Level*/}
-        {this.props.illinois_counties.status !== 'pending' && <CountyLayer />}
+        {illinois_counties.status !== 'pending' && <CountyLayer />}
         {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
-        {this.props.viewport.zoom > 7 && this.props.illinois_zipcodes.status !== 'pending' && <ZipcodeLayer />} 
+        {viewport.zoom > 7 && illinois_zipcodes.status !== 'pending' && <ZipcodeLayer />} 
         
         {/*Tool-tip*/}
         <RenderToolTip />
@@ -100,7 +101,6 @@ class Map extends Component {
   
       </ReactMapGL>
     )
-  }
 }
 
-export default connect(mapStateToProps)(Map)
+export default Map
