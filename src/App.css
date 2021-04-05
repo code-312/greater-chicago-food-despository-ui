@@ -56,6 +56,16 @@ nav button {
     border-left: none;
     padding: 20px 0 20px 25px;
 }
+@media (max-width: 900px) {
+  nav button {
+    font-size: 1em;
+    padding: 20px 0 20px 10px;
+  }
+}
+/** selecting right menu so that I can adjust properties **/
+.menu.col-2.pl-0.pr-0 {
+  min-width: 7rem;
+}
 
 nav button:hover {
     background-color: #F3F2D8;
@@ -81,6 +91,20 @@ nav .scroll {
     padding: 10px;
     border-radius: 9px;
     color: #059713;
+}
+
+
+@media (max-width: 900px) {
+  #right-menu {
+    position: initial;
+    top: initial;
+    right: initial;
+  }
+
+  #right-menu > label{
+    width: 8rem;
+  }
+
 }
 
 #right-menu h2 {

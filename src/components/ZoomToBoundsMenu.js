@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateVP } from '../redux/viewportReducer';
 import {updateViewportToFitBounds} from '../mapbox/Util';
@@ -7,9 +7,16 @@ import {updateViewportToFitBounds} from '../mapbox/Util';
  * COMPONENT: ZoomToBoundsMenu
  */
 const ZoomToBoundsMenu = () => {
+    const [userViewport, setUserViewport] = useState(window.innerWidth)
+    useEffect(() => {
+        const handleWindowResize = () => setUserViewport(window.innerWidth)
+        window.addEventListener('resize', handleWindowResize)
+
+        return () => window.removeEventListener('resize', handleWindowResize)
+    }, [])
+    
     //useSelector gets viewport state from Redux store
     const currentViewport = useSelector(state => state.viewport);
-    
     const origin = {
         latitude: 40.150196,
         longitude: -89.367848, 
@@ -37,7 +44,9 @@ const ZoomToBoundsMenu = () => {
     var countyButtons = (countyFeatures) => {
         if (countyFeatures) {
             return countyFeatures.map((feature) => {
-                const label = feature.properties.NAME + ' County';
+                // V width of the screen ( if it's smaller than 900px it'll remove the word 'county')
+                const breakpoint = 900 
+                const label = userViewport > breakpoint ? feature.properties.NAME + ' County' : feature.properties.NAME
                 const newViewport = updateViewportToFitBounds(currentViewport,feature);
                 
                 return (<ZoomToBoundsButton 

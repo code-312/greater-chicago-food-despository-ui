@@ -81,6 +81,8 @@ class Map extends Component {
       {...this.props.viewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
       onViewportChange={this.handleViewportChange}
+      width='100vw'
+      height='100vh'
       onHover={this.onHover}
       maxZoom={15}
       minZoom={5.5} >
