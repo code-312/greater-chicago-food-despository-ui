@@ -4,18 +4,14 @@
    * If a zipcode is also highlighted, then also displays zipcode number.
    */
 
-import React, {Component} from 'react'
-import { connect } from 'react-redux';
+import React from 'react'
+import { useSelector } from 'react-redux';
 
-//these props are passed to the App component
-const mapStateToProps = state => {
-    const { filters } = state;
-    return { filters }
-  }
+const RenderToolTip = () => {
+    //these props are passed to the App component
+    const filters = useSelector(state => state.filters)
 
-class RenderToolTip extends Component {
-  render() {
-    const {hoveredCounty, hoveredZipCode, x, y} = this.props.filters;
+    const {hoveredCounty, hoveredZipCode, x, y} = filters;
     const style = {
       position:'absolute',
       margin: 8,
@@ -41,7 +37,6 @@ class RenderToolTip extends Component {
         </div>
       )
     );
-  }
 }
 
-export default connect(mapStateToProps)(RenderToolTip)
+export default RenderToolTip;

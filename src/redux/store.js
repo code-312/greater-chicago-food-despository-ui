@@ -24,7 +24,9 @@ const store = configureStore({
         thunk: true,
         immutableCheck: false,
         serializableCheck: false,
-        }),
+        },
+        window.devToolsExtension ? window.devToolsExtension() : f => f),
 });
+/// To view the store within your browser download chrome extension: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
 
 export default store;

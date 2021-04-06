@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux'
 import { countyFetch } from './redux/countyReducer';
 import { countyDataFetch } from './redux/countyDataReducer';
 import { zipFetch } from './redux/zipReducer';
@@ -11,19 +10,17 @@ import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import RightHandMenu from './components/RightHandMenu';
 import Map from './mapbox/Map'
 
-class App extends Component {
+const App = () => {
+  const dispatch = useDispatch() 
+  //countyFetch and zipFetch are both async thunks from countyReducer.js and zipReducer.js, respectively
+  //They dispatch the most current API call to the Redux store
+  useEffect(() => {
+    dispatch(countyFetch());
+    dispatch(zipFetch());
+    dispatch(countyDataFetch());
+    dispatch(zipDataFetch());
+  }, [])
 
-  componentDidMount() {
-    //dispatch is added to props automatically when connect is used without mapDispatchToProps
-    //countyFetch and zipFetch are both async thunks from countyReducer.js and zipReducer.js, respectively
-    //They dispatch the most current API call to the Redux store
-    this.props.dispatch(countyFetch());
-    this.props.dispatch(zipFetch());
-    this.props.dispatch(countyDataFetch());
-    this.props.dispatch(zipDataFetch())
-  }
-
-  render() {
     return (
       <div className="container-fluid">
         <div className="row">
@@ -45,7 +42,6 @@ class App extends Component {
         </div>
       </div>
     );
-  }
 }
 
-export default connect()(App);
+export default App;
