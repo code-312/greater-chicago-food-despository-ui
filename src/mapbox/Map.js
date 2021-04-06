@@ -25,7 +25,6 @@ const Map = () => {
   const county_data = useSelector(state => state.county_data)
   const zip_data = useSelector(state => state.zip_data)
   
-
   //deletes are temporary fix to non-serialized values in Redux store
   // dispatch newViewPort to store
   const handleViewportChange = (newViewport) => {
@@ -76,7 +75,6 @@ const Map = () => {
     }));
   };
 
-    console.log('data', zip_data.zipData, county_data.countyData)
     return (
       <ReactMapGL
       {...viewport}
