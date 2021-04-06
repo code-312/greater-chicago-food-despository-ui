@@ -22,8 +22,6 @@ const Map = () => {
   const viewport = useSelector(state => state.viewport)
   const illinois_counties = useSelector(state => state.illinois_counties)
   const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
-  const county_data = useSelector(state => state.county_data)
-  const zip_data = useSelector(state => state.zip_data)
   
   //deletes are temporary fix to non-serialized values in Redux store
   // dispatch newViewPort to store

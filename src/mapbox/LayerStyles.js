@@ -10,7 +10,7 @@
  * https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/
  */
 
- import {highlight, countyFill, countyOutline, zipcodeFill, zipcodeOutline} from './Colors'
+ import {highlight, countyFill, countyOutline, zipcodeFill, zipcodeOutline, colorMapFill} from './Colors'
 
 /**
  * Base styling for county layer objects
@@ -62,4 +62,16 @@ export const selectedZipcode = {
         "line-color": highlight,
         "line-width": 1
     }
-};
+}
+
+export const colorMap = {
+    id: 'colorMap',
+    type: 'fill',
+    paint: {
+        'fill-color': {
+          property: 'percentile',
+          stops: colorMapFill,
+        },
+        'fill-opacity': 0.8
+    }
+}
