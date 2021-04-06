@@ -24,23 +24,28 @@ export const updateViewportToFitBounds = (currentViewport, feature) => {
     };
 }
 
-
+// 
+//
+// For County Data
+//
+//
 /**
  * creates a scale range for selected feature, adds it to countyData and returns final renderObj to feed into geoJSON to render chloropleth map
  *  @param countyData => county features data received from backend, poverty and race data
  *  @param counties => county geometry data
  *  @returns object with both data combined and a scaled value of selected feature based on which geoJSON will be created
  * */ 
-export function updateScaleInterval(countyData, counties) {
-  const scale = scaleQuantile().domain(createFeatureArray(countyData)).range(range(9))
-  return combineData(countyData, counties, scale)
+export function updateScaleInterval(countyData, counties, feat) {
+  let keyArr = featureKeyName(feat)
+  const scale = scaleQuantile().domain(createFeatureArray(countyData, feat, keyArr)).range(range(9))
+  return combineData(countyData, counties, scale, keyArr)
 }
 
 // return an Array with just the selected features required to create a scale range
-function createFeatureArray (countyData) {
+function createFeatureArray (countyData, feat, keyArr) {
   let selectedFeatureData = []
   for (const keys in countyData) {
-    selectedFeatureData.push(countyData[keys].poverty_data.poverty_population_total)
+    selectedFeatureData.push(countyData[keys][keyArr[0]][keyArr[1]])
   }
   return selectedFeatureData
 }
@@ -52,11 +57,11 @@ function createFeatureArray (countyData) {
  *  @param scale => scaled value of the selected feature
  *  @returns object with scaled value of selected feature added to county object and combined with its respective geometry data
  * */ 
-function combineData(countyDataObj, counties, scale) {
+function combineData(countyDataObj, counties, scale, keyArr) {
   let renderObj = {}
   let feat = []
   for (const keys in countyDataObj) {
-    let value = countyDataObj[keys].poverty_data.poverty_population_total
+    let value = countyDataObj[keys][keyArr[0]][keyArr[1]]
     const scaleAddedObj = {...countyDataObj[keys], value, percentile: scale(value)}
     renderObj[keys] = scaleAddedObj
   }
@@ -69,4 +74,25 @@ function combineData(countyDataObj, counties, scale) {
     "features": feat,
     "type": "FeatureCollection"
   }
+}
+
+function featureKeyName(feat) {
+  const featureList = {
+    'overall-poverty': 'poverty_population_total',
+    'child-poverty': 'poverty_population_poverty_child',
+    'asian': 'race_asian',
+    'black': 'race_black',
+    'hispaniclatino': 'race_hispaniclatino_total',
+    'native': 'race_native',
+    'other': 'race_other',
+    'pacific': 'race_pacific',
+    'white': 'race_white',
+    'total': 'race_total'
+  }
+  let key2 = featureList[feat]
+  let key1 = 'race_data'
+  if (feat.includes('poverty')) {
+    key1 = 'poverty_data'
+  }
+  return [key1, key2]
 }

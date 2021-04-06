@@ -147,3 +147,22 @@ nav .scroll {
     transition: all .3s ease;
     transform: translatex(20px);
 }
+
+#right-menu .legend1 {
+  width: 60px;
+  height: 30px;
+  background-color: #3288bd;
+}
+
+#right-menu .legend2 {
+  width: 60px;
+  height: 30px;
+  background-color: #d53e4f;
+}
+
+#right-menu .legend {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

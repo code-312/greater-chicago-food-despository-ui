@@ -13,7 +13,6 @@ const RightHandMenu = () => {
 
   const onToggle = e => {
     selectFeat === e.target.name ? dispatch(updateSelectFeat('')) :  dispatch(updateSelectFeat(e.target.name))
-    console.log('featureState: ', selectFeat)
   }
 
   return (
@@ -28,7 +27,8 @@ const RightHandMenu = () => {
           Child Poverty
           <input type="checkbox"  id="child-poverty" name="child-poverty" className="toggle" onChange={onToggle} checked={selectFeat === "child-poverty"}></input>
         </label>
-        {currentViewport.zoom > 7 &&
+        {/* changed zoom to less than 5 to check race data on geoJson */}
+        {currentViewport.zoom > 5 &&
           <div id="right-menu-zipcode">
             <h2>Zipcode Map</h2>
             <label htmlFor="asian">
@@ -66,6 +66,8 @@ const RightHandMenu = () => {
           </div>
         }
       </div>
+      <div className='legend'><div className='legend1'></div> <span>Min</span></div>
+      <div className='legend'><div className='legend2'></div> <span>Max</span></div>
     </div>
   )
 }

@@ -16,8 +16,8 @@ const CountyLevel = () => {
   const county_data = useSelector(state => state.county_data)
 
   const data = useMemo(() => {
-    return county_data.countyData && updateScaleInterval(county_data.countyData, illinois_counties.counties)
-  }, [county_data.countyData, illinois_counties.counties])
+    return county_data.countyData && updateScaleInterval(county_data.countyData, illinois_counties.counties, selectFeat)
+  }, [county_data.countyData, illinois_counties.counties, selectFeat])
 
     return (
       <Source id="counties" type="geojson" data={data}>
