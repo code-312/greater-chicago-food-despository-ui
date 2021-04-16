@@ -3,6 +3,8 @@
 ## Current Status
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3a338fa4-8edb-41a6-ac06-4e4295a895ad/deploy-status)](https://app.netlify.com/sites/gcfd/deploys)
 
+View deployed site [here](https://gcfd.netlify.app/).
+
 ## Development
 ### Local API Key Configuration
 To protect any API keys during production they should not be hard-coded into the application. 
