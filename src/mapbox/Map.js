@@ -76,7 +76,7 @@ const Map = () => {
     }));
   };
 
-    console.log('data', zip_data.zipData, county_data.countyData)
+    // console.log('data', zip_data.zipData, county_data.countyData)
     return (
       <ReactMapGL
       {...viewport}

@@ -3,13 +3,6 @@ import {Source, Layer} from 'react-map-gl';
 import { useSelector } from 'react-redux';
 import {zipcode, selectedZipcode} from './LayerStyles';
 
-/*
-  * curl https://cfc-gcfd-default-rtdb.firebaseio.com/zip_data.json
-  * Data fetched 4/12/21
-*/
-
-const zipData = require('../fetched_data/zipData.json');
-
 const ZipcodeLevel = () => {
   /**
     * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
@@ -17,6 +10,7 @@ const ZipcodeLevel = () => {
   */
   const filters = useSelector(state => state.filters)
   const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
+  // const illinois_zipcodes = useSelector(state => state.zipLayer)
 
     return (
       <Source id="zipcodes" type="geojson" data={illinois_zipcodes.zipcodes}>

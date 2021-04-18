@@ -1,13 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+// import axios from 'axios';
+/**
+ * County demographic data fetched 4/12/21 and saved locally
+ * to avoid exceeding Firebase data limits.  Data is updated
+ * only once anually (date?), when it should be fetched again.
+ */
 
 export const countyDataFetch = createAsyncThunk(
   'counties/countyDataFetch',
   async () => {
-    const url = "https://cfc-gcfd-default-rtdb.firebaseio.com/county_data.json"
+    // const url = "https://cfc-gcfd-default-rtdb.firebaseio.com/county_data.json"
     try {
-      const res = await axios.get(url);
-      return res.data; 
+      // const res = await axios.get(url);
+      // return res.data;
+      const res = await require('../fetched_data/countyData.json');
+      return res;
     } catch(err) {
         console.error("There was a problem fetching county data details: " + err);
         return [];

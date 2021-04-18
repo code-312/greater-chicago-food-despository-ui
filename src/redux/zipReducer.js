@@ -1,5 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+// import axios from 'axios';
+
+/**
+ * Zipcode geoJSON data fetched 4/18/21 and saved locally
+ * to avoid exceeding Firebase data limits.  Data is updated
+ * only once anually (date?), when it should be fetched again.
+ */
 
 // Thunk makes API call, returns action of the type specified by the first parameter
 // In the slice, extraReducers define different actions based on the 3 possible states of the returned promise and execute reducers for them
@@ -7,10 +13,12 @@ export const zipFetch = createAsyncThunk(
   'zipcodes/zipFetch',
   //payload creator
   async () => {
-    const url = "https://cfc-gcfd-default-rtdb.firebaseio.com/zipcodes.json"
+    // const url = "https://cfc-gcfd-default-rtdb.firebaseio.com/zipcodes.json"
     try {
-      const res = await axios.get(url);
-      return res.data; 
+      // const res = await axios.get(url);
+      // return res.data;
+      const zipLayer = await require('../fetched_data/zipLayer.json');
+      return zipLayer
     } catch(err) {
         console.error("There was a problem fetching zipcode data" + err);
         return {}
