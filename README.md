@@ -1,6 +1,12 @@
 # Greater Chicago Food Depository - Frontend UI
 
-## Local API Key Configuration
+## Current Status
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3a338fa4-8edb-41a6-ac06-4e4295a895ad/deploy-status)](https://app.netlify.com/sites/gcfd/deploys)
+
+View deployed site [here](https://gcfd.netlify.app/).
+
+## Development
+### Local API Key Configuration
 To protect any API keys during production they should not be hard-coded into the application. 
 Any API Keys should instead be stored at the root of the project directory in a .env file, which are already 
 setup to be ignored by git. Variables in a .env file can be accessed anywhere throught the app as: 
@@ -9,14 +15,14 @@ setup to be ignored by git. Variables in a .env file can be accessed anywhere th
 
 For more info on .env files: https://create-react-app.dev/docs/adding-custom-environment-variables/
 
-### API Keys and Corresponding Variable Names: 
+#### API Keys and Corresponding Variable Names: 
 - MapBox: REACT_APP_MAPBOX_API_KEY
 
-## JSON Format for data consumed by the frontend:
+### JSON Format for data consumed by the frontend:
 Data for both counties and zipcodes should be in the form of a list of key,value pairs.
 of the corresponding data to that county.
 
-### County Level Format: 
+#### County Level Format: 
 The keys for counties should be the State + County FIPS codes in string format:
 State FIPS codes are two digits (Illinois' is "17") and the County FIPS codes are always 3 digits.
 Not all datasets will combine these two, so in processing data it may be necessary to do this step.
@@ -36,7 +42,7 @@ In the example below, the first key is "17001" which equals Illinois + Adams Cou
         ...
     }
 
-### Zipcode Level Format: 
+#### Zipcode Level Format: 
 The keys for zipcodes should be the 5-digit long zipcode number in string format.
 
     {
@@ -52,9 +58,6 @@ The keys for zipcodes should be the 5-digit long zipcode number in string format
         }, 
         ...
     }
-
-
-
 
 
 # Getting Started with Create React App
