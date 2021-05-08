@@ -1,5 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+// import axios from 'axios';
+
+/**
+ * County geoJSON data fetched 4/18/21 and saved locally
+ * to avoid exceeding Firebase data limits.  Data is updated
+ * only once anually (date?), when it should be fetched again.
+ */
 
 // Thunk makes API call, returns action of the type specified by the first parameter
 // In the slice, extraReducers define different actions based on the 3 possible states of the returned promise and execute reducers for them
@@ -7,10 +13,12 @@ export const countyFetch = createAsyncThunk(
   'counties/countyFetch',
   //payload creator
   async () => {
-    const url = "https://cfc-gcfd-default-rtdb.firebaseio.com/counties.json"
+    // const url = "https://cfc-gcfd-default-rtdb.firebaseio.com/counties.json"
     try {
-      const res = await axios.get(url);
-      return res.data; 
+      // const res = await axios.get(url);
+      // return res.data;
+      const res = await require('../fetched_data/countyLayer.json');
+      return res;
     } catch(err) {
         console.error("There was a problem fetching county data: " + err);
         return [];

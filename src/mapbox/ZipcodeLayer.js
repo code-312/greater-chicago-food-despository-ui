@@ -5,11 +5,13 @@ import {zipcode, selectedZipcode} from './LayerStyles';
 
 const ZipcodeLevel = () => {
   /**
-   * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
-   * filter = hovered/highlight zipcode/county
-   */
+    * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
+    * filter = hovered/highlight zipcode/county
+  */
   const filters = useSelector(state => state.filters)
   const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
+  // const illinois_zipcodes = useSelector(state => state.zipLayer)
+
     return (
       <Source id="zipcodes" type="geojson" data={illinois_zipcodes.zipcodes}>
        <Layer {...zipcode} filter={filters.filterZipcodeByCounty}></Layer>
