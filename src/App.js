@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import { useDispatch } from 'react-redux'
 import { countyFetch } from './redux/countyReducer';
 import { countyDataFetch } from './redux/countyDataReducer';
@@ -9,6 +8,8 @@ import { zipDataFetch } from './redux/zipCodeDataReducer';
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import RightHandMenu from './components/RightHandMenu/RightHandMenu';
 import Map from './mapbox/Map'
+
+import './App.css';
 
 const App = () => {
   const dispatch = useDispatch() 
