@@ -7,6 +7,7 @@
   color: #059713;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
   padding: 12px;
+  position: relative;
 }
 
 .rt__title {
@@ -27,4 +28,23 @@
   font-weight: 800;
   text-align: center;
   padding: 12px;
+}
+
+.rt__footer {
+  position: absolute;
+  bottom: 5px;
+  border-top: 1px solid #f9d68d;
+  width: 90%;
+  align-self: center;
+}
+
+.rt__link {
+  color: black;
+  font-size: 10px;
+  padding-left: 5px;
+  font-weight: 500;
+}
+
+.rt__link:hover {
+  text-decoration: none;
 }

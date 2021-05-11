@@ -28,6 +28,9 @@ const RightHandMenu = () => {
         <RadioSelect data='WIC' />
       </div>
       <div className='rt__donut'></div>
+      <div className='rt__footer'>
+        <a alt='link to surce' href='#a' className='rt__link'>Link to source</a>  
+      </div>
     </div>
   )
 }
