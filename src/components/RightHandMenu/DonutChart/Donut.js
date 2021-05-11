@@ -21,25 +21,27 @@ function Donut() {
     setLegend( [...l])
   },[data])
 
-  console.log(legend)
   return (
     <div>
-       <PieChart width={200} height={200}>
-        <Pie
-          data={data}
-          cx={100}
-          cy={100}
-          innerRadius={40}
-          outerRadius={55}
-          fill="#8884d8"
-          paddingAngle={1}
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
+      <div className='donut__chart'>
+        <PieChart width={200} height={200}>
+          <Pie
+            data={data}
+            cx={100}
+            cy={100}
+            innerRadius={40}
+            outerRadius={55}
+            fill="#8884d8"
+            paddingAngle={1}
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+        </PieChart>
+        <div className='donut__centerTxt'><h5>Total Women</h5><span>113</span></div>
+      </div>
       <Legend legend={legend} />
     </div>
   )

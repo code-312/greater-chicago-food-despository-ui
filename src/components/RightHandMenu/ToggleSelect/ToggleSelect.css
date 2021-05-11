@@ -1,17 +1,20 @@
-.toogSel {
+.toggSel {
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100%;
   height: 26px;
   margin-bottom: 14px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
-.toogOpt {
+.toggOpt {
   margin: 0;
   border: 1px solid #059713;
   width: 100%;
   text-align: center;
+  padding-top:3px;
 }
 
 .ts__a {
@@ -23,7 +26,7 @@
   border-radius: 0 10px 10px 0;
 }
 
-.toogSelect {
+.toggSelect {
  background-color: #059713;
  color: white;
 }
