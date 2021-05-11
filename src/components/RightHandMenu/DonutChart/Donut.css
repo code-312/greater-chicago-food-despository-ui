@@ -5,7 +5,7 @@
 .donut__centerTxt {
   width: 60px;
   position: absolute;
-  top: 85px;
+  top: 110px;
   left: 77px;
   text-align: center;
   display: flex;
@@ -27,3 +27,16 @@
     font-weight: 500;
 }
 
+tspan {
+  font-size: 10px;
+  color: #1c752a;
+}
+
+text {
+  font-size: 6px;
+  font-weight: 700;
+}
+
+.tspan__val {
+  font-weight: 500;
+}

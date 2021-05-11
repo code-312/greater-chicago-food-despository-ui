@@ -4,7 +4,7 @@
   height: calc(100vh - 32px);
   margin: 16px;
   border-radius: 9px;
-  color: #059713;
+  color: #1c752a;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
   padding: 12px;
   position: relative;
@@ -51,4 +51,17 @@
 
 .rt__link:hover {
   text-decoration: none;
+}
+
+.noCounty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.rt__noCounty {
+  text-align: center;
+  padding: 20px;
+  font-weight: 700;
 }

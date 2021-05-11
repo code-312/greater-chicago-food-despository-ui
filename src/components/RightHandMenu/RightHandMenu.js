@@ -38,7 +38,7 @@ const dataTypes = {
 }
 
 const RightHandMenu = () => {
-  const mockProps = {'data':'WIC Usage', 'county': 'Champaign County'}
+  const mockProps = {'data':'Food Insecurity', 'county': 'Champaign County'}
 
   const { data, county } = mockProps
 
@@ -75,7 +75,7 @@ const RightHandMenu = () => {
         </div>
       </div>
     ) : (
-      <div className='rtMenu'><p className='rt__noCounty'>Select a county to view {data}</p></div>
+      <div className='rtMenu noCounty'><p className='rt__noCounty'>Select a county to view {data}</p></div>
     )}
     </div> 
   )

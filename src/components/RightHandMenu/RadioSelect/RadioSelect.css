@@ -30,8 +30,8 @@
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;  
-  color: #059713;
-  border: 1px solid #059713;
+  color: #1c752a;
+  border: 1px solid #1c752a;
   content: '';
   width: 14px;
   height: 14px;
@@ -40,7 +40,7 @@
 
 .radioSel input[type='radio']:checked {
   padding: 1px;
-  background-image:linear-gradient(to bottom, #059713 0%, #059713 100%), linear-gradient(to bottom, white 0%, white 100%);
+  background-image:linear-gradient(to bottom, #1c752a 0%, #1c752a 100%), linear-gradient(to bottom, white 0%, white 100%);
   background-clip: content-box, padding-box;
 }
 
