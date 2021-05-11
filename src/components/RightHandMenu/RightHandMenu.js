@@ -36,15 +36,24 @@ const dataTypes = {
   }
 }
 
-/**
+/*
  * COMPONENT: RightHandMenu
  */
 
 const RightHandMenu = () => {
-  const mockProps = {'data':'Census Data', 'county': 'Champaign County'}
+  // This data should come in as props/slice into this component
+  // change 'data' for different views of menu
+  const mockProps = {'data':'Food Insecurity', 'county': ''}
+  // const mockProps = {'data':'Food Insecurity', 'county': 'Champaign County'}
+  // const mockProps = {'data':'WIC Usage', 'county': 'Champaign County'}
+  // const mockProps = {'data':'Poverty Rates', 'county': 'Champaign County'}
+  // const mockProps = {'data':'Census Data', 'county': 'Champaign County'}
+
+
 
   const { data, county } = mockProps
 
+  // To keep track of which toggleSelect option is selected, so that respective radioSelect Options can be rendered
   const initalToggleState = () => (dataTypes[data].toggleSelect ? dataTypes[data].toggleSelect[0] : null )
 
   const [toggSelected, setToggSelected] = useState(initalToggleState())
@@ -69,6 +78,7 @@ const RightHandMenu = () => {
           </div>
         ) : ''}
 
+        {/* WIC data and Census Data has race type pie chart; others have a different pie chart */}
         <div className='rt__donut'>
           {(data === 'WIC Usage' || data === 'Census Data') ? <Donut /> : <UnequalDonut />}    
         </div>

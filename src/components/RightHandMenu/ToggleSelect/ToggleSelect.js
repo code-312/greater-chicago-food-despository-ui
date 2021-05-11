@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 
 import './ToggleSelect.css'
 
+/*
+ * COMPONENT: ToggleSelect
+ * Always has only 2 options data to select which comes in as props from RightHandMenu
+ * Some data needs to be filtered here for pie chart (use redux slice as props needs to be hoisted)
+ */
 function ToggleSelect(props) {
 const [active, setActive] = useState('A')
 

@@ -4,11 +4,14 @@ import { PieChart, Pie, Sector } from 'recharts'
 import './UnequalDonut.css'
 import Legend from '../Legend/Legend'
 
+// Mock Race Data; Similar Data should come in from Redux Slice
 const data = [
   { key: 'Food Insecurity', value: 251 },
   { key: 'Total Population', value: (334-251) }
 ]
 
+// SVG and positioning for labels around the donut chart; default props send by Pie
+// Mostly same as Donut.js; See Donut.js
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
@@ -62,6 +65,7 @@ const renderActiveShape = (props) => {
         {payload.name}
         </text> */}
       
+      {/* Create a sector on top of pie chart with larger width (inner and outer radius) to create visual effect that it is a cell of pie */}
       <Sector
         cx={cx}
         cy={cy}
@@ -72,12 +76,17 @@ const renderActiveShape = (props) => {
         fill='#2cba42'
       />
 
+      {/* line from pie chart to label name */}
       <path
         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
         stroke='#2cba42'
         fill='none'
       />
+
+      {/* Circle at the tip of line */}
       <circle cx={ex} cy={ey} r={3} fill='#2cba42' stroke='none' />
+
+      {/* Label name/ text at end tip of line from pie chart */}
       <text
         textLength='30'
         x={tx}
@@ -97,9 +106,17 @@ const renderActiveShape = (props) => {
   );
 };
 
+/*
+ * COMPONENT: UnequalDonut
+ * for Poverty, Food Insecurity etc, where only 2 data (total and children/smth else) is provided; Green Piechart
+ * data slice filtered as per radioSelct and ToggleSelect to be used in place of mockData
+ */
 function UnequalDonut() {
   const [legend, setLegend] = useState([])
   const [sum, setSum] = useState(0)
+
+  // ActiveIndex identifies on which cell index of pie renderActiveShape function is to be called 
+  // fixed to 0 as 1st element is the only one requiring label and sector overlay
   const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
@@ -107,7 +124,7 @@ function UnequalDonut() {
       return a + b.value
     }, 0)
     const l =  [
-      { key: 'Food Insecurity', 'value': 251, 'color': '#2cba42' },
+      { key: 'Food Insecurity', 'value': data[0].value, 'color': '#2cba42' },
       { key: 'Total Population', 'value': sum1, 'color': '#124c1b' }
     ]
     setSum(sum1)

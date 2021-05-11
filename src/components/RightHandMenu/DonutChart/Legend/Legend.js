@@ -2,6 +2,11 @@ import React from 'react'
 
 import './Legend.css'
 
+/*
+ * COMPONENT: Legend
+ * Legend list for pie chart
+ * data with color value and name comes as props from donut or unequalDonut component
+ */
 function Legend(props) {
   return (
     <div className='legend'>

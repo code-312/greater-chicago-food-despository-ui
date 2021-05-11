@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 
 import './RadioSelect.css'
 
+/*
+ * COMPONENT: RadioSelect
+ * options data comes in as props from RightHandMenu
+ *  * Some data needs to be filtered here for pie chart (use redux slice as props needs to be hoisted)
+ */
 function RadioSelect(props) {
   const [selectFeat, setFeat] = useState(0)
   const radioClick = (idx) => {
