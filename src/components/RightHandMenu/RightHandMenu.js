@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import './RightHandMenu.css'
 import ToogleSelect from './ToogleSelect/ToogleSelect'
 import RadioSelect from './RadioSelect/RadioSelect'
+import Donut from './DonutChart/Donut'
 /**
  * COMPONENT: RightHandMenu
  */
@@ -27,7 +28,9 @@ const RightHandMenu = () => {
       <div className='rt__radioSelect'>
         <RadioSelect data='WIC' />
       </div>
-      <div className='rt__donut'></div>
+      <div className='rt__donut'>
+        <Donut />
+      </div>
       <div className='rt__footer'>
         <a alt='link to surce' href='#a' className='rt__link'>Link to source</a>  
       </div>

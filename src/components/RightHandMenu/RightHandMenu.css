@@ -30,6 +30,10 @@
   padding: 12px;
 }
 
+.rt__donut {
+  margin: 0 auto;
+}
+
 .rt__footer {
   position: absolute;
   bottom: 5px;
