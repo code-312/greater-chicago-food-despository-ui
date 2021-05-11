@@ -1,17 +1,21 @@
 import React from 'react'
 
+import './RadioSelect.css'
+
 const options = {
   'food_insecurity': ['2018', '2020(Projected)'],
   'WIC': ['Women', 'Infants', 'Children']
 }
 
-function RadioSelect() {
+function RadioSelect(props) {
   return (
     <div className='radioSel'>
-       <label htmlFor="overall-poverty">
-          Overall Poverty
-          <input type="checkbox"  id="overall-poverty" name="overall-poverty" className="toggle" defaultChecked></input>
-        </label>
+        {options[props.data].map((feature, idx) => (
+            <label htmlFor={feature} key={idx}>
+              <input type="radio" id={feature} name={feature} className='radioOpt'></input>
+              {feature}
+            </label>
+        ))}
     </div>
   )
 }

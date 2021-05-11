@@ -1,0 +1,45 @@
+.radioSel {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-right: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.radioSel label {
+  width: 50%;
+}
+
+.radioOpt {
+  color: #059713;
+}
+
+.radioSel input[type='radio']:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+.radioSel input[type='radio']:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #ffa500;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import './RightHandMenu.css'
 import ToogleSelect from './ToogleSelect/ToogleSelect'
+import RadioSelect from './RadioSelect/RadioSelect'
 /**
  * COMPONENT: RightHandMenu
  */
@@ -23,7 +24,9 @@ const RightHandMenu = () => {
       <div className='rt__toogleSelect'>
         <ToogleSelect />
       </div>
-      <div className='rt__radioSelect'></div>
+      <div className='rt__radioSelect'>
+        <RadioSelect data='WIC' />
+      </div>
       <div className='rt__donut'></div>
     </div>
   )
