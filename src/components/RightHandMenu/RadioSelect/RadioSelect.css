@@ -1,45 +1,46 @@
 .radioSel {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-left: 10px;
   margin-right: 10px;
   flex-wrap: wrap;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
 }
 
 .radioSel label {
-  width: 50%;
+  /* width: 50%; */
+  display: flex;
+  align-items: center;
+  padding-bottom: 3px;
+}
+
+.radioLabel {
+  padding-left: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  margin: 0;
+  display: inline-block;
 }
 
 .radioOpt {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;  
   color: #059713;
+  border: 1px solid #059713;
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
 }
 
-.radioSel input[type='radio']:after {
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
-  top: -2px;
-  left: -1px;
-  position: relative;
-  background-color: #d1d3d1;
-  content: '';
-  display: inline-block;
-  visibility: visible;
-  border: 2px solid white;
+.radioSel input[type='radio']:checked {
+  padding: 1px;
+  background-image:linear-gradient(to bottom, #059713 0%, #059713 100%), linear-gradient(to bottom, white 0%, white 100%);
+  background-clip: content-box, padding-box;
 }
 
-.radioSel input[type='radio']:checked:after {
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
-  top: -2px;
-  left: -1px;
-  position: relative;
-  background-color: #ffa500;
-  content: '';
-  display: inline-block;
-  visibility: visible;
-  border: 2px solid white;
-}
