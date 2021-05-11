@@ -4,10 +4,9 @@ import './RightHandMenu.css'
 import ToggleSelect from './ToggleSelect/ToggleSelect'
 import RadioSelect from './RadioSelect/RadioSelect'
 import Donut from './DonutChart/Donut'
-/**
- * COMPONENT: RightHandMenu
- */
+import UnequalDonut from './DonutChart/UnEqualDonut/UnequalDonut'
 
+// Static Content to show in right hand menu
 const dataTypes = {
   'Poverty Rates' : {
     'desc': 'Text about poverty rates and the data and possibly the next year',
@@ -37,8 +36,12 @@ const dataTypes = {
   }
 }
 
+/**
+ * COMPONENT: RightHandMenu
+ */
+
 const RightHandMenu = () => {
-  const mockProps = {'data':'Food Insecurity', 'county': 'Champaign County'}
+  const mockProps = {'data':'Census Data', 'county': 'Champaign County'}
 
   const { data, county } = mockProps
 
@@ -67,7 +70,7 @@ const RightHandMenu = () => {
         ) : ''}
 
         <div className='rt__donut'>
-          <Donut />
+          {(data === 'WIC Usage' || data === 'Census Data') ? <Donut /> : <UnequalDonut />}    
         </div>
 
         <div className='rt__footer'>

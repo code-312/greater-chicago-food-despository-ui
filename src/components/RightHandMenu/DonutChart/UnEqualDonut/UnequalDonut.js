@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { PieChart, Pie, Cell } from 'recharts'
+import React, { useState, useEffect } from "react"
+import { PieChart, Pie, Sector } from "recharts"
 
-import './Donut.css'
-import Legend from './Legend/Legend'
+import './UnequalDonut.css'
+import Legend from '../Legend/Legend'
 
 const data = [
-  { key: 'White', value: 400 },
-  { key: 'Asian', value: 300 },
-  { key: 'Black', value: 300 },
-  { key: 'Hispanic/Latino', value: 200 },
-  { key: 'Pacific', value: 300 },
-  { key: 'Two+', value: 300 },
-  { key: 'Other', value: 200 }
+  { key: 'Food Insecurity', value: 251 },
+  { key: 'Total Population', value: (334-251) }
 ]
-const COLORS = ['#2cba42', '#f3ad1c', '#534588', '#ff6833', '#92dbdd', '#ff0000', '#cc27b0']
 
-// SVG and positioning for labels around the donut chart
+const COLORS = ['#2cba42', '#124c1b']
+
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
     cx,
     cy,
+    startAngle,
+    endAngle,
     midAngle,
+    innerRadius,
     outerRadius,
-    fill,
     value,
     name
   } = props;
@@ -66,12 +63,23 @@ const renderActiveShape = (props) => {
       {/* <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
         {payload.name}
         </text> */}
+      
+      <Sector
+        cx={cx}
+        cy={cy}
+        innerRadius={innerRadius - 2}
+        outerRadius={outerRadius + 2}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        fill="#2cba42"
+      />
+
       <path
         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-        stroke={fill}
+        stroke="#2cba42"
         fill="none"
       />
-      <circle cx={ex} cy={ey} r={3} fill={fill} stroke="none" />
+      <circle cx={ex} cy={ey} r={3} fill="#2cba42" stroke="none" />
       <text
         textLength='30'
         x={tx}
@@ -91,41 +99,40 @@ const renderActiveShape = (props) => {
   );
 };
 
-function Donut() {
+function UnequalDonut() {
   const [legend, setLegend] = useState([])
   const [sum, setSum] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    const l = []
     let sum1 = data.reduce(function (a, b) {
       return a + b.value
     }, 0)
-    data.map((entry, index) => (l.push({ 'key' : entry.key, 'color' : COLORS[index % COLORS.length], 'value' : entry.value  })))
+    const l =  [
+      { key: 'Food Insecurity', 'value': 251, 'color': '#2cba42' },
+      { key: 'Total Population', 'value': sum1, 'color': '#124c1b' }
+    ]
     setSum(sum1)
-    setLegend( [...l])
+    setLegend([...l])
   },[data])
 
   return (
     <div>
       <div className='donut__chart'>
-        <PieChart width={200} height={250}>
-          <Pie
-            data={data}
-            cx={100}
-            cy={125}
-            innerRadius={40}
-            outerRadius={55}
-            fill="#8884d8"
-            paddingAngle={1}
-            dataKey="value"
-            label={renderActiveShape}
-            labelLine={false}
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-        </PieChart>
+      <PieChart width={200} height={250}>
+        <Pie
+          activeIndex={activeIndex}
+          activeShape={renderActiveShape}
+          data={data}
+          cx={100}
+          cy={125}
+          innerRadius={43}
+          outerRadius={52}
+          fill='#124c1b'
+          paddingAngle={0}
+          dataKey='value'
+        />
+      </PieChart>
         <div className='donut__centerTxt'><h5>Total Population</h5><span>{sum}</span></div>
       </div>
       <Legend legend={legend} />
@@ -133,4 +140,4 @@ function Donut() {
   )
 }
 
-export default Donut
+export default UnequalDonut
