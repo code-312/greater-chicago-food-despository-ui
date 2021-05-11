@@ -17,7 +17,7 @@ const COLORS = ['#2cba42', '#f3ad1c', '#534588', '#ff6833', '#92dbdd', '#ff0000'
 
 // SVG and positioning for labels around the donut chart
 const renderActiveShape = (props) => {
-  const RADIAN = Math.PI / 180;
+  const RADIAN = Math.PI / 180
   const {
     cx,
     cy,
@@ -26,7 +26,7 @@ const renderActiveShape = (props) => {
     fill,
     value,
     name
-  } = props;
+  } = props
 
   const myCalc = (midAngle, sin, sy) => {
     if (
@@ -34,29 +34,29 @@ const renderActiveShape = (props) => {
       midAngle >= 350 ||
       (midAngle >= 170 && midAngle <= 190)
     ) {
-      return sy;
+      return sy
     } else if (midAngle >= 340 || (midAngle >= 180 && midAngle <= 220)) {
-      return cy + (outerRadius + 30) * sin + 20;
+      return cy + (outerRadius + 30) * sin + 20
     } else if (midAngle <= 20 || (midAngle >= 140 && midAngle <= 180)) {
-      return cy + (outerRadius + 30) * sin - 20;
+      return cy + (outerRadius + 30) * sin - 20
     } else {
-      return cy + (outerRadius + 30) * sin;
+      return cy + (outerRadius + 30) * sin
     }
-  };
+  }
 
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + outerRadius * cos;
-  const sy = cy + outerRadius * sin;
+  const sin = Math.sin(-RADIAN * midAngle)
+  const cos = Math.cos(-RADIAN * midAngle)
+  const sx = cx + outerRadius * cos
+  const sy = cy + outerRadius * sin
   const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
               ? cx + (outerRadius + 30) * cos
-              : sx;
-  const my = myCalc(midAngle, sin, sy);
+              : sx
+  const my = myCalc(midAngle, sin, sy)
   const ex = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
               ? mx
-              : mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
-  const textAnchor = cos >= 0 ? "end" : "start";
+              : mx + (cos >= 0 ? 1 : -1) * 22
+  const ey = my
+  const textAnchor = cos >= 0 ? 'end' : 'start'
   const tx= ex + (cos >= 0 ? 1 : -1) * 12
   const ty= ey + (sin >= 0 ? 1 : -1) * 16
 
@@ -69,9 +69,9 @@ const renderActiveShape = (props) => {
       <path
         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
         stroke={fill}
-        fill="none"
+        fill='none'
       />
-      <circle cx={ex} cy={ey} r={3} fill={fill} stroke="none" />
+      <circle cx={ex} cy={ey} r={3} fill={fill} stroke='none' />
       <text
         textLength='30'
         x={tx}
@@ -88,8 +88,8 @@ const renderActiveShape = (props) => {
           y={ty + 10}>{`${value}`}</tspan>
       </text>
     </g>
-  );
-};
+  )
+}
 
 function Donut() {
   const [legend, setLegend] = useState([])
@@ -115,9 +115,9 @@ function Donut() {
             cy={125}
             innerRadius={40}
             outerRadius={55}
-            fill="#8884d8"
+            fill='#8884d8'
             paddingAngle={1}
-            dataKey="value"
+            dataKey='value'
             label={renderActiveShape}
             labelLine={false}
           >

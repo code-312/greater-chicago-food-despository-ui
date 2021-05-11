@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 import './RightHandMenu.css'
 import ToggleSelect from './ToggleSelect/ToggleSelect'
@@ -83,4 +83,4 @@ const RightHandMenu = () => {
     </div> 
   )
 }
-export default RightHandMenu;
+export default RightHandMenu

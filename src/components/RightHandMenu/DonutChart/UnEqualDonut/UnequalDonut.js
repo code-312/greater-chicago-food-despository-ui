@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { PieChart, Pie, Sector } from "recharts"
+import React, { useState, useEffect } from 'react'
+import { PieChart, Pie, Sector } from 'recharts'
 
 import './UnequalDonut.css'
 import Legend from '../Legend/Legend'
@@ -8,8 +8,6 @@ const data = [
   { key: 'Food Insecurity', value: 251 },
   { key: 'Total Population', value: (334-251) }
 ]
-
-const COLORS = ['#2cba42', '#124c1b']
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -23,7 +21,7 @@ const renderActiveShape = (props) => {
     outerRadius,
     value,
     name
-  } = props;
+  } = props
 
   const myCalc = (midAngle, sin, sy) => {
     if (
@@ -31,29 +29,29 @@ const renderActiveShape = (props) => {
       midAngle >= 350 ||
       (midAngle >= 170 && midAngle <= 190)
     ) {
-      return sy;
+      return sy
     } else if (midAngle >= 340 || (midAngle >= 180 && midAngle <= 220)) {
-      return cy + (outerRadius + 30) * sin + 20;
+      return cy + (outerRadius + 30) * sin + 20
     } else if (midAngle <= 20 || (midAngle >= 140 && midAngle <= 180)) {
-      return cy + (outerRadius + 30) * sin - 20;
+      return cy + (outerRadius + 30) * sin - 20
     } else {
-      return cy + (outerRadius + 30) * sin;
+      return cy + (outerRadius + 30) * sin
     }
-  };
+  }
 
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + outerRadius * cos;
-  const sy = cy + outerRadius * sin;
+  const sin = Math.sin(-RADIAN * midAngle)
+  const cos = Math.cos(-RADIAN * midAngle)
+  const sx = cx + outerRadius * cos
+  const sy = cy + outerRadius * sin
   const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
               ? cx + (outerRadius + 30) * cos
-              : sx;
-  const my = myCalc(midAngle, sin, sy);
+              : sx
+  const my = myCalc(midAngle, sin, sy)
   const ex = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
               ? mx
-              : mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
-  const textAnchor = cos >= 0 ? "end" : "start";
+              : mx + (cos >= 0 ? 1 : -1) * 22
+  const ey = my
+  const textAnchor = cos >= 0 ? 'end' : 'start'
   const tx= ex + (cos >= 0 ? 1 : -1) * 12
   const ty= ey + (sin >= 0 ? 1 : -1) * 16
 
@@ -71,15 +69,15 @@ const renderActiveShape = (props) => {
         outerRadius={outerRadius + 2}
         startAngle={startAngle}
         endAngle={endAngle}
-        fill="#2cba42"
+        fill='#2cba42'
       />
 
       <path
         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-        stroke="#2cba42"
-        fill="none"
+        stroke='#2cba42'
+        fill='none'
       />
-      <circle cx={ex} cy={ey} r={3} fill="#2cba42" stroke="none" />
+      <circle cx={ex} cy={ey} r={3} fill='#2cba42' stroke='none' />
       <text
         textLength='30'
         x={tx}
