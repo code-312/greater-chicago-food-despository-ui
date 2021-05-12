@@ -6,9 +6,10 @@ function DatasetSelector(props) {
 		options[0] ? options[0] : null,
 	);
 
-	const handleSelection = (e) => {
-		const indexOfSelection = options.indexOf(e.target.id);
-		setSelectedOptions(options[indexOfSelection]);
+	const handleSelection = (e, index) => {
+		console.log(e);
+		console.log(index);
+		setSelectedOptions(options[index]);
 	};
 
 	/* For later - When state changes, update the store */
@@ -24,8 +25,10 @@ function DatasetSelector(props) {
 					return (
 						<li key={i}>
 							<DatasetOption
+								handleSelection={handleSelection}
 								option={option}
 								selected={selected}
+								index={i}
 							/>
 						</li>
 					);
@@ -37,25 +40,28 @@ function DatasetSelector(props) {
 
 /* COMPONENT: DatasetOption */
 function DatasetOption(props) {
+	const { selected, index } = props;
+
+	const handleClick = (e) => {
+		props.handleSelection(e, index);
+		e.preventDefault();
+	};
+
 	return (
 		<>
 			<label className="align-self-center radio">
-				<RadioButton />
-                <span className="radio__label">{props.option}</span>
+				<span className="radio__input">
+					<input
+						type="radio"
+						name="radio"
+						className={`align-self-center${
+							selected ? ' checked' : ''
+						}`}></input>
+					<span className="radio__control" onClick={handleClick}></span>
+				</span>
+				<span className="radio__label">{props.option}</span>
 			</label>
 		</>
-	);
-}
-
-function RadioButton(props) {
-	return (
-		<span className="radio__input">
-			<input
-				type="radio"
-                name="radio"
-				className="align-self-center"></input>
-			<span className="radio__control"></span>
-		</span>
 	);
 }
 

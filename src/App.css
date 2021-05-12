@@ -139,10 +139,6 @@
     height: 0;
 }
 
-.radio__input input:focus {
-  box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
-}
-
 input + .radio__control::before {
   content: "";
   width: 0.5em;
@@ -153,7 +149,7 @@ input + .radio__control::before {
   transform: scale(0);
 }
 
-input:checked + .radio__control::before {
+input.checked + .radio__control::before {
   transform: scale(1.2);
 }
 
