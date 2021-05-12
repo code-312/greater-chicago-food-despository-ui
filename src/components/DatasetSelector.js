@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 
 function DatasetSelector(props) {
-	const { options } = props;
-	const [selectedOption, setSelectedOptions] = useState(
+    
+    /* For testing - remove later. These will either be passed in as props or come from the store. */
+    const options = [
+        'Poverty Rates',
+        'Food Insecurity',
+        'WIC Usage',
+        'Snap Usage',
+        'Census',
+    ];
+
+	// const { options } = props;
+
+    const [selectedOption, setSelectedOptions] = useState(
 		options[0] ? options[0] : null,
 	);
 

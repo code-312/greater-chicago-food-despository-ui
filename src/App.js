@@ -22,15 +22,6 @@ const App = () => {
     dispatch(zipDataFetch());
   }, [])
 
-  /* For testing - remove later */
-  const options = [
-    'Poverty Rates',
-    'Food Insecurity',
-    'WIC Usage',
-    'Snap Usage',
-    'Census',
-  ];
-
     return (
       <div className="container-fluid">
         <div className="row">
@@ -39,7 +30,7 @@ const App = () => {
           <nav className="menu col-2 pl-0 pr-0">
             <div id='left-menu'>
               <ZoomToBoundsMenu />
-              <DatasetSelector options={options}/>
+              <DatasetSelector />
             </div>
           </nav>
 
