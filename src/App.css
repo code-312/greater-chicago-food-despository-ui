@@ -125,7 +125,7 @@
   color: var(--radio-color);
   display: grid;
   grid-template-columns: min-content auto;
-  grid-gap: 0.5em;
+  grid-gap: 1rem;
   justify-content: center;
   align-content: center;
 }
@@ -162,7 +162,6 @@ input.checked + .radio__control::before {
   height: 1em;
   border-radius: 50%;
   border: 0.1em solid currentColor;
-  transform: translateY(-0.05em);
   align-self: center;
 }
 
