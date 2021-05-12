@@ -163,6 +163,7 @@ input.checked + .radio__control::before {
   border-radius: 50%;
   border: 0.1em solid currentColor;
   transform: translateY(-0.05em);
+  align-self: center;
 }
 
 .radio__label {
