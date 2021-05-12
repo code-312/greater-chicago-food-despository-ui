@@ -37,11 +37,79 @@
   }
 }
 
+
+
 /****Left Hand Menu Styles (other than font styles)****/
-nav div {
+
+#left-menu ul {
+  list-style-type: none;
+}
+
+#left-menu {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #D9D9D9;
+}
+
+#left-menu #county-list {
     display: flex;
     flex-direction: column;
-    max-height: 100vh;
+    max-height: calc(100vh - 215px);
+}
+
+#left-menu #data-selector {
+  margin: 1rem auto 1rem;
+  width: calc(100% - 2rem);
+  flex: 1;
+}
+
+#data-selector {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 1px 4px #15223214;
+  border: 1px solid #CED4DA;
+  border-radius: 10px;
+  opacity: 1;
+}
+
+#data-selector h3{
+  margin: 0.5rem auto 0.5rem 1rem;
+  font: normal normal normal 1rem/1.3125rem futura-pt demi;
+  letter-spacing: 0px;
+  color: #1C752A;
+  opacity: 1;
+}
+
+#data-selector ul {
+  margin: 0px;
+  padding: 0px 0px 0px 1rem;
+}
+
+#data-selector label {
+  font: normal normal medium 0.8125/1.0625rem futura-pt;
+  letter-spacing: 0px;
+  color: #1C752A;
+  opacity: 1;
+}
+
+.flex-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-list li {
+  display: flex;
+  align-items: center;
+}
+
+.flex-list label {
+  margin: 0px;
+}
+
+.flex-list input {
+  margin-right: 0.8rem;
 }
 
 nav button {
@@ -55,6 +123,7 @@ nav button {
     border-top: none;
     border-left: none;
     padding: 20px 0 20px 25px;
+    width: 100%;
 }
 
 nav button:hover {
@@ -65,7 +134,7 @@ nav button:focus {
     background-color: #F3F2D8;
 }
 
-nav .scroll {
+.scroll {
    display: flex;
     flex-direction: column;
     overflow-y: scroll;
