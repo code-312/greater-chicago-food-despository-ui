@@ -26,7 +26,6 @@ function DatasetSelector(props) {
 							<DatasetOption
 								option={option}
 								selected={selected}
-								handleSelection={handleSelection}
 							/>
 						</li>
 					);
@@ -38,22 +37,25 @@ function DatasetSelector(props) {
 
 /* COMPONENT: DatasetOption */
 function DatasetOption(props) {
-	const handleChange = (e) => {
-		props.handleSelection(e);
-	};
 	return (
 		<>
-			<input
-				type="radio"
-				id={props.option}
-				onChange={handleChange}
-				checked={props.selected}
-				data-index={props['data-index']}
-				className="align-self-center"></input>
-			<label htmlFor={props.option} className="align-self-center">
-				{props.option}
+			<label className="align-self-center radio">
+				<RadioButton />
+                <span className="radio__label">{props.option}</span>
 			</label>
 		</>
+	);
+}
+
+function RadioButton(props) {
+	return (
+		<span className="radio__input">
+			<input
+				type="radio"
+                name="radio"
+				className="align-self-center"></input>
+			<span className="radio__control"></span>
+		</span>
 	);
 }
 

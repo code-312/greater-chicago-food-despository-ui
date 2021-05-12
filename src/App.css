@@ -1,3 +1,13 @@
+:root {
+  --radio-color: #1C752A;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -86,7 +96,7 @@
 }
 
 #data-selector label {
-  font: normal normal medium 0.8125/1.0625rem futura-pt;
+  font: normal normal medium 0.8125rem/1.0625rem futura-pt;
   letter-spacing: 0px;
   color: #1C752A;
   opacity: 1;
@@ -108,8 +118,57 @@
   margin: 0px;
 }
 
-.flex-list input {
-  margin-right: 0.8rem;
+.radio {
+  font-size: 1rem;
+  color: var(--radio-color);
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-gap: 0.5em;
+  justify-content: center;
+  align-content: center;
+}
+
+.radio__input {
+  display: flex;
+  
+}
+
+.radio__input input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio__input input:focus {
+  box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+}
+
+input + .radio__control::before {
+  content: "";
+  width: 0.5em;
+  height: 0.5em;
+  box-shadow: inset 0.5em 0.5em currentColor;
+  border-radius: 50%;
+  transition: 180ms transform ease-in-out;
+  transform: scale(0);
+}
+
+input:checked + .radio__control::before {
+  transform: scale(1.2);
+}
+
+.radio__control {
+  display: grid;
+  place-items: center;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 0.1em solid currentColor;
+  transform: translateY(-0.05em);
+}
+
+.radio__label {
+  line-height: 1;
 }
 
 nav button {
