@@ -74,7 +74,7 @@
 
 #data-selector h3{
   margin: 0.5rem auto 0.5rem 1rem;
-  font: normal normal normal 1rem/1.3125rem futura-pt demi;
+  font: normal normal normal 1rem/1.3125rem futura-pt, sans-serif;
   letter-spacing: 0px;
   color: #1C752A;
   opacity: 1;
