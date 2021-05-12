@@ -9,6 +9,7 @@ import { zipDataFetch } from './redux/zipCodeDataReducer';
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import RightHandMenu from './components/RightHandMenu';
 import Map from './mapbox/Map'
+import DatasetSelector from './components/DatasetSelector';
 
 const App = () => {
   const dispatch = useDispatch() 
@@ -21,13 +22,25 @@ const App = () => {
     dispatch(zipDataFetch());
   }, [])
 
+  /* For testing - remove later */
+  const options = [
+    'Poverty Rates',
+    'Food Insecurity',
+    'WIC Usage',
+    'Snap Usage',
+    'Census',
+  ];
+
     return (
       <div className="container-fluid">
         <div className="row">
 
           {/*Column 1: Left-hand menu (Zoom Control)*/}
           <nav className="menu col-2 pl-0 pr-0">
-            <ZoomToBoundsMenu /> 
+            <div id='left-menu'>
+              <ZoomToBoundsMenu />
+              <DatasetSelector options={options}/>
+            </div>
           </nav>
 
           {/*Column 2: MapBox map */}
