@@ -19,7 +19,6 @@ const countyDataSlice = createSlice({
   name: 'countyData',
   initialState: { countyData: {}, status: 'idle', error: null },
   reducers: {
-    // 
   },
   extraReducers: {
     [countyDataFetch.fulfilled]: (state, action) => {

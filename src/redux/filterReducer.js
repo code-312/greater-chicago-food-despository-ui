@@ -7,7 +7,8 @@ export const initialFilterState = {
     x: null,
     y: null,
     hoveredCounty: null,
-    hoveredZipCode: null
+    hoveredZipCode: null,
+    selectedCounty: null
 }
 
 // Slices create action types automatically, i.e. 'filters/updateFilters' and then execute reducers when those actions are dispatched

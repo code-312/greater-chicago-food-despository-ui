@@ -81,7 +81,7 @@ export const ZoomToBoundsButton = ({keyValue, label, newViewport}) => {
     const updateViewport = (vp) => dispatch(updateVP(vp));
     return (
         <button
-            onClick={() => updateViewport(newViewport)}
+            // onClick={() => updateViewport(newViewport)}
             data-testid={"zoom_to_bounds_button_" + keyValue}
         >{label}</button>
     )
