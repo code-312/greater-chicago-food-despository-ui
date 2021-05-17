@@ -18,8 +18,6 @@ function DatasetSelector(props) {
 	);
 
 	const handleSelection = (e, index) => {
-		console.log(e);
-		console.log(index);
 		setSelectedOptions(options[index]);
 	};
 
