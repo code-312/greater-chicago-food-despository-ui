@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateVP } from '../redux/viewportReducer';
-import {updateViewportToFitBounds} from '../mapbox/Util';
+import { updateVP } from '../../redux/viewportReducer';
+import {updateViewportToFitBounds} from '../../mapbox/Util';
 
 /**
  * COMPONENT: ZoomToBoundsMenu

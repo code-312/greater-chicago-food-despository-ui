@@ -1,0 +1,27 @@
+#left-menu #data-selector {
+	margin: 1rem auto 1rem;
+	width: calc(100% - 2rem);
+	flex: 1;
+}
+
+#data-selector {
+	background: #ffffff 0% 0% no-repeat padding-box;
+	box-shadow: 0px 1px 4px #15223214;
+	border: 1px solid #ced4da;
+	border-radius: 10px;
+	opacity: 1;
+    flex: 0 1 auto;
+}
+
+#data-selector h3 {
+	margin: 0.5rem auto 0.5rem 1rem;
+	font: normal normal normal 1rem/1.3125rem futura-pt, sans-serif;
+	letter-spacing: 0px;
+	color: #1c752a;
+	opacity: 1;
+}
+
+#data-selector label {
+	margin: 0px;
+	padding: 0px 0px 0px 1rem;
+}

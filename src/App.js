@@ -6,10 +6,9 @@ import { countyDataFetch } from './redux/countyDataReducer';
 import { zipFetch } from './redux/zipReducer';
 import { zipDataFetch } from './redux/zipCodeDataReducer';
 
-import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import RightHandMenu from './components/RightHandMenu';
 import Map from './mapbox/Map'
-import DatasetSelector from './components/DatasetSelector';
+import LeftHandMenu from './components/LeftHandMenu';
 
 const App = () => {
   const dispatch = useDispatch() 
@@ -28,10 +27,7 @@ const App = () => {
 
           {/*Column 1: Left-hand menu (Zoom Control)*/}
           <nav className="menu col-2 pl-0 pr-0">
-            <div id='left-menu'>
-              <ZoomToBoundsMenu />
-              <DatasetSelector />
-            </div>
+              <LeftHandMenu />
           </nav>
 
           {/*Column 2: MapBox map */}
