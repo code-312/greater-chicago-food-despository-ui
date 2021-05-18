@@ -9,6 +9,7 @@ import { zipDataFetch } from './redux/zipCodeDataReducer';
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import RightHandMenu from './components/RightHandMenu';
 import Map from './mapbox/Map'
+import MapColorLegend from './components/MapColorLegend';
 
 const App = () => {
   const dispatch = useDispatch() 
