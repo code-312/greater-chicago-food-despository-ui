@@ -1,0 +1,31 @@
+.toggSel {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+	height: 26px;
+	margin-bottom: 14px;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.toggOpt {
+	margin: 0;
+	border: 1px solid #124c1b;
+	width: 100%;
+	text-align: center;
+	padding-top: 3px;
+}
+
+.ts__a {
+	border-radius: 10px 0 0 10px;
+}
+
+.ts__b {
+	border-radius: 0 10px 10px 0;
+}
+
+.toggSelect {
+	background-color: #124c1b;
+	color: white;
+}

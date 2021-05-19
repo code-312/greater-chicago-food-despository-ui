@@ -80,6 +80,8 @@ const Map = () => {
     return (
       <ReactMapGL
       {...viewport}
+      width='100%'
+      height='100vh'
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
       onViewportChange={handleViewportChange}
       onHover={onHover}

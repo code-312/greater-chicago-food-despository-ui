@@ -12,42 +12,10 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: row;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
 
 /****Left Hand Menu Styles (other than font styles)****/
 
@@ -99,40 +67,38 @@ nav button:focus {
 }
 
 /****Right Hand Menu Styles (other than font styles)****/
-#right-menu {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    width: 255px;
-    background: white;
-    padding: 10px;
-    border-radius: 9px;
-    color: #059713;
+.rtMenuWrapper {
+  background-color:#e7e7e7;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  min-width: 260px;
+  max-width: 260px;
 }
 
-#right-menu h2 {
-    font-size: 2em;
-    text-align: center;
+/* #right-menu h2 {
+  font-size: 2em;
+  text-align: center;
 }
 
 #right-menu label {
-    width: 235px;
-    margin: 8px 0 0 0;
-    padding: 5px;
-    background-color: #F3F2D8;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
+  width: 235px;
+  margin: 8px 0 0 0;
+  padding: 5px;
+  background-color: #F3F2D8;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
 }
 
 #right-menu #right-menu-county {
     display: visible;
-}
+} */
 
 
 
 /*toggle button*/
-#right-menu input[type="checkbox"] {
+/* #right-menu input[type="checkbox"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -173,4 +139,4 @@ nav button:focus {
 #right-menu .toggle:checked:after {
     transition: all .3s ease;
     transform: translatex(20px);
-}
+} */
