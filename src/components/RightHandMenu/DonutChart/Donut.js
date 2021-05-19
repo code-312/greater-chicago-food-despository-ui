@@ -116,7 +116,7 @@ function Donut() {
     let sum1 = data.reduce(function (a, b) {
       return a + b.value
     }, 0)
-    data.map((entry, index) => (l.push({ 'key' : entry.key, 'color' : COLORS[index % COLORS.length], 'value' : entry.value  })))
+    data.map((entry, index) => (l.push({ key : entry.key, color : COLORS[index % COLORS.length], value : entry.value  })))
     setSum(sum1)
     setLegend( [...l])
   },[data])

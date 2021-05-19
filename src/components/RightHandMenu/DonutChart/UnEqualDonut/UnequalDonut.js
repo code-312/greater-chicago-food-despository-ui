@@ -124,8 +124,8 @@ function UnequalDonut() {
       return a + b.value
     }, 0)
     const l =  [
-      { key: 'Food Insecurity', 'value': data[0].value, 'color': '#2cba42' },
-      { key: 'Total Population', 'value': sum1, 'color': '#124c1b' }
+      { key: 'Food Insecurity', value: data[0].value, color: '#2cba42' },
+      { key: 'Total Population', value: sum1, color: '#124c1b' }
     ]
     setSum(sum1)
     setLegend([...l])
