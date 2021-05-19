@@ -12,13 +12,24 @@ function RadioSelect(props) {
   const radioClick = (idx) => {
     setFeat(idx)
   }
+  
+  if(!props.handleChange) console.error('RadioSelect is missing an onChange in its props. Make sure this is on purpose.')
+
+  const handleChange = (idx) => {
+    if(!props.handleChange) {
+      return
+    }
+    props.handleChange(idx)
+  }
+
+  const { alignment } = props
 
   return (
-    <div className='radioSel'>
+    <div className={`radioSel-${alignment}`}>
      {props.data ? (
         props.data.map((feature, idx) => (
           <label htmlFor={feature} key={idx}>
-            <input type="radio" id={feature} name={feature} className='radioOpt' checked={selectFeat===idx} onChange={() => radioClick(idx)}></input>
+            <input type="radio" id={feature} name={feature} className='radioOpt' checked={selectFeat===idx} onClick={() => radioClick(idx)} onChange={() => handleChange(idx)}></input>
             <h3 className='radioLabel'>{feature}</h3>
           </label>
         ))

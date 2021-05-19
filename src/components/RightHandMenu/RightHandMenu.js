@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import './RightHandMenu.css'
 import ToggleSelect from './ToggleSelect/ToggleSelect'
-import RadioSelect from './RadioSelect/RadioSelect'
+import RadioSelect from '../Utility/RadioSelect/RadioSelect'
 import Donut from './DonutChart/Donut'
 import UnequalDonut from './DonutChart/UnEqualDonut/UnequalDonut'
 
@@ -17,8 +17,8 @@ const dataTypes = {
     'desc': 'Text about food insecurity rates and the data and possibly the next year',
     'toggleSelect': ['Total', 'Children'],
     'radioSelect': {
-      'Total' : ['2018', '2020 (Projected)'],
-      'Children' : ['2018', '2020 (Projected)'] 
+      'Total' : ['2018', '2020'],
+      'Children' : ['2018', '2020'] 
       }
   },
   'WIC Usage' : {
@@ -43,8 +43,8 @@ const dataTypes = {
 const RightHandMenu = () => {
   // This data should come in as props/slice into this component
   // change 'data' for different views of menu
-  const mockProps = {'data':'Food Insecurity', 'county': ''}
-  // const mockProps = {'data':'Food Insecurity', 'county': 'Champaign County'}
+  // const mockProps = {'data':'Food Insecurity', 'county': ''}
+  const mockProps = {'data':'Food Insecurity', 'county': 'Champaign County'}
   // const mockProps = {'data':'WIC Usage', 'county': 'Champaign County'}
   // const mockProps = {'data':'Poverty Rates', 'county': 'Champaign County'}
   // const mockProps = {'data':'Census Data', 'county': 'Champaign County'}
@@ -74,7 +74,7 @@ const RightHandMenu = () => {
         
         { dataTypes[data].radioSelect ? (
           <div className='rt__radioSelect'>
-            <RadioSelect data={dataTypes[data].radioSelect[toggSelected]} />
+            <RadioSelect data={dataTypes[data].radioSelect[toggSelected]} handleChange={(idx) => console.log(idx)} alignment={'row'}/>
           </div>
         ) : ''}
 
