@@ -1,6 +1,6 @@
 import React from 'react';
-import ZoomToBoundsMenu from '../components/LeftHandMenu/ZoomToBoundsMenu';
-import DatasetSelector from '../components/LeftHandMenu/DatasetSelector/DatasetSelector'
+import ZoomToBoundsMenu from './ZoomToBoundsMenu';
+import DatasetSelector from './DatasetSelector/DatasetSelector'
 
 function LeftHandMenu() {
 	return (

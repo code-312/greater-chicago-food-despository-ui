@@ -11,7 +11,7 @@
 }
 
 .radioSel-row label {
-  /* width: 50%; */
+  width: 50%;
   display: flex;
   align-items: center;
   padding-bottom: 3px;

@@ -7,7 +7,7 @@ import { zipDataFetch } from './redux/zipCodeDataReducer';
 
 import RightHandMenu from './components/RightHandMenu/RightHandMenu';
 import Map from './mapbox/Map'
-import LeftHandMenu from './components/LeftHandMenu';
+import LeftHandMenu from './components/LeftHandMenu/LeftHandMenu';
 
 import './App.css'
 

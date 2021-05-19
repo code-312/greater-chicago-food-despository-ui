@@ -1,5 +1,5 @@
 import React from 'react';
-import RadioSelect from '../../RadioSelect/RadioSelect';
+import RadioSelect from '../../Utility/RadioSelect/RadioSelect';
 
 import './DatasetSelector.css';
 
