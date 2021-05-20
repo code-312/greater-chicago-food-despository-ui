@@ -11,15 +11,11 @@ function DatasetSelector(props) {
         'Census',
     ];
 
-	// const { options } = props;
-
     const [selectedOption, setSelectedOptions] = useState(
 		options[0] ? options[0] : null,
 	);
 
 	const handleSelection = (e, index) => {
-		console.log(e);
-		console.log(index);
 		setSelectedOptions(options[index]);
 	};
 
