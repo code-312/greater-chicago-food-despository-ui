@@ -2,39 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  flex-direction: row;
 }
 
 /****Left Hand Menu Styles (other than font styles)****/
@@ -71,79 +41,113 @@ nav .scroll {
     overflow-y: scroll;
 }
 
-/****Right Hand Menu Styles (other than font styles)****/
-#right-menu {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    width: 255px;
-    background: white;
-    padding: 10px;
-    border-radius: 9px;
-    color: #059713;
+/* right hand menu style mostly for positioning */
+.rtMenuWrapper {
+   background-color:#e7e7e7;
+   display: flex;
+   flex-direction: column;
+   max-height: 100vh;
+   min-width: 260px;
+   max-width: 260px;
+}
+
+
+
+
+
+
+
+/* #right-menu {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 255px;
+  background: white;
+  padding: 10px;
+  border-radius: 9px;
+  color: #059713;
 }
 
 #right-menu h2 {
-    font-size: 2em;
-    text-align: center;
+  font-size: 2em;
+  text-align: center;
 }
 
 #right-menu label {
-    width: 235px;
-    margin: 8px 0 0 0;
-    padding: 5px;
-    background-color: #F3F2D8;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
+  width: 235px;
+  margin: 8px 0 0 0;
+  padding: 5px;
+  background-color: #F3F2D8;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
 }
 
 #right-menu #right-menu-county {
-    display: visible;
-}
+  display: visible;
+} */
 
 
 
-/*toggle button*/
+/* 
 #right-menu input[type="checkbox"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;   
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;   
 }
 
 #right-menu .toggle {
-    height: 20px;
-    width: 42px;
-    border-radius: 16px;
-    display: inline-block;
-    position: relative;
-    top: 2px;
-    border: 2px solid #059713;
-    background-color: #F5F5F5;
+  height: 20px;
+  width: 42px;
+  border-radius: 16px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  border: 2px solid #059713;
+  background-color: #F5F5F5;
 }      
 
 #right-menu .toggle:after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid #059713;
-    background: white;
-    box-shadow: 0 1px 2px rgba(44,44,44,.2);   transition: all .3s ease;
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #059713;
+  background: white;
+  box-shadow: 0 1px 2px rgba(44,44,44,.2);   transition: all .3s ease;
 
 }
 
 #right-menu .toggle:checked {
-    border-color: #059713;
-    background-color: #059713;
+  border-color: #059713;
+  background-color: #059713;
 }
 
 #right-menu .toggle:checked:after {
-    transition: all .3s ease;
-    transform: translatex(20px);
+  transition: all .3s ease;
+  transform: translatex(20px);
 }
+
+#right-menu .legend1 {
+width: 60px;
+height: 30px;
+background-color: #3288bd;
+}
+
+#right-menu .legend2 {
+width: 60px;
+height: 30px;
+background-color: #d53e4f;
+}
+
+#right-menu .legend {
+margin-top: 10px;
+display: flex;
+flex-direction: row;
+align-items: center;
+} */

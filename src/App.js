@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { countyFetch } from './redux/countyReducer';
 import { countyDataFetch } from './redux/countyDataReducer';
@@ -7,8 +6,10 @@ import { zipFetch } from './redux/zipReducer';
 import { zipDataFetch } from './redux/zipCodeDataReducer';
 
 import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
-import RightHandMenu from './components/RightHandMenu';
+import RightHandMenu from './components/RightHandMenu/RightHandMenu';
 import Map from './mapbox/Map'
+
+import './App.css';
 
 const App = () => {
   const dispatch = useDispatch() 
@@ -21,24 +22,29 @@ const App = () => {
     dispatch(zipDataFetch());
   }, [])
 
+  const [selectedCounty, setSelectedCounty] = useState('')
+
+  console.log('app', selectedCounty)
+
     return (
-      <div className="container-fluid">
-        <div className="row">
+      <div className="main">
+        <div className="container-fluid">
+          <div className="row">
 
-          {/*Column 1: Left-hand menu (Zoom Control)*/}
-          <nav className="menu col-2 pl-0 pr-0">
-            <ZoomToBoundsMenu /> 
-          </nav>
+            {/*Column 1: Left-hand menu (Zoom Control)*/}
+            <nav className="col-3 pl-0 pr-0 menu ">
+              <ZoomToBoundsMenu /> 
+            </nav>
 
-          {/*Column 2: MapBox map */}
-          <div className="col pl-0 pr-0">
-            <Map />
+            {/*Column 2: MapBox map */}
+            <div className="col-9 pl-0 pr-0">
+              <Map setSelectedCounty={setSelectedCounty}/>
+            </div>
           </div>
-
-          {/* Column 3: Right-hand menu */}
-          <nav className="menu col-2 pl-0 pre-0">
-            <RightHandMenu />
-          </nav>
+        </div>
+        {/* Column 3: Right-hand menu */}
+        <div className="rtMenuWrapper">
+          <RightHandMenu />
         </div>
       </div>
     );
