@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { countyFetch } from './redux/countyReducer';
 import { countyDataFetch } from './redux/countyDataReducer';
@@ -20,11 +20,7 @@ const App = () => {
     dispatch(zipFetch());
     dispatch(countyDataFetch());
     dispatch(zipDataFetch());
-  }, [])
-
-  const [selectedCounty, setSelectedCounty] = useState('')
-
-  console.log('app', selectedCounty)
+  })
 
     return (
       <div className="main">
@@ -38,7 +34,7 @@ const App = () => {
 
             {/*Column 2: MapBox map */}
             <div className="col-9 pl-0 pr-0">
-              <Map setSelectedCounty={setSelectedCounty}/>
+              <Map />
             </div>
           </div>
         </div>

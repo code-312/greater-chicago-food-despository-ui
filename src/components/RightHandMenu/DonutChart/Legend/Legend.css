@@ -1,6 +1,6 @@
-/* .legend {
- 
-} */
+.legend {
+ margin-top: 20px;
+}
 
 .leg__item {
   display: flex;
@@ -28,6 +28,6 @@
 }
 
 .leg__rt {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
 }
