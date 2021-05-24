@@ -1,0 +1,42 @@
+.donut__chart {
+  position: relative;
+}
+
+.donut__centerTxt {
+  width: 60px;
+  position: absolute;
+  top: 110px;
+  left: 77px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut__centerTxt h5 {
+  font-size: 10px;
+  font-weight: 800;
+  margin: 0;
+  padding: 0 0 3px 0;
+}
+
+.donut__centerTxt span {
+    font-size: 8px;
+    color: black;
+    font-weight: 500;
+}
+
+tspan {
+  font-size: 10px;
+  color: #1c752a;
+}
+
+text {
+  font-size: 6px;
+  font-weight: 700;
+}
+
+.tspan__val {
+  font-weight: 500;
+}
