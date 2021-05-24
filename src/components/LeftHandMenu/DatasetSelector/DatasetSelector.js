@@ -13,9 +13,8 @@ function DatasetSelector(props) {
 		'Census',
 	];
 
-	// const { options } = props
 	const handleSelection = (idx) => {
-		console.log(`Selected: ${options[idx]}`);
+		// Handle selection in here.
 	};
 
 	/* For later - When state changes, update the store */
