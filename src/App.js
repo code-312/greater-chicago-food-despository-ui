@@ -5,10 +5,11 @@ import { countyDataFetch } from './redux/countyDataReducer';
 import { zipFetch } from './redux/zipReducer';
 import { zipDataFetch } from './redux/zipCodeDataReducer';
 
-import ZoomToBoundsMenu from './components/ZoomToBoundsMenu';
 import RightHandMenu from './components/RightHandMenu/RightHandMenu';
 import Map from './mapbox/Map'
-import DatasetSelector from './components/DatasetSelector';
+import LeftHandMenu from './components/LeftHandMenu/LeftHandMenu';
+
+import './App.css'
 
 import './App.css';
 
@@ -31,23 +32,21 @@ const App = () => {
       <div className="main">
         <div className="container-fluid">
           <div className="row">
+            {/*Column 1: Left-hand menu (Zoom Control)*/}
+            <nav className="menu col-2 pl-0 pr-0">
+                <LeftHandMenu />
+            </nav>
 
-          {/*Column 1: Left-hand menu (Zoom Control)*/}
-          <nav className="menu col-2 pl-0 pr-0">
-            <div id='left-menu'>
-              <ZoomToBoundsMenu />
-              <DatasetSelector />
-            </div>
-          </nav>
             {/*Column 2: MapBox map */}
-            <div className="col-9 pl-0 pr-0">
+            <div className="col pl-0 pr-0">
               <Map setSelectedCounty={setSelectedCounty}/>
             </div>
+
+            {/* Column 3: Right-hand menu */}
+            <nav className="rtMenuWrapper">
+              <RightHandMenu />
+            </nav>
           </div>
-        </div>
-        {/* Column 3: Right-hand menu */}
-        <div className="rtMenuWrapper">
-          <RightHandMenu />
         </div>
       </div>
     );

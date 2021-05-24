@@ -17,8 +17,6 @@
   flex-direction: row;
 }
 
-
-
 /****Left Hand Menu Styles (other than font styles)****/
 
 #left-menu ul {
@@ -29,114 +27,15 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  max-height: 100vh;
   background-color: #D9D9D9;
 }
 
 #left-menu #county-list {
     display: flex;
     flex-direction: column;
-    max-height: calc(100vh - 215px);
-}
-
-#left-menu #data-selector {
-  margin: 1rem auto 1rem;
-  width: calc(100% - 2rem);
-  flex: 1;
-}
-
-#data-selector {
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 0px 1px 4px #15223214;
-  border: 1px solid #CED4DA;
-  border-radius: 10px;
-  opacity: 1;
-}
-
-#data-selector h3{
-  margin: 0.5rem auto 0.5rem 1rem;
-  font: normal normal normal 1rem/1.3125rem futura-pt, sans-serif;
-  letter-spacing: 0px;
-  color: #1C752A;
-  opacity: 1;
-}
-
-#data-selector ul {
-  margin: 0px;
-  padding: 0px 0px 0px 1rem;
-}
-
-#data-selector label {
-  font: normal normal normal 0.8125rem/1.0625rem futura-pt;
-  letter-spacing: 0px;
-  color: #1C752A;
-  opacity: 1;
-  font-weight: 400;
-}
-
-.flex-list {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-list li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.6rem;
-}
-
-.flex-list label {
-  margin: 0px;
-}
-
-.radio {
-  font-size: 1rem;
-  color: var(--radio-color);
-  display: grid;
-  grid-template-columns: min-content auto;
-  grid-gap: 1rem;
-  justify-content: center;
-  align-content: center;
-}
-
-.radio__input {
-  display: flex;
-}
-
-.radio__input input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    display: none;
-}
-
-input + .radio__control::before {
-  content: "";
-  width: 0.5em;
-  height: 0.5em;
-  box-shadow: inset 0.5em 0.5em currentColor;
-  border-radius: 50%;
-  transition: 180ms transform ease-in-out;
-  transform: scale(0);
-}
-
-input.checked + .radio__control::before {
-  transform: scale(1.2);
-}
-
-.radio__control {
-  display: grid;
-  place-items: center;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  border: 0.1em solid currentColor;
-  align-self: center;
-}
-
-.radio__label {
-  line-height: 1.06125rem;
+    max-height: calc(100vh - 300px);
+    flex: 1 0 auto;
 }
 
 nav button {
@@ -167,34 +66,17 @@ nav button:focus {
     overflow-y: scroll;
 }
 
-/* right hand menu style mostly for positioning */
+/****Right Hand Menu Styles (other than font styles)****/
 .rtMenuWrapper {
-   background-color:#e7e7e7;
-   display: flex;
-   flex-direction: column;
-   max-height: 100vh;
-   min-width: 260px;
-   max-width: 260px;
+  background-color:#e7e7e7;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  min-width: 260px;
+  max-width: 260px;
 }
 
-
-
-
-
-
-
-/* #right-menu {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  width: 255px;
-  background: white;
-  padding: 10px;
-  border-radius: 9px;
-  color: #059713;
-}
-
-#right-menu h2 {
+/* #right-menu h2 {
   font-size: 2em;
   text-align: center;
 }
@@ -212,7 +94,6 @@ nav button:focus {
 #right-menu #right-menu-county {
   display: visible;
 } */
-
 
 
 /* 
