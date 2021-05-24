@@ -4,17 +4,6 @@ import { PieChart, Pie, Cell } from 'recharts'
 import './Donut.css'
 import Legend from './Legend/Legend'
 
-// Mock Race Data; Similar Data should come in from Redux Slice
-const data = [
-  { key: 'White', value: 400 },
-  { key: 'Asian', value: 300 },
-  { key: 'Black', value: 300 },
-  { key: 'Hispanic/Latino', value: 200 },
-  { key: 'Pacific', value: 300 },
-  { key: 'Two+', value: 300 },
-  { key: 'Other', value: 200 }
-]
-
 // Color for various sectors in pie chart
 const COLORS = ['#2cba42', '#f3ad1c', '#534588', '#ff6833', '#92dbdd', '#ff0000', '#cc27b0']
 
@@ -28,7 +17,8 @@ const renderActiveShape = (props) => {
     outerRadius,
     fill,
     value,
-    name
+    name,
+    data
   } = props
 
   const myCalc = (midAngle, sin, sy) => {
@@ -63,7 +53,6 @@ const renderActiveShape = (props) => {
   const tx= ex + (cos >= 0 ? 1 : -1) * 12       //coordinates (tx,ty) on which text tag is placed
   const ty= ey + (sin >= 0 ? 1 : -1) * 16
 
-
   return (
     <g>
       {/* centers text in middle of pie chart */}
@@ -88,10 +77,10 @@ const renderActiveShape = (props) => {
         y={ty}
         textAnchor={textAnchor}
       >
-        <tspan 
+        <tspan
           fill='#1c752a'
           x={tx}
-          y={ty} >{`${data[name].key}`}</tspan>
+          y={ty} >{`${data[name].value}`}</tspan>
         <tspan
           className='tspan__val'
           x={tx + (cos >= 0 ? -1 : 1) * 6}
@@ -107,42 +96,57 @@ const renderActiveShape = (props) => {
  * for Race and similar type data
  * data slice filtered as per radioSelct and ToggleSelect to be used in place of mockData
  */
-function Donut() {
+function Donut(props) {
+  const {
+    data,
+    values,
+    calculateSum
+  } = props;
   const [legend, setLegend] = useState([])
   const [sum, setSum] = useState(0)
-
+  console.log('props', props)
   useEffect(() => {
     const l = []
-    let sum1 = data.reduce(function (a, b) {
-      return a + b.value
-    }, 0)
-    data.map((entry, index) => (l.push({ key : entry.key, color : COLORS[index % COLORS.length], value : entry.value  })))
-    setSum(sum1)
+    let sum1 = 0;
+    if (calculateSum) {
+      values.map(val => sum1 += data[val.field])
+    }
+    values.map(({name, field}, index) => (l.push({ key: name, color : COLORS[index % COLORS.length], value : data[field]  })))
+    if (calculateSum) {
+      setSum(sum1)
+    }
     setLegend( [...l])
   },[data])
+
+  const pieData = values.map(val => {
+    console.log('val', val.field)
+    console.log(data)
+    return ({ key: val.name, value: data[val.field] })
+  })
+  console.log('pieData', pieData)
 
   return (
     <div>
       <div className='donut__chart'>
-        <PieChart width={200} height={250}>
-          <Pie
-            data={data}
-            cx={100}
-            cy={125}
-            innerRadius={40}
-            outerRadius={55}
-            fill='#8884d8'
-            paddingAngle={1}
-            dataKey='value'
-            label={renderActiveShape}
-            labelLine={false}
-          >
-            {/* for each cell in pie fill color separate */}
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-        </PieChart>
+      <PieChart width={200} height={250}>
+        <Pie
+          data={pieData}
+          cx={100}
+          cy={125}
+          innerRadius={40}
+          outerRadius={55}
+          fill='#8884d8'
+          paddingAngle={1}
+          dataKey='value'
+          label={renderActiveShape}
+          labelLine={false}
+        >
+          {/* for each cell in pie fill color separate */}
+          {pieData.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+      </PieChart>
         <div className='donut__centerTxt'><h5>Total Population</h5><span>{sum}</span></div>
       </div>
       <Legend legend={legend} />
