@@ -1,0 +1,16 @@
+.side-menu {
+    position: absolute;
+    right: 17.3rem;
+    top: 1rem;
+    background-color: white;
+    border-radius: 10%;
+    padding: 1rem 1rem 1rem 1rem;
+    color: #1c752a;
+    font-family: futura-pt;
+    line-height: 1rem;
+    min-width: 5rem;
+}
+
+.side-menu-title {
+    font-size: 0.9rem;
+}
