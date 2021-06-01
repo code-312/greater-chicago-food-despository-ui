@@ -23,6 +23,22 @@ export const filterFeatChart = (data, selectedFeat) => {
             { key: 'Total Population', value: 100 - Math.round((reqCountyData.insecurity_data[selectedfilterSubfeat] * 100 * 100)) / 100 }
           ]
         break
+      case 'WIC':
+        if (selectedfilterSubfeat === 'Enrollment') {
+          pieData = [
+            { key: 'Women', value: reqCountyData.wic_participation_women_data.total },
+            { key: 'Infants', value: reqCountyData.wic_participation_infants_data.total },
+            { key: 'Children', value: reqCountyData.wic_participation_children_data.total }
+          ]
+        } else {
+          if (selectedfilterSubfeat.slice(0,3) === 'wic') {
+            console.log('filter_wic')
+            for (const itemKey in wicLegend) {
+              pieData.push({ key: wicLegend[itemKey], value: reqCountyData[selectedfilterSubfeat][itemKey] })
+            }
+          }
+        }
+        break
       default:
         break
     }
@@ -39,4 +55,14 @@ const raceLegend = {
   race_pacific: 'Pacific',
   race_twoplus_total: 'Two+',
   race_other: 'Other'
+}
+
+const wicLegend = {
+  race_white: 'White',
+  race_asian: 'Asian',
+  race_black: 'Black',
+  hispanic_or_latino: 'Hispanic/Latino',
+  race_amer_indian_or_alaskan_native: 'Native',
+  race_native_hawaii_or_pacific_islander: 'Pacific',
+  race_multiracial: 'Two+'
 }

@@ -37,11 +37,13 @@ const RightHandMenu = () => {
   const [toggIdxSelected, setToggIdxSelected] = useState(initialToggleIdxState())
 
   const radioClick = (idx) => {
-    dispatch(updateSelectedFeat({...selectedFeat, ...{
-      selectedfilterSubfeat: dataOptions[selectedfilterFeat].radioSelect[toggSelected+'Keys'][idx],
-      featLabel: dataOptions[selectedfilterFeat].legendLabels[toggIdxSelected]
-    }}))
-    const pieData = filterFeatChart(countyData, selectedFeat)
+    if (dataOptions[selectedfilterFeat].radioSelect[toggSelected+'Keys']) {
+      dispatch(updateSelectedFeat({...selectedFeat, ...{
+        selectedfilterSubfeat: dataOptions[selectedfilterFeat].radioSelect[toggSelected+'Keys'][idx],
+        featLabel: dataOptions[selectedfilterFeat].legendLabels[toggIdxSelected]
+      }}))
+      const pieData = filterFeatChart(countyData, selectedFeat)
+    }
   }
 
   return (
@@ -67,7 +69,7 @@ const RightHandMenu = () => {
 
           {/* WIC data and Census Data has race type pie chart; others have a different pie chart */}
           <div className='rt__donut'>
-            {(selectedfilterFeat === 'WIC' || selectedfilterFeat === 'race_data') ? <Donut data={pieData} /> : <UnequalDonut data={pieData} />}    
+            {(selectedfilterFeat === 'WIC' || selectedfilterFeat === 'race_data') ? <Donut data={pieData} dataType={dataOptions[selectedfilterFeat].dataType} /> : <UnequalDonut data={pieData} dataType={dataOptions[selectedfilterFeat].dataType} />}    
           </div>
         </div>
         <div className='rt__footer'>

@@ -16,7 +16,7 @@ function Legend(props) {
             <div className='leg__color' style={{ backgroundColor: item.color }}></div>
             <div className='leg__name'>{item.key}</div>
           </div>
-          <div className='leg__rt'>{item.percent ? `${item.value} (${item.percent}%)` : item.value + ' %'}</div>
+          <div className='leg__rt'>{props.dataType === 'percentValue' ? `${item.value} (${item.percent}%)` : props.dataType === 'percent' ? item.value + ' %' : item.value}</div>
         </div>
       ))}
     </div>

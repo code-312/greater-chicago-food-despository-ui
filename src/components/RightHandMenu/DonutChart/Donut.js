@@ -94,7 +94,7 @@ const renderActiveShape = (props) => {
         <tspan
           className='tspan__val'
           x={tx + (cos >= 0 ? -1 : 1) * 6}
-          y={ty + 10}>{`${value} (${payload.payload.percent}%)`}</tspan>
+          y={ty + 10}>{payload.payload.percent ? `${value} (${payload.payload.percent}%)` : value}</tspan>
       </text>
     </g>
   )
@@ -110,44 +110,46 @@ function Donut(props) {
   const [legend, setLegend] = useState([])
   const [sum, setSum] = useState(0)
 
-  const { data } = props
+  const { data, dataType } = props
 
   useEffect(() => {
     const l = []
     let sum1 = data.reduce(function (a, b) {
       return a + b.value
     }, 0)
-    data.map((entry, index) => (l.push({ key : entry.key, color : COLORS[index % COLORS.length], value : entry.value, percent: entry.percent  })))
+    data.map((entry, index) => (l.push({ key : entry.key, color : COLORS[index % COLORS.length], value : entry.value, percent: entry.percent !== undefined ? entry.percent : null  })))
     setSum(sum1)
     setLegend( [...l])
   },[data])
 
   return (
-    <div>
-      <div className='donut__chart'>
-        <PieChart width={200} height={250}>
-          <Pie
-            data={data}
-            cx={100}
-            cy={125}
-            innerRadius={40}
-            outerRadius={55}
-            fill='#8884d8'
-            paddingAngle={1}
-            dataKey='value'
-            label={renderActiveShape}
-            labelLine={false}
-          >
-            {/* for each cell in pie fill color separate */}
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-        </PieChart>
-        <div className='donut__centerTxt'><h5>Total Population</h5><span>{`${sum} (100%)`}</span></div>
+    data ? (
+      <div>
+        <div className='donut__chart'>
+          <PieChart width={200} height={250}>
+            <Pie
+              data={data}
+              cx={100}
+              cy={125}
+              innerRadius={40}
+              outerRadius={55}
+              fill='#8884d8'
+              paddingAngle={1}
+              dataKey='value'
+              label={renderActiveShape}
+              labelLine={false}
+            >
+              {/* for each cell in pie fill color separate */}
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+          </PieChart>
+          <div className='donut__centerTxt'><h5>Total</h5><span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span></div>
+        </div>
+        <Legend legend={legend} dataType={dataType} />
       </div>
-      <Legend legend={legend} />
-    </div>
+    ) : ''
   )
 }
 

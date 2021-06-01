@@ -7,7 +7,8 @@ export const dataOptions = {
     toggleSelect: ['Total', 'Children'],
     toggleSelectKeys: ['poverty_population_poverty', 'poverty_population_poverty_child'],
     legendLabels: ['Overall Poverty', 'Child Poverty'],
-    radioSelect: null
+    radioSelect: null,
+    dataType: 'percentValue'
   },
   insecurity_data : {
     title: 'Food Insecurity',
@@ -20,21 +21,27 @@ export const dataOptions = {
       TotalKeys: ['insecurity_2018', 'insecurity_2020_projected'],
       Children : ['2018', '2020'],
       ChildrenKeys: ['insecurity_2018_child', 'insecurity_2020_child_projected']
-    }
+    },
+    dataType: 'percent'
   },
   WIC : {
     title: 'WIC Usage',
     desc: 'Text about WIC usage data and the data and possibly the next year',
     toggleSelect: ['Enrollment', 'Race'],
+    toggleSelectKeys: ['Enrollment', 'Race'],
+    legendLabels: ['Total Enrollment', ''],
     radioSelect: {
       Enrollment : null,
-      Race : ['Women', 'Infants', 'Children'],
-      }
+      Race : ['Women', 'Infants', 'Children', 'Total'],
+      RaceKeys: ['wic_participation_women_data', 'wic_participation_infants_data', 'wic_participation_children_data', 'wic_participation_total_data']
+      },
+    dataType: 'value'
   },
   race_data : {
     title: 'Census Data',
     desc: 'Text about Census data and the data and possibly the next year',
     toggleSelect: null,
-    radioSelect: null
+    radioSelect: null,
+    dataType: 'percentValue'
   }
 }
