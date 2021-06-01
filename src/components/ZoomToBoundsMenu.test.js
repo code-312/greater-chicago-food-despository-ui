@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '../test-utils';
-import ZoomToBoundsMenu, {ZoomToBoundsButton} from './ZoomToBoundsMenu'
+import ZoomToBoundsMenu, {ZoomToBoundsButton} from './LeftHandMenu/ZoomToBoundsMenu'
 import userEvent from '@testing-library/user-event'
 
 /**
