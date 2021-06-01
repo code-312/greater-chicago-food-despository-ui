@@ -136,8 +136,8 @@ const renderLabelonHover = (props) => {
 
   const sin = Math.sin(-RADIAN * midAngle)  //convert degree to radian units and find sin value of it
   const cos = Math.cos(-RADIAN * midAngle)  //convert degree to radian units and find cos value of it
-  const sx = cx + (outerRadius + 10) * cos         //start coordinates (sx,sy) for line
-  const sy = cy + (outerRadius + 10) * sin
+  const sx = cx + (outerRadius + 4) * cos         //start coordinates (sx,sy) for line
+  const sy = cy + (outerRadius + 6) * sin
   const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190) //mid coordinates (mx,my) for line
               ? cx + (outerRadius + 30) * cos
               : sx
@@ -171,8 +171,8 @@ const renderLabelonHover = (props) => {
         cy={cy}
         startAngle={startAngle}
         endAngle={endAngle}
-        innerRadius={outerRadius + 6}
-        outerRadius={outerRadius + 10}
+        innerRadius={outerRadius + 4}
+        outerRadius={outerRadius + 6}
         fill={fill}
       />
 
