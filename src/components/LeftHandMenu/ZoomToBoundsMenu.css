@@ -1,0 +1,13 @@
+.county-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  font-weight: 900;
+  height: 300px;
+}
+
+.scroll {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}

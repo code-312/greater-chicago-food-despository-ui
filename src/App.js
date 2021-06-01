@@ -29,7 +29,7 @@ const App = () => {
         <div className="container-fluid">
           <div className="row">
             {/*Column 1: Left-hand menu (Zoom Control)*/}
-            <nav className="menu col-2 pl-0 pr-0">
+            <nav className="leftMenuWrapper">
                 <LeftHandMenu />
             </nav>
 
