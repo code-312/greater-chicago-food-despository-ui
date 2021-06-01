@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './RadioSelect.css'
 
@@ -9,18 +9,20 @@ import './RadioSelect.css'
  */
 function RadioSelect(props) {
   const [selectFeat, setFeat] = useState(0)
-  const radioClick = (idx) => {
-    setFeat(idx)
-  }
-  
+
   if(!props.handleChange) console.error('RadioSelect is missing an onChange in its props. Make sure this is on purpose.')
 
   const handleChange = (idx) => {
+    setFeat(idx)
     if(!props.handleChange) {
       return
     }
     props.handleChange(idx)
   }
+
+  useEffect(() => {
+    handleChange(0)
+  }, [props.data])
 
   const { alignment } = props
 
@@ -29,7 +31,7 @@ function RadioSelect(props) {
      {props.data ? (
         props.data.map((feature, idx) => (
           <label htmlFor={feature} key={idx}>
-            <input type="radio" id={feature} name={feature} className='radioOpt' checked={selectFeat===idx} onClick={() => radioClick(idx)} onChange={() => handleChange(idx)}></input>
+            <input type="radio" id={feature} name={feature} className='radioOpt' checked={selectFeat===idx} onChange={() => handleChange(idx)}></input>
             <h3 className='radioLabel'>{feature}</h3>
           </label>
         ))

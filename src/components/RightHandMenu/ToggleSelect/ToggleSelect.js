@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { updateSelectFeat } from  '../../../redux/selectFeatReducer';
+import { useDispatch, useSelector } from 'react-redux'
+import { updateSelectedFeat } from  '../../../redux/selectedFeatReducer'
 
 import './ToggleSelect.css'
 
@@ -12,21 +12,22 @@ import './ToggleSelect.css'
 function ToggleSelect(props) {
   const dispatch = useDispatch()
   const [active, setActive] = useState(0)
-  const selectFeat = useSelector(state => state.selectFeat)
+  const selectedFeat = useSelector(state => state.selectedFeat)
 
-  useEffect((active) => {
+  useEffect(() => {
     props.setToggSelected(props.data[0])
-    dispatch(updateSelectFeat({...selectFeat, ...{
-      filterSubFeat: props.dataID[0],
+    props.setToggIdxSelected(0)
+    dispatch(updateSelectedFeat({...selectedFeat, ...{
+      selectedfilterSubfeat: props.dataID[0],
       featLabel: props.dataLabel[0]
     }}))
-  },[])
+  },[props.data])
 
   const optionClick = (select) => {
-    console.log('toggle',props)
     props.setToggSelected(props.data[select])
-    dispatch(updateSelectFeat({...selectFeat, ...{
-      filterSubFeat: props.dataID[select],
+    props.setToggIdxSelected(select)
+    dispatch(updateSelectedFeat({...selectedFeat, ...{
+      selectedfilterSubfeat: props.dataID[select],
       featLabel: props.dataLabel[select]
     }}))
     setActive(active === select ? active : select)

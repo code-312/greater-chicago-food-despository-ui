@@ -4,19 +4,19 @@ import { PieChart, Pie, Cell } from 'recharts'
 import './Donut.css'
 import Legend from './Legend/Legend'
 
-// Mock Race Data; Similar Data should come in from Redux Slice
-const data = [
-  { key: 'White', value: 400 },
-  { key: 'Asian', value: 300 },
-  { key: 'Black', value: 300 },
-  { key: 'Hispanic/Latino', value: 200 },
-  { key: 'Pacific', value: 300 },
-  { key: 'Two+', value: 300 },
-  { key: 'Other', value: 200 }
-]
+// Mock Race Data; Similar Data should come in for pie chart
+// const data = [
+//   { key: 'White', value: 400 },
+//   { key: 'Asian', value: 300 },
+//   { key: 'Black', value: 300 },
+//   { key: 'Hispanic/Latino', value: 200 },
+//   { key: 'Pacific', value: 300 },
+//   { key: 'Two+', value: 300 },
+//   { key: 'Other', value: 200 }
+// ]
 
 // Color for various sectors in pie chart
-const COLORS = ['#2cba42', '#f3ad1c', '#534588', '#ff6833', '#92dbdd', '#ff0000', '#cc27b0']
+const COLORS = ['#2cba42', '#f3ad1c', '#534588', '#ff6833', '#964B00', '#92dbdd', '#ff0000', '#cc27b0']
 
 // SVG and positioning for labels around the donut chart; default props send by Pie
 const renderActiveShape = (props) => {
@@ -28,7 +28,7 @@ const renderActiveShape = (props) => {
     outerRadius,
     fill,
     value,
-    name
+    payload
   } = props
 
   const myCalc = (midAngle, sin, sy) => {
@@ -63,7 +63,6 @@ const renderActiveShape = (props) => {
   const tx= ex + (cos >= 0 ? 1 : -1) * 12       //coordinates (tx,ty) on which text tag is placed
   const ty= ey + (sin >= 0 ? 1 : -1) * 16
 
-
   return (
     <g>
       {/* centers text in middle of pie chart */}
@@ -91,11 +90,11 @@ const renderActiveShape = (props) => {
         <tspan 
           fill='#1c752a'
           x={tx}
-          y={ty} >{`${data[name].key}`}</tspan>
+          y={ty} >{`${payload.payload.key}`}</tspan>
         <tspan
           className='tspan__val'
           x={tx + (cos >= 0 ? -1 : 1) * 6}
-          y={ty + 10}>{`${value}`}</tspan>
+          y={ty + 10}>{`${value} (${payload.payload.percent}%)`}</tspan>
       </text>
     </g>
   )
@@ -107,16 +106,18 @@ const renderActiveShape = (props) => {
  * for Race and similar type data
  * data slice filtered as per radioSelct and ToggleSelect to be used in place of mockData
  */
-function Donut() {
+function Donut(props) {
   const [legend, setLegend] = useState([])
   const [sum, setSum] = useState(0)
+
+  const { data } = props
 
   useEffect(() => {
     const l = []
     let sum1 = data.reduce(function (a, b) {
       return a + b.value
     }, 0)
-    data.map((entry, index) => (l.push({ key : entry.key, color : COLORS[index % COLORS.length], value : entry.value  })))
+    data.map((entry, index) => (l.push({ key : entry.key, color : COLORS[index % COLORS.length], value : entry.value, percent: entry.percent  })))
     setSum(sum1)
     setLegend( [...l])
   },[data])
@@ -143,7 +144,7 @@ function Donut() {
             ))}
           </Pie>
         </PieChart>
-        <div className='donut__centerTxt'><h5>Total Population</h5><span>{sum}</span></div>
+        <div className='donut__centerTxt'><h5>Total Population</h5><span>{`${sum} (100%)`}</span></div>
       </div>
       <Legend legend={legend} />
     </div>

@@ -1,24 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialFeatState = {
-    selectCounty: null,
-    selectZipcode: null,
-    filterFeat: 'poverty_data',
-    filterSubFeat: null,
+    selectedCounty: null,
+    selectedZipcode: null,
+    selectedfilterFeat: 'race_data',
+    selectedfilterSubfeat: 'poverty_population_total',
     featLabel: null
 }
 
 // Slices create action types automatically, i.e. 'filters/updateFilters' and then execute reducers when those actions are dispatched
-export const selectFeatSlice = createSlice({
+export const selectedFeatSlice = createSlice({
     name: 'features',
     initialState: initialFeatState,
     reducers: {
-        updateSelectFeat(state, action) {
+        updateSelectedFeat(state, action) {
             return {...state, ...action.payload};
         }
     }
 });
 
-export const { updateSelectFeat } = selectFeatSlice.actions;
+export const { updateSelectedFeat } = selectedFeatSlice.actions;
 
-export default selectFeatSlice.reducer;
+export default selectedFeatSlice.reducer;

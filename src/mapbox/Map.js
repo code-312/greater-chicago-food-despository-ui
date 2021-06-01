@@ -4,7 +4,7 @@ import ReactMapGL, { NavigationControl } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateVP } from './../redux/viewportReducer';
 import { updateFilters } from './../redux/filterReducer';
-import { updateSelectFeat } from  './../redux/selectFeatReducer';
+import { updateSelectedFeat } from  './../redux/selectedFeatReducer';
 
 import CountyLayer from './CountyLayer';
 import ZipcodeLayer from './ZipcodeLayer';
@@ -23,7 +23,7 @@ const Map = () => {
   const viewport = useSelector(state => state.viewport)
   const illinois_counties = useSelector(state => state.illinois_counties)
   const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
-  const selectFeat = useSelector(state => state.selectFeat)
+  const selectedFeat = useSelector(state => state.selectedFeat)
 
   //deletes are temporary fix to non-serialized values in Redux store
   // dispatch newViewPort to store
@@ -90,9 +90,9 @@ const Map = () => {
                                           }  : null
     const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null
 
-    dispatch(updateSelectFeat({...selectFeat, ...{
-      selectCounty: currentCounty,
-      selectZipcode: currentZipCode
+    dispatch(updateSelectedFeat({...selectedFeat, ...{
+      selectedCounty: currentCounty,
+      selectedZipcode: currentZipCode
     }}
     ))
   }

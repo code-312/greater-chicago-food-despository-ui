@@ -41,7 +41,6 @@ const renderActiveShape = (props) => {
   const tx= ex + (cos >= 0 ? 1 : -1) * 20
   const ty= ey + (sin >= 0 ? 1 : -1) * 16
 
-
   return (
     <g>
       {/* <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
@@ -83,7 +82,7 @@ const renderActiveShape = (props) => {
         <tspan
           className='tspan__val'
           x={tx + (cos >= 0 ? -1 : 1) * 6}
-          y={ty + 10}>{`${value} (${Math.round(payload.payload.percent * 100)}%)`}</tspan>
+          y={ty + 10}>{payload.payload.percent ? `${value} (${payload.payload.percent}%)` : value + ' %'}</tspan>
       </text>
     </g>
   );
@@ -109,8 +108,8 @@ function UnequalDonut(props) {
         return a + b.value
       }, 0)
       const l =  [
-        { key: data[0].key, value: data[0].value, color: '#2cba42', percent: data[0].percent },
-        { key: data[1].key, value: sum1, color: '#124c1b', percent: data[1].percent }
+        { key: data[0].key, value: data[0].value, color: '#2cba42', percent: data[0].percent ? data[0].percent : '' },
+        { key: data[1].key, value: sum1, color: '#124c1b', percent: data[1].percent ? data[1].percent : '' }
       ]
       setSum(sum1)
       setLegend([...l])
@@ -134,7 +133,7 @@ function UnequalDonut(props) {
           dataKey='value'
         />
       </PieChart>
-        <div className='donut__centerTxt'><h5>Total Population</h5><span>{`${sum} (${Math.round(data[1].percent * 100)}%)`}</span></div>
+        <div className='donut__centerTxt'><h5>Total Population</h5><span>{data[1].percent ? `${sum} (${data[1].percent}%)` : sum + ' %'}</span></div>
       </div>
       <Legend legend={legend} />
     </div>

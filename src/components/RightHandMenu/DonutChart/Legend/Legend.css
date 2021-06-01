@@ -7,7 +7,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 8px;
+  padding: 4px 0px 4px 6px;
 }
 
 .leg__left {
@@ -19,7 +19,7 @@
   width: 15px;
   height: 15px;
   border-radius: 3px;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .leg__name {
@@ -30,4 +30,7 @@
 .leg__rt {
   font-size: 10px;
   font-weight: 600;
+  float: right;
+  white-space: nowrap;
+  /* overflow: scroll; */
 }

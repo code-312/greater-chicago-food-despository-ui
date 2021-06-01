@@ -1,106 +1,73 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux'
+import { updateSelectedFeat } from  '../../redux/selectedFeatReducer'
 
 import './RightHandMenu.css'
 import ToggleSelect from './ToggleSelect/ToggleSelect'
 import RadioSelect from '../Utility/RadioSelect/RadioSelect'
 import Donut from './DonutChart/Donut'
 import UnequalDonut from './DonutChart/UnEqualDonut/UnequalDonut'
-import {featureDataFilter} from '../Utility/dataFilter_Pie'
 
-// Static Content to show in right hand menu
-const dataTypes = {
-  poverty_data : {
-    title: 'Poverty Rates',
-    desc: 'Text about poverty rates and the data and possibly the next year',
-    toggleSelect: ['Total', 'Children'],
-    toggleSelectKeys: ['poverty_population_poverty', 'poverty_population_poverty_child'],
-    toggleLegendLabel: ['Overall Poverty', 'Child Poverty'],
-    radioSelect: null
-  },
-  insecurity_data : {
-    title: 'Food Insecurity',
-    desc: 'Text about food insecurity rates and the data and possibly the next year',
-    toggleSelect: ['Total', 'Children'],
-    radioSelect: {
-      Total : ['2018', '2020'],
-      Children : ['2018', '2020'] 
-    }
-  },
-  wic : {
-    title: 'WIC Usage',
-    desc: 'Text about WIC usage data and the data and possibly the next year',
-    toggleSelect: ['Enrollment', 'Race'],
-    radioSelect: {
-      Enrollment : null,
-      Race : ['Women', 'Infants', 'Children'],
-      }
-  },
-  race_data : {
-    title: 'Census Data',
-    desc: 'Text about Census data and the data and possibly the next year',
-    toggleSelect: null,
-    radioSelect: null
-  }
-}
+import {filterFeatChart} from '../Utility/filterFeatChart'
+import { dataOptions } from './dataOptions'
+
 
 /*
  * COMPONENT: RightHandMenu
  */
 
 const RightHandMenu = () => {
-  // This data should come in as props/slice into this component
-  // change 'data' for different views of menu
+  const dispatch = useDispatch()
 
-  // const mockProps = {data:'insecurity_data', county: 'Champaign County'}
-  // const mockProps = {data:'wic', county: 'Champaign County'}
-  const mockProps = {data:'poverty_data'}
-  // const mockProps = {data:'race_data', county: 'Champaign County'}
-
-
-
-  const { data } = mockProps
-
-  // get all County features data
+  // get all County features data and selected feature option from redux store
   const countyData = useSelector(state => state.county_data.countyData)
-  const selectFeat = useSelector(state => state.selectFeat)
+  const selectedFeat = useSelector(state => state.selectedFeat)
 
-  const { selectCounty, filterFeat } = selectFeat
+  const { selectedCounty, selectedfilterFeat } = selectedFeat
 
-  const pieData = featureDataFilter(countyData, selectFeat )
+  // Pass all data and selected data to filterFeatChart function which will filter out data and give data as required by chart
+  const pieData = filterFeatChart(countyData, selectedFeat)
 
   console.log('pieData', pieData)
 
   // To keep track of which toggleSelect option is selected, so that respective radioSelect Options can be rendered
-  // const initalToggleState = () => (dataTypes[data].toggleSelect ? dataTypes[data].toggleSelect[0] : null )
-  const initalToggleState = () => (dataTypes[data].toggleSelect ? 0 : null )
+  const initalToggleState = () => (dataOptions[selectedfilterFeat].toggleSelect ? dataOptions[selectedfilterFeat].toggleSelect[0] : null )
+  const initialToggleIdxState = () => (dataOptions[selectedfilterFeat].toggleSelect ? 0 : null )
   const [toggSelected, setToggSelected] = useState(initalToggleState())
+  const [toggIdxSelected, setToggIdxSelected] = useState(initialToggleIdxState())
+
+  const radioClick = (idx) => {
+    dispatch(updateSelectedFeat({...selectedFeat, ...{
+      selectedfilterSubfeat: dataOptions[selectedfilterFeat].radioSelect[toggSelected+'Keys'][idx],
+      featLabel: dataOptions[selectedfilterFeat].legendLabels[toggIdxSelected]
+    }}))
+    const pieData = filterFeatChart(countyData, selectedFeat)
+  }
 
   return (
     <div>
-      { selectCounty && dataTypes[filterFeat] ? (
+      { selectedCounty && dataOptions[selectedfilterFeat] ? (
       <div className='rtMenu'>
         <div className='rtBody'>
-          <h1 className='rt__title'>{dataTypes[filterFeat].title}</h1>
-          <p className='rt__desc'>{dataTypes[filterFeat].desc}</p>
-          <h3 className='rt__name'>{selectCounty ? selectCounty.name + ' County' : '' }</h3>
+          <h1 className='rt__title'>{dataOptions[selectedfilterFeat].title}</h1>
+          <p className='rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
+          <h3 className='rt__name'>{selectedCounty ? selectedCounty.name + ' County' : ''}</h3>
 
-          { dataTypes[data].toggleSelect ? (
+          { dataOptions[selectedfilterFeat].toggleSelect ? (
             <div className='rt__toggleSelect'>
-              <ToggleSelect data={dataTypes[filterFeat].toggleSelect} dataID={dataTypes[filterFeat].toggleSelectKeys} dataLabel={dataTypes[filterFeat].toggleLegendLabel} setToggSelected= {setToggSelected}/>
+              <ToggleSelect data={dataOptions[selectedfilterFeat].toggleSelect} dataID={dataOptions[selectedfilterFeat].toggleSelectKeys} dataLabel={dataOptions[selectedfilterFeat].legendLabels} setToggSelected={setToggSelected} setToggIdxSelected={setToggIdxSelected} />
             </div>
           ) : ''}
           
-          { dataTypes[data].radioSelect ? (
+          { dataOptions[selectedfilterFeat].radioSelect ? (
             <div className='rt__radioSelect'>
-              <RadioSelect data={dataTypes[filterFeat].radioSelect[toggSelected]} handleChange={(idx) => console.log(idx)} alignment={'row'}/>
+              <RadioSelect data={dataOptions[selectedfilterFeat].radioSelect[toggSelected]} handleChange={(idx) => radioClick(idx)} alignment={'row'}/>
             </div>
           ) : ''}
 
           {/* WIC data and Census Data has race type pie chart; others have a different pie chart */}
           <div className='rt__donut'>
-            {(data === 'WIC' || data === 'Census') ? <Donut /> : <UnequalDonut data={pieData} />}    
+            {(selectedfilterFeat === 'WIC' || selectedfilterFeat === 'race_data') ? <Donut data={pieData} /> : <UnequalDonut data={pieData} />}    
           </div>
         </div>
         <div className='rt__footer'>
@@ -108,7 +75,7 @@ const RightHandMenu = () => {
         </div>
       </div>
     ) : (
-      <div className='rtMenu noCounty'><p className='rt__noCounty'>Select a county to view {filterFeat}</p></div>
+      <div className='rtMenu noCounty'><p className='rt__noCounty'>Select a county to view {dataOptions[selectedfilterFeat].title}</p></div>
     )}
     </div> 
   )
