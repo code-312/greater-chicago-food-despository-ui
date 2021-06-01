@@ -26,9 +26,7 @@ const RightHandMenu = () => {
   const { selectedCounty, selectedfilterFeat } = selectedFeat
 
   // Pass all data and selected data to filterFeatChart function which will filter out data and give data as required by chart
-  const pieData = filterFeatChart(countyData, selectedFeat)
-
-  console.log('pieData', pieData)
+  let pieData = filterFeatChart(countyData, selectedFeat)
 
   // To keep track of which toggleSelect option is selected, so that respective radioSelect Options can be rendered
   const initalToggleState = () => (dataOptions[selectedfilterFeat].toggleSelect ? dataOptions[selectedfilterFeat].toggleSelect[0] : null )
@@ -42,7 +40,7 @@ const RightHandMenu = () => {
         selectedfilterSubfeat: dataOptions[selectedfilterFeat].radioSelect[toggSelected+'Keys'][idx],
         featLabel: dataOptions[selectedfilterFeat].legendLabels[toggIdxSelected]
       }}))
-      const pieData = filterFeatChart(countyData, selectedFeat)
+      pieData = filterFeatChart(countyData, selectedFeat)
     }
   }
 

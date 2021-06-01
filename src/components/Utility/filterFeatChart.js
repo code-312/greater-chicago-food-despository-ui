@@ -3,7 +3,6 @@ export const filterFeatChart = (data, selectedFeat) => {
   const { selectedfilterFeat, selectedfilterSubfeat, selectedCounty, featLabel } = selectedFeat
   let pieData = []
   let reqCountyData = (data && selectedCounty) && data[selectedCounty.id]
-  console.log('filter', reqCountyData, selectedFeat)
   if (reqCountyData) {
     switch(selectedfilterFeat) {
       case 'poverty_data':
@@ -32,7 +31,6 @@ export const filterFeatChart = (data, selectedFeat) => {
           ]
         } else {
           if (selectedfilterSubfeat.slice(0,3) === 'wic') {
-            console.log('filter_wic')
             for (const itemKey in wicLegend) {
               pieData.push({ key: wicLegend[itemKey], value: reqCountyData[selectedfilterSubfeat][itemKey] })
             }

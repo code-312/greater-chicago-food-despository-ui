@@ -99,7 +99,7 @@ function UnequalDonut(props) {
 
   // ActiveIndex identifies on which cell index of pie renderActiveShape function is to be called 
   // fixed to 0 as 1st element is the only one requiring label and sector overlay
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, ] = useState(0)
 
   const { data, dataType } = props
   useEffect(() => {
