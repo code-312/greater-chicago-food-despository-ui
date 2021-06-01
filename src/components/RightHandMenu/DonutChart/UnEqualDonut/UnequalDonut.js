@@ -12,7 +12,7 @@ import Legend from '../Legend/Legend'
 
 // SVG and positioning for labels around the donut chart; default props send by Pie
 // Mostly same as Donut.js; See Donut.js
-const renderActiveShape = (props) => {
+const renderLabels = (props) => {
   const RADIAN = Math.PI / 180;
   const {
     cx,
@@ -122,7 +122,7 @@ function UnequalDonut(props) {
       <PieChart width={200} height={250}>
         <Pie
           activeIndex={activeIndex}
-          activeShape={renderActiveShape}
+          activeShape={renderLabels}
           data={data}
           cx={100}
           cy={125}
