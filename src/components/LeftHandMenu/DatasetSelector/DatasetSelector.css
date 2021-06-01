@@ -1,16 +1,8 @@
 .data-selector {
-	margin: 1rem auto 1rem;
-	width: calc(100% - 2rem);
-	flex: 1;
-}
-
-.data-selector {
-	background: #ffffff 0% 0% no-repeat padding-box;
-	box-shadow: 0px 1px 4px #15223214;
-	border: 1px solid #ced4da;
-	border-radius: 10px;
-	opacity: 1;
-	flex: 0 1 auto;
+	margin: 16px;
+	background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
+	border-radius: 9px;
 }
 
 .data-selector-title {

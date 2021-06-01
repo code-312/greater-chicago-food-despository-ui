@@ -30,7 +30,7 @@ export const filterFeatChart = (data, selectedFeat) => {
             { key: 'Children', value: reqCountyData.wic_participation_children_data.total }
           ]
         } else {
-          if (selectedfilterSubfeat.slice(0,3) === 'wic') {
+          if (selectedfilterSubfeat ? selectedfilterSubfeat.slice(0,3) === 'wic' : false) {
             for (const itemKey in wicLegend) {
               pieData.push({ key: wicLegend[itemKey], value: reqCountyData[selectedfilterSubfeat][itemKey] })
             }
