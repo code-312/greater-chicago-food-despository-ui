@@ -1,5 +1,5 @@
 import React from 'react'
-import RadioSelect from '../../Utility/RadioSelect/RadioSelect'
+import RadioSelect2 from '../../Utility/RadioSelect/RadioSelect2'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { updateSelectedFeat } from  '../../../redux/selectedFeatReducer'
@@ -18,9 +18,11 @@ function DatasetSelector(props) {
 
 	const handleSelection = (idx) => {
 		// Handle selection in here.
-		// dispatch(updateSelectedFeat({...selectedFeat, ...{
-		// 	selectedfilterFeat: featOptions.featKeys[idx]
-		// }}))
+		dispatch(updateSelectedFeat({...selectedFeat, ...{
+			selectedfilterFeat: featOptions.featKeys[idx],
+			selectedfilterSubfeat: null,
+			featLabel: null
+		}}))
 		console.log(idx)
 	}
 
@@ -28,7 +30,7 @@ function DatasetSelector(props) {
 	return !featOptions ? null : (
 		<div className="data-selector">
 			<h3 className="data-selector-title">Show data for:</h3>
-			<RadioSelect
+			<RadioSelect2
 				data={featOptions.featNames}
 				handleChange={handleSelection}
 				alignment={'column'}

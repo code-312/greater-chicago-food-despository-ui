@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialFeatState = {
     selectedCounty: null,
     selectedZipcode: null,
-    selectedfilterFeat: 'WIC',
+    selectedfilterFeat: 'poverty_data',
     selectedfilterSubfeat: 'poverty_population_total',
     featLabel: null
 }
