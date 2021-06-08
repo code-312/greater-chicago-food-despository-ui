@@ -21,6 +21,7 @@ function ToggleSelect(props) {
       selectedfilterSubfeat: props.dataID[0],
       featLabel: props.dataLabel[0]
     }}))
+    setActive(0)
   },[props.data])
 
   const optionClick = (select) => {
