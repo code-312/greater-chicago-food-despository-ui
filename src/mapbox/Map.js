@@ -9,7 +9,7 @@ import CountyLayer from './CountyLayer';
 import ZipcodeLayer from './ZipcodeLayer';
 import RenderToolTip from '../components/RenderToolTip';
 import { navControlStyles } from './NavigationControlsStyles';
-
+import {MapExtraDataMenu} from "../components/ExtraDataMenu/ExtraDataMenu"
 
 
 const Map = () => {
@@ -101,6 +101,13 @@ const Map = () => {
           <NavigationControl showCompass={false} />
         </div>
   
+        <MapExtraDataMenu
+          title={"Show data for"}
+          options={["option1", "option2", "option3"]}
+          onChange={(selectedValue) => {
+              console.log(selectedValue);
+          }}
+        />
       </ReactMapGL>
     )
 }

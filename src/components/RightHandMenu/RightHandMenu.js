@@ -6,7 +6,6 @@ import RadioSelect from "../Utility/RadioSelect/RadioSelect";
 import Donut from "./DonutChart/Donut";
 import UnequalDonut from "./DonutChart/UnEqualDonut/UnequalDonut";
 
-import ExtraDataMenu from "./ExtraDataMenu/ExtraDataMenu";
 // Static Content to show in right hand menu
 const dataTypes = {
   "Poverty Rates": {
@@ -65,14 +64,6 @@ const RightHandMenu = () => {
 
   return (
     <div>
-      <ExtraDataMenu
-        title={"Show data for"}
-        options={["option1", "option2", "option3"]}
-        onChange={(selectedValue) => {
-          console.log(selectedValue);
-        }}
-      />
-
       {county ? (
         <div className="rtMenu">
           <h1 className="rt__title">{data}</h1>
