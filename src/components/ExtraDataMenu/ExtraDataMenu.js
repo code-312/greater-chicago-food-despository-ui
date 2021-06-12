@@ -5,10 +5,6 @@ import RadioSelect from "../Utility/RadioSelect/RadioSelect";
 import "./ExtraDataMenu.css";
 
 export function MapExtraDataMenu({title = "Show data for:", options}) {
-  const dispatch = useDispatch();
-  const currentViewport = useSelector((state) => state.viewport);
-
-  const isExtraDataShowing = useSelector((state) => state.viewport);
   function handleSelection(optionSelected) {
     //TODO dispatch something
   }
