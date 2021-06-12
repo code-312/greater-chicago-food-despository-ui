@@ -31,7 +31,9 @@ export default function ExtraDataMenu({title = "Title", options, onChange}) {
       <h5 className="side-menu-title">{title + ":"}</h5>
       <RadioSelect
         data={options}
-        handleChange={onChange}
+        handleChange={(optionIndex) => {
+          onChange(options[optionIndex]);
+        }}
         alignment={"column"}
       />
     </div>
