@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateVP } from '../../redux/viewportReducer';
+import { updateSelectedFeat } from '../../redux/selectedFeatReducer';
 import {updateViewportToFitBounds} from '../../mapbox/Util';
 
 import './ZoomToBoundsMenu.css'
@@ -41,10 +42,11 @@ const ZoomToBoundsMenu = () => {
             return countyFeatures.map((feature) => {
                 const label = feature.properties.NAME + ' County';
                 const newViewport = updateViewportToFitBounds(currentViewport,feature);
-                
+                const countyID = feature.properties.STATE + feature.properties.COUNTY
                 return (<ZoomToBoundsButton 
                     key={feature.properties.NAME} 
                     keyValue={feature.properties.NAME}
+                    countyID={countyID}
                     label={label} newViewport={newViewport} 
                 />);
             })
@@ -78,12 +80,23 @@ export default ZoomToBoundsMenu;
  * @param {String} label => Text label for the button
  * @param newViewport => parameter 
  */
-export const ZoomToBoundsButton = ({keyValue, label, newViewport}) => {
+export const ZoomToBoundsButton = ({keyValue, label, newViewport, countyID}) => {
     const dispatch = useDispatch();
-    const updateViewport = (vp) => dispatch(updateVP(vp));
+    const selectedFeat = useSelector(state => state.selectedFeat)
+
+    const onZoomToBoundsButtonClick = (vp, keyValue, countyID) => {
+        const currentCounty = {
+            name: keyValue, 
+            id: countyID
+            } 
+        dispatch(updateVP(vp));
+        dispatch(updateSelectedFeat({...selectedFeat, ...{
+            selectedCounty: currentCounty
+          }}));
+    }
     return (
         <button
-            onClick={() => updateViewport(newViewport)}
+            onClick={() => onZoomToBoundsButtonClick(newViewport, keyValue, countyID)}
             data-testid={"zoom_to_bounds_button_" + keyValue}
         >{label}</button>
     )

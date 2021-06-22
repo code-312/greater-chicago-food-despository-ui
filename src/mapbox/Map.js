@@ -4,7 +4,7 @@ import ReactMapGL, { NavigationControl } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateVP } from './../redux/viewportReducer';
 import { updateFilters } from './../redux/filterReducer';
-import { updateSelectedFeat } from './../redux/selectedFeatReducer';
+import { updateSelectedFeat } from '../redux/selectedFeatReducer';
 
 import CountyLayer from './CountyLayer';
 import ZipcodeLayer from './ZipcodeLayer';
@@ -90,7 +90,6 @@ const Map = () => {
                                             id: countyFeature.properties.STATE + countyFeature.properties.COUNTY
                                           }  : null
     const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null
-
     dispatch(updateSelectedFeat({...selectedFeat, ...{
       selectedCounty: currentCounty,
       selectedZipcode: currentZipCode
