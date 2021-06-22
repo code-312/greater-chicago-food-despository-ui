@@ -1,0 +1,17 @@
+.county-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  margin: 16px 16px 0 16px;
+  height: calc(100vh - 210px);
+  border-radius: 9px;
+  color: #1c752a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
+  overflow: hidden;
+}
+
+.scroll {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
