@@ -229,7 +229,12 @@ function Donut(props) {
     let sum1 = data.reduce(function (acc, curr) {
       return acc + curr.value
     }, 0)
-    data.map((entry, index) => (legendData.push({ key : entry.key, color : COLORS[index % COLORS.length], value : entry.value, percent: entry.percent !== undefined ? entry.percent : null  })))
+    data.map((entry, index) => (legendData.push({ key : entry.key, 
+                                                  color : COLORS[index % COLORS.length], 
+                                                  value : entry.value, 
+                                                  percent: entry.percent !== undefined ? entry.percent : null  })
+                                )
+            )
     setSum(sum1)
     setLegend( [...legendData])
   },[data])
@@ -256,11 +261,16 @@ function Donut(props) {
             >
               {/* for each cell in pie fill color separate */}
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell key={`cell-${index}`} 
+                      fill={COLORS[index % COLORS.length]} 
+                />
               ))}
             </Pie>
           </PieChart>
-          <div className='donut__centerTxt'><h5>Total</h5><span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span></div>
+          <div className='donut__centerTxt'>
+            <h5>Total</h5>
+            <span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span>
+          </div>
         </div>
         <Legend legend={legend} dataType={dataType} />
       </div>

@@ -55,20 +55,33 @@ const RightHandMenu = () => {
 
           { dataOptions[selectedfilterFeat].toggleSelect ? (
             <div className='rt__toggleSelect'>
-              <ToggleSelect data={dataOptions[selectedfilterFeat].toggleSelect} dataID={dataOptions[selectedfilterFeat].toggleSelectKeys} dataLabel={dataOptions[selectedfilterFeat].legendLabels} setToggSelected={setToggSelected} setToggIdxSelected={setToggIdxSelected} />
+              <ToggleSelect data={dataOptions[selectedfilterFeat].toggleSelect} 
+                            dataID={dataOptions[selectedfilterFeat].toggleSelectKeys} 
+                            dataLabel={dataOptions[selectedfilterFeat].legendLabels} 
+                            setToggSelected={setToggSelected} 
+                            setToggIdxSelected={setToggIdxSelected} 
+              />
             </div>
           ) : ''}
           
           { dataOptions[selectedfilterFeat].radioSelect ? (
             <div className='rt__radioSelect'>
-              <RadioSelect data={dataOptions[selectedfilterFeat].radioSelect[toggSelected]} handleChange={(idx) => radioClick(idx)} alignment={'row'}/>
+              <RadioSelect data={dataOptions[selectedfilterFeat].radioSelect[toggSelected]} 
+                           handleChange={(idx) => radioClick(idx)} 
+                           alignment={'row'}
+              />
             </div>
           ) : ''}
 
           {/* WIC data and Census Data has race type pie chart; others have a different pie chart */}
           <div className='rt__donut'>
-            {(selectedfilterFeat !== 'snap_data' ?
-              (selectedfilterFeat === 'WIC' || selectedfilterFeat === 'race_data') ? <Donut data={pieData} dataType={dataOptions[selectedfilterFeat].dataType} /> : <UnequalDonut data={pieData} dataType={dataOptions[selectedfilterFeat].dataType} /> : ''
+            {(selectedfilterFeat !== 'snap_data' ? (selectedfilterFeat === 'WIC' || selectedfilterFeat === 'race_data') ? <Donut data={pieData} 
+                                                                                                                                 dataType={dataOptions[selectedfilterFeat].dataType} 
+                                                                                                                          /> 
+                                                                                                                        : <UnequalDonut data={pieData} 
+                                                                                                                                        dataType={dataOptions[selectedfilterFeat].dataType} 
+                                                                                                                          /> 
+                                                                                                                        : ''
             )}
           </div>
         </div>

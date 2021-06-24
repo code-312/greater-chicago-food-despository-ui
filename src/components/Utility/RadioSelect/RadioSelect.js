@@ -31,7 +31,13 @@ function RadioSelect(props) {
      {props.data ? (
         props.data.map((feature, idx) => (
           <label htmlFor={feature} key={idx}>
-            <input type="radio" id={feature} name={feature} className='radioOpt' checked={selectFeat===idx} onChange={() => handleChange(idx)}></input>
+            <input type="radio" 
+                   id={feature} 
+                   name={feature} 
+                   className='radioOpt' 
+                   checked={selectFeat===idx} 
+                   onChange={() => handleChange(idx)}>
+              </input>
             <h3 className='radioLabel'>{feature}</h3>
           </label>
         ))

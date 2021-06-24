@@ -108,8 +108,14 @@ function UnequalDonut(props) {
         return acc + curr.value
       }, 0)
       const legendData =  [
-        { key: data[0].key, value: data[0].value, color: '#2cba42', percent: data[0].percent !== undefined? data[0].percent : '' },
-        { key: data[1].key, value: sum1, color: '#124c1b', percent: data[1].percent !== undefined ? data[1].percent : '' }
+        { key: data[0].key, 
+          value: data[0].value, 
+          color: '#2cba42', 
+          percent: data[0].percent !== undefined? data[0].percent : '' },
+        { key: data[1].key, 
+          value: sum1, 
+          color: '#124c1b', 
+          percent: data[1].percent !== undefined ? data[1].percent : '' }
       ]
       setSum(sum1)
       setLegend([...legendData])
@@ -133,8 +139,12 @@ function UnequalDonut(props) {
           dataKey='value'
         />
       </PieChart>
-        <div className='donut__centerTxt'><h5>Total Population</h5><span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span></div>
+        <div className='donut__centerTxt'>
+          <h5>Total Population</h5>
+          <span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span>
+        </div>
       </div>
+      
       <Legend legend={legend} dataType={dataType} />
     </div>
   )

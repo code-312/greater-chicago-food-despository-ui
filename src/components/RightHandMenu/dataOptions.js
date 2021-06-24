@@ -49,7 +49,7 @@ export const dataOptions = {
     desc: 'Text about SNAP data',
     toggleSelect: ['2019', '2020'],
     toggleSelectKeys: ['2019', '2020'],
-    legendLabels: ['2019', '2020'],
+    legendLabels: ['', ''],
     radioSelect: {
       2019: ['0-4', '5-17','18-65', '66+'],
       2020: ['0-4', '5-17','18-65', '66+'],

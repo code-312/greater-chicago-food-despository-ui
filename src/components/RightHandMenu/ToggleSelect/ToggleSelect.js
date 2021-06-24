@@ -17,6 +17,7 @@ function ToggleSelect(props) {
   useEffect(() => {
     props.setToggSelected(props.data[0])
     props.setToggIdxSelected(0)
+
     dispatch(updateSelectedFeat({...selectedFeat, ...{
       selectedfilterSubfeat: props.dataID[0],
       featLabel: props.dataLabel[0]
@@ -27,10 +28,12 @@ function ToggleSelect(props) {
   const optionClick = (select) => {
     props.setToggSelected(props.data[select])
     props.setToggIdxSelected(select)
+
     dispatch(updateSelectedFeat({...selectedFeat, ...{
       selectedfilterSubfeat: props.dataID[select],
       featLabel: props.dataLabel[select]
     }}))
+    
     setActive(active === select ? active : select)
   }
 
