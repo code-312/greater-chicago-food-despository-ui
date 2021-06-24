@@ -67,7 +67,9 @@ const RightHandMenu = () => {
 
           {/* WIC data and Census Data has race type pie chart; others have a different pie chart */}
           <div className='rt__donut'>
-            {(selectedfilterFeat === 'WIC' || selectedfilterFeat === 'race_data') ? <Donut data={pieData} dataType={dataOptions[selectedfilterFeat].dataType} /> : <UnequalDonut data={pieData} dataType={dataOptions[selectedfilterFeat].dataType} />}    
+            {(selectedfilterFeat !== 'snap_data' ?
+              (selectedfilterFeat === 'WIC' || selectedfilterFeat === 'race_data') ? <Donut data={pieData} dataType={dataOptions[selectedfilterFeat].dataType} /> : <UnequalDonut data={pieData} dataType={dataOptions[selectedfilterFeat].dataType} /> : ''
+            )}
           </div>
         </div>
         <div className='rt__footer'>

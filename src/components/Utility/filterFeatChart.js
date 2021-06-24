@@ -2,6 +2,7 @@ export const filterFeatChart = (data, selectedFeat) => {
   const { selectedfilterFeat, selectedfilterSubfeat, selectedCounty, featLabel } = selectedFeat
   let pieData = []
   let reqCountyData = (data && selectedCounty) && data[selectedCounty.id]
+  console.log(reqCountyData)
   if (reqCountyData) {
     switch(selectedfilterFeat) {
       case 'poverty_data':
@@ -35,6 +36,9 @@ export const filterFeatChart = (data, selectedFeat) => {
             }
           }
         }
+        break
+      case 'snap_data':
+        console.log('snap Data')
         break
       default:
         break

@@ -13,7 +13,7 @@ function DatasetSelector(props) {
 	// Radio Options to select feature for data display
 	const featOptions = {
 		featNames: ['Poverty Rates','Food Insecurity','WIC Usage','Snap Usage','Census',],
-		featKeys: ['poverty_data', 'insecurity_data', 'WIC', null, 'race_data']
+		featKeys: ['poverty_data', 'insecurity_data', 'WIC', 'snap_data', 'race_data']
 	}
 
 	const handleSelection = (idx) => {

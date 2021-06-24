@@ -43,5 +43,19 @@ export const dataOptions = {
     toggleSelect: null,
     radioSelect: null,
     dataType: 'percentValue'
+  },
+  snap_data : {
+    title: 'Snap Data',
+    desc: 'Text about SNAP data',
+    toggleSelect: ['2019', '2020'],
+    toggleSelectKeys: ['2019', '2020'],
+    legendLabels: ['2019', '2020'],
+    radioSelect: {
+      2019: ['0-4', '5-17','18-65', '66+'],
+      2020: ['0-4', '5-17','18-65', '66+'],
+      '2019Keys': ['age_0-4', 'age_5-17','age_18-65', 'age_66+'],
+      '2020Keys': ['age_0-4', 'age_5-17','age_18-65', 'age_66+']
+    },
+    dataType: 'value'
   }
 }
