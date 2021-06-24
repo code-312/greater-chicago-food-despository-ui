@@ -22,7 +22,7 @@ function RadioSelect(props) {
 
   useEffect(() => {
     handleChange(0)
-  }, [props.data])
+  },[props.data])
 
   const { alignment } = props
 

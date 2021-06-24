@@ -104,15 +104,15 @@ function UnequalDonut(props) {
   const { data, dataType } = props
   useEffect(() => {
     if (data) {
-      let sum1 = data.reduce(function (a, b) {
-        return a + b.value
+      let sum1 = data.reduce(function (acc, curr) {
+        return acc + curr.value
       }, 0)
-      const l =  [
+      const legendData =  [
         { key: data[0].key, value: data[0].value, color: '#2cba42', percent: data[0].percent !== undefined? data[0].percent : '' },
         { key: data[1].key, value: sum1, color: '#124c1b', percent: data[1].percent !== undefined ? data[1].percent : '' }
       ]
       setSum(sum1)
-      setLegend([...l])
+      setLegend([...legendData])
     }
   },[data])
 

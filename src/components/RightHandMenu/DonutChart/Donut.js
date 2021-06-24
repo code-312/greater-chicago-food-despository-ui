@@ -19,87 +19,86 @@ import Legend from './Legend/Legend'
 const COLORS = ['#2cba42', '#f3ad1c', '#534588', '#ff6833', '#964B00', '#92dbdd', '#ff0000', '#cc27b0']
 
 // Attempt 1: SVG and positioning for labels around the donut chart; default props send by Pie
-const renderLabels = (props) => {
-  const RADIAN = Math.PI / 180
-  const {
-    cx,
-    cy,
-    midAngle,
-    outerRadius,
-    fill,
-    value,
-    payload
-  } = props
+// const renderLabels = (props) => {
+//   const RADIAN = Math.PI / 180
+//   const {
+//     cx,
+//     cy,
+//     midAngle,
+//     outerRadius,
+//     fill,
+//     value,
+//     payload
+//   } = props
 
-  const myCalc = (midAngle, sin, sy) => {
-    if (
-      midAngle <= 10 ||
-      midAngle >= 350 ||
-      (midAngle >= 170 && midAngle <= 190)
-    ) {
-      return sy
-    } else if (midAngle >= 340 || (midAngle >= 180 && midAngle <= 220)) {
-      return cy + (outerRadius + 30) * sin + 20
-    } else if (midAngle <= 20 || (midAngle >= 140 && midAngle <= 180)) {
-      return cy + (outerRadius + 30) * sin - 20
-    } else {
-      return cy + (outerRadius + 30) * sin
-    }
-  }
+//   const myCalc = (midAngle, sin, sy) => {
+//     if (
+//       midAngle <= 10 ||
+//       midAngle >= 350 ||
+//       (midAngle >= 170 && midAngle <= 190)
+//     ) {
+//       return sy
+//     } else if (midAngle >= 340 || (midAngle >= 180 && midAngle <= 220)) {
+//       return cy + (outerRadius + 30) * sin + 20
+//     } else if (midAngle <= 20 || (midAngle >= 140 && midAngle <= 180)) {
+//       return cy + (outerRadius + 30) * sin - 20
+//     } else {
+//       return cy + (outerRadius + 30) * sin
+//     }
+//   }
 
-  const sin = Math.sin(-RADIAN * midAngle)  //convert degree to radian units and find sin value of it
-  const cos = Math.cos(-RADIAN * midAngle)  //convert degree to radian units and find cos value of it
-  const sx = cx + outerRadius * cos         //start coordinates (sx,sy) for line
-  const sy = cy + outerRadius * sin
-  const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190) //mid coordinates (mx,my) for line
-              ? cx + (outerRadius + 30) * cos
-              : sx
-  const my = myCalc(midAngle, sin, sy)
-  const ex = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)  //end coordinates (ex,ey) for line
-              ? mx
-              : mx + (cos >= 0 ? 1 : -1) * 22   //1st and 4th quadrant cos is +ve ; 1st and 2nd quadrant sin is +ve
-  const ey = my
-  const textAnchor = cos >= 0 ? 'end' : 'start' //where to anchor text tag
-  const tx= ex + (cos >= 0 ? 1 : -1) * 12       //coordinates (tx,ty) on which text tag is placed
-  const ty= ey + (sin >= 0 ? 1 : -1) * 16
+//   const sin = Math.sin(-RADIAN * midAngle)  //convert degree to radian units and find sin value of it
+//   const cos = Math.cos(-RADIAN * midAngle)  //convert degree to radian units and find cos value of it
+//   const sx = cx + outerRadius * cos         //start coordinates (sx,sy) for line
+//   const sy = cy + outerRadius * sin
+//   const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190) //mid coordinates (mx,my) for line
+//               ? cx + (outerRadius + 30) * cos
+//               : sx
+//   const my = myCalc(midAngle, sin, sy)
+//   const ex = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)  //end coordinates (ex,ey) for line
+//               ? mx
+//               : mx + (cos >= 0 ? 1 : -1) * 22   //1st and 4th quadrant cos is +ve ; 1st and 2nd quadrant sin is +ve
+//   const ey = my
+//   const textAnchor = cos >= 0 ? 'end' : 'start' //where to anchor text tag
+//   const tx= ex + (cos >= 0 ? 1 : -1) * 12       //coordinates (tx,ty) on which text tag is placed
+//   const ty= ey + (sin >= 0 ? 1 : -1) * 16
 
-  return (
-    <g>
-      {/* centers text in middle of pie chart */}
-      {/* <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-        {payload.name}
-        </text> */}
+//   return (
+//     <g>
+//       {/* centers text in middle of pie chart */}
+//       {/* <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+//         {payload.name}
+//         </text> */}
 
-      {/* line from pie chart to label name */}
-      <path
-        d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-        stroke={fill}
-        fill='none'
-      />
+//       {/* line from pie chart to label name */}
+//       <path
+//         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+//         stroke={fill}
+//         fill='none'
+//       />
 
-      {/* Circle at the tip of line */}
-      <circle cx={ex} cy={ey} r={3} fill={fill} stroke='none' />
+//       {/* Circle at the tip of line */}
+//       <circle cx={ex} cy={ey} r={3} fill={fill} stroke='none' />
 
-      {/* Label name/ text at end tip of line from pie chart */}
-      <text
-        textLength='30'
-        x={tx}
-        y={ty}
-        textAnchor={textAnchor}
-      >
-        <tspan 
-          fill='#1c752a'
-          x={tx}
-          y={ty} >{`${payload.payload.key}`}</tspan>
-        <tspan
-          className='tspan__val'
-          x={tx + (cos >= 0 ? -1 : 1) * 6}
-          y={ty + 10}>{payload.payload.percent ? `${value} (${payload.payload.percent}%)` : value}</tspan>
-      </text>
-    </g>
-  )
-}
-
+//       {/* Label name/ text at end tip of line from pie chart */}
+//       <text
+//         textLength='30'
+//         x={tx}
+//         y={ty}
+//         textAnchor={textAnchor}
+//       >
+//         <tspan 
+//           fill='#1c752a'
+//           x={tx}
+//           y={ty} >{`${payload.payload.key}`}</tspan>
+//         <tspan
+//           className='tspan__val'
+//           x={tx + (cos >= 0 ? -1 : 1) * 6}
+//           y={ty + 10}>{payload.payload.percent ? `${value} (${payload.payload.percent}%)` : value}</tspan>
+//       </text>
+//     </g>
+//   )
+// }
 
 // Attempt 2: labels on hover
 const renderLabelonHover = (props) => {
@@ -226,13 +225,13 @@ function Donut(props) {
   const { data, dataType } = props
 
   useEffect(() => {
-    const l = []
-    let sum1 = data.reduce(function (a, b) {
-      return a + b.value
+    const legendData = []
+    let sum1 = data.reduce(function (acc, curr) {
+      return acc + curr.value
     }, 0)
-    data.map((entry, index) => (l.push({ key : entry.key, color : COLORS[index % COLORS.length], value : entry.value, percent: entry.percent !== undefined ? entry.percent : null  })))
+    data.map((entry, index) => (legendData.push({ key : entry.key, color : COLORS[index % COLORS.length], value : entry.value, percent: entry.percent !== undefined ? entry.percent : null  })))
     setSum(sum1)
-    setLegend( [...l])
+    setLegend( [...legendData])
   },[data])
 
   return (
