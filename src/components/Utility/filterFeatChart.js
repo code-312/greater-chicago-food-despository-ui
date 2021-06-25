@@ -96,12 +96,12 @@ const wicLegend = {
   race_multiracial: 'Two+'
 }
 
-const snapRaceLegend = {
-  race_white: 'White',
-  race_asian: 'Asian',
-  race_black: 'Black',
-  race_hispaniclatino_total: 'Hispanic/Latino',
-  race_native: 'Native',
-  race_pacific: 'Pacific',
-  race_unknown: 'Unknown'
-}
+// const snapRaceLegend = {
+//   race_white: 'White',
+//   race_asian: 'Asian',
+//   race_black: 'Black',
+//   race_hispaniclatino_total: 'Hispanic/Latino',
+//   race_native: 'Native',
+//   race_pacific: 'Pacific',
+//   race_unknown: 'Unknown'
+// }

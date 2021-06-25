@@ -23,6 +23,7 @@ function ToggleSelect(props) {
       featLabel: props.dataLabel[0]
     }}))
     setActive(0)
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   },[props.data])
 
   const optionClick = (select) => {

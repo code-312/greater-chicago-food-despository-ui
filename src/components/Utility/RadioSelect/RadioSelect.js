@@ -12,7 +12,7 @@ function RadioSelect(props) {
 
   if(!props.handleChange) console.error('RadioSelect is missing an onChange in its props. Make sure this is on purpose.')
 
-  const handleChange = (idx) => {
+  const onOptionChange = (idx) => {
     setFeat(idx)
     if(!props.handleChange) {
       return
@@ -21,7 +21,8 @@ function RadioSelect(props) {
   }
 
   useEffect(() => {
-    handleChange(0)
+    onOptionChange(0)
+   //eslint-disable-next-line react-hooks/exhaustive-deps
   },[props.data])
 
   const { alignment } = props
@@ -36,7 +37,7 @@ function RadioSelect(props) {
                    name={feature} 
                    className='radioOpt' 
                    checked={selectFeat===idx} 
-                   onChange={() => handleChange(idx)}>
+                   onChange={() => onOptionChange(idx)}>
               </input>
             <h3 className='radioLabel'>{feature}</h3>
           </label>
