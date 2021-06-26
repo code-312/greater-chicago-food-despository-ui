@@ -65,7 +65,19 @@ export const filterFeatChart = (data, selectedFeat) => {
         break
 
       case 'snap_data':
-        console.log('snap Data')
+        if (selectedfilterSubfeat) {
+          const subFeat1 = selectedfilterSubfeat.slice(0,4)
+          const subFeat2 = selectedfilterSubfeat.slice(4)
+          if (subFeat1 && subFeat2) {
+            for (const itemKey in snapRaceLegend) {
+              pieData.push({ key: snapRaceLegend[itemKey],
+                            value: reqCountyData.snap_data[subFeat1][subFeat2][itemKey]
+                          })
+            }
+          }
+        } else {
+          pieData= []
+        }
         break
         
       default:
@@ -96,12 +108,12 @@ const wicLegend = {
   race_multiracial: 'Two+'
 }
 
-// const snapRaceLegend = {
-//   race_white: 'White',
-//   race_asian: 'Asian',
-//   race_black: 'Black',
-//   race_hispaniclatino_total: 'Hispanic/Latino',
-//   race_native: 'Native',
-//   race_pacific: 'Pacific',
-//   race_unknown: 'Unknown'
-// }
+const snapRaceLegend = {
+  race_white: 'White',
+  race_asian: 'Asian',
+  race_black: 'Black',
+  race_hispaniclatino: 'Hispanic/Latino',
+  race_native: 'Native',
+  race_pacific: 'Pacific',
+  race_unknown: 'Unknown'
+}
