@@ -4,6 +4,7 @@ import ReactMapGL, { NavigationControl } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateVP } from './../redux/viewportReducer';
 import { updateFilters } from './../redux/filterReducer';
+import {MapExtraDataMenu} from "../components/ExtraDataMenu/ExtraDataMenu"
 
 import CountyLayer from './CountyLayer';
 import ZipcodeLayer from './ZipcodeLayer';
@@ -109,6 +110,13 @@ const Map = (props) => {
         
         {/*Tool-tip*/}
         <RenderToolTip />
+        <MapExtraDataMenu
+          title={"Show data for"}
+          options={["option1", "option2", "option3"]}
+          onChange={(selectedValue) => {
+              console.log(selectedValue);
+          }}
+        />
     
         {/* Zoom +/- buttons */}
         <div style={navControlStyles}>

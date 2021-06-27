@@ -11,6 +11,14 @@
     min-width: 5rem;
 }
 
+#extra-data-menu .radioLabel {
+    font: normal normal normal 0.8125rem/1.0625rem futura-pt;
+}
+#extra-data-menu .radioSel-column {
+    margin-left: -1rem; 
+}
+
+
 .side-menu-title {
     font-size: 0.9rem;
 }

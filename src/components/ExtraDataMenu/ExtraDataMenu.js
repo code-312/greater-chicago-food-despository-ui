@@ -14,7 +14,7 @@ export function MapExtraDataMenu({title = "Show data for:", options}) {
 }
 export default function ExtraDataMenu({title = "Title", options, onChange}) {
   return (
-    <div className="side-menu shadow">
+    <div id="extra-data-menu" className="side-menu shadow">
       <h5 className="side-menu-title">{title + ":"}</h5>
       <RadioSelect
         data={options}
