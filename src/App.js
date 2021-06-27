@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { countyFetch } from './redux/countyReducer';
 import { countyDataFetch } from './redux/countyDataReducer';
@@ -11,6 +11,8 @@ import LeftHandMenu from './components/LeftHandMenu/LeftHandMenu';
 
 import './App.css'
 
+import './App.css';
+
 const App = () => {
   const dispatch = useDispatch() 
   //countyFetch and zipFetch are both async thunks from countyReducer.js and zipReducer.js, respectively
@@ -22,11 +24,14 @@ const App = () => {
     dispatch(zipDataFetch());
   }, [])
 
+  const [selectedCounty, setSelectedCounty] = useState('')
+
+  console.log('app', selectedCounty)
+
     return (
       <div className="main">
         <div className="container-fluid">
           <div className="row">
-
             {/*Column 1: Left-hand menu (Zoom Control)*/}
             <nav className="menu col-2 pl-0 pr-0">
                 <LeftHandMenu />
@@ -34,7 +39,7 @@ const App = () => {
 
             {/*Column 2: MapBox map */}
             <div className="col pl-0 pr-0">
-              <Map />
+              <Map setSelectedCounty={setSelectedCounty}/>
             </div>
 
             {/* Column 3: Right-hand menu */}

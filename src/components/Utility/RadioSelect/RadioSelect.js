@@ -13,16 +13,16 @@ function RadioSelect(props) {
     setFeat(idx)
   }
   
-  if(!props.handleChange) console.error('RadioSelect is missing an onChange in its props. Make sure this is on purpose.');
+  if(!props.handleChange) console.error('RadioSelect is missing an onChange in its props. Make sure this is on purpose.')
 
   const handleChange = (idx) => {
     if(!props.handleChange) {
       return
-    };
-    props.handleChange(idx);
+    }
+    props.handleChange(idx)
   }
 
-  const { alignment } = props; 
+  const { alignment } = props
 
   return (
     <div className={`radioSel-${alignment}`}>

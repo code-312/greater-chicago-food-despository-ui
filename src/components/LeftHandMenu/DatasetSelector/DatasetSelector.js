@@ -13,9 +13,8 @@ function DatasetSelector(props) {
 		'Census',
 	];
 
-	// const { options } = props
 	const handleSelection = (idx) => {
-		console.log(`Selected: ${options[idx]}`);
+		// Handle selection in here.
 	};
 
 	/* For later - When state changes, update the store */
@@ -24,7 +23,7 @@ function DatasetSelector(props) {
 	/* Don't load this bar if there are no dataset options */
 	return !options ? null : (
 		<div id="data-selector">
-			<h3>Show data for:</h3>
+			<h3 id="data-selector-title">Show data for:</h3>
 			<RadioSelect
 				data={options}
 				handleChange={handleSelection}
