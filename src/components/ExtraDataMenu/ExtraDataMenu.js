@@ -8,18 +8,9 @@ export function MapExtraDataMenu({title = "Show data for:", options}) {
   function handleSelection(optionSelected) {
     //TODO dispatch something
   }
-
-  if (isExtraDataShowing) {
-    return (
-      <ExtraDataMenu
-        title={title}
-        options={options}
-        onChange={handleSelection}
-      />
-    );
-  }
-
-  return null;
+  return (
+    <ExtraDataMenu title={title} options={options} onChange={handleSelection} />
+  );
 }
 export default function ExtraDataMenu({title = "Title", options, onChange}) {
   return (
