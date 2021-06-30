@@ -22,8 +22,8 @@ const CountyLevel = () => {
       {getCountyAndColorGroup({
         countyAndMetricGroup: retrieveCountyAndMetricGroup(),
         colorKeyword: "green",
-        maxBrightness: 50,
-        minBrightness: 0,
+        maxLightness: 70,
+        minLightness: 20,
       }).map((countyAndColor) => (
         <Layer
           {...{...county, id: countyAndColor.county}}
