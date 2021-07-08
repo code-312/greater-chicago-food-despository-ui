@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateVP } from '../redux/viewportReducer';
-import {updateViewportToFitBounds} from '../mapbox/Util';
+import { updateVP } from '../../redux/viewportReducer';
+import {updateViewportToFitBounds} from '../../mapbox/Util';
 
 /**
  * COMPONENT: ZoomToBoundsMenu
@@ -53,7 +53,7 @@ const ZoomToBoundsMenu = () => {
     // Returns a button to re-orientate the map around the state, followed by an alphabetized 
     // list of buttons that re-orientate the map around a county
     return (
-        <div>
+        <div id="county-list">
             <ZoomToBoundsButton 
                 key="Illinois" 
                 keyValue="Illinois"
