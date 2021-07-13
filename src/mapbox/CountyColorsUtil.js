@@ -23,8 +23,18 @@ export function getCountyAndColorGroup({
   const allMetricValues = countyAndMetricGroup.map(
     (countyAndMetric) => countyAndMetric.metric,
   );
-  const maxMetricValue = Math.max(...allMetricValues);
-  const minMetricValue = Math.min(...allMetricValues);
+  const maxxes = [10, 30, 60, 90];
+  const maxMetricValue = [10, 30, 60, 90].length;
+
+  const minMetricValue = 0;
+  const categoryIndex = getValueCategoryList({
+    values: countyAndMetricGroup.map(
+      (countyAndMetric) => countyAndMetric.metric,
+    ),
+    categoryMaximumValues: [25, 50, 75, 200],
+    min: 0,
+  });
+
   return countyAndMetricGroup.map((countyAndMetric, index) => {
     return {
       county: countyAndMetric.county,
@@ -34,7 +44,7 @@ export function getCountyAndColorGroup({
           hslColorParamaters[0],
           100,
           getScaledLightnessLevel({
-            value: countyAndMetric.metric,
+            value: categoryIndex[index],
             maxValue: maxMetricValue,
             minValue: minMetricValue,
             maxLightness,
@@ -50,6 +60,45 @@ export function getCountyAndColorGroup({
 
  <Source id="counties" type="geojson" data={illinois_counties.counties}>
 */
+export function getCategoryDictionary({
+  categoryMaximumValues,
+  //TODO change to new list
+  valueDictionary,
+}) {
+  const originalValues = Object.values(valueDictionary);
+  const originalKeys = Object.keys(valueDictionary);
+  const categoryValue = getValueCategoryList({
+    values: originalValues,
+    categoryMaximumValues,
+  });
+
+  const newDictionaryWithCategoriesAsValues = originalKeys.reduce(
+    (categoryDictionary, key, index) => {
+      categoryDictionary[key] = categoryValue[index];
+      return categoryDictionary;
+    },
+    {},
+  );
+  return newDictionaryWithCategoriesAsValues;
+}
+export function getValueCategoryList({
+  values,
+  categoryMaximumValues,
+  minimumValue = 0, //TODO add minimum so it doesn't start at 0
+}) {
+  const sortedCategoryMaximums = categoryMaximumValues
+    .slice(0)
+    .sort((a, b) => a - b);
+  return values.map((value) => {
+    for (var i = 0; i < sortedCategoryMaximums.length; i++) {
+      if (value <= sortedCategoryMaximums[i]) {
+        return i;
+      }
+    }
+    throw Error(`Value: ${value} is not in any category`);
+  });
+}
+
 export const countyAndMetricGroup = [
   //random sample data
   {county: "Hardin", metric: 0},
