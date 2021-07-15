@@ -4,8 +4,8 @@ import React, {useMemo} from "react";
 
 import {county, selectedCounty} from "./LayerStyles";
 import {
-  getCountyAndColorGroup,
-  retrieveCountyAndMetricGroup,
+  getCountyAndColorDictionary,
+  retrieveCountyAndMetricDictionary,
 } from "./CountyColorsUtil";
 
 const CountyLevel = () => {
@@ -15,24 +15,24 @@ const CountyLevel = () => {
    */
   const filters = useSelector((state) => state.filters);
   const illinois_counties = useSelector((state) => state.illinois_counties);
-
+    const countyColorDictionary= getCountyAndColorDictionary({
+        countyValueDictionary: retrieveCountyAndMetricDictionary(),
+        categoryMaximumValues: [25, 50, 75, 200],
+        colorsForCategories: ["#D8F9DB", "#7EC484", "#48944D", "#237528"],
+        minimumCategoryValue: 0,
+    })
   return (
     <Source id="counties" type="geojson" data={illinois_counties.counties}>
       {/* Use useMemo if this calculation slows down the app */}
-      {getCountyAndColorGroup({
-        countyAndMetricGroup: retrieveCountyAndMetricGroup(),
-        colorKeyword: "green",
-        maxLightness: 60,
-        minLightness: 10,
-      }).map((countyAndColor) => (
+      {Object.keys(countyColorDictionary).map((countyName) => (
         <Layer
-          {...{...county, id: countyAndColor.county}}
-          key={countyAndColor.county}
+          {...{...county, id: countyName}}
+          key={countyName}
           paint={{
             ...county.paint,
-            "fill-color": countyAndColor.color,
+            "fill-color": countyColorDictionary[countyName],
           }}
-          filter={["in", "NAME", countyAndColor.county]}
+          filter={["in", "NAME", countyName]}
         />
       ))}
 

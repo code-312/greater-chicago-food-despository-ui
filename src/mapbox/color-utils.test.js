@@ -4,7 +4,7 @@ import {
   getValueCategoryList,
 } from "./CountyColorsUtil";
 
-test.only("convert data to categories", () => {
+test("convert data to categories", () => {
   expect(
     getCategoryDictionary({
       categoryMaximumValues: [2, 4.5, 10],
