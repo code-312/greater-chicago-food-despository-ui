@@ -1,5 +1,4 @@
 //es6 import didn't work for me
-var convert = require("color-convert");
 export function getCountyAndColorDictionary({
   countyValueDictionary,
   colorsForCategories,
