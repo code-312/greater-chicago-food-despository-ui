@@ -1,4 +1,3 @@
-//es6 import didn't work for me
 export function getCountyAndColorDictionary({
   countyValueDictionary,
   colorsForCategories,
@@ -14,6 +13,7 @@ export function getCountyAndColorDictionary({
     categoryDictionary: countyCategoryDictionary,
   });
 }
+
 export function getColorDictionary({colors, categoryDictionary}) {
   const categories = Object.values(categoryDictionary);
   const originalKeys = Object.keys(categoryDictionary);
