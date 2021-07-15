@@ -11,7 +11,8 @@ import RenderToolTip from '../components/RenderToolTip';
 import { navControlStyles } from './NavigationControlsStyles';
 
 
-const Map = () => {
+
+const Map = (props) => {
   const dispatch = useDispatch()
   /**
    * illinois_counties = County GeoJSON and county level data.
@@ -46,12 +47,12 @@ const Map = () => {
     const { features, srcEvent: {offsetX, offsetY} } = event
     
     // Select the feature and corresponding countyId from the list of features if one exists
-    const countyFeature = features && features.find(f => f.layer.id === 'county');
-    const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode');
+    const countyFeature = features && features.find(f => f.layer.id === 'county')
+    const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode')
 
     //this object is more condensed and contains only non-serialized values -  for Redux
-    const currentCounty = countyFeature ? countyFeature.properties : null;
-    const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null;
+    const currentCounty = countyFeature ? countyFeature.properties : null
+    const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null
 
     // Given the currently hovered features, determine the zipcode and county filters:
     let zipcodeFilter = ''
@@ -75,7 +76,20 @@ const Map = () => {
     }));
   };
 
-    // console.log('data', zip_data.zipData, county_data.countyData)
+  const onClick = event => {
+    // Extract the list of features and x,y coords from the event
+    const { features } = event
+
+    // Select the feature and corresponding countyId from the list of features if one exists
+    const countyFeature = features && features.find(f => f.layer.id === 'county')
+    const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode')
+
+    //this object is more condensed and contains only non-serialized values -  for Redux
+    const currentCounty = countyFeature ? countyFeature.properties : null
+    const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null
+    props.setSelectedCounty(currentCounty)
+  }
+
     return (
       <ReactMapGL
       {...viewport}
@@ -84,6 +98,7 @@ const Map = () => {
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
       onViewportChange={handleViewportChange}
       onHover={onHover}
+      onClick={onClick}
       maxZoom={15}
       minZoom={5.5} >
 

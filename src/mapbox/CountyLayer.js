@@ -1,8 +1,8 @@
-import {Source, Layer} from "react-map-gl";
-import {useSelector} from "react-redux";
-import React, {useMemo} from "react";
+import React from 'react'
+import {Source, Layer} from 'react-map-gl';
+import { useSelector } from 'react-redux';
+import {county, selectedCounty} from './LayerStyles';
 
-import {county, selectedCounty} from "./LayerStyles";
 import {
   getCountyAndColorDictionary,
   retrieveCountyAndMetricDictionary,
@@ -13,8 +13,8 @@ const CountyLevel = () => {
    * illinois_counties = County GeoJSON and county level data.
    * filter = hovered/highlight zipcode/county
    */
-  const filters = useSelector((state) => state.filters);
-  const illinois_counties = useSelector((state) => state.illinois_counties);
+  const filters = useSelector(state => state.filters)
+  const illinois_counties = useSelector(state => state.illinois_counties)
     const countyColorDictionary= getCountyAndColorDictionary({
         countyValueDictionary: retrieveCountyAndMetricDictionary(),
         categoryMaximumValues: [25, 50, 75, 200],
