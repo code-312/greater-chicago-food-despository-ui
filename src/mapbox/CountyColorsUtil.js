@@ -34,23 +34,32 @@ export function getCountyAndColorGroup({
     categoryMaximumValues: [25, 50, 75, 200],
     min: 0,
   });
+  /*  const getHexColor = (categoryIndex) => {
+    return (
+      "#" +
+      convert.hsl.hex(
+        hslColorParamaters[0],
+        100,
+        getScaledLightnessLevel({
+          value: categoryIndex,
+          maxValue: maxMetricValue,
+          minValue: minMetricValue,
+          maxLightness,
+          minLightness,
+        }),
+      )
+    );
+  };*/
+
+  const givenColors = ["#D8F9DB", "#7EC484", "#48944D", "#237528"];
+  const getHexColor = (categoryIndex) => {
+    return givenColors[categoryIndex];
+  };
 
   return countyAndMetricGroup.map((countyAndMetric, index) => {
     return {
       county: countyAndMetric.county,
-      color:
-        "#" +
-        convert.hsl.hex(
-          hslColorParamaters[0],
-          100,
-          getScaledLightnessLevel({
-            value: categoryIndex[index],
-            maxValue: maxMetricValue,
-            minValue: minMetricValue,
-            maxLightness,
-            minLightness,
-          }),
-        ),
+      color: getHexColor(categoryIndex[index]),
     };
   });
 }
@@ -74,8 +83,7 @@ export function getCategoryDictionary({
 
   const newDictionaryWithCategoriesAsValues = originalKeys.reduce(
     (categoryDictionary, key, index) => {
-      categoryDictionary[key] = categoryValue[index];
-      return categoryDictionary;
+      return {[key]: categoryValue[index], ...categoryDictionary};
     },
     {},
   );
