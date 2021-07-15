@@ -39,7 +39,7 @@ export function getCategoryDictionary({
 export function getValueCategoryList({
   values,
   categoryMaximumValues,
-  minimumValue = 0, //TODO add minimum so it doesn't start at 0
+  minimumValue = 0, 
 }) {
   const sortedCategoryMaximums = categoryMaximumValues
     .slice(0) //clone list
