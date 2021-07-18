@@ -13,25 +13,28 @@ const CountyLevel = () => {
   const countyData = useSelector(state => state.county_data).countyData;
 
   /**
-   * Calling getPovertyPercentages will return an ordered array
-   * e.g. [[countyName1, lowestPovertyPercentage], [countyName2, nextLowestPovertyPercentage]]
-   * This can be used on a choropleth layer for styling counties by color based on this metric
+   * Calling getPovertyPercentages will return an ordered array county objects.
+   * e.g. [{countyName1: lowestPovertyPercentage}, {countyName2: nextLowestPovertyPercentage}]
+   * This can be used on a choropleth layer for styling counties by color based on this metric.
   */
   const getPovertyPercentages = (countyData) => {
     console.log(countyData);
     const counties = [];
     const FIPS = Object.keys(countyData);
     FIPS.forEach((county) => {
-      const currentCounty = [];
-      currentCounty.push(countyData[county].NAME.split(' ')[0]);
-      currentCounty.push(countyData[county].poverty_data.poverty_percentages.poverty_population_poverty);
+      const currentCounty = {};
+      const name = countyData[county].NAME;
+      currentCounty.name = name.slice(0, name.indexOf(" County"));
+      currentCounty.povertyPercentage = countyData[county].poverty_data.poverty_percentages.poverty_population_poverty;
       counties.push(currentCounty);
     })
 
     // sort counties by total poverty percentage
-    counties.sort((a, b) => a[1] - b[1]);
+    counties.sort((a, b) => a.povertyPercentage - b.povertyPercentage);
     return counties;
   }
+
+  console.log(getPovertyPercentages(countyData))
 
   return (
     <Source id="counties" type="geojson" data={illinois_counties.counties}>
