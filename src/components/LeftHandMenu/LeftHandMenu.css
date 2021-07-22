@@ -1,0 +1,11 @@
+.left-menu {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.left-menu ul {
+  list-style-type: none;
+}

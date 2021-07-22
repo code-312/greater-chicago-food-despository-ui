@@ -4,6 +4,7 @@ import ReactMapGL, { NavigationControl } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateVP } from './../redux/viewportReducer';
 import { updateFilters } from './../redux/filterReducer';
+import { updateSelectedFeat } from '../redux/selectedFeatReducer';
 
 import CountyLayer from './CountyLayer';
 import ZipcodeLayer from './ZipcodeLayer';
@@ -12,7 +13,7 @@ import { navControlStyles } from './NavigationControlsStyles';
 
 
 
-const Map = (props) => {
+const Map = () => {
   const dispatch = useDispatch()
   /**
    * illinois_counties = County GeoJSON and county level data.
@@ -22,8 +23,7 @@ const Map = (props) => {
   const viewport = useSelector(state => state.viewport)
   const illinois_counties = useSelector(state => state.illinois_counties)
   const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
-  const county_data = useSelector(state => state.county_data)
-  const zip_data = useSelector(state => state.zip_data)
+  const selectedFeat = useSelector(state => state.selectedFeat)
   
 
   //deletes are temporary fix to non-serialized values in Redux store
@@ -85,9 +85,16 @@ const Map = (props) => {
     const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode')
 
     //this object is more condensed and contains only non-serialized values -  for Redux
-    const currentCounty = countyFeature ? countyFeature.properties : null
+    const currentCounty = countyFeature ? {
+                                            name: countyFeature.properties.NAME, 
+                                            id: countyFeature.properties.STATE + countyFeature.properties.COUNTY
+                                          }  : null
     const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null
-    props.setSelectedCounty(currentCounty)
+    dispatch(updateSelectedFeat({...selectedFeat, ...{
+      selectedCounty: currentCounty,
+      selectedZipcode: currentZipCode
+    }}
+    ))
   }
 
     return (

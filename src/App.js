@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
+
 import { countyFetch } from './redux/countyReducer';
 import { countyDataFetch } from './redux/countyDataReducer';
 import { zipFetch } from './redux/zipReducer';
 import { zipDataFetch } from './redux/zipCodeDataReducer';
-
 import RightHandMenu from './components/RightHandMenu/RightHandMenu';
 import Map from './mapbox/Map'
 import LeftHandMenu from './components/LeftHandMenu/LeftHandMenu';
 
 import './App.css'
-
-import './App.css';
 
 const App = () => {
   const dispatch = useDispatch() 
@@ -22,26 +20,20 @@ const App = () => {
     dispatch(zipFetch());
     dispatch(countyDataFetch());
     dispatch(zipDataFetch());
-  }, [])
-
-  const [selectedCounty, setSelectedCounty] = useState('')
-
-  console.log('app', selectedCounty)
+  })
 
     return (
       <div className="main">
         <div className="container-fluid">
           <div className="row">
             {/*Column 1: Left-hand menu (Zoom Control)*/}
-            <nav className="menu col-2 pl-0 pr-0">
+            <nav className="LeftMenuWrapper">
                 <LeftHandMenu />
             </nav>
-
             {/*Column 2: MapBox map */}
             <div className="col pl-0 pr-0">
-              <Map setSelectedCounty={setSelectedCounty}/>
+              <Map />
             </div>
-
             {/* Column 3: Right-hand menu */}
             <nav className="rtMenuWrapper">
               <RightHandMenu />
