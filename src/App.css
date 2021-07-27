@@ -17,29 +17,6 @@
   flex-direction: row;
 }
 
-/* County name list buttons effects */
-nav button {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    color: #059713; 
-    background: #fff;
-    border-bottom: 1px solid #F3AD1C;
-    border-right: none;
-    border-top: none;
-    border-left: none;
-    padding: 20px 0 20px 25px;
-    width: 100%;
-}
-
-nav button:hover {
-    background-color: #F3F2D8;
-}
-
-nav button:focus {
-    background-color: #F3F2D8;
-}
-
 /****Right and Left Hand Menu Styles (other than font styles)****/
 .rtMenuWrapper, .leftMenuWrapper {
   background-color:#e7e7e7;

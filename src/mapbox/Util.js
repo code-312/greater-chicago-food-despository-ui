@@ -19,6 +19,6 @@ export const updateViewportToFitBounds = (currentViewport, feature) => {
     return {
       longitude: longitude,
       latitude: latitude,
-      zoom: zoom
+      zoom: zoom - 2
     };
 }

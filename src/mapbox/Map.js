@@ -24,6 +24,7 @@ const Map = () => {
   const illinois_counties = useSelector(state => state.illinois_counties)
   const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
   const selectedFeat = useSelector(state => state.selectedFeat)
+  const filters = useSelector(state => state.filters)
   
 
   //deletes are temporary fix to non-serialized values in Redux store
@@ -95,6 +96,9 @@ const Map = () => {
       selectedZipcode: currentZipCode
     }}
     ))
+    dispatch(updateFilters({...filters,
+      selectedCounty: ['in', 'COUNTY', countyFeature ? countyFeature.properties.COUNTY: '']
+    }));
   }
 
     return (
