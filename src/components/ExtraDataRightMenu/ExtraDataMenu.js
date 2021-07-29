@@ -78,6 +78,7 @@ function ExtraDataMenu(props) {
 		// 	selectedfilterSubfeat: null,
 		// 	featLabel: null
 		// }}))
+    console.log(idx)
 	}
 
 	/* Don't load this bar if there are no dataset options */

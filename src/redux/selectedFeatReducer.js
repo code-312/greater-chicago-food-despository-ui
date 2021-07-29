@@ -5,6 +5,7 @@ export const initialFeatState = {
     selectedZipcode: null,
     selectedfilterFeat: 'poverty_data',
     selectedfilterSubfeat: 'poverty_population_total',
+    selectedExtraDataFeat: null,
     featLabel: null
 }
 
