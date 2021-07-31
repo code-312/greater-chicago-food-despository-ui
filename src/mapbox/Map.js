@@ -9,7 +9,6 @@ import { updateSelectedFeat } from '../redux/selectedFeatReducer';
 import CountyLayer from './CountyLayer';
 import ZipcodeLayer from './ZipcodeLayer';
 import RenderToolTip from '../components/RenderToolTip';
-import ExtraDataMenu from '../components/ExtraDataRightMenu/ExtraDataMenu';
 import { navControlStyles } from './NavigationControlsStyles';
 
 
@@ -116,7 +115,6 @@ const Map = () => {
         
         {/*Tool-tip*/}
         <RenderToolTip />
-        <ExtraDataMenu />
         {/* Zoom +/- buttons */}
         <div style={navControlStyles}>
           <NavigationControl showCompass={false} />

@@ -2,7 +2,6 @@ export const filterFeatChart = (data, selectedFeat) => {
   const { selectedfilterFeat, selectedfilterSubfeat, selectedCounty, featLabel } = selectedFeat
   let pieData = []
   let reqCountyData = (data && selectedCounty) && data[selectedCounty.id]
-  
   if (reqCountyData) {
 
     switch(selectedfilterFeat) {

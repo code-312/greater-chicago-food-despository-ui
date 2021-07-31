@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import RadioSelect2 from '../Utility/RadioSelect/RadioSelect2'
+import RadioSelect from '../Utility/RadioSelect/RadioSelect'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { updateSelectedFeat } from  '../../redux/selectedFeatReducer'
+import { updateExtraDataFeat } from  '../../redux/extraDataMenuReducer'
 
 import './ExtraDataMenu.css'
 
 function ExtraDataMenu(props) {
-  const [radioData, setRadioData] = useState(null)
 	const dispatch = useDispatch()
 	const selectedFeat = useSelector(state => state.selectedFeat)
-  const { selectedfilterFeat, selectedfilterSubfeat } = selectedFeat
+  const { selectedfilterFeat, selectedfilterSubfeat, selectedCounty } = selectedFeat
+
+  const [radioData, setRadioData] = useState(null)
 
   useEffect(() => {
     	// Radio Options to select feature for data display
@@ -69,29 +70,25 @@ function ExtraDataMenu(props) {
         setRadioData(null)
         break
     }
-  },[selectedfilterFeat, selectedfilterSubfeat])
+  },[selectedfilterFeat,selectedfilterSubfeat])
 
 	const handleSelection = (idx) => {
-		// Handle selection in here.
-		// dispatch(updateSelectedFeat({...selectedFeat, ...{
-		// 	selectedfilterFeat: featOptions.featKeys[idx],
-		// 	selectedfilterSubfeat: null,
-		// 	featLabel: null
-		// }}))
-    console.log(idx)
+		dispatch(updateExtraDataFeat({
+			selectedExtraDataFeat: radioData[Object.keys(radioData)[idx]]
+		}))
 	}
 
 	/* Don't load this bar if there are no dataset options */
-	return !radioData ? '' : (
+	return (radioData && selectedCounty) ? (
 		<div className="extraData-wrapper">
 			<h3 className="extraData-title">Show data for:</h3>
-			<RadioSelect2
+			<RadioSelect
 				data={Object.keys(radioData)}
 				handleChange={handleSelection}
 				alignment={'column'}
 			/>
 		</div>
-	)
+	) : ''
 }
 
 export default ExtraDataMenu
