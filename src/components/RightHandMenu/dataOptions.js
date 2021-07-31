@@ -49,12 +49,12 @@ export const dataOptions = {
     desc: 'Text about SNAP data',
     toggleSelect: ['2019', '2020'],
     toggleSelectKeys: ['2019', '2020'],
-    legendLabels: ['', ''],
+    legendLabels: ['2019', '2020'],
     radioSelect: {
-      2019: ['0-4', '5-17','18-65', '66+'],
-      2020: ['0-4', '5-17','18-65', '66+'],
-      '2019Keys': ['age_0-4', 'age_5-17','age_18-65', 'age_66+'],
-      '2020Keys': ['age_0-4', 'age_5-17','age_18-65', 'age_66+']
+      2019: ['Age: 0-4', 'Age: 5-17','Age: 18-65', 'Age: 66+'],
+      2020: ['Age: 0-4', 'Age: 5-17','Age: 18-65', 'Age: 66+'],
+      '2019Keys': ['2019age_0-4', '2019age_5-17','2019age_18-65', '2019age_66+'],
+      '2020Keys': ['2020age_0-4', '2020age_5-17','2020age_18-65', '2020age_66+']
     },
     dataType: 'value'
   }
