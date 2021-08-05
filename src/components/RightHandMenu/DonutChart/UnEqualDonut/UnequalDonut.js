@@ -5,14 +5,14 @@ import './UnequalDonut.css'
 import Legend from '../Legend/Legend'
 
 // Mock Race Data; Similar Data should come in from Redux Slice
-const data = [
-  { key: 'Food Insecurity', value: 251 },
-  { key: 'Total Population', value: (334-251) }
-]
+// const data = [
+//   { key: 'Food Insecurity', value: 251 },
+//   { key: 'Total Population', value: (334-251) }
+// ]
 
 // SVG and positioning for labels around the donut chart; default props send by Pie
 // Mostly same as Donut.js; See Donut.js
-const renderActiveShape = (props) => {
+const renderLabels = (props) => {
   const RADIAN = Math.PI / 180;
   const {
     cx,
@@ -23,41 +23,23 @@ const renderActiveShape = (props) => {
     innerRadius,
     outerRadius,
     value,
-    name
+    payload
   } = props
-
-  const myCalc = (midAngle, sin, sy) => {
-    if (
-      midAngle <= 10 ||
-      midAngle >= 350 ||
-      (midAngle >= 170 && midAngle <= 190)
-    ) {
-      return sy
-    } else if (midAngle >= 340 || (midAngle >= 180 && midAngle <= 220)) {
-      return cy + (outerRadius + 30) * sin + 20
-    } else if (midAngle <= 20 || (midAngle >= 140 && midAngle <= 180)) {
-      return cy + (outerRadius + 30) * sin - 20
-    } else {
-      return cy + (outerRadius + 30) * sin
-    }
-  }
 
   const sin = Math.sin(-RADIAN * midAngle)
   const cos = Math.cos(-RADIAN * midAngle)
   const sx = cx + outerRadius * cos
   const sy = cy + outerRadius * sin
-  const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
-              ? cx + (outerRadius + 30) * cos
-              : sx
-  const my = myCalc(midAngle, sin, sy)
-  const ex = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
-              ? mx
-              : mx + (cos >= 0 ? 1 : -1) * 22
+  // const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
+  //             ? cx + (outerRadius + 30) * cos
+  //             : sx 
+  const mx = sx
+  const my = sy - (outerRadius + 20) * cos
+  const ex = mx + (cos >= 0 ? 1 : -1) * 20
   const ey = my
   const textAnchor = cos >= 0 ? 'end' : 'start'
-  const tx= ex + (cos >= 0 ? 1 : -1) * 12
+  const tx= ex + (cos >= 0 ? 1 : -1) * 20
   const ty= ey + (sin >= 0 ? 1 : -1) * 16
-
 
   return (
     <g>
@@ -96,11 +78,11 @@ const renderActiveShape = (props) => {
         <tspan 
           fill='#1c752a'
           x={tx}
-          y={ty} >{`${data[name].key}`}</tspan>
+          y={ty}>{`${payload.payload.key}`}</tspan>
         <tspan
           className='tspan__val'
           x={tx + (cos >= 0 ? -1 : 1) * 6}
-          y={ty + 10}>{`${value}`}</tspan>
+          y={ty + 10}>{payload.payload.percent ? `${value} (${payload.payload.percent}%)` : value + ' %'}</tspan>
       </text>
     </g>
   );
@@ -111,24 +93,33 @@ const renderActiveShape = (props) => {
  * for Poverty, Food Insecurity etc, where only 2 data (total and children/smth else) is provided; Green Piechart
  * data slice filtered as per radioSelct and ToggleSelect to be used in place of mockData
  */
-function UnequalDonut() {
+function UnequalDonut(props) {
   const [legend, setLegend] = useState([])
   const [sum, setSum] = useState(0)
 
   // ActiveIndex identifies on which cell index of pie renderActiveShape function is to be called 
   // fixed to 0 as 1st element is the only one requiring label and sector overlay
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, ] = useState(0)
 
+  const { data, dataType } = props
   useEffect(() => {
-    let sum1 = data.reduce(function (a, b) {
-      return a + b.value
-    }, 0)
-    const l =  [
-      { key: 'Food Insecurity', value: data[0].value, color: '#2cba42' },
-      { key: 'Total Population', value: sum1, color: '#124c1b' }
-    ]
-    setSum(sum1)
-    setLegend([...l])
+    if (data) {
+      let sum1 = data.reduce(function (acc, curr) {
+        return acc + curr.value
+      }, 0)
+      const legendData =  [
+        { key: data[0].key, 
+          value: data[0].value, 
+          color: '#2cba42', 
+          percent: data[0].percent !== undefined? data[0].percent : '' },
+        { key: data[1].key, 
+          value: sum1, 
+          color: '#124c1b', 
+          percent: data[1].percent !== undefined ? data[1].percent : '' }
+      ]
+      setSum(sum1)
+      setLegend([...legendData])
+    }
   },[data])
 
   return (
@@ -137,7 +128,7 @@ function UnequalDonut() {
       <PieChart width={200} height={250}>
         <Pie
           activeIndex={activeIndex}
-          activeShape={renderActiveShape}
+          activeShape={renderLabels}
           data={data}
           cx={100}
           cy={125}
@@ -148,9 +139,13 @@ function UnequalDonut() {
           dataKey='value'
         />
       </PieChart>
-        <div className='donut__centerTxt'><h5>Total Population</h5><span>{sum}</span></div>
+        <div className='donut__centerTxt'>
+          <h5>Total Population</h5>
+          <span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span>
+        </div>
       </div>
-      <Legend legend={legend} />
+      
+      <Legend legend={legend} dataType={dataType} />
     </div>
   )
 }

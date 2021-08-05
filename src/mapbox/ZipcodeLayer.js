@@ -10,8 +10,6 @@ const ZipcodeLevel = () => {
   */
   const filters = useSelector(state => state.filters)
   const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
-  // const illinois_zipcodes = useSelector(state => state.zipLayer)
-
     return (
       <Source id="zipcodes" type="geojson" data={illinois_zipcodes.zipcodes}>
        <Layer {...zipcode} filter={filters.filterZipcodeByCounty}></Layer>

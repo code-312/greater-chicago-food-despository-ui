@@ -1,19 +1,11 @@
-#left-menu #data-selector {
-	margin: 1rem auto 1rem;
-	width: calc(100% - 2rem);
-	flex: 1;
+.data-selector {
+	margin: 16px;
+	background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
+	border-radius: 9px;
 }
 
-#data-selector {
-	background: #ffffff 0% 0% no-repeat padding-box;
-	box-shadow: 0px 1px 4px #15223214;
-	border: 1px solid #ced4da;
-	border-radius: 10px;
-	opacity: 1;
-	flex: 0 1 auto;
-}
-
-#data-selector-title {
+.data-selector-title {
 	margin: 0.5rem auto 0.5rem 1.2rem;
 	font: normal normal normal 1rem/1.3125rem futura-pt, sans-serif;
 	letter-spacing: 0px;
@@ -21,7 +13,7 @@
 	opacity: 1;
 }
 
-#data-selector .radioLabel {
+.data-selector .radioLabel {
 	font: normal normal normal 0.8125rem/1.0625rem futura-pt;
 	font-weight: normal;
 	line-height: 1.0625rem;
