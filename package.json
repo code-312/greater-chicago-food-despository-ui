@@ -3,20 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.5.0",
-    "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@turf/bbox": "^6.0.1",
-    "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.4.0",
-    "react-dom": "^17.0.1",
-    "react-map-gl": "^5.2.9",
-    "react-redux": "^7.2.2",
+    "@reduxjs/toolkit": "^1.6.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@turf/bbox": "^6.4.0",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.6.1",
+    "react-dom": "^17.0.2",
+    "react-map-gl": "^5.3.16",
+    "react-redux": "^7.2.4",
     "react-scripts": "4.0.0",
-    "redux": "^4.0.5",
+    "recharts": "^2.0.9",
+    "redux": "^4.1.0",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -44,8 +44,8 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/dom": "^7.28.1",
-    "@testing-library/user-event": "^12.5.0",
+    "@testing-library/dom": "^7.31.2",
+    "@testing-library/user-event": "^12.8.3",
     "concurrently": "^5.3.0",
     "json-server": "^0.16.3"
   }

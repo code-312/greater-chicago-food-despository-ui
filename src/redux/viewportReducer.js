@@ -4,6 +4,7 @@ export const initialVPState = {
     latitude: 40.150196,
     longitude: -89.367848, 
     zoom: 6,
+    // height and width of viewport override by map's height and width in Map component
     width: window.innerWidth,
     height: window.innerHeight,
   }

@@ -4,13 +4,13 @@ import ReactMapGL, { NavigationControl } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateVP } from './../redux/viewportReducer';
 import { updateFilters } from './../redux/filterReducer';
+import { updateSelectedFeat } from '../redux/selectedFeatReducer';
 
 import CountyLayer from './CountyLayer';
 import ZipcodeLayer from './ZipcodeLayer';
 import RenderToolTip from '../components/RenderToolTip';
 import MapColorLegend from '../components/MapColorLegend';
 import { navControlStyles } from './NavigationControlsStyles';
-
 
 
 const Map = () => {
@@ -23,8 +23,7 @@ const Map = () => {
   const viewport = useSelector(state => state.viewport)
   const illinois_counties = useSelector(state => state.illinois_counties)
   const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
-  const county_data = useSelector(state => state.county_data)
-  const zip_data = useSelector(state => state.zip_data)
+  const selectedFeat = useSelector(state => state.selectedFeat)
   
 
   //deletes are temporary fix to non-serialized values in Redux store
@@ -48,12 +47,12 @@ const Map = () => {
     const { features, srcEvent: {offsetX, offsetY} } = event
     
     // Select the feature and corresponding countyId from the list of features if one exists
-    const countyFeature = features && features.find(f => f.layer.id === 'county');
-    const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode');
+    const countyFeature = features && features.find(f => f.layer.id === 'county')
+    const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode')
 
     //this object is more condensed and contains only non-serialized values -  for Redux
-    const currentCounty = countyFeature ? countyFeature.properties : null;
-    const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null;
+    const currentCounty = countyFeature ? countyFeature.properties : null
+    const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null
 
     // Given the currently hovered features, determine the zipcode and county filters:
     let zipcodeFilter = ''
@@ -77,13 +76,36 @@ const Map = () => {
     }));
   };
 
-    // console.log('data', zip_data.zipData, county_data.countyData)
+  const onClick = event => {
+    // Extract the list of features and x,y coords from the event
+    const { features } = event
+
+    // Select the feature and corresponding countyId from the list of features if one exists
+    const countyFeature = features && features.find(f => f.layer.id === 'county')
+    const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode')
+
+    //this object is more condensed and contains only non-serialized values -  for Redux
+    const currentCounty = countyFeature ? {
+                                            name: countyFeature.properties.NAME, 
+                                            id: countyFeature.properties.STATE + countyFeature.properties.COUNTY
+                                          }  : null
+    const currentZipCode = zipCodeFeature ? zipCodeFeature.properties : null
+    dispatch(updateSelectedFeat({...selectedFeat, ...{
+      selectedCounty: currentCounty,
+      selectedZipcode: currentZipCode
+    }}
+    ))
+  }
+
     return (
       <ReactMapGL
       {...viewport}
+      width='100%'
+      height='100vh'
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
       onViewportChange={handleViewportChange}
       onHover={onHover}
+      onClick={onClick}
       maxZoom={15}
       minZoom={5.5} >
 
