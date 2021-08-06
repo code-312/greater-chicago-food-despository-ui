@@ -6,18 +6,10 @@ import { countyDataFetch } from './redux/countyDataReducer';
 import { zipFetch } from './redux/zipReducer';
 import { zipDataFetch } from './redux/zipCodeDataReducer';
 import RightHandMenu from './components/RightHandMenu/RightHandMenu';
-<<<<<<< HEAD
-import Map from './mapbox/Map'
-import MapColorLegend from './components/MapColorLegend';
-import LeftHandMenu from './components/LeftHandMenu/LeftHandMenu';
-
-import './App.css';
-=======
 import Map from './mapbox/Map';
 import MapColorLegend from './components/MapColorLegend';
 import LeftHandMenu from './components/LeftHandMenu/LeftHandMenu';
 import './App.css'
->>>>>>> 348cc021291bf72666bda7b9212cf4807dfe2d07
 
 const App = () => {
   const dispatch = useDispatch() 

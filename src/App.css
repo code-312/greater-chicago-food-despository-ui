@@ -59,19 +59,8 @@ nav button:focus {
 }
 
 #right-menu .toggle:checked:after {
-<<<<<<< HEAD
-  transition: all .3s ease;
-  transform: translatex(20px);
-}
-
-#right-menu .legend1 {
-width: 60px;
-height: 30px;
-background-color: #3288bd;
-=======
     transition: all .3s ease;
     transform: translatex(20px);
->>>>>>> 348cc021291bf72666bda7b9212cf4807dfe2d07
 }
 
 #right-menu .legend2 {
@@ -116,8 +105,4 @@ align-items: center;
 }
 .legend .bin-label{
   white-space: nowrap; 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 348cc021291bf72666bda7b9212cf4807dfe2d07
