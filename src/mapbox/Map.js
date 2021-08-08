@@ -12,6 +12,7 @@ import RenderToolTip from '../components/RenderToolTip';
 import { navControlStyles } from './NavigationControlsStyles';
 
 
+
 const Map = () => {
   const dispatch = useDispatch()
   /**
