@@ -10,13 +10,7 @@ const CountyLevel = () => {
      */
   const filters = useSelector(state => state.filters)
   const illinois_counties = useSelector(state => state.illinois_counties)
-
-  // const countyData = useSelector(state => state.county_data)
-  const selectedFeat = useSelector(state => state.selectedFeat)
-  const extraDataFeat = useSelector(state => state.extraDataMenuFeat)
-
-  console.log(selectedFeat, extraDataFeat)
-
+  
     return (
       <Source id="counties" type="geojson" data={illinois_counties.counties}>
         <Layer {...county}></Layer>
