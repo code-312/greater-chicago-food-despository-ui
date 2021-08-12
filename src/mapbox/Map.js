@@ -115,7 +115,6 @@ const Map = () => {
         
         {/*Tool-tip*/}
         <RenderToolTip />
-    
         {/* Zoom +/- buttons */}
         <div style={navControlStyles}>
           <NavigationControl showCompass={false} />
