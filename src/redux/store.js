@@ -29,7 +29,7 @@ const store = configureStore({
         immutableCheck: false,
         serializableCheck: false,
         },
-        window.devToolsExtension ? window.devToolsExtension() : f => f),
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f),
 });
 /// To view the store within your browser download chrome extension: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
 
