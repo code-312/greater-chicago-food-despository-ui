@@ -6,6 +6,7 @@ import viewportReducer from './viewportReducer';
 import zipDataReducer from './zipCodeDataReducer';
 import zipReducer from './zipReducer';
 import selectedFeatReducer from './selectedFeatReducer'
+import extraDataMenuReducer from './extraDataMenuReducer';
 
 //the listed keys under "reducer" are references to the different parts of state, passed as props to subscribed components
 //thunk middleware is already included with configureStore - took out additional included middleware with getDefaultMiddleWare because it was slowing down dev environment
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
   county_data: countyDataReducer,
   zip_data: zipDataReducer,
   selectedFeat: selectedFeatReducer,
+  extraDataMenuFeat: extraDataMenuReducer
 });
 
 const store = configureStore({
@@ -27,7 +29,7 @@ const store = configureStore({
         immutableCheck: false,
         serializableCheck: false,
         },
-        window.devToolsExtension ? window.devToolsExtension() : f => f),
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f),
 });
 /// To view the store within your browser download chrome extension: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
 

@@ -75,14 +75,13 @@ const RightHandMenu = () => {
 
           {/* WIC data and Census Data has race type pie chart; others have a different pie chart */}
           <div className='rt__donut'>
-            {(selectedfilterFeat !== 'snap_data' ? (selectedfilterFeat === 'WIC' || selectedfilterFeat === 'race_data') ? <Donut data={pieData} 
-                                                                                                                                 dataType={dataOptions[selectedfilterFeat].dataType} 
-                                                                                                                          /> 
-                                                                                                                        : <UnequalDonut data={pieData} 
-                                                                                                                                        dataType={dataOptions[selectedfilterFeat].dataType} 
-                                                                                                                          /> 
-                                                                                                                        : ''
-            )}
+            {(selectedfilterFeat === 'poverty_data' || selectedfilterFeat === 'insecurity_data') ? <UnequalDonut data={pieData} 
+                                                                                                  dataType={dataOptions[selectedfilterFeat].dataType} 
+                                                                                    /> 
+                                                                                  : <Donut data={pieData} 
+                                                                                           dataType={dataOptions[selectedfilterFeat].dataType} 
+                                                                                    /> 
+            }
           </div>
         </div>
         <div className='rt__footer'>
