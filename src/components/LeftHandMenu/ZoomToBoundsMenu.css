@@ -1,13 +1,25 @@
 .county-list {
   display: flex;
   flex-direction: column;
-  flex: 1 0 auto;
+  flex: 1;
   margin: 16px 16px 0 16px;
-  height: calc(100vh - 210px);
+  max-height: calc(100vh - 210px);
+  flex-shrink: 1;
   border-radius: 9px;
   color: #1c752a;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
   overflow: hidden;
+}
+
+.title {
+  padding: 16px 0 16px 0;
+  height: calc(100vh - 210px);
+  width: 100%;
+  color: #059713; 
+  background: #fff;
+  text-align: center;
+  font-weight: 600;
+  border-bottom: 1px solid #F3AD1C;
 }
 
 .scroll {
@@ -15,3 +27,31 @@
   flex-direction: column;
   overflow-y: scroll;
 }
+
+/* County name list buttons effects */
+button {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #059713; 
+  background: #fff;
+  border-bottom: 1px solid #F3AD1C;
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  padding: 20px 0 20px 25px;
+  width: 100%;
+}
+
+button:last-child {
+border-bottom: none;
+}
+
+button:hover {
+  background-color: #F3F2D8;
+}
+
+button:focus {
+  background-color: #F3F2D8;
+}
+

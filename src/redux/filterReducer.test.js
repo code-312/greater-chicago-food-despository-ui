@@ -10,6 +10,7 @@ describe('filter Slice', () => {
     it('must update filterState when hovered over a zipcode or a county', () => {
         // input payloads
         const payload1 = {
+            selectedCounty: ['in', 'COUNTY', ''],
             highlightCounty: ["in", "COUNTY", "167"],
             highlightZipcode: ['in', 'ZCTA', null],
             filterZipcodeByCounty: ['in', 'COUNTY', '17167'],
@@ -26,6 +27,7 @@ describe('filter Slice', () => {
             hoveredZipCode: null
         } 
         const payload2 = {
+            selectedCounty: ['in', 'COUNTY', ''],
             highlightCounty: ["in", "COUNTY", "003"],
             highlightZipcode: ['in', 'ZCTA', '62990'],
             filterZipcodeByCounty: ['in', 'COUNTY', '17003'],
