@@ -28,13 +28,26 @@ export const county = {
 /**
  * Styling for selected county layer object (mouse is hovering over it)
  */
-export const selectedCounty = {
-    id: 'selectedCounty',
+export const hoverCounty = {
+    id: 'hoverCounty',
     type: 'line',
     paint:{
         "line-opacity": 0.75, 
         "line-color": highlight,
         "line-width": 3
+    }
+};
+
+/**
+ * Styling for selected county layer object (clicked)
+ */
+ export const selectedCounty = {
+    id: 'selectedCounty',
+    type: 'fill',
+    paint:{
+        'fill-color': highlight,
+        "fill-opacity": 0.5, 
+        "fill-outline-color": highlight
     }
 };
 

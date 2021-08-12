@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateVP } from '../../redux/viewportReducer';
+import { updateFilters } from './../../redux/filterReducer';
 import { updateSelectedFeat } from '../../redux/selectedFeatReducer';
 import {updateViewportToFitBounds} from '../../mapbox/Util';
 
@@ -58,12 +59,7 @@ const ZoomToBoundsMenu = () => {
     // list of buttons that re-orientate the map around a county
     return (
         <div className="county-list">
-            <ZoomToBoundsButton 
-                key="Illinois" 
-                keyValue="Illinois"
-                label="Select a County" 
-                newViewport={origin} 
-            />
+            <div className="title">Select a County</div>
             <div className="scroll">
                 {countyButtons(countyFeatures)}
             </div>    
@@ -83,6 +79,7 @@ export default ZoomToBoundsMenu;
 export const ZoomToBoundsButton = ({keyValue, label, newViewport, countyID}) => {
     const dispatch = useDispatch();
     const selectedFeat = useSelector(state => state.selectedFeat)
+    const filters = useSelector(state => state.filters)
 
     const onZoomToBoundsButtonClick = (vp, keyValue, countyID) => {
         const currentCounty = {
@@ -93,6 +90,9 @@ export const ZoomToBoundsButton = ({keyValue, label, newViewport, countyID}) => 
         dispatch(updateSelectedFeat({...selectedFeat, ...{
             selectedCounty: currentCounty
           }}));
+        dispatch(updateFilters({...filters,
+        selectedCounty: ['in', 'COUNTY', currentCounty.id.slice(2,5)]
+        }));
     }
     return (
         <button
