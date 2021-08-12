@@ -36,7 +36,7 @@ function MapColorLegend(props) {
 
 
   return !colors ? null : (
-    <div class="legend clearfix" >
+    <div class="map-color-legend clearfix" >
       <span>Color Key</span>
       <div class="bin-container">
         {colors.map((color, i) => {
