@@ -6,9 +6,9 @@ import { countyDataFetch } from './redux/countyDataReducer';
 import { zipFetch } from './redux/zipReducer';
 import { zipDataFetch } from './redux/zipCodeDataReducer';
 import RightHandMenu from './components/RightHandMenu/RightHandMenu';
-import Map from './mapbox/Map'
+import Map from './mapbox/Map';
+import MapColorLegend from './components/MapColorLegend';
 import LeftHandMenu from './components/LeftHandMenu/LeftHandMenu';
-
 import './App.css'
 
 const App = () => {

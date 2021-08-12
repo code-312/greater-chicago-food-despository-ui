@@ -9,6 +9,7 @@ import { updateSelectedFeat } from '../redux/selectedFeatReducer';
 import CountyLayer from './CountyLayer';
 import ZipcodeLayer from './ZipcodeLayer';
 import RenderToolTip from '../components/RenderToolTip';
+import MapColorLegend from '../components/MapColorLegend';
 import { navControlStyles } from './NavigationControlsStyles';
 
 
@@ -123,6 +124,9 @@ const Map = () => {
         <div style={navControlStyles}>
           <NavigationControl showCompass={false} />
         </div>
+
+        {/*Legend*/}
+        <MapColorLegend />
   
       </ReactMapGL>
     )
