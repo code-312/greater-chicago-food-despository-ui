@@ -15,9 +15,12 @@ const CountyLevel = () => {
    */
   const filters = useSelector(state => state.filters)
   const illinois_counties = useSelector(state => state.illinois_counties)
+  const selectedFeat = useSelector(state => state.selectedFeat)
+  const extraDataFeat = useSelector(state => state.extraDataMenuFeat)
+  const countyData = useSelector(state => state.county_data.countyData)
   
   const countyColorDictionary= getCountyAndColorDictionary({
-        countyValueDictionary: retrieveCountyAndMetricDictionary(),
+        countyValueDictionary: retrieveCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData),
         categoryMaximumValues: [25, 50, 75, 200],
         colorsForCategories: ["#D8F9DB", "#7EC484", "#48944D", "#237528"],
         minimumCategoryValue: 0,
