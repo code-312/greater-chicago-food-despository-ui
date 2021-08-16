@@ -25,6 +25,8 @@ const CountyLevel = () => {
         colorsForCategories: ["#D8F9DB", "#7EC484", "#48944D", "#237528"],
         minimumCategoryValue: 0,
   })
+
+  console.log(countyColorDictionary.countyValueDictionary)
   
   return (
     <Source id="counties" type="geojson" data={illinois_counties.counties}>

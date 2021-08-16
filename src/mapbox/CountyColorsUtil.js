@@ -74,7 +74,6 @@ export function retrieveCountyAndMetricDictionary(selectedFeat, extraFeat, count
 */
   const { selectedfilterFeat, selectedfilterSubfeat } = selectedFeat;
   const { selectedExtraDataFeat } = extraFeat;
-  // console.log(selectedfilterFeat, selectedfilterSubfeat, featLabel,selectedExtraDataFeat, countyData)
   let countyMetricDict = {};
 
   if (countyData) {
@@ -124,7 +123,9 @@ export function retrieveCountyAndMetricDictionary(selectedFeat, extraFeat, count
       };
     };
   };
-  // return countyMetricDict;
+  return countyMetricDict;
+  /*
+  // countyMetricDict gives value of required feature as below
   return {
     //random sample data
     Hardin: 0,
@@ -230,6 +231,7 @@ export function retrieveCountyAndMetricDictionary(selectedFeat, extraFeat, count
     Henry: 100,
     Grundy: 101,
   };
+  */
 }
 
 function getScaledLightnessLevel({
