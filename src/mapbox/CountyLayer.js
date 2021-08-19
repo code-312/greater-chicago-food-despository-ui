@@ -15,6 +15,9 @@ const CountyLevel = () => {
    */
   const filters = useSelector(state => state.filters)
   const illinois_counties = useSelector(state => state.illinois_counties)
+  const meta = useSelector(state => state.metaData)
+
+  console.log(meta)
   
   const countyColorDictionary= getCountyAndColorDictionary({
         countyValueDictionary: retrieveCountyAndMetricDictionary(),
