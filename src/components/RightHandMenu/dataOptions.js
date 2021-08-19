@@ -38,7 +38,7 @@ export const dataOptions = {
     dataType: 'value'
   },
   race_data : {
-    title: 'Census Data',
+    title: 'Race/Ethnicity',
     desc: 'Text about Census data and the data and possibly the next year',
     toggleSelect: null,
     radioSelect: null,
