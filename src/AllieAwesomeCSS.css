@@ -1,0 +1,31 @@
+/* 
+    I need fonts and text sizes.
+    Then spacing and div options
+    Documentation so that it is somewhat useable
+*/
+
+.component-container {
+    border-radius: 9px;
+    background-color: var(--component-background-color);
+}
+
+.list-header {
+    color: var(--primary-font-color);
+    font-family: Futura PT;
+    font-size: 0.875rem; /* 14px */
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.option-container {
+    height: 2rem;
+    width: 100%
+}
+
+.option-text {
+    color: var(--primary-font-color);
+	font-family: Futura PT;
+	font-size: 0.875rem; /* 14px */
+    margin-left: 1rem;
+}
+
