@@ -21,7 +21,7 @@ const CountyLevel = () => {
   
   const countyColorDictionary= getCountyAndColorDictionary({
         countyValueDictionary: retrieveCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData),
-        categoryMaximumValues: [25, 50, 75, 200],
+        categoryMaximumValues: [25, 50, 75, 20000000],
         colorsForCategories: ["#D8F9DB", "#7EC484", "#48944D", "#237528"],
         minimumCategoryValue: 0,
   })
