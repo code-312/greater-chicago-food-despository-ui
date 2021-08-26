@@ -59,7 +59,7 @@ const RightHandMenu = () => {
               dataOptions[selectedfilterFeat].title
             )}
           </h1>
-          <p className='rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
+          <p className='rt__desc' tabindex="0">{dataOptions[selectedfilterFeat].desc}</p>
           <h3 className='rt__name'>{selectedCounty ? selectedCounty.name + ' County' : ''}</h3>
 
           { dataOptions[selectedfilterFeat].toggleSelect ? (
