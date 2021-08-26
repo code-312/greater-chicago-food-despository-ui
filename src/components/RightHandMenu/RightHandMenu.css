@@ -24,15 +24,6 @@
   color: black;
   font-size: 10px;
   font-weight: 600;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.rt__desc:focus {
-  -webkit-line-clamp: unset;
 }
 
 .rt__name {
