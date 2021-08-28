@@ -5,6 +5,7 @@ import { countyFetch } from './redux/countyReducer';
 import { countyDataFetch } from './redux/countyDataReducer';
 import { zipFetch } from './redux/zipReducer';
 import { zipDataFetch } from './redux/zipCodeDataReducer';
+import { metaDataFetch } from './redux/metaDataReducer';
 import RightHandMenu from './components/RightHandMenu/RightHandMenu';
 import Map from './mapbox/Map';
 import MapColorLegend from './components/MapColorLegend';
@@ -20,6 +21,7 @@ const App = () => {
     dispatch(zipFetch());
     dispatch(countyDataFetch());
     dispatch(zipDataFetch());
+    dispatch(metaDataFetch());
   })
 
     return (

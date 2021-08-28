@@ -1,21 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import axios from 'axios';
 
-export const metaDataFetch = createAsyncThunk('meta/metaDataFetch',
+export const metaDataFetch = createAsyncThunk(
+  'metadata/metaDataFetch',
   async () => {
-    console.log('pp')
     try {
-      const res = await require('../fetched_data/metaData.json');
-      return res;
+      console.log('async ')
+      return await require('../fetched_data/metaData.json');
     } catch(err) {
-        console.error("There was a problem fetching meta data details: " + err);
+        console.error("There was a problem fetching county data: " + err);
         return [];
     }  
   }
 );
 
 const metaDataSlice = createSlice({
-  name: 'meta',
+  name: 'metadata',
   initialState: { meta: {}, status: 'idle', error: null },
   reducers: {
     // 
@@ -24,7 +23,7 @@ const metaDataSlice = createSlice({
     [metaDataFetch.fulfilled]: (state, action) => {
       if(state.status === 'pending'){
         state.status = 'idle';
-        state.metaData = action.payload;
+        state.meta = action.payload;
       }
     },
     [metaDataFetch.pending]: (state, action) => {
@@ -42,3 +41,4 @@ const metaDataSlice = createSlice({
 });
 
 export default metaDataSlice.reducer;
+
