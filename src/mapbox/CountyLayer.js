@@ -15,9 +15,8 @@ const CountyLevel = () => {
    */
   const filters = useSelector(state => state.filters)
   const illinois_counties = useSelector(state => state.illinois_counties)
+  // Use natural_breaks from meta to create bins for data categories
   const meta = useSelector(state => state.metaData)
-
-  console.log(meta)
   
   const countyColorDictionary= getCountyAndColorDictionary({
         countyValueDictionary: retrieveCountyAndMetricDictionary(),
