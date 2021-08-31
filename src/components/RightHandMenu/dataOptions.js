@@ -3,7 +3,7 @@
 export const dataOptions = {
   poverty_data : {
     title: 'Poverty Rates',
-    desc: 'Text about poverty rates and the data and possibly the next year',
+    desc: 'This includes county data on the number of people living in a household with a total cash income below the U.S. Census Bureau’s poverty threshold.',
     toggleSelect: ['Total', 'Children'],
     toggleSelectKeys: ['poverty_population_poverty', 'poverty_population_poverty_child'],
     legendLabels: ['Overall Poverty', 'Child Poverty'],
@@ -12,7 +12,7 @@ export const dataOptions = {
   },
   insecurity_data : {
     title: 'Food Insecurity',
-    desc: 'Text about food insecurity rates and the data and possibly the next year',
+    desc: 'This includes data on the overall food insecurity rates for people in the county. Food insecurity is defined as a lack of consistent access to enough food for an active, healthy life.',
     toggleSelect: ['Total', 'Children'],
     toggleSelectKeys: [null, null],
     legendLabels: ['Food Insecurity', 'Child Food Insecurity'],
@@ -26,7 +26,7 @@ export const dataOptions = {
   },
   WIC : {
     title: 'WIC Usage',
-    desc: 'Text about WIC usage data and the data and possibly the next year',
+    desc: 'This includes county data on the total number of people enrolled in the Women Infant Children (WIC) special nutrition program, broken down into categories, total enrollment and racial makeup.',
     toggleSelect: ['Enrollment', 'Race'],
     toggleSelectKeys: ['Enrollment', 'Race'],
     legendLabels: ['Total Enrollment', ''],
@@ -39,14 +39,14 @@ export const dataOptions = {
   },
   race_data : {
     title: 'Race/Ethnicity',
-    desc: 'Text about Census data and the data and possibly the next year',
+    desc: 'This includes data on the racial/ethnic makeups of counties that have been measured across a 5-year span and averaged together to provide a more reliable estimate of the data.',
     toggleSelect: null,
     radioSelect: null,
     dataType: 'percentValue'
   },
   snap_data : {
     title: 'Snap Data',
-    desc: 'Text about SNAP data',
+    desc: 'This includes county data on enrollment in the Supplemental Nutrition Assistance Program (SNAP) that provides nutrition benefits to supplement the food budget for families broken down by age range and race.',
     toggleSelect: ['2019', '2020'],
     toggleSelectKeys: ['2019', '2020'],
     legendLabels: ['2019', '2020'],
