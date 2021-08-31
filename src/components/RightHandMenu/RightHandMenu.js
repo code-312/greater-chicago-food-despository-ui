@@ -49,7 +49,16 @@ const RightHandMenu = () => {
       { selectedCounty && dataOptions[selectedfilterFeat] ? (
       <div className='rtMenu'>
         <div className='rtBody'>
-          <h1 className='rt__title'>{dataOptions[selectedfilterFeat].title}</h1>
+          <h1 className='rt__title'>
+            {dataOptions[selectedfilterFeat].title === 'Race/Ethnicity' ? (
+              <>
+                Race/Ethnicity
+                <span style={{ fontSize: '.85rem' }}> (Census)</span>
+              </>
+            ) : (
+              dataOptions[selectedfilterFeat].title
+            )}
+          </h1>
           <p className='rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
           <h3 className='rt__name'>{selectedCounty ? selectedCounty.name + ' County' : ''}</h3>
 

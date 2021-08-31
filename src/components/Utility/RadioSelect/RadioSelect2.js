@@ -35,7 +35,17 @@ function RadioSelect2(props) {
                    checked={selectFeat===idx} 
                    onChange={() => handleChange(idx)}>
             </input>
-            <h3 className='radioLabel'>{feature}</h3>
+            <h3 className='radioLabel'>
+              {feature === 'Race/Ethnicity' ? (
+                  <>
+                    Race/Ethnicity
+                    <span style={{ fontSize: '.65rem' }}> (Census)</span>
+                  </>
+                ) : (
+                  feature
+                )
+              }
+            </h3>
           </label>
         ))
       ): ''}

@@ -38,7 +38,7 @@ export const dataOptions = {
     dataType: 'value'
   },
   race_data : {
-    title: 'Census Data',
+    title: 'Race/Ethnicity',
     desc: 'This includes data on the racial/ethnic makeups of counties that have been measured across a 5-year span and averaged together to provide a more reliable estimate of the data.',
     toggleSelect: null,
     radioSelect: null,
