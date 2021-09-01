@@ -16,13 +16,9 @@ import { navControlStyles } from './NavigationControlsStyles';
 const Map = () => {
   const dispatch = useDispatch()
   /**
-   * illinois_counties = County GeoJSON and county level data.
-   * illinois_zipcodes = Zip-code GeoJSON and zip-code level data.
    * viewport = viewport showing map of current coordinate
    */
   const viewport = useSelector(state => state.viewport)
-  const illinois_counties = useSelector(state => state.illinois_counties)
-  const illinois_zipcodes = useSelector(state => state.illinois_zipcodes)
   const selectedFeat = useSelector(state => state.selectedFeat)
   const filters = useSelector(state => state.filters)
   
@@ -114,9 +110,9 @@ const Map = () => {
       minZoom={5.5} >
 
         {/*County Level*/}
-        {illinois_counties.status !== 'pending' && <CountyLayer />}
+        <CountyLayer />
         {/*Zip-Code Level (only displays if zoom is greater than 7)*/}
-        {viewport.zoom > 7 && illinois_zipcodes.status !== 'pending' && <ZipcodeLayer />} 
+        {viewport.zoom > 7 ? <ZipcodeLayer /> : null} 
         
         {/*Tool-tip*/}
         <RenderToolTip />

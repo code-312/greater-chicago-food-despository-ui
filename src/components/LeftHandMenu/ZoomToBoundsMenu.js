@@ -1,9 +1,10 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateVP } from '../../redux/viewportReducer';
 import { updateFilters } from './../../redux/filterReducer';
 import { updateSelectedFeat } from '../../redux/selectedFeatReducer';
 import {updateViewportToFitBounds} from '../../mapbox/Util';
+import {DataContext} from '../../App'
 
 import './ZoomToBoundsMenu.css'
 
@@ -24,8 +25,8 @@ const ZoomToBoundsMenu = () => {
    * Selector function
    * Returns a list of the county GeoJSON features
    */
+   const { counties } = useContext(DataContext);
    const countyFeatures = useSelector(state => {
-       const { counties } = state.illinois_counties;
         if(Object.keys(counties).length !== 0) {
             let { features } = counties;
             const sortedCountyFeatures = [...features].sort((a,b) => (a.properties.NAME > b.properties.NAME) ? 1 : -1);
