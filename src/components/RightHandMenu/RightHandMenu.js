@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState,useContext} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateSelectedFeat } from  '../../redux/selectedFeatReducer'
 
@@ -10,7 +10,7 @@ import UnequalDonut from './DonutChart/UnEqualDonut/UnequalDonut'
 
 import {filterFeatChart} from '../Utility/filterFeatChart'
 import { dataOptions } from './dataOptions'
-
+import {DataContext} from '../../App'
 
 /*
  * COMPONENT: RightHandMenu
@@ -20,7 +20,7 @@ const RightHandMenu = () => {
   const dispatch = useDispatch()
 
   // get all County features data and selected feature option from redux store
-  const countyData = useSelector(state => state.county_data.countyData)
+  const {countyData} = useContext(DataContext)
   const selectedFeat = useSelector(state => state.selectedFeat)
 
   const { selectedCounty, selectedfilterFeat } = selectedFeat
@@ -49,7 +49,16 @@ const RightHandMenu = () => {
       { selectedCounty && dataOptions[selectedfilterFeat] ? (
       <div className='rtMenu'>
         <div className='rtBody'>
-          <h1 className='rt__title'>{dataOptions[selectedfilterFeat].title}</h1>
+          <h1 className='rt__title'>
+            {dataOptions[selectedfilterFeat].title === 'Race/Ethnicity' ? (
+              <>
+                Race/Ethnicity
+                <span style={{ fontSize: '.85rem' }}> (Census)</span>
+              </>
+            ) : (
+              dataOptions[selectedfilterFeat].title
+            )}
+          </h1>
           <p className='rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
           <h3 className='rt__name'>{selectedCounty ? selectedCounty.name + ' County' : ''}</h3>
 
