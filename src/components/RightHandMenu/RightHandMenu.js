@@ -124,7 +124,7 @@ const RightHandMenu = () => {
             </div>
           </div>
           <div className='rt__footer'>
-            <LinkToSource />
+            <LinkToSource data={selectedFeat}/>
           </div>
         </div>
       ) : (

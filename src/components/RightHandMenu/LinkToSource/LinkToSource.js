@@ -1,10 +1,37 @@
 import React from 'react';
-import './LinkToSource.css'
+import './LinkToSource.css';
 
-const LinkToSource = () => {
+const LinkToSource = ({ data }) => {
+  const { selectedfilterFeat, selectedfilterSubfeat } = data;
+
+  const renderLinkText = () => {
+    switch (selectedfilterFeat) {
+      case 'poverty_data':
+        return 'IPUMS (2014)';
+      case 'WIC':
+        return 'IDHS (2021)';
+      case 'snap_data':
+        return 'IDHS (2019-2020)';
+      case 'race_data':
+        return 'American Community Survey (2018)';
+    }
+    // If Food Insecurity is selected:
+    switch (selectedfilterSubfeat) {
+      case 'insecurity_2018':
+        return 'Feeding America (2018)';
+      case 'insecurity_2020_projected':
+        return 'Feeding America (2020)';
+      case 'insecurity_2018_child':
+        return 'Feeding America - Children (2018)';
+      case 'insecurity_2020_child_projected':
+        return 'Feeding America - Children (2020)';
+    }
+    return 'Link to source';
+  };
+
   return (
     <a alt='link to source' href='#a' className='rt__link'>
-      Link to source
+      {renderLinkText()}
     </a>
   );
 };
