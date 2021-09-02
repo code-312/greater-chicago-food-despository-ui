@@ -9,19 +9,19 @@ import LeftHandMenu from "./components/LeftHandMenu/LeftHandMenu";
 import "./App.css";
 
 const App = () => {
-  return <DataLayer />;
+  //all data is received at once so it is not helpful to complicate it 
+  const zipcodes = require("./fetched_data/zipLayer.json");
+  const countyData = require('./fetched_data/countyData.json');
+  const counties = require('./fetched_data/countyLayer.json')
+  return <DataLayer data={{zipcodes,countyData,counties}}/>;
 };
 
 export const DataContext = React.createContext();
 
-export function DataLayer() {
-    //all data is received at once so it is not helpful to complicate it 
-  const zipcodes = require("./fetched_data/zipLayer.json");
-  const countyData = require('./fetched_data/countyData.json');
-  const counties = require('./fetched_data/countyLayer.json')
+export function DataLayer({data}) {
 
   return (
-      <DataContext.Provider value={{zipcodes,countyData,counties}}> 
+    <DataContext.Provider value={data}> 
       <div className="main">
         <div className="container-fluid">
           <div className="row">
