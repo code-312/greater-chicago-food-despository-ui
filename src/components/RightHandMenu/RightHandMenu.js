@@ -7,6 +7,7 @@ import ToggleSelect from './ToggleSelect/ToggleSelect';
 import RadioSelect from '../Utility/RadioSelect/RadioSelect';
 import Donut from './DonutChart/Donut';
 import UnequalDonut from './DonutChart/UnEqualDonut/UnequalDonut';
+import LinkToSource from './LinkToSource/LinkToSource'
 
 import { filterFeatChart } from '../Utility/filterFeatChart';
 import { dataOptions } from './dataOptions';
@@ -123,9 +124,7 @@ const RightHandMenu = () => {
             </div>
           </div>
           <div className='rt__footer'>
-            <a alt='link to surce' href='#a' className='rt__link'>
-              Link to source
-            </a>
+            <LinkToSource />
           </div>
         </div>
       ) : (
