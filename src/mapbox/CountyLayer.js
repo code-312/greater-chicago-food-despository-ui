@@ -14,7 +14,8 @@ const CountyLevel = () => {
    * counties = County GeoJSON and county level data.
    * filter = hovered/highlight zipcode/county
    */
-  const filters = useSelector(state => state.filters)
+    const filters = useSelector(state => state.filters)
+    const state = useSelector(state => state)
   const { countyData, counties } = useContext(DataContext)
 
   const selectedFeat = useSelector(state => state.selectedFeat)
@@ -26,6 +27,7 @@ const CountyLevel = () => {
         colorsForCategories: ["#D8F9DB", "#7EC484", "#48944D", "#237528"],
         minimumCategoryValue: 0,
   })
+    console.log({state})
   const colorLayers = useMemo(
       () =>
           Object.keys(countyColorDictionary).map((countyName) => (

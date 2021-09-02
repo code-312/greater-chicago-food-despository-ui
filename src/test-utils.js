@@ -19,7 +19,18 @@ function render (
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 
+function reduxRender (
+    element,
+    {
+        initialState,
+        store = createStore(rootReducer, initialState),
+        ...renderOptions
+    } = {}
+) {
+    return rtlRender(<Provider store={store}>{element}</Provider>)
+}
+
 // re-export everything
 export * from '@testing-library/react'
 // override render method
-export { render }
+export { render, reduxRender }
