@@ -98,8 +98,8 @@ align-items: center;
   margin-right: 8px;
 }
 .map-color-legend .bin-color-sample{
-  height: 28px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
 }
 .map-color-legend .bin-label{
   white-space: nowrap; 
