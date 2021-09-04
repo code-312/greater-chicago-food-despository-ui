@@ -1,9 +1,4 @@
-/* 
-    I need fonts and text sizes.
-    Then spacing and div options
-    Documentation so that it is somewhat useable
-*/
-
+/* FONTS */
 .card-container {
     border-radius: 9px;
     background-color: var(--component-background-color);
@@ -57,4 +52,3 @@
 .primary-color {
     color: var(--primary-font-color);
 }
-
