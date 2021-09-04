@@ -48,6 +48,11 @@
     color: black;
 }
 
+/* I'm useful :)  */
+.white {
+    color: white;
+}
+
 /* Me too! :) */
 .primary-color {
     color: var(--primary-font-color);
