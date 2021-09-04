@@ -9,15 +9,12 @@
     background-color: var(--component-background-color);
 }
 
-
 /* Used in:
     * Card headers
     * Titles
     * Any bold text
 */
 .font-bold {
-    color: var(--primary-font-color);
-    text-align: left;
     font: normal normal bold 14px/14px Futura PT;
     letter-spacing: 0px;
     opacity: 1;
@@ -28,18 +25,32 @@
     * Dropdown menu (override the color to black)
     * Toggle menu options
     * Display data in Donut
+    * Color key legend text
 */
 .font-normal {
-    text-align: left;
     font: normal normal medium 14px/18px Futura PT;
     letter-spacing: 0px;
-    color: #1C752A;
+    opacity: 1;
+}
+
+/* Used in:
+    * Breadtext
+    * Donut chart text
+*/
+.font-small {
+    font: normal normal medium 10px/10px Futura PT;
+    letter-spacing: 0px;
     opacity: 1;
 }
 
 /* I'm useful :)  */
 .black {
     color: black;
+}
+
+/* Me too! :) */
+.primary-color {
+    color: var(--primary-font-color);
 }
 
 
