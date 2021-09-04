@@ -9,12 +9,39 @@
     background-color: var(--component-background-color);
 }
 
-.header {
+
+/* Used in:
+    * Card headers
+    * Titles
+    * Any bold text
+*/
+.font-bold {
     color: var(--primary-font-color);
-    font-family: Futura PT;
-    font-size: 0.875rem; /* 14px */
-    font-weight: bold;
+    text-align: left;
+    font: normal normal bold 14px/14px Futura PT;
+    letter-spacing: 0px;
+    opacity: 1;
 }
+
+/* Used in:
+    * List options
+    * Dropdown menu (override the color to black)
+    * Toggle menu options
+    * Display data in Donut
+*/
+.font-normal {
+    text-align: left;
+    font: normal normal medium 14px/18px Futura PT;
+    letter-spacing: 0px;
+    color: #1C752A;
+    opacity: 1;
+}
+
+/* I'm useful :)  */
+.black {
+    color: black;
+}
+
 
 .option-container {
     height: 2rem;
