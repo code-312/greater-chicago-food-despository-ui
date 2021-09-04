@@ -4,17 +4,16 @@
     Documentation so that it is somewhat useable
 */
 
-.component-container {
+.card-container {
     border-radius: 9px;
     background-color: var(--component-background-color);
 }
 
-.list-header {
+.header {
     color: var(--primary-font-color);
     font-family: Futura PT;
     font-size: 0.875rem; /* 14px */
     font-weight: bold;
-    margin-left: 1rem;
 }
 
 .option-container {
