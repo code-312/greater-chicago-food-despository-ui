@@ -15,7 +15,7 @@
     * Any bold text
 */
 .font-bold {
-    font: normal normal bold 14px/14px Futura PT;
+    font: normal normal bold 0.875rem/0.875rem Futura PT;
     letter-spacing: 0px;
     opacity: 1;
 }
@@ -28,7 +28,7 @@
     * Color key legend text
 */
 .font-normal {
-    font: normal normal medium 14px/18px Futura PT;
+    font: normal normal medium 0.875rem/0.875rem Futura PT;
     letter-spacing: 0px;
     opacity: 1;
 }
@@ -38,7 +38,7 @@
     * Donut chart text
 */
 .font-small {
-    font: normal normal medium 10px/10px Futura PT;
+    font: normal normal medium 0.625rem/0.625rem Futura PT;
     letter-spacing: 0px;
     opacity: 1;
 }
@@ -56,18 +56,5 @@
 /* Me too! :) */
 .primary-color {
     color: var(--primary-font-color);
-}
-
-
-.option-container {
-    height: 2rem;
-    width: 100%
-}
-
-.option-text {
-    color: var(--primary-font-color);
-	font-family: Futura PT;
-	font-size: 0.875rem; /* 14px */
-    margin-left: 1rem;
 }
 
