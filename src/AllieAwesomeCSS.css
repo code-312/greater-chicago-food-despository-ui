@@ -48,10 +48,3 @@
 .primary-color {
     color: var(--primary-font-color);
 }
-
-/* "Card" layout */
-
-.card-container {
-    border-radius: 9px;
-    background-color: var(--component-background-color);
-}
