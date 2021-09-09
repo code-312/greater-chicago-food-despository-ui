@@ -1,8 +1,4 @@
 /* FONTS */
-.card-container {
-    border-radius: 9px;
-    background-color: var(--component-background-color);
-}
 
 /* Used in:
     * Card headers
@@ -10,7 +6,7 @@
     * Any bold text
 */
 .font-bold {
-    font: normal normal bold 0.875rem/0.875rem Futura PT;
+    font: normal normal bold 0.875rem/0.875rem 'futura-pt';
     letter-spacing: 0px;
     opacity: 1;
 }
@@ -23,7 +19,7 @@
     * Color key legend text
 */
 .font-normal {
-    font: normal normal medium 0.875rem/0.875rem Futura PT;
+    font: normal normal medium 0.875rem/0.875rem 'futura-pt';
     letter-spacing: 0px;
     opacity: 1;
 }
@@ -33,7 +29,7 @@
     * Donut chart text
 */
 .font-small {
-    font: normal normal medium 0.625rem/0.625rem Futura PT;
+    font: normal normal medium 0.625rem/0.625rem 'futura-pt';
     letter-spacing: 0px;
     opacity: 1;
 }
@@ -51,4 +47,11 @@
 /* Me too! :) */
 .primary-color {
     color: var(--primary-font-color);
+}
+
+/* "Card" layout */
+
+.card-container {
+    border-radius: 9px;
+    background-color: var(--component-background-color);
 }

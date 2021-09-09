@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateSelectedFeat } from  '../../../redux/selectedFeatReducer'
 
 import './DatasetSelector.css'
+import CardHeader from '../../Utility/CardHeader/CardHeader'
 
 function DatasetSelector(props) {
 	const dispatch = useDispatch()
@@ -28,7 +29,7 @@ function DatasetSelector(props) {
 	/* Don't load this bar if there are no dataset options */
 	return !featOptions ? null : (
 		<div className="data-selector">
-			<h3 className="data-selector-title">Show data for:</h3>
+			<CardHeader text="Show data for:" />
 			<RadioSelect2
 				data={featOptions.featNames}
 				handleChange={handleSelection}
