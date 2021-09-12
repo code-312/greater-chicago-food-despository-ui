@@ -21,7 +21,6 @@ function RadioSelect(props) {
   }
 
   useEffect(() => {
-    onOptionChange(0)
    //eslint-disable-next-line react-hooks/exhaustive-deps
   },[props.data])
 
@@ -30,18 +29,18 @@ function RadioSelect(props) {
   return (
     <div className={`radioSel-${alignment}`}>
      {props.data ? (
-        props.data.map((feature, idx) => (
-          <label htmlFor={feature} key={idx}>
+        props.data.map((feature, idx) => {
+          return <label htmlFor={feature} key={idx}>
             <input type="radio" 
                    id={feature} 
                    name={feature} 
                    className='radioOpt' 
                    checked={selectFeat===idx} 
-                   onChange={() => onOptionChange(idx)}>
+                   onChange={() => {onOptionChange(idx)}}>
               </input>
             <h3 className='radioLabel'>{feature}</h3>
           </label>
-        ))
+ })
       ): ''}
     </div>
   )

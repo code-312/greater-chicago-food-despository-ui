@@ -6,28 +6,48 @@ import {county, selectedCounty, hoverCounty} from './LayerStyles';
 import {DataContext} from '../App'
 import {
   getCountyAndColorDictionary,
-  retrieveCountyAndMetricDictionary,
 } from "./CountyColorsUtil";
+
+import {extractCountyAndMetricDictionary,getDataForSelector} from "./ExtractCountyDataUtil.js"
+import {
+    getExtraDataLabelDictionary,
+} from './DataSelectionUtil';
 
 const CountyLevel = () => {
   /**
    * counties = County GeoJSON and county level data.
    * filter = hovered/highlight zipcode/county
    */
-    const filters = useSelector(state => state.filters)
-    const state = useSelector(state => state)
-  const { countyData, counties } = useContext(DataContext)
+  const filters = useSelector(state => state.filters)
+
+  const { countyData, counties, metaData } = useContext(DataContext)
 
   const selectedFeat = useSelector(state => state.selectedFeat)
   const extraDataFeat = useSelector(state => state.extraDataMenuFeat)
   
+  let categoryRanges = getDataForSelector({
+      selectedfilterFeat: selectedFeat.selectedfilterFeat,
+      selectedfilterSubfeat: selectedFeat.selectedfilterSubfeat,
+      selectedExtraDataFeat: extraDataFeat.selectedExtraDataFeat,
+      currentObjectToSearch: metaData.data_bins.natural_breaks,
+  });
+
+  if(categoryRanges === undefined){
+      categoryRanges = getDataForSelector({
+          selectedfilterFeat: selectedFeat.selectedfilterFeat,
+          selectedfilterSubfeat: selectedFeat.selectedfilterSubfeat,
+          selectedExtraDataFeat: getExtraDataLabelDictionary(selectedFeat.selectedfilterFeat)[extraDataFeat.selectedExtraDataFeatLabel],
+         currentObjectToSearch: metaData.data_bins.natural_breaks,
+      });
+  }
+
   const countyColorDictionary= getCountyAndColorDictionary({
-        countyValueDictionary: retrieveCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData),
-        categoryMaximumValues: [25, 50, 75, Infinity],
+      countyValueDictionary:extractCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData), 
+      categoryMaximumValues: categoryRanges.slice(1),
         colorsForCategories: ["#D8F9DB", "#7EC484", "#48944D", "#237528"],
         minimumCategoryValue: 0,
   })
-    console.log({state})
+
   const colorLayers = useMemo(
       () =>
           Object.keys(countyColorDictionary).map((countyName) => (

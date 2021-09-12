@@ -1,9 +1,26 @@
+export function getExtraDataLabelDictionary(selectedfilterFeat, selectedfilterSubfeat) {
+  const featOptions = getFeatOptions();
+  switch (selectedfilterFeat) {
+    case "WIC":
+      if (selectedfilterSubfeat === "Enrollment") {
+        return(featOptions.WIC.Enrollment);
+      } else {
+        return(featOptions.WIC.wic_participation);
+      }
+    case "race_data":
+      return(featOptions.race_data);
+    case "snap_data":
+      return(featOptions.snap_data);
+    default:
+      return(null);
+  }
+}
+
 export function getFilterFeaturesFromSelection({
   selectedFeatureLabel = null,
   selectedFeat = null,
   selectedfilterFeat = null,
   selectedfilterSubfeat = null,
-
   extraDataMenuLabel = null,
   selectedCounty = null,
 }) {
@@ -20,22 +37,9 @@ export function getFilterFeaturesFromSelection({
     selectedfilterSubfeat: null,
     selectedCounty,
   };
-  // extraDataFeat
-  return {selectedFeat, extraDataFeat: null};
+
+  return {selectedFeat};
 }
-// export function getExtraDataMenuOptionFromSelection({
-//   selectedFeatureLabel = null,
-//   extraDataMenuLabel = null,
-// }) {
-//   const {selectedFeat, extraDataFeat} = getFeaturesFromSelection({
-//     selectedFeatureLabel,
-//     extraDataMenuLabel,
-//   });
-//   return getExtraDataMenuOptions({
-//     selectedfilterFeat: selectedFeat.selectedfilterFeat,
-//     selectedfilterSubfeat: selectedFeat.selectedfilterSubfeat,
-//   });
-// }
 
 export function getExtraDataMenuOptions({
   selectedfilterFeat,
@@ -58,6 +62,7 @@ export function getExtraDataMenuOptions({
       return null;
   }
 }
+//this value is a function so it can be read from the bottom of the file for cleaner code
 function getFeatOptions() {
   return {
     WIC: {
