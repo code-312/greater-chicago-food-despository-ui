@@ -1,7 +1,9 @@
-import React, {useContext, useMemo} from 'react'
+import React, {useContext, useMemo, useEffect} from 'react'
 import {Source, Layer} from 'react-map-gl';
-import {useSelector} from 'react-redux';
-import {county, selectedCounty, hoverCounty} from './LayerStyles';
+import { useSelector, useDispatch } from 'react-redux'
+import {mapColors,categoryOpacityGroup} from "./Colors"
+import {selectedCounty, hoverCounty} from './LayerStyles';
+import {setSelectionDefaults} from './MapSelectionDefaults';
 
 import {DataContext} from '../App'
 import {
@@ -19,10 +21,21 @@ const CountyLevel = () => {
    * filter = hovered/highlight zipcode/county
    */
   const filters = useSelector(state => state.filters)
-
   const { countyData, counties, metaData } = useContext(DataContext)
-
   const selectedFeat = useSelector(state => state.selectedFeat)
+  const selectedExtraDataFeat = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeat)
+  const selectedExtraDataFeatLabel = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeatLabel)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+      setSelectionDefaults({
+          selectedFeat,
+          dispatch,
+          selectedExtraDataFeat: selectedExtraDataFeat,
+      });
+  }, [selectedFeat]);
+
+
   const extraDataFeat = useSelector(state => state.extraDataMenuFeat)
   
   let categoryRanges = getDataForSelector({
@@ -42,9 +55,10 @@ const CountyLevel = () => {
   }
 
   const countyColorDictionary= getCountyAndColorDictionary({
-      countyValueDictionary:extractCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData), 
-      categoryMaximumValues: categoryRanges.slice(1),
-        colorsForCategories: ["#D8F9DB", "#7EC484", "#48944D", "#237528"],
+        countyValueDictionary: extractCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData),
+         categoryMaximumValues: [25, 50, 75, Infinity],
+      // categoryMaximumValues: categoryRanges.slice(1),
+        opacityGroup: categoryOpacityGroup,
         minimumCategoryValue: 0,
   })
 
@@ -52,11 +66,12 @@ const CountyLevel = () => {
       () =>
           Object.keys(countyColorDictionary).map((countyName) => (
               <Layer
-                {...{...county, id: countyName}}
+                {...{ id: countyName, type: 'fill'}}
                 key={countyName}
                 paint={{
-                    ...county.paint,
-                    "fill-color": countyColorDictionary[countyName],
+                    "fill-outline-color": "#124c1b", 
+                    "fill-color": mapColors[selectedExtraDataFeatLabel] || mapColors["ERROR"],
+                    "fill-opacity" : countyColorDictionary[countyName]
                 }}
                 filter={["in", "NAME", countyName]}
               />
@@ -64,13 +79,12 @@ const CountyLevel = () => {
       [countyColorDictionary],
   );
 
+      /* return null; */
   return (
     <Source id="counties" type="geojson" data={counties}>
       {colorLayers}
-      <Layer {...county}></Layer>
       <Layer {...selectedCounty} filter={filters.selectedCounty}></Layer>
       <Layer {...hoverCounty} filter={filters.highlightCounty}></Layer>
-     
     </Source>
   );
 };
