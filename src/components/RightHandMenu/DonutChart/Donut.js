@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { PieChart, Pie, Cell, Sector } from 'recharts'
+import ExtraDataMenu from '../../ExtraDataRightMenu/ExtraDataMenu'
 
 import './Donut.css'
 import Legend from './Legend/Legend'
@@ -272,6 +273,7 @@ function Donut(props) {
             <span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span>
           </div>
         </div>
+		  	<ExtraDataMenu />
         <Legend legend={legend} dataType={dataType} />
       </div>
     ) : ''
