@@ -9,14 +9,14 @@ export const zipcodeOutline = "#a4720b";
 
 export const categoryOpacityGroup = [0.1, 0.4, 0.7, 1];
 export const mapColors = {
-  Asian: "#F3AD1C",
+  Asian: "#F3AD28",
   White: "#2CBA42",
-  Black: "#534588",
-  "Hispanic/Latino": "#FF6833",
+  Black: "#524486",
+  "Hispanic/Latino": "#FD6832",
   Pacific: "#92DBDD",
-  "Two+": "#FF0000",
-  "Unknown": "#FF0000",
-  Other: "#534588",
-  Native: "#584C3A",
+  "Two+": "#92DBDD",
+  Other: "#CB2FAE",
+  Unknown: "#CB2FAE",
+  Native: "#954A10",
   ERROR: "#808080",
 };
