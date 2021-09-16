@@ -1,0 +1,50 @@
+/* FONTS */
+
+/* Used in:
+    * Card headers
+    * Titles
+    * Any bold text
+*/
+.font-bold {
+    font: normal normal bold 0.875rem/0.875rem 'futura-pt';
+    letter-spacing: 0px;
+    opacity: 1;
+}
+
+/* Used in:
+    * List options
+    * Dropdown menu (override the color to black)
+    * Toggle menu options
+    * Display data in Donut
+    * Color key legend text
+*/
+.font-normal {
+    font: normal normal medium 0.875rem/0.875rem 'futura-pt';
+    letter-spacing: 0px;
+    opacity: 1;
+}
+
+/* Used in:
+    * Breadtext
+    * Donut chart text
+*/
+.font-small {
+    font: normal normal medium 0.625rem/0.625rem 'futura-pt';
+    letter-spacing: 0px;
+    opacity: 1;
+}
+
+/* I'm useful :)  */
+.black {
+    color: black;
+}
+
+/* I'm useful :)  */
+.white {
+    color: white;
+}
+
+/* Me too! :) */
+.primary-color {
+    color: var(--primary-font-color);
+}
