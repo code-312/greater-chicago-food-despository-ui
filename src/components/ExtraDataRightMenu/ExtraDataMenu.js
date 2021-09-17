@@ -90,11 +90,6 @@ function ExtraDataMenu(props) {
         value={'Women'}
         placeholder="Select an option"
       />
-			{/* <RadioSelect
-				data={Object.keys(radioData)}
-				handleChange={handleSelection}
-				alignment={'column'}
-			/> */}
 		</div>
 	) : ''
 }
