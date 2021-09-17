@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import RadioSelect from '../Utility/RadioSelect/RadioSelect'
-
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateExtraDataFeat } from  '../../redux/extraDataMenuReducer'
 
@@ -78,15 +78,23 @@ function ExtraDataMenu(props) {
 		}))
 	}
 
-	/* Don't load this bar if there are no dataset options */
+	/* Don't load this bar if there are no dataset options */  
 	return (radioData && selectedCounty) ? (
-		<div className="extraData-wrapper">
+    <div className="extraData-wrapper">
+      {console.log("This is what was to the radio buttons before, ", Object.keys(radioData))}
 			<h3 className="extraData-title">Show data for:</h3>
-			<RadioSelect
+      <Dropdown 
+        arrowClassName='arrow'
+        options={Object.keys(radioData)} 
+        onChange={handleSelection} 
+        value={'Women'}
+        placeholder="Select an option"
+      />
+			{/* <RadioSelect
 				data={Object.keys(radioData)}
 				handleChange={handleSelection}
 				alignment={'column'}
-			/>
+			/> */}
 		</div>
 	) : ''
 }
