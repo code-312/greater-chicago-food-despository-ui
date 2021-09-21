@@ -7,6 +7,7 @@ import {updateViewportToFitBounds} from '../../mapbox/Util';
 import {DataContext} from '../../App'
 
 import './ZoomToBoundsMenu.css'
+import CardHeader from '../Utility/CardHeader/CardHeader';
 
 /**
  * COMPONENT: ZoomToBoundsMenu
@@ -60,7 +61,7 @@ const ZoomToBoundsMenu = () => {
     // list of buttons that re-orientate the map around a county
     return (
         <div className="county-list">
-            <div className="title">Select a County</div>
+            <CardHeader text={"Select a County"} />
             <div className="scroll">
                 {countyButtons(countyFeatures)}
             </div>    
