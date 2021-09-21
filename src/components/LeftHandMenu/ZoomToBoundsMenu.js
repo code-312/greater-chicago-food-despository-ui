@@ -7,7 +7,6 @@ import {updateViewportToFitBounds} from '../../mapbox/Util';
 import {DataContext} from '../../App'
 
 import './ZoomToBoundsMenu.css'
-import CardHeader from '../Utility/CardHeader/CardHeader';
 
 /**
  * COMPONENT: ZoomToBoundsMenu

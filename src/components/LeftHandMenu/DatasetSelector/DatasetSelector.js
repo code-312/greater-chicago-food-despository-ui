@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateSelectedFeat } from  '../../../redux/selectedFeatReducer'
 
 import './DatasetSelector.css'
-import CardHeader from '../../Utility/CardHeader/CardHeader'
 
 function DatasetSelector(props) {
 	const dispatch = useDispatch()
