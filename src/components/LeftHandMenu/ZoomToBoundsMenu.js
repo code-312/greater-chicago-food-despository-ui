@@ -61,7 +61,7 @@ const ZoomToBoundsMenu = () => {
     // list of buttons that re-orientate the map around a county
     return (
         <div className="county-list">
-            <CardHeader text={"Select a County"} />
+            <div className="title">Select a County</div>
             <div className="scroll">
                 {countyButtons(countyFeatures)}
             </div>    

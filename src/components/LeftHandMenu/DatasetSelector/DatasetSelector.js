@@ -28,8 +28,8 @@ function DatasetSelector(props) {
 
 	/* Don't load this bar if there are no dataset options */
 	return !featOptions ? null : (
-		<div className="data-selector">
-			<CardHeader text="Show data for:" />
+		<div className="data-selector">			
+			<h3 className="data-selector-title">Show data for:</h3>
 			<RadioSelect2
 				data={featOptions.featNames}
 				handleChange={handleSelection}
