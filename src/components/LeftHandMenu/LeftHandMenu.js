@@ -8,9 +8,9 @@ import './LeftHandMenu.css'
 function LeftHandMenu() {
 	return (
 		<div className="left-menu">
-			<ZoomToBoundsMenu />
-			<DatasetSelector />
+      <DatasetSelector />
 			<ExtraDataMenu />
+			<ZoomToBoundsMenu />
 		</div>
 	);
 }

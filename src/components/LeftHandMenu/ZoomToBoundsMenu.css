@@ -13,7 +13,6 @@
 
 .title {
   padding: 16px 0 16px 0;
-  height: calc(100vh - 210px);
   width: 100%;
   color: #059713; 
   background: #fff;
@@ -35,7 +34,7 @@ button {
   text-align: center;
   color: #059713; 
   background: #fff;
-  border-bottom: 1px solid #F3AD1C;
+  border-bottom: 1px solid #CED4DA !important;
   border-right: none;
   border-top: none;
   border-left: none;
