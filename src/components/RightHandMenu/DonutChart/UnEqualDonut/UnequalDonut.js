@@ -102,6 +102,7 @@ function UnequalDonut(props) {
   const [activeIndex, ] = useState(0)
 
   const { data, dataType } = props
+  console.log("Data key", data[0].key)
   useEffect(() => {
     if (data) {
       let sum1 = data.reduce(function (acc, curr) {
@@ -140,8 +141,15 @@ function UnequalDonut(props) {
         />
       </PieChart>
         <div className='donut__centerTxt'>
-          <h5>Total Population</h5>
-          <span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span>
+          {(data[0].key === 'Food Insecurity' || data[0].key === 'Child Food Insecurity')
+          ?
+            <h5>Out of Total Population</h5>
+          :
+            <>  
+              <h5>Total Population</h5>
+              <span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span>
+            </>
+          } 
         </div>
       </div>
       
