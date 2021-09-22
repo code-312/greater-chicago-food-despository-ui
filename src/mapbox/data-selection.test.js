@@ -7,16 +7,17 @@ import DatasetSelector from
   '../components/LeftHandMenu/DatasetSelector/DatasetSelector';
 import ExtraDataMenu from '../components/ExtraDataRightMenu/ExtraDataMenu';
 
+var Div = ({children}) => <div>{children}</div>;
 
-jest.mock("react-map-gl", () => {
-   var Div = ({children}) => <div>{children}</div>;
-   return {
+const mockMapGl = {
         __esModule: true,
         //Mock the map components in CountyLayer
         Source: Div,
         Layer: Div,
         default: Div,
     };
+jest.mock("react-map-gl", () => {
+   return mockMapGL
 });
 
 test.only("change the filter when race selected should not break the app", () => {
