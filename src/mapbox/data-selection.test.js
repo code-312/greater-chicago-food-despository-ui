@@ -11,13 +11,13 @@ jest.mock("react-map-gl", () => {
    const React = require("react");
    var Div = ({children}) => <div>{children}</div>;
 
-   const mockMapGl = {
+   const values = {
         //Mock the map components in CountyLayer
         Source: Div,
         Layer: Div,
         default: Div,
     };
-   return mockMapGL;
+   return values;
 });
 
 test.only("change the filter when race selected should not break the app", () => {
