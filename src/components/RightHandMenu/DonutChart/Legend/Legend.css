@@ -10,6 +10,15 @@
    padding: 4px 0px 4px 6px;
  }
  
+ .leg__item:hover {
+     display: flex;
+     background-color: blue;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     padding: 4px 0px 4px 6px;
+ }
+
  .leg__left {
    display: flex;
    align-items: center;
