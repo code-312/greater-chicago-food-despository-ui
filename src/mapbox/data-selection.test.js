@@ -8,12 +8,9 @@ import DatasetSelector from
 import ExtraDataMenu from '../components/ExtraDataRightMenu/ExtraDataMenu';
 
 
-// import {Source, Layer} from 'react-map-gl';
-var Div = ({children}) => <div>{children}</div>;
-var Source = Div;
-var Layer = Source;
 jest.mock("react-map-gl", () => {
-    return {
+   var Div = ({children}) => <div>{children}</div>;
+   return {
         __esModule: true,
         //Mock the map components in CountyLayer
         Source: Div,
