@@ -28,14 +28,14 @@ const renderLabels = (props) => {
 
   const sin = Math.sin(-RADIAN * midAngle)
   const cos = Math.cos(-RADIAN * midAngle)
-  const sx = cx + outerRadius * cos
-  const sy = cy + outerRadius * sin
+  const sx = cx + (outerRadius + 6.5) * cos 
+  const sy = cy + (outerRadius + 1) * sin
   // const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
   //             ? cx + (outerRadius + 30) * cos
   //             : sx 
   const mx = sx
-  const my = sy - (outerRadius + 20) * cos
-  const ex = mx + (cos >= 0 ? 1 : -1) * 20
+  const my = sy - (outerRadius - 10) * cos
+  const ex = mx + (cos >= 0 ? 1 : -1) * 15
   const ey = my
   const textAnchor = cos >= 0 ? 'end' : 'start'
   const tx= ex + (cos >= 0 ? 1 : -1) * 20
@@ -55,6 +55,15 @@ const renderLabels = (props) => {
         outerRadius={outerRadius}
         startAngle={startAngle}
         endAngle={endAngle}
+        fill='#2cba42'
+      />
+      <Sector
+        cx={cx}
+        cy={cy}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        innerRadius={outerRadius + 4}
+        outerRadius={outerRadius + 6}
         fill='#2cba42'
       />
 
