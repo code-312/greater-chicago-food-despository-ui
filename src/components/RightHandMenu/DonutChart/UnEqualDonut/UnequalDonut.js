@@ -131,9 +131,9 @@ function UnequalDonut(props) {
           activeShape={renderLabels}
           data={data}
           cx={100}
-          cy={125}
-          innerRadius={43}
-          outerRadius={52}
+          cy={131}
+          innerRadius={38}
+          outerRadius={51}
           fill='#124c1b'
           paddingAngle={0}
           dataKey='value'
