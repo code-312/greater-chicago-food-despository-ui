@@ -51,8 +51,8 @@ const renderLabels = (props) => {
       <Sector
         cx={cx}
         cy={cy}
-        innerRadius={innerRadius - 2}
-        outerRadius={outerRadius + 2}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
         startAngle={startAngle}
         endAngle={endAngle}
         fill='#2cba42'
