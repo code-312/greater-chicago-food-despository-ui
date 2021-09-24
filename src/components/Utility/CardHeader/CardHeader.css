@@ -1,0 +1,6 @@
+.cardheader-container {
+    height: calc(0.875rem + 20px);
+    border-bottom: 1px solid #F3AD28;
+    width: 100%;
+    padding: 10px 1rem;
+}
