@@ -81,7 +81,6 @@ function ExtraDataMenu(props) {
 	/* Don't load this bar if there are no dataset options */  
 	return (radioData && selectedCounty) ? (
     <div className="extraData-wrapper">
-      {console.log("This is what was to the radio buttons before, ", Object.keys(radioData))}
 			<h3 className="extraData-title">Show data for:</h3>
       <Dropdown 
         arrowClassName='arrow'
