@@ -141,8 +141,8 @@ function UnequalDonut(props) {
           data={data}
           cx={100}
           cy={131}
-          innerRadius={38}
-          outerRadius={51}
+          innerRadius={54}
+          outerRadius={69}
           fill='#124c1b'
           paddingAngle={0}
           dataKey='value'

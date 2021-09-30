@@ -251,8 +251,8 @@ function Donut(props) {
               data={data}
               cx={100}
               cy={125}
-              innerRadius={35}
-              outerRadius={48}
+              innerRadius={54}
+              outerRadius={69}
               fill='#8884d8'
               paddingAngle={1}
               dataKey='value'
