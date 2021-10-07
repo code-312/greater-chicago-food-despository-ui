@@ -134,13 +134,13 @@ function UnequalDonut(props) {
   return (
     <div>
       <div className='donut__chart'>
-      <PieChart width={200} height={250}>
+      <PieChart width={273} height={250}>
         <Pie
           activeIndex={activeIndex}
           activeShape={renderLabels}
           data={data}
-          cx={100}
-          cy={131}
+          cx={130}
+          cy={125}
           innerRadius={54}
           outerRadius={69}
           fill='#124c1b'

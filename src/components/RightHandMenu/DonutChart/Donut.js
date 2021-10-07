@@ -243,14 +243,14 @@ function Donut(props) {
     data ? (
       <div>
         <div className='donut__chart'>
-          <PieChart width={200} height={250}>
+          <PieChart width={273} height={250}>
             <Pie
               activeIndex={activeLabel}
               activeShape={renderLabelonHover}
               onMouseEnter={onPieEnter}
               data={data}
-              cx={100}
-              cy={125}
+              cx={130}
+              cy={121}
               innerRadius={54}
               outerRadius={69}
               fill='#8884d8'
