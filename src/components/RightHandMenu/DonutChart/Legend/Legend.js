@@ -11,6 +11,11 @@ import './Legend.css'
 function Legend(props) {
   return (
     <div className='legend'>
+      <h3 className="leg__title">
+      {props.legend[0] && props.legend[0].key === "Food Insecurity" 
+        ? "Out of Total Population:" 
+        : "Select data to display:"} 
+      </h3>
       {props.legend.map((item, idx) => (
         <div className='leg__item' key={idx}>
           <div className='leg__left'>
