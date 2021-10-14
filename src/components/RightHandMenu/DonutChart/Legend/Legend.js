@@ -11,6 +11,7 @@ import './Legend.css'
 function Legend(props) {
   return (
     <div className='legend'>
+      <h3 className="leg__title">This is a test:</h3>
       {props.legend.map((item, idx) => (
         <div className='leg__item' key={idx}>
           <div className='leg__left'>
