@@ -129,7 +129,7 @@ const renderLabelonHover = (props) => {
     } else if (midAngle <= 20 || (midAngle >= 140 && midAngle <= 180)) {
       return cy + (outerRadius + 30) * sin - 30
     } else {
-      return cy + (outerRadius + 30) * sin
+      return cy + (outerRadius + 27) * sin
     }
   }
 
@@ -138,12 +138,12 @@ const renderLabelonHover = (props) => {
   const sx = cx + (outerRadius + 4) * cos         //start coordinates (sx,sy) for line
   const sy = cy + (outerRadius + 6) * sin
   const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190) //mid coordinates (mx,my) for line
-              ? cx + (outerRadius + 30) * cos
+              ? cx + (outerRadius + 37) * cos
               : sx
   const my = myCalc(midAngle, sin, sy)
   const ex = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)  //end coordinates (ex,ey) for line
               ? mx
-              : mx + (cos >= 0 ? 1 : -1) * 22   //1st and 4th quadrant cos is +ve ; 1st and 2nd quadrant sin is +ve
+              : mx + (cos >= 0 ? 1 : -1) * 50   //1st and 4th quadrant cos is +ve ; 1st and 2nd quadrant sin is +ve
   const ey = my
   const textAnchor = cos >= 0 ? 'end' : 'start' //where to anchor text tag
   const tx= ex + (cos >= 0 ? 1 : -1) * 12       //coordinates (tx,ty) on which text tag is placed
@@ -244,16 +244,16 @@ function Donut(props) {
     data ? (
       <div>
         <div className='donut__chart'>
-          <PieChart width={200} height={250}>
+          <PieChart width={273} height={250}>
             <Pie
               activeIndex={activeLabel}
               activeShape={renderLabelonHover}
               onMouseEnter={onPieEnter}
               data={data}
-              cx={100}
-              cy={125}
-              innerRadius={35}
-              outerRadius={48}
+              cx={130}
+              cy={121}
+              innerRadius={54}
+              outerRadius={69}
               fill='#8884d8'
               paddingAngle={1}
               dataKey='value'

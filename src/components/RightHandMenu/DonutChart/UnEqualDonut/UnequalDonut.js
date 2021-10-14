@@ -28,14 +28,14 @@ const renderLabels = (props) => {
 
   const sin = Math.sin(-RADIAN * midAngle)
   const cos = Math.cos(-RADIAN * midAngle)
-  const sx = cx + outerRadius * cos
-  const sy = cy + outerRadius * sin
+  const sx = cx + (outerRadius + 6.5) * cos 
+  const sy = cy + (outerRadius + 1) * sin
   // const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
   //             ? cx + (outerRadius + 30) * cos
   //             : sx 
   const mx = sx
-  const my = sy - (outerRadius + 20) * cos
-  const ex = mx + (cos >= 0 ? 1 : -1) * 20
+  const my = sy - (outerRadius - 10) * cos
+  const ex = mx + (cos >= 0 ? 1 : -1) * 15
   const ey = my
   const textAnchor = cos >= 0 ? 'end' : 'start'
   const tx= ex + (cos >= 0 ? 1 : -1) * 20
@@ -51,10 +51,19 @@ const renderLabels = (props) => {
       <Sector
         cx={cx}
         cy={cy}
-        innerRadius={innerRadius - 2}
-        outerRadius={outerRadius + 2}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
         startAngle={startAngle}
         endAngle={endAngle}
+        fill='#2cba42'
+      />
+      <Sector
+        cx={cx}
+        cy={cy}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        innerRadius={outerRadius + 4}
+        outerRadius={outerRadius + 6}
         fill='#2cba42'
       />
 
@@ -126,15 +135,15 @@ function UnequalDonut(props) {
   return (
     <div>
       <div className='donut__chart'>
-      <PieChart width={200} height={250}>
+      <PieChart width={273} height={250}>
         <Pie
           activeIndex={activeIndex}
           activeShape={renderLabels}
           data={data}
-          cx={100}
+          cx={130}
           cy={125}
-          innerRadius={43}
-          outerRadius={52}
+          innerRadius={54}
+          outerRadius={69}
           fill='#124c1b'
           paddingAngle={0}
           dataKey='value'
