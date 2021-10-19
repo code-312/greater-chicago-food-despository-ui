@@ -223,6 +223,10 @@ function Donut(props) {
     }, [setActiveLabel]
   )
 
+  const onClickLegend = (idx) => {
+    setActiveLabel(idx)
+  }
+  
   const { data, dataType } = props
 
   useEffect(() => {
@@ -274,7 +278,7 @@ function Donut(props) {
           </div>
         </div>
 		  	<ExtraDataMenu />
-        <Legend legend={legend} dataType={dataType} />
+        <Legend legend={legend} dataType={dataType} onClickLegend={onClickLegend}/>
       </div>
     ) : ''
   )
