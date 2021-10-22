@@ -17,7 +17,7 @@ function Legend(props) {
         : "Select data to display:"} 
       </h3>
       {props.legend.map((item, idx) => (
-        <div className='leg__item' key={idx}>
+        <div className='leg__item' key={idx} onClick={() => props.onClickLegend(idx)}>
           {/* disable legend items whose item vaule is 0 */}
           {item.value != 0 ?
           <>

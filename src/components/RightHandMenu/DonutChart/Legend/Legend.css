@@ -1,5 +1,5 @@
 .legend {
-  margin-top: 20px;
+  margin-top: 20px; 
  }
  
 .leg__title {
@@ -12,6 +12,7 @@
 }
 
  .leg__item {
+   cursor: pointer;
    display: flex;
    flex-direction: row;
    justify-content: space-between;
