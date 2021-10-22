@@ -18,6 +18,9 @@ function Legend(props) {
       </h3>
       {props.legend.map((item, idx) => (
         <div className='leg__item' key={idx} onClick={() => props.onClickLegend(idx)}>
+          {/* disable legend items whose item vaule is 0 */}
+          {item.value != 0 ?
+          <>
           <div className='leg__left'>
             <div className='leg__color' style={{ backgroundColor: item.color }}></div>
             <div className='leg__name'>{item.key}</div>
@@ -26,6 +29,19 @@ function Legend(props) {
                                                                       : props.dataType === 'percent' ? item.value + ' %' 
                                                                                                      : item.value}
           </div>
+          </> 
+          :
+          <>
+          <div className='leg__left'>
+            <div className='leg__color' disabled="true" style={{ backgroundColor: "lightgrey" }}></div>
+            <div className='leg__name' disabled="true" style={{ color: "lightgrey" }}>{item.key}</div>
+          </div>
+          <div className='leg__rt' disabled="true" style={{ color: "lightgrey" }}>{props.dataType === 'percentValue' ? `${item.value} (${item.percent}%)` 
+                                                                      : props.dataType === 'percent' ? item.value + ' %' 
+                                                                                                     : item.value}
+          </div>
+          </>
+          }
         </div>
       ))}
     </div>
