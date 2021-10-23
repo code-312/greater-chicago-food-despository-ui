@@ -2,18 +2,17 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin: 16px 16px 0 16px;
-  max-height: calc(100vh - 210px);
+  margin: 0px 16px 16px 16px;
   flex-shrink: 1;
   border-radius: 9px;
   color: #1c752a;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
   overflow: hidden;
+  background-color: white;
 }
 
 .title {
   padding: 16px 0 16px 0;
-  height: calc(100vh - 210px);
   width: 100%;
   color: #059713; 
   background: #fff;
@@ -29,18 +28,18 @@
 }
 
 /* County name list buttons effects */
-button {
+.scroll button {
   display: flex;
   flex-direction: column;
   text-align: center;
-  color: #059713; 
   background: #fff;
-  border-bottom: 1px solid #F3AD1C;
+  border-bottom: 1px solid #CED4DA !important;
   border-right: none;
   border-top: none;
   border-left: none;
-  padding: 20px 0 20px 25px;
+  height: calc(0.875rem + 20px);
   width: 100%;
+  padding: 10px 1rem !important;
 }
 
 button:last-child {
