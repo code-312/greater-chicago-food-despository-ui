@@ -56,6 +56,10 @@
   max-width: 329px;
 }
 
+.LeftMenuWrapper {
+  background-color:#e7e7e7;
+}
+
 #right-menu .toggle:checked:after {
     transition: all .3s ease;
     transform: translatex(20px);
