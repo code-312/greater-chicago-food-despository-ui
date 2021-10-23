@@ -29,7 +29,7 @@
 }
 
 /* County name list buttons effects */
-button {
+.scroll button {
   display: flex;
   flex-direction: column;
   text-align: center;
