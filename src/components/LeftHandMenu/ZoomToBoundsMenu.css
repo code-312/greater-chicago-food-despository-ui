@@ -9,6 +9,7 @@
   color: #1c752a;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
   overflow: hidden;
+  background-color: white;
 }
 
 .title {
