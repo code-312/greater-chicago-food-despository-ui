@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import { useSelector } from 'react-redux'
@@ -12,10 +12,15 @@ function ExtraDataMenu(props) {
   const {radioSelect, toggSelected, radioClick} = props
 
 	const handleSelection = (selected) => {
+    console.log("This is what's getting passed to 'handleSelection' ", selected);
     radioClick(radioSelect[toggSelected].findIndex(option => option === selected.value))
 	}
 
-  console.log("radioSelect", radioSelect, ' | toggSelected,', toggSelected, " | selectefiltereFeat", selectedfilterFeat);
+  useEffect(() => {
+    handleSelection({value: radioSelect[toggSelected][0], label: radioSelect[toggSelected][0]})
+  },[toggSelected])
+  
+  console.log("radioSelect", radioSelect[toggSelected]);
 
 	/* Don't load this bar if there are no dataset options */  
 	return (radioSelect && selectedCounty) ? (
