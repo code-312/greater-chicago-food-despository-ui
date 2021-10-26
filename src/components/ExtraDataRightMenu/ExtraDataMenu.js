@@ -13,6 +13,8 @@ function ExtraDataMenu(props) {
 
   const [radioData, setRadioData] = useState(null)
 
+  const {radioSelect, toggSelected} = props
+
   useEffect(() => {
     	// Radio Options to select feature for data display
 	const featOptions = {
@@ -84,9 +86,9 @@ function ExtraDataMenu(props) {
 			<h3 className="extraData-title">Show data for:</h3>
       <Dropdown 
         arrowClassName='arrow'
-        options={Object.keys(radioData)} 
+        options={radioSelect[toggSelected]} 
         onChange={handleSelection} 
-        value={'Women'}
+        value={radioSelect[toggSelected][0]}
         placeholder="Select an option"
       />
 		</div>
