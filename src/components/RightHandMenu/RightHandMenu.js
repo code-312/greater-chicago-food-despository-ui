@@ -43,6 +43,7 @@ const RightHandMenu = () => {
   );
 
   const radioClick = idx => {
+    console.log("Oh so far away", idx);
     if (dataOptions[selectedfilterFeat].radioSelect[toggSelected + 'Keys']) {
       dispatch(
         updateSelectedFeat({
@@ -60,10 +61,6 @@ const RightHandMenu = () => {
       pieData = filterFeatChart(countyData, selectedFeat);
     }
   };
-  
-
-	console.log("realRadioSelect", dataOptions[selectedfilterFeat].radioSelect)
-	console.log("realToggSelected", toggSelected)
 
   return (
     <div>
@@ -118,6 +115,9 @@ const RightHandMenu = () => {
                 <UnequalDonut
                   data={pieData}
                   dataType={dataOptions[selectedfilterFeat].dataType}
+                  radioSelect={dataOptions[selectedfilterFeat].radioSelect}
+                  toggSelected={toggSelected}
+                  radioClick={idx => radioClick(idx)}
                 />
               ) : (
                 <Donut
@@ -125,6 +125,7 @@ const RightHandMenu = () => {
                   dataType={dataOptions[selectedfilterFeat].dataType}
                   radioSelect={dataOptions[selectedfilterFeat].radioSelect}
                   toggSelected={toggSelected}
+                  radioClick={idx => radioClick(idx)}
                 />
               )}
             </div>

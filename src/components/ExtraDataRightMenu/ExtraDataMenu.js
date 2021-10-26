@@ -13,7 +13,7 @@ function ExtraDataMenu(props) {
 
   const [radioData, setRadioData] = useState(null)
 
-  const {radioSelect, toggSelected} = props
+  const {radioSelect, toggSelected, radioClick} = props
 
   useEffect(() => {
     	// Radio Options to select feature for data display
@@ -74,10 +74,9 @@ function ExtraDataMenu(props) {
     }
   },[selectedfilterFeat,selectedfilterSubfeat])
 
-	const handleSelection = (idx) => {
-		dispatch(updateExtraDataFeat({
-			selectedExtraDataFeat: radioData[Object.keys(radioData)[idx]]
-		}))
+	const handleSelection = (selected) => {
+    console.log("This is what a radio click looks like, ", selected.value)
+    radioClick(radioSelect[toggSelected].findIndex(option => option === selected.value))
 	}
 
 	/* Don't load this bar if there are no dataset options */  
