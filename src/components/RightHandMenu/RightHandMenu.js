@@ -60,6 +60,10 @@ const RightHandMenu = () => {
       pieData = filterFeatChart(countyData, selectedFeat);
     }
   };
+  
+
+	console.log("realRadioSelect", dataOptions[selectedfilterFeat].radioSelect)
+	console.log("realToggSelected", toggSelected)
 
   return (
     <div>
@@ -95,7 +99,7 @@ const RightHandMenu = () => {
               ''
             )}
 
-            {dataOptions[selectedfilterFeat].radioSelect ? (
+            {dataOptions[selectedfilterFeat].radioSelect && (
               <div className='rt__radioSelect'>
                 <RadioSelect
                   data={
@@ -105,8 +109,6 @@ const RightHandMenu = () => {
                   alignment={'row'}
                 />
               </div>
-            ) : (
-              ''
             )}
 
             {/* WIC data and Census Data has race type pie chart; others have a different pie chart */}
@@ -121,6 +123,8 @@ const RightHandMenu = () => {
                 <Donut
                   data={pieData}
                   dataType={dataOptions[selectedfilterFeat].dataType}
+                  radioSelect={dataOptions[selectedfilterFeat].radioSelect}
+                  toggSelected={toggSelected}
                 />
               )}
             </div>

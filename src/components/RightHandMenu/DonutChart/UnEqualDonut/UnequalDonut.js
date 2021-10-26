@@ -111,7 +111,6 @@ function UnequalDonut(props) {
   const [activeIndex, ] = useState(0)
 
   const { data, dataType } = props
-  console.log("Data key", data[0].key)
   useEffect(() => {
     if (data) {
       let sum1 = data.reduce(function (acc, curr) {

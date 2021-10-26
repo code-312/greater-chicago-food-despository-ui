@@ -235,7 +235,7 @@ function Donut(props) {
 		setActiveLabel(idx);
 	};
 
-	const { data, dataType } = props;
+	const { data, dataType, radioSelect, toggSelected } = props;
 
 	useEffect(() => {
 		const legendData = [];
@@ -293,7 +293,14 @@ function Donut(props) {
 					</span>
 				</div>
 			</div>
-			<ExtraDataMenu />
+			{
+				radioSelect && radioSelect[toggSelected] && (
+					<ExtraDataMenu 
+						radioSelect={radioSelect}
+						toggSelected={toggSelected}
+					/>
+				)
+			}
 			<Legend
 				legend={legend}
 				dataType={dataType}
