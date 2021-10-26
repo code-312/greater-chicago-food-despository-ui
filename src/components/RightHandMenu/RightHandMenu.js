@@ -43,7 +43,6 @@ const RightHandMenu = () => {
   );
 
   const radioClick = idx => {
-    console.log("Oh so far away", idx);
     if (dataOptions[selectedfilterFeat].radioSelect[toggSelected + 'Keys']) {
       dispatch(
         updateSelectedFeat({
