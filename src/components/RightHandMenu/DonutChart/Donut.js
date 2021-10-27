@@ -235,7 +235,7 @@ function Donut(props) {
 		setActiveLabel(idx);
 	};
 
-	const { data, dataType, radioSelect, toggSelected, radioClick } = props;
+	const { data, dataType, radioSelect, toggSelected, radioClick, dropDownValue } = props;
 
 	useEffect(() => {
 		const legendData = [];
@@ -299,6 +299,7 @@ function Donut(props) {
 						radioSelect={radioSelect}
 						toggSelected={toggSelected}
 						radioClick={radioClick}
+            dropDownValue={dropDownValue}
 					/>
 				)
 			}

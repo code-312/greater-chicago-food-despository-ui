@@ -110,7 +110,7 @@ function UnequalDonut(props) {
   // fixed to 0 as 1st element is the only one requiring label and sector overlay
   const [activeIndex, ] = useState(0)
 
-  const { data, dataType, radioSelect, toggSelected, radioClick } = props
+  const { data, dataType, radioSelect, toggSelected, radioClick, dropDownValue } = props
   useEffect(() => {
     if (data) {
       let sum1 = data.reduce(function (acc, curr) {
@@ -166,6 +166,7 @@ function UnequalDonut(props) {
 						radioSelect={radioSelect}
 						toggSelected={toggSelected}
 						radioClick={radioClick}
+            dropDownValue={dropDownValue}
 					/>
 				)
 			}

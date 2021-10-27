@@ -1,9 +1,3 @@
-/* .extraData-wrapper{
-  margin: 0 16px 16px 16px;
-	background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
-	border-radius: 9px;
-} */
 
 .extraData-title {
 	margin: 0.5rem auto 0.5rem 1.2rem;
@@ -15,7 +9,7 @@
 }
 
 .Dropdown-control {
-	width: 189px;
+	width: 100%;
 	height: 32px;
 	padding: 4px 16px;
 	border-color: #1c752a;
