@@ -12,7 +12,6 @@ function ExtraDataMenu(props) {
   const {radioSelect, toggSelected, radioClick, dropDownValue} = props
 
 	const handleSelection = (selected) => {
-    console.log("This is what's getting passed to 'handleSelection' ", selected);
     radioClick(radioSelect[toggSelected].findIndex(option => option === selected.value))
 	}
 

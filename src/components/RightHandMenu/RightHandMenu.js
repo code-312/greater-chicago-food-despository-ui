@@ -62,9 +62,6 @@ const RightHandMenu = () => {
     }
   };
 
-  console.log("Toggle Selected: ", toggSelected);
-  console.log("Toggle Index Selected: ", toggIdxSelected);
-
   return (
     <div>
       {selectedCounty && dataOptions[selectedfilterFeat] ? (
