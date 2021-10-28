@@ -17,9 +17,18 @@
    flex-direction: row;
    justify-content: space-between;
    align-items: center;
+   border-top: 1px solid #CED4DA;
    padding: 4px 0px 4px 6px;
  }
- 
+
+ .leg__item:last-child {
+     border-bottom: 1px solid #CED4DA;
+ }
+ .selected_item {
+     background-color: rgba(206, 212, 218,.5);
+ }
+
+
  .leg__left {
    display: flex;
    align-items: center;
