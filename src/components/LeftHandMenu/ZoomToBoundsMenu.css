@@ -39,7 +39,7 @@
   border-left: none;
   height: calc(0.875rem + 20px);
   width: 100%;
-  padding: 10px 1rem !important;
+  padding: 12px 1rem !important;
 }
 
 button:last-child {

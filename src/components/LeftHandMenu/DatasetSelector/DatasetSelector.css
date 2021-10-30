@@ -1,18 +1,18 @@
 .data-selector {
 	margin: 16px;
 	background: white;
-  	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0.1px;
 	border-radius: 9px;
 	height: 177px;
 	width: 185px;
 }
 
-.data-selector .radioLabel {
-	line-height: 1.0625rem;
-	letter-spacing: 0px;
-	padding-left: 15px;
+.data-selector .radioSel-column {
+	margin-top: 8px;
+	height: 128px;
+	max-height: 128px;
 }
 
-.data-selector .radioSel-column {
-	margin-top: 9px;
+.radioSel-column > label > h3 {
+	padding-top: 4px;
 }
