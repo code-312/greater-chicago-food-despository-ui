@@ -6,7 +6,7 @@
     * Any bold text
 */
 .font-bold {
-    font: normal normal bold 0.875rem/0.875rem 'Hind';
+    font: normal normal bold 1rem/1rem 'Hind';
     letter-spacing: 0px;
     opacity: 1;
 }
