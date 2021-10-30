@@ -4,7 +4,6 @@ import { updateSelectedFeat } from  '../../redux/selectedFeatReducer'
 
 import './RightHandMenu.css'
 import ToggleSelect from './ToggleSelect/ToggleSelect'
-import RadioSelect from '../Utility/RadioSelect/RadioSelect'
 import Donut from './DonutChart/Donut'
 import UnequalDonut from './DonutChart/UnEqualDonut/UnequalDonut'
 import LinkToSource from './LinkToSource/LinkToSource'
@@ -12,7 +11,6 @@ import LinkToSource from './LinkToSource/LinkToSource'
 import {filterFeatChart} from '../Utility/filterFeatChart'
 import {dataOptions} from './dataOptions'
 import {DataContext} from '../../App'
-
 
 /*
  * COMPONENT: RightHandMenu
@@ -24,6 +22,8 @@ const RightHandMenu = () => {
   // get all County features data and selected feature option from redux store
   const {countyData} = useContext(DataContext);
   const selectedFeat = useSelector(state => state.selectedFeat);
+
+  const [dropDownValue, setDropDownValue] = useState(0)
 
   const { selectedCounty, selectedfilterFeat } = selectedFeat;
 
@@ -44,6 +44,7 @@ const RightHandMenu = () => {
 
   const radioClick = idx => {
     if (dataOptions[selectedfilterFeat].radioSelect[toggSelected + 'Keys']) {
+      setDropDownValue(idx)
       dispatch(
         updateSelectedFeat({
           ...selectedFeat,
@@ -95,20 +96,6 @@ const RightHandMenu = () => {
               ''
             )}
 
-            {dataOptions[selectedfilterFeat].radioSelect ? (
-              <div className='rt__radioSelect'>
-                <RadioSelect
-                  data={
-                    dataOptions[selectedfilterFeat].radioSelect[toggSelected]
-                  }
-                  handleChange={idx => radioClick(idx)}
-                  alignment={'row'}
-                />
-              </div>
-            ) : (
-              ''
-            )}
-
             {/* WIC data and Census Data has race type pie chart; others have a different pie chart */}
             <div className='rt__donut'>
               {selectedfilterFeat === 'poverty_data' ||
@@ -116,11 +103,19 @@ const RightHandMenu = () => {
                 <UnequalDonut
                   data={pieData}
                   dataType={dataOptions[selectedfilterFeat].dataType}
+                  radioSelect={dataOptions[selectedfilterFeat].radioSelect}
+                  toggSelected={toggSelected}
+                  radioClick={idx => radioClick(idx)}
+                  dropDownValue={dropDownValue}
                 />
               ) : (
                 <Donut
                   data={pieData}
                   dataType={dataOptions[selectedfilterFeat].dataType}
+                  radioSelect={dataOptions[selectedfilterFeat].radioSelect}
+                  toggSelected={toggSelected}
+                  radioClick={idx => radioClick(idx)}
+                  dropDownValue={dropDownValue}
                 />
               )}
             </div>
