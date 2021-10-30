@@ -32,6 +32,14 @@
 	padding: 4px 16px;
 }
 
+.Dropdown-option:hover {
+	background: #CED4DA;
+}
+
+.Dropdown-option.is-selected {
+	display: none;
+}
+
 .Dropdown-option:not(:last-child) {
 	border-bottom: 1px solid #1c752a;
 }

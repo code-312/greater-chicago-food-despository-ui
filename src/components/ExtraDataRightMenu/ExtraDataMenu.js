@@ -21,7 +21,7 @@ function ExtraDataMenu(props) {
   
 	/* Don't load this bar if there are no dataset options */  
 	return (radioSelect && selectedCounty) ? (
-    <div className="extraData-wrapper">
+    <div className="extraData-wrapper font-normal">
 			<h3 className="extraData-title">Show data for:</h3>
       <Dropdown 
         arrowClassName='arrow'
