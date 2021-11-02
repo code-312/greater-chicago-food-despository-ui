@@ -36,14 +36,14 @@ function MapColorLegend(props) {
 
 
   return !colors ? null : (
-    <div class="map-color-legend clearfix" >
-      <span class="color-key">Color Key</span>
-      <div class="bin-container">
+    <div className="map-color-legend clearfix" >
+      <span className="color-key">Color Key</span>
+      <div className="bin-container">
         {colors.map((color, i) => {
           return (
-            <div class="bin">
-              <div class="bin-color-sample" style={{background:color}}></div>
-              <span class="bin-label">{ranges ? ranges[i] : null}</span>
+            <div key={i} className="bin">
+              <div className="bin-color-sample" style={{background:color}}></div>
+              <span className="bin-label">{ranges ? ranges[i] : null}</span>
             </div>
           );
         })}

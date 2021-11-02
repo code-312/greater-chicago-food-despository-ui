@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { PieChart, Pie, Sector } from 'recharts'
-
+import ExtraDataMenu from '../../../ExtraDataRightMenu/ExtraDataMenu'
 import './UnequalDonut.css'
 import Legend from '../Legend/Legend'
 
@@ -110,8 +110,7 @@ function UnequalDonut(props) {
   // fixed to 0 as 1st element is the only one requiring label and sector overlay
   const [activeIndex, ] = useState(0)
 
-  const { data, dataType } = props
-  console.log("Data key", data[0].key)
+  const { data, dataType, radioSelect, toggSelected, radioClick, dropDownValue } = props
   useEffect(() => {
     if (data) {
       let sum1 = data.reduce(function (acc, curr) {
@@ -161,7 +160,16 @@ function UnequalDonut(props) {
           } 
         </div>
       </div>
-      
+      {
+				radioSelect && radioSelect[toggSelected] && (
+					<ExtraDataMenu 
+						radioSelect={radioSelect}
+						toggSelected={toggSelected}
+						radioClick={radioClick}
+            dropDownValue={dropDownValue}
+					/>
+				)
+			}
       <Legend legend={legend} dataType={dataType} />
     </div>
   )
