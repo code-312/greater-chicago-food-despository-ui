@@ -32,8 +32,9 @@ export const dataOptions = {
     legendLabels: ['Total Enrollment', ''],
     radioSelect: {
       Enrollment : null,
-      Race : ['Women', 'Infants', 'Children', 'Total'],
-      RaceKeys: ['wic_participation_women_data', 'wic_participation_infants_data', 'wic_participation_children_data', 'wic_participation_total_data']
+      Race : ['Total', 'Women', 'Infants', 'Children'],
+      RaceKeys: ['wic_participation_total_data',
+        'wic_participation_women_data', 'wic_participation_infants_data', 'wic_participation_children_data']
       },
     dataType: 'value'
   },
