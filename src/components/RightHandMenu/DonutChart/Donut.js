@@ -254,64 +254,60 @@ function Donut(props) {
 		setLegend([...legendData]);
 	}, [data]);
 
-	return data ? (
-		<div>
-			<div className="donut__chart">
-				<PieChart width={273} height={250}>
-					<Pie
-						activeIndex={activeLabel}
-						activeShape={renderLabelonHover}
-						onMouseEnter={onPieEnter}
-						data={data}
-						cx={130}
-						cy={121}
-						innerRadius={54}
-						outerRadius={69}
-						fill="#8884d8"
-						paddingAngle={1}
-						dataKey="value"
-						// label={renderLabels}
-						labelLine={false}
-					>
-						{/* for each cell in pie fill color separate */}
-						{data.map((entry, index) => (
-							<Cell
-								key={`cell-${index}`}
-								fill={COLORS[index % COLORS.length]}
-							/>
-						))}
-					</Pie>
-				</PieChart>
-				<div className="donut__centerTxt">
-					<h5>Total Population</h5>
-					<span>
-						{dataType === 'percentValue'
-							? `${sum} (${data[1].percent}%)`
-							: dataType === 'percent'
-							? sum + ' %'
-							: sum}
-					</span>
-				</div>
-			</div>
-			{
+
+  return (
+    data ? (
+      <div>
+        <div className='donut__chart'>
+          <PieChart width={273} height={250}>
+            <Pie
+              activeIndex={activeLabel}
+              activeShape={renderLabelonHover}
+              onMouseEnter={onPieEnter}
+              data={data}
+              cx={130}
+              cy={121}
+              innerRadius={54}
+              outerRadius={69}
+              fill='#8884d8'
+              paddingAngle={1}
+              dataKey='value'
+              // label={renderLabels}
+              labelLine={false}
+            >
+              {/* for each cell in pie fill color separate */}
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} 
+                      fill={COLORS[index % COLORS.length]} 
+                />
+              ))}
+            </Pie>
+          </PieChart>
+          <div className='donut__centerTxt'>
+            <h5>Total Population</h5>
+            <span>
+				        {dataType === 'percentValue'
+							  ? `${sum} (${data[1].percent}%)`
+							  : dataType === 'percent'
+							  ? sum + ' %'
+							  : sum}
+            </span>
+          </div>
+        </div>
+			  {
 				radioSelect && radioSelect[toggSelected] && (
-					<ExtraDataMenu 
-						radioSelect={radioSelect}
-						toggSelected={toggSelected}
-						radioClick={radioClick}
-            dropDownValue={dropDownValue}
-					/>
+				<ExtraDataMenu
+				  radioSelect={radioSelect}
+				  toggSelected={toggSelected}
+				 	radioClick={radioClick}
+          dropDownValue={dropDownValue}
+				/>
 				)
-			}
-			<Legend
-				legend={legend}
-				dataType={dataType}
-				onClickLegend={onClickLegend}
-			/>
-		</div>
-	) : (
-		''
-	);
+			  }
+        <Legend legend={legend} selectedIndex={activeLabel} dataType={dataType} onClickLegend={onClickLegend}/>
+      </div>
+    ) : null
+  )
 }
 
 export default Donut;
