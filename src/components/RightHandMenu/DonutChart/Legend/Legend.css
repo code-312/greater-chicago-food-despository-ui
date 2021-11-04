@@ -25,6 +25,7 @@
      border-bottom: 1px solid #CED4DA;
  }
  .selected_item {
+     font-weight: 600;
      background-color: rgba(206, 212, 218,.5);
  }
 
