@@ -53,7 +53,7 @@ function MapColorLegend(props) {
       <div className="bin-container">
         {colors.map((color, i) => {
           return (
-            <div className="bin">
+            <div className="bin" key={i}>
               <div className="bin-color-sample" style={{background:color}}></div>
               <span className="bin-label">{rangeLabels[i]}</span>
             </div>

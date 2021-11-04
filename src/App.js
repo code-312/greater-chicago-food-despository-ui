@@ -1,10 +1,10 @@
-import React, {useEffect} from "react";
-import {useDispatch} from "react-redux";
+import React from "react";
+// import {useDispatch} from "react-redux";
 
 
 import RightHandMenu from "./components/RightHandMenu/RightHandMenu";
 import Map from "./mapbox/Map";
-import MapColorLegend from "./components/MapColorLegend";
+// import MapColorLegend from "./components/MapColorLegend";
 import LeftHandMenu from "./components/LeftHandMenu/LeftHandMenu";
 import "./App.css";
 
