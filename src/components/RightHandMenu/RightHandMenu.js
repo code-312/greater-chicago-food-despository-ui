@@ -11,6 +11,7 @@ import LinkToSource from './LinkToSource/LinkToSource'
 import {filterFeatChart} from '../Utility/filterFeatChart'
 import {dataOptions} from './dataOptions'
 import {DataContext} from '../../App'
+import '../../AllieAwesomeCSS.css'
 
 /*
  * COMPONENT: RightHandMenu
@@ -126,7 +127,7 @@ const RightHandMenu = () => {
         </div>
       ) : (
         <div className='rtMenu noCounty'>
-          <p className='rt__noCounty'>
+          <p className='rt__noCounty font-large'>
             Select a county to view {dataOptions[selectedfilterFeat].title}
           </p>
         </div>
