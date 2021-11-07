@@ -70,10 +70,10 @@ const RightHandMenu = () => {
         <div className='rtMenu'>
           <div className='rtBody'>
             {dataOptions[selectedfilterFeat].title === 'Race/Ethnicity' ? (
-                <CardHeader text={"Race/Ethnicity"} styleOverride={{ width: "297px", marginLeft: "-12px"}} />
+                <CardHeader text={"Race/Ethnicity"} styleOverride={{ width: "297px", marginLeft: "-12px", marginTop: "-12px"}} />
               ) : (
                 <CardHeader text={
-                  dataOptions[selectedfilterFeat].title} styleOverride={{ width: "297px", marginLeft: "-12px"}} />
+                  dataOptions[selectedfilterFeat].title} styleOverride={{ width: "297px", marginLeft: "-12px", marginTop: "-12px"}} />
               )}
             <p className='rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
             <h3 className='rt__name'>
