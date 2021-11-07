@@ -15,7 +15,7 @@ const LinkToSource = ({ data }) => {
       case 'race_data':
         return 'American Community Survey (2018)';
       default:
-        console.log('No selected filterFeat');    
+        null    
     }
     // If Food Insecurity is selected:
     switch (selectedfilterSubfeat) {
@@ -28,7 +28,7 @@ const LinkToSource = ({ data }) => {
       case 'insecurity_2020_child_projected':
         return 'Feeding America - Children (2020)';
       default: 
-        console.log('No selected Subfeat');
+        null
     }
     return 'Link to source';
   };
