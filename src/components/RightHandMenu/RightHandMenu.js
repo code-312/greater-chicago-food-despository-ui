@@ -12,6 +12,7 @@ import {filterFeatChart} from '../Utility/filterFeatChart'
 import {dataOptions} from './dataOptions'
 import {DataContext} from '../../App'
 import '../../AllieAwesomeCSS.css'
+import CardHeader from '../Utility/CardHeader/CardHeader'
 
 /*
  * COMPONENT: RightHandMenu
@@ -68,16 +69,12 @@ const RightHandMenu = () => {
       {selectedCounty && dataOptions[selectedfilterFeat] ? (
         <div className='rtMenu'>
           <div className='rtBody'>
-            <h1 className='rt__title'>
-              {dataOptions[selectedfilterFeat].title === 'Race/Ethnicity' ? (
-                <>
-                  Race/Ethnicity
-                  <span style={{ fontSize: '.85rem' }}> (Census)</span>
-                </>
+            {dataOptions[selectedfilterFeat].title === 'Race/Ethnicity' ? (
+                <CardHeader text={"Race/Ethnicity"} styleOverride={{ width: "297px", marginLeft: "-12px"}} />
               ) : (
-                dataOptions[selectedfilterFeat].title
+                <CardHeader text={
+                  dataOptions[selectedfilterFeat].title} styleOverride={{ width: "297px", marginLeft: "-12px"}} />
               )}
-            </h1>
             <p className='rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
             <h3 className='rt__name'>
               {selectedCounty ? selectedCounty.name + ' County' : ''}
