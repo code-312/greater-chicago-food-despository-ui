@@ -75,7 +75,7 @@ const RightHandMenu = () => {
                 <CardHeader text={
                   dataOptions[selectedfilterFeat].title} styleOverride={{ width: "297px", marginLeft: "-12px", marginTop: "-12px"}} />
               )}
-            <p className='rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
+            <p className='font-small black rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
             <h3 className='rt__name'>
               {selectedCounty ? selectedCounty.name + ' County' : ''}
             </h3>

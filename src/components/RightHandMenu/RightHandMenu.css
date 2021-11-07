@@ -21,9 +21,7 @@
 }
 
 .rt__desc {
-  color: black;
-  font-size: 10px;
-  font-weight: 600;
+  padding-left: 4px;
 }
 
 .rt__name {
