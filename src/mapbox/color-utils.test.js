@@ -46,9 +46,7 @@ it.skip("get individual county colors", () => {
   ).toEqual(4);
 });
 //put this in a function so it can be at the bottom of the file
-function retrieveTestResults() {
-  return;
-}
+// 
 function retrieveTestCountyAndMetric() {
   return [
     //random sample data
