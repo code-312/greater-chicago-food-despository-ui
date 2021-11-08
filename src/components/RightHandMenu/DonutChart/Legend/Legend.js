@@ -11,7 +11,7 @@ let getDisplayValue;
 function Legend(props) {
   return (
     <div className="legend">
-      <h3 className="leg__title">
+      <h3 className="leg__title font-bold primary-color">
         {props.legend[0] && props.legend[0].key === "Food Insecurity"
           ? "Out of Total Population:"
           : "Select data to display:"}
