@@ -46,7 +46,7 @@ function LegendItem({legendItem, index, displayValue}) {
             className="leg__color"
             style={{backgroundColor: item.color}}
           ></div>
-          <div className="leg__name">{item.key}</div>
+          <div className="font-normal primary-color">{item.key}</div>
         </div>
         <div className="leg__rt">{displayValue}</div>
       </>
@@ -60,7 +60,7 @@ function LegendItem({legendItem, index, displayValue}) {
           disabled="true"
           style={{backgroundColor: "lightgrey"}}
         ></div>
-        <div className="leg__name" disabled="true" style={{color: "lightgrey"}}>
+        <div className="font-normal primary-color" disabled="true" style={{color: "lightgrey"}}>
           {item.key}
         </div>
       </div>
@@ -75,6 +75,6 @@ getDisplayValue = (item, dataType) =>
   dataType === "percentValue"
     ? `${item.value} (${item.percent}%)`
     : dataType === "percent"
-    ? item.value + " %?"
+    ? item.value + " %"
     : item.value;
 export default Legend;

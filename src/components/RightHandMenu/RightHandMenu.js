@@ -70,10 +70,10 @@ const RightHandMenu = () => {
         <div className='rtMenu'>
           <div className='rtBody'>
             {dataOptions[selectedfilterFeat].title === 'Race/Ethnicity' ? (
-                <CardHeader text={"Race/Ethnicity"} styleOverride={{ width: "297px", marginLeft: "-12px", marginTop: "-12px"}} />
+                <CardHeader text={"Race/Ethnicity"} styleOverride={{ width: "297px", marginLeft: "-16px", marginTop: "-12px"}} />
               ) : (
                 <CardHeader text={
-                  dataOptions[selectedfilterFeat].title} styleOverride={{ width: "297px", marginLeft: "-12px", marginTop: "-12px"}} />
+                  dataOptions[selectedfilterFeat].title} styleOverride={{ width: "297px", marginLeft: "-16px", marginTop: "-12px"}} />
               )}
             <p className='font-small black rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
             <h3 className='rt__name font-bold primary-color'>
@@ -124,7 +124,7 @@ const RightHandMenu = () => {
         </div>
       ) : (
         <div className='rtMenu noCounty'>
-          <p className='rt__noCounty font-large'>
+          <p className='rt__noCounty font-large primary-color'>
             Select a county to view {dataOptions[selectedfilterFeat].title}
           </p>
         </div>
