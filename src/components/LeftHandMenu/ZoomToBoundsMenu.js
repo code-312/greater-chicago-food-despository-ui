@@ -16,11 +16,11 @@ const ZoomToBoundsMenu = () => {
     //useSelector gets viewport state from Redux store
     const currentViewport = useSelector(state => state.viewport);
     
-    const origin = {
-        latitude: 40.150196,
-        longitude: -89.367848, 
-        zoom: 6,
-    };
+    // const origin = {
+    //     latitude: 40.150196,
+    //     longitude: -89.367848, 
+    //     zoom: 6,
+    // };
 
     /**
    * Selector function

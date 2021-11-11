@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 /**
  * COMPONENT: MapColorLegend
@@ -27,12 +26,12 @@ function MapColorLegend(props) {
     '75-100%'
   ];
 
-  const ranges_alt = [
-    '0-1533',
-    '1533-3439',
-    '3440-14564',
-    '145564-232434'
-  ];
+  // const ranges_alt = [
+  //   '0-1533',
+  //   '1533-3439',
+  //   '3440-14564',
+  //   '145564-232434'
+  // ];
 
 
   return !colors ? null : (
