@@ -14,6 +14,8 @@ const LinkToSource = ({ data }) => {
         return 'IDHS (2019-2020)';
       case 'race_data':
         return 'American Community Survey (2018)';
+      default:
+        console.log('No selectedfilterFeat')    
     }
     // If Food Insecurity is selected:
     switch (selectedfilterSubfeat) {
@@ -25,6 +27,8 @@ const LinkToSource = ({ data }) => {
         return 'Feeding America - Children (2018)';
       case 'insecurity_2020_child_projected':
         return 'Feeding America - Children (2020)';
+      default: 
+        console.log('No selectedfilterSubfeat')
     }
     return 'Link to source';
   };
