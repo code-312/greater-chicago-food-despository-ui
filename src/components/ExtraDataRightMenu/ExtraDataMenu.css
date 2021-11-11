@@ -33,7 +33,7 @@
 }
 
 .Dropdown-option:hover {
-	background: #CFD4D9;
+	background: rgba(206, 212, 218,.5);
 	/* background: #CED4DA; */
 }
 
