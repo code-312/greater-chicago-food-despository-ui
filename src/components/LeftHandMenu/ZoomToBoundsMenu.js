@@ -100,12 +100,11 @@ export const ZoomToBoundsButton = ({keyValue, label, newViewport, countyID}) => 
         }));
     }
 
-    
     return (
         <button
             onClick={() => onZoomToBoundsButtonClick(newViewport, keyValue, countyID)}
             data-testid={"zoom_to_bounds_button_" + keyValue}
-            className={`font-normal primary-color ${keyValue === selectedCounty.name ? 'selected-county' : ''}`}
+            className={`font-normal primary-color ${(keyValue === selectedCounty?.name) ? 'selected-county' : ''}`}
         >{label}</button>
     )
 }
