@@ -65,6 +65,11 @@ export function getDataForSelector({
       case "snap_data":
         selectedfilterSubfeat = selectedfilterSubfeat || "2019age_18-65";
         selectedExtraDataFeat = selectedExtraDataFeat || "race_asian";
+        
+        if(selectedfilterSubfeat.length === 4){
+          selectedfilterSubfeat += "age_18-65";
+        }
+        
         if (selectedfilterSubfeat && selectedfilterSubfeat.length > 4) {
           return currentObjectToSearch[selectedfilterFeat][
             selectedfilterSubfeat.substring(0, 4)
@@ -72,49 +77,50 @@ export function getDataForSelector({
         }
         break;
 
+      // selected filter feat is WIC
       case "WIC":
-        selectedfilterSubfeat =
-          selectedfilterSubfeat || "wic_participation_total_data";
+        selectedfilterSubfeat = selectedfilterSubfeat || "wic_participation_total_data";
         selectedExtraDataFeat = selectedExtraDataFeat || "race_asian";
+
+        // there is a selected filter subfeat and selected extra data feat
         if (selectedfilterSubfeat && selectedExtraDataFeat) {
-          if (
-            selectedfilterSubfeat.substring(0, 3) === "wic" &&
-            selectedExtraDataFeat.substring !== "wic"
-          ) {
+          
+          // selectedfilterSubfeat begins with "wic" and exraDataFeat does not 
+          if (selectedfilterSubfeat.substring(0, 3) === "wic" && selectedExtraDataFeat.substring !== "wic") {
+              
+            // there is a selected filer subfeat ("wic_participation_total_data" set above)
             if (currentObjectToSearch[selectedfilterSubfeat]) {
-              return currentObjectToSearch[selectedfilterSubfeat][
-                selectedExtraDataFeat
-              ];
+              return currentObjectToSearch[selectedfilterSubfeat][selectedExtraDataFeat];
             } else {
+              // there is no selectedfilterSubfeat property
               return 0;
             }
-          } else if (
-            selectedfilterSubfeat === "Enrollment" &&
-            selectedExtraDataFeat.substring(0, 3) === "wic"
-          ) {
-            if (
-              currentObjectToSearch[
-                selectedExtraDataFeat.substring(
-                  0,
-                  selectedExtraDataFeat.length - 6,
-                )
-              ]
-            ) {
-              return currentObjectToSearch[
-                selectedExtraDataFeat.substring(
-                  0,
-                  selectedExtraDataFeat.length - 6,
-                )
-              ][
-                selectedExtraDataFeat.substring(
-                  selectedExtraDataFeat.length - 5,
-                )
-              ];
+              
+          // selctedfilterSubfeaet is "Enrollment" (used to have && sedf substring "wic")
+          } else if (selectedfilterSubfeat === "Enrollment") {
+            console.log("selectedfilterSubfeat: ", selectedfilterSubfeat);
+            console.log("selectedExtraDataFeat: ", selectedExtraDataFeat);
+            console.log("currentObjectToSearch: ", currentObjectToSearch);
+            console.log("Substring (0, len-6): ", selectedExtraDataFeat.substring(0,selectedExtraDataFeat.length - 6));
+            console.log("Substring (len-5): ", selectedExtraDataFeat.substring( selectedExtraDataFeat.length - 5));
+            
+            // if selectedExtraDataFeat not valid make it 'Women'
+            selectedExtraDataFeat = (selectedExtraDataFeat === 'Women' ||selectedExtraDataFeat ===  'Infants' ||selectedExtraDataFeat ===  'Children') 
+            ? selectedExtraDataFeat 
+            : 'Women';
+              
+            // if there is a selectedExtraDataFeat.substring (defaults to "race")
+            if (currentObjectToSearch[`wic_participation_${selectedExtraDataFeat.toLowerCase()}_data`]) {
+              return currentObjectToSearch
+                [`wic_participation_${selectedExtraDataFeat.toLowerCase()}_data`]
+                ['total'];
             } else {
+              // no valid property selected
               return 0;
             }
           }
         }
+        // there is no selected filtered subfeat or no selected extra data
         break;
 
       default:
