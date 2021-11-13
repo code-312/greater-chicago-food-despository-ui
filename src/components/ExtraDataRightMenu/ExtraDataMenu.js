@@ -1,17 +1,16 @@
-<<<<<<< HEAD
-import React, {useState, useEffect} from 'react'
-import RadioSelect from '../Utility/RadioSelect/RadioSelect'
+// import React, {useState, useEffect} from 'react'
+// import RadioSelect from '../Utility/RadioSelect/RadioSelect'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { updateExtraDataFeat } from  '../../redux/extraDataMenuReducer'
-import {getExtraDataLabelDictionary} from '../../mapbox/DataSelectionUtil'
-import './ExtraDataMenu.css'
+// import { useSelector, useDispatch } from 'react-redux'
+// import { updateExtraDataFeat } from  '../../redux/extraDataMenuReducer'
+// import {getExtraDataLabelDictionary} from '../../mapbox/DataSelectionUtil'
+// import './ExtraDataMenu.css'
 
-function ExtraDataMenu(props) {
-	const dispatch = useDispatch()
-  const selectedFeat = useSelector(state => state.selectedFeat)
-  const { selectedfilterFeat, selectedfilterSubfeat, selectedCounty } = selectedFeat
-=======
+// function ExtraDataMenu(props) {
+// 	const dispatch = useDispatch()
+//   const selectedFeat = useSelector(state => state.selectedFeat)
+//   const { selectedfilterFeat, selectedfilterSubfeat, selectedCounty } = selectedFeat
+
 import React, { useEffect } from 'react'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
@@ -22,26 +21,20 @@ import './ExtraDataMenu.css'
 function ExtraDataMenu(props) {
 	const selectedFeat = useSelector(state => state.selectedFeat)
   const { selectedCounty } = selectedFeat
->>>>>>> main
 
   const {radioSelect, toggSelected, radioClick, dropDownValue} = props
 
-<<<<<<< HEAD
-  useEffect(() => {
-      setRadioData(getExtraDataLabelDictionary(selectedfilterFeat,selectedfilterSubfeat))
-  },[selectedfilterFeat,selectedfilterSubfeat])
+  // useEffect(() => {
+  //     setRadioData(getExtraDataLabelDictionary(selectedfilterFeat,selectedfilterSubfeat))
+  // },[selectedfilterFeat,selectedfilterSubfeat])
 
-	const handleSelection = (idx) => {
-		dispatch(updateExtraDataFeat({
-			  selectedExtraDataFeat: radioData[Object.keys(radioData)[idx]],
-        selectedExtraDataFeatLabel: Object.keys(radioData)[idx]
-		}))
-	}
+	// const handleSelection = (idx) => {
+	// 	dispatch(updateExtraDataFeat({
+	// 		  selectedExtraDataFeat: radioData[Object.keys(radioData)[idx]],
+  //       selectedExtraDataFeatLabel: Object.keys(radioData)[idx]
+	// 	}))
+	// }
 
-	/* Don't load this bar if there are no dataset options */
-	return (radioData) ? (
-		<div className="extraData-wrapper">
-=======
 	const handleSelection = (selected) => {
     radioClick(radioSelect[toggSelected].findIndex(option => option === selected.value))
 	}
@@ -53,7 +46,6 @@ function ExtraDataMenu(props) {
 	/* Don't load this bar if there are no dataset options */  
 	return (radioSelect && selectedCounty) ? (
     <div className="extraData-wrapper font-normal">
->>>>>>> main
 			<h3 className="extraData-title">Show data for:</h3>
       <Dropdown 
         arrowClassName='arrow'

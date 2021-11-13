@@ -9,11 +9,7 @@ import UnequalDonut from './DonutChart/UnEqualDonut/UnequalDonut'
 import LinkToSource from './LinkToSource/LinkToSource'
 
 import {filterFeatChart} from '../Utility/filterFeatChart'
-<<<<<<< HEAD
 import { dataOptions } from './dataOptions'
-=======
-import {dataOptions} from './dataOptions'
->>>>>>> main
 import {DataContext} from '../../App'
 
 /*
@@ -24,15 +20,10 @@ const RightHandMenu = () => {
   const dispatch = useDispatch();
 
   // get all County features data and selected feature option from redux store
-<<<<<<< HEAD
-  const {countyData} = useContext(DataContext)
-  const selectedFeat = useSelector(state => state.selectedFeat)
-=======
   const {countyData} = useContext(DataContext);
   const selectedFeat = useSelector(state => state.selectedFeat);
 
   const [dropDownValue, setDropDownValue] = useState(0)
->>>>>>> main
 
   const { selectedCounty, selectedfilterFeat } = selectedFeat;
 
