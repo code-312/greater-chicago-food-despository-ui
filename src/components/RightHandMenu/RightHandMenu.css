@@ -44,17 +44,6 @@
   align-self: center;
 }
 
-.rt__link {
-  color: black;
-  font-size: 10px;
-  padding-left: 5px;
-  font-weight: 500;
-}
-
-.rt__link:hover {
-  text-decoration: none;
-}
-
 .noCounty {
   display: flex;
   align-items: center;

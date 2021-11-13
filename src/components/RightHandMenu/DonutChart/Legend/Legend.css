@@ -1,15 +1,35 @@
 .legend {
-  margin-top: 20px;
+  margin-top: 20px; 
  }
  
+.leg__title {
+  margin: 0.5rem auto 0.5rem 1.2rem;
+  font: normal normal normal 1rem/1.3125rem futura-pt, sans-serif;
+  letter-spacing: 0px;
+  color: #1c752a;
+  opacity: 1;
+  margin-left: 0;
+}
+
  .leg__item {
+   cursor: pointer;
    display: flex;
    flex-direction: row;
    justify-content: space-between;
    align-items: center;
+   border-top: 1px solid #CED4DA;
    padding: 4px 0px 4px 6px;
  }
- 
+
+ .leg__item:last-child {
+     border-bottom: 1px solid #CED4DA;
+ }
+ .selected_item {
+     font-weight: 600;
+     background-color: rgba(206, 212, 218,.5);
+ }
+
+
  .leg__left {
    display: flex;
    align-items: center;

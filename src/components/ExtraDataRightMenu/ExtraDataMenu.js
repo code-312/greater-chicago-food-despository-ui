@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {useState, useEffect} from 'react'
 import RadioSelect from '../Utility/RadioSelect/RadioSelect'
 
@@ -10,9 +11,22 @@ function ExtraDataMenu(props) {
 	const dispatch = useDispatch()
   const selectedFeat = useSelector(state => state.selectedFeat)
   const { selectedfilterFeat, selectedfilterSubfeat, selectedCounty } = selectedFeat
+=======
+import React, { useEffect } from 'react'
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
+import { useSelector } from 'react-redux'
 
-  const [radioData, setRadioData] = useState(null)
+import './ExtraDataMenu.css'
 
+function ExtraDataMenu(props) {
+	const selectedFeat = useSelector(state => state.selectedFeat)
+  const { selectedCounty } = selectedFeat
+>>>>>>> main
+
+  const {radioSelect, toggSelected, radioClick, dropDownValue} = props
+
+<<<<<<< HEAD
   useEffect(() => {
       setRadioData(getExtraDataLabelDictionary(selectedfilterFeat,selectedfilterSubfeat))
   },[selectedfilterFeat,selectedfilterSubfeat])
@@ -27,12 +41,26 @@ function ExtraDataMenu(props) {
 	/* Don't load this bar if there are no dataset options */
 	return (radioData) ? (
 		<div className="extraData-wrapper">
+=======
+	const handleSelection = (selected) => {
+    radioClick(radioSelect[toggSelected].findIndex(option => option === selected.value))
+	}
+
+  useEffect(() => {
+    radioClick(dropDownValue)
+  }, [radioSelect, toggSelected, dropDownValue])
+  
+	/* Don't load this bar if there are no dataset options */  
+	return (radioSelect && selectedCounty) ? (
+    <div className="extraData-wrapper font-normal">
+>>>>>>> main
 			<h3 className="extraData-title">Show data for:</h3>
-			<RadioSelect
-				data={Object.keys(radioData)}
-				handleChange={handleSelection}
-				alignment={'column'}
-			/>
+      <Dropdown 
+        arrowClassName='arrow'
+        options={radioSelect[toggSelected]} 
+        onChange={handleSelection} 
+        value={radioSelect[toggSelected][0]}
+      />
 		</div>
 	) : ''
 }
