@@ -23,6 +23,7 @@ export function extractCountyAndMetricDictionary(
       selectedExtraDataFeat,
       currentObjectToSearch: countyData[county],
     });
+    console.log("Answer: ", countyMetricDict[countyName_Key]);
   }
 
   if( Object.values(countyMetricDict).includes(undefined)){
@@ -79,6 +80,10 @@ export function getDataForSelector({
 
       // selected filter feat is WIC
       case "WIC":
+        console.log("selectedfilterSubfeat: ", selectedfilterSubfeat);
+        console.log("selectedExtraDataFeat: ", selectedExtraDataFeat);
+        console.log("currentObjectToSearch: ", currentObjectToSearch);
+
         selectedfilterSubfeat = selectedfilterSubfeat || "wic_participation_total_data";
         selectedExtraDataFeat = selectedExtraDataFeat || "race_asian";
 
@@ -98,11 +103,6 @@ export function getDataForSelector({
               
           // selctedfilterSubfeaet is "Enrollment" (used to have && sedf substring "wic")
           } else if (selectedfilterSubfeat === "Enrollment") {
-            console.log("selectedfilterSubfeat: ", selectedfilterSubfeat);
-            console.log("selectedExtraDataFeat: ", selectedExtraDataFeat);
-            console.log("currentObjectToSearch: ", currentObjectToSearch);
-            console.log("Substring (0, len-6): ", selectedExtraDataFeat.substring(0,selectedExtraDataFeat.length - 6));
-            console.log("Substring (len-5): ", selectedExtraDataFeat.substring( selectedExtraDataFeat.length - 5));
             
             // if selectedExtraDataFeat not valid make it 'Women'
             selectedExtraDataFeat = (selectedExtraDataFeat === 'Women' ||selectedExtraDataFeat ===  'Infants' ||selectedExtraDataFeat ===  'Children') 
@@ -118,7 +118,16 @@ export function getDataForSelector({
               // no valid property selected
               return 0;
             }
-          }
+          
+          // selected sub feat is "Race"
+          } else if (selectedfilterSubfeat === "Race") {
+            // if county has WIC data
+            if (currentObjectToSearch.wic_participation_total_data) {
+              return currentObjectToSearch?.wic_participation_total_data?.['race_asian'];
+            } else {
+              return 0;
+            }
+          } 
         }
         // there is no selected filtered subfeat or no selected extra data
         break;

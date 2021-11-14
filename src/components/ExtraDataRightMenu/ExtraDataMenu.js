@@ -11,17 +11,6 @@ function ExtraDataMenu(props) {
 
   const {radioSelect, toggSelected, radioClick, dropDownValue} = props
 
-  // useEffect(() => {
-  //     setRadioData(getExtraDataLabelDictionary(selectedfilterFeat,selectedfilterSubfeat))
-  // },[selectedfilterFeat,selectedfilterSubfeat])
-
-	// const handleSelection = (idx) => {
-	// 	dispatch(updateExtraDataFeat({
-	// 		  selectedExtraDataFeat: radioData[Object.keys(radioData)[idx]],
-  //       selectedExtraDataFeatLabel: Object.keys(radioData)[idx]
-	// 	}))
-	// }
-
 	const handleSelection = (selected) => {
     radioClick(radioSelect[toggSelected].findIndex(option => option === selected.value))
 	}
