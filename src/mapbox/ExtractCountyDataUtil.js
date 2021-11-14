@@ -23,7 +23,6 @@ export function extractCountyAndMetricDictionary(
       selectedExtraDataFeat,
       currentObjectToSearch: countyData[county],
     });
-    console.log("Answer: ", countyMetricDict[countyName_Key]);
   }
 
   if( Object.values(countyMetricDict).includes(undefined)){
@@ -47,8 +46,15 @@ export function getDataForSelector({
   if (selectedfilterFeat) {
     switch (selectedfilterFeat) {
       case "poverty_data":
-        selectedfilterSubfeat =
-          selectedfilterSubfeat || "poverty_population_total";
+        selectedfilterSubfeat = (
+          selectedfilterSubfeat === "poverty_population_total" ||
+          selectedfilterSubfeat === "poverty_percentages" ||
+          selectedfilterSubfeat === "poverty_population_poverty_child" ||
+          selectedfilterSubfeat === "poverty_population_poverty"
+        )
+            ? selectedfilterSubfeat
+            : "poverty_population_total"
+
         return currentObjectToSearch[selectedfilterFeat][selectedfilterSubfeat];
         break;
 
@@ -80,10 +86,6 @@ export function getDataForSelector({
 
       // selected filter feat is WIC
       case "WIC":
-        console.log("selectedfilterSubfeat: ", selectedfilterSubfeat);
-        console.log("selectedExtraDataFeat: ", selectedExtraDataFeat);
-        console.log("currentObjectToSearch: ", currentObjectToSearch);
-
         selectedfilterSubfeat = selectedfilterSubfeat || "wic_participation_total_data";
         selectedExtraDataFeat = selectedExtraDataFeat || "race_asian";
 
