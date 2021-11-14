@@ -24,18 +24,18 @@ export function extractCountyAndMetricDictionary(
       currentObjectToSearch: countyData[county],
     });
   }
-    if( Object.values(countyMetricDict).includes(undefined)){
-        const newSelectedDataFeature =  getExtraDataLabelDictionary(selectedfilterFeat)[selectedExtraDataFeatLabel]
-        if(newSelectedDataFeature === selectedExtraDataFeatLabel){
-            throw new Error(`County metric is undefind for ${selectedfilterFeat,extraDataMenuFeat,selectedExtraDataFeatLabel}`)
-        }
-        selectedExtraDataFeat=  getExtraDataLabelDictionary(selectedfilterFeat)[selectedExtraDataFeatLabel]
-        return  extractCountyAndMetricDictionary(selectedFeat, { selectedExtraDataFeat }, countyData)
-    }
+
+  if( Object.values(countyMetricDict).includes(undefined)){
+      const newSelectedDataFeature =  getExtraDataLabelDictionary(selectedfilterFeat)[selectedExtraDataFeatLabel]
+      if(newSelectedDataFeature === selectedExtraDataFeatLabel){
+          throw new Error(`County metric is undefind for ${selectedfilterFeat,extraDataMenuFeat,selectedExtraDataFeatLabel}`)
+      }
+      selectedExtraDataFeat=  getExtraDataLabelDictionary(selectedfilterFeat)[selectedExtraDataFeatLabel]
+      return  extractCountyAndMetricDictionary(selectedFeat, { selectedExtraDataFeat }, countyData)
+  }
 
   return countyMetricDict;
 }
-
 
 export function getDataForSelector({
   selectedfilterFeat,
