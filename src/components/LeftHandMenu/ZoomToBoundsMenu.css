@@ -42,15 +42,19 @@
   padding: 12px 1rem !important;
 }
 
-button:last-child {
+.scroll button:last-child {
 border-bottom: none;
 }
 
-button:hover {
-  background-color: #F3F2D8;
+.scroll button:hover {
+  background-color: #CED4DA;
 }
 
-button:focus {
-  background-color: #F3F2D8;
+.scroll button:focus {
+  background-color: #CED4DA;
 }
 
+.selected-county {
+  background-color: #CED4DA;
+  font-weight: 600;
+}
