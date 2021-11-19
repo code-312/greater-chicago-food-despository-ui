@@ -4,10 +4,6 @@
  
 .leg__title {
   margin: 0.5rem auto 0.5rem 1.2rem;
-  font: normal normal normal 1rem/1.3125rem futura-pt, sans-serif;
-  letter-spacing: 0px;
-  color: #1c752a;
-  opacity: 1;
   margin-left: 0;
 }
 
@@ -19,6 +15,8 @@
    align-items: center;
    border-top: 1px solid #CED4DA;
    padding: 4px 0px 4px 6px;
+   width: 297px;
+   margin-left: -16px;
  }
 
  .leg__item:last-child {
@@ -33,18 +31,14 @@
  .leg__left {
    display: flex;
    align-items: center;
+   margin-left: 2rem;
  }
  
  .leg__color {
    width: 15px;
    height: 15px;
    border-radius: 3px;
-   margin-right: 10px;
- }
- 
- .leg__name {
-   font-size: 12px;
-   font-weight: 800;
+   margin-right: 1rem;
  }
  
  .leg__rt {
@@ -52,6 +46,7 @@
    font-weight: 600;
    float: right;
    white-space: nowrap;
+   margin-right: 2rem;
    /* overflow: scroll; */
  }
  
