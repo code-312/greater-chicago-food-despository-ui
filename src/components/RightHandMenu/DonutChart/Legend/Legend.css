@@ -17,14 +17,20 @@
    padding: 4px 0px 4px 6px;
    width: 297px;
    margin-left: -16px;
+   font: normal normal normal 0.875rem/0.875rem 'Hind';
  }
 
  .leg__item:last-child {
      border-bottom: 1px solid #CED4DA;
  }
+
+ .leg__item:hover {
+   background-color: #CED4DA;
+ }
+ 
  .selected_item {
      font-weight: 600;
-     background-color: rgba(206, 212, 218,.5);
+     background-color: #CED4DA;
  }
 
 
@@ -43,10 +49,10 @@
  
  .leg__rt {
    font-size: 10px;
-   font-weight: 600;
    float: right;
    white-space: nowrap;
    margin-right: 2rem;
-   /* overflow: scroll; */
+   font-family: 'Hind';
+   font-size: 0.875rem;
  }
  

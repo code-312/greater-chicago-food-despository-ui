@@ -12,7 +12,7 @@
 	padding: 4px 16px;
 	border-color: #1c752a;
 	border-radius: 5px;
-	font: normal normal normal 1rem futura-pt;
+	font: normal normal 600 1rem hind;
 }
 
 .is-open .Dropdown-control{
@@ -26,13 +26,12 @@
 }
 
 .Dropdown-option {
-	font: normal normal normal 1rem futura-pt;
+	font: normal normal 600 1rem hind;
 	padding: 4px 16px;
 }
 
 .Dropdown-option:hover {
-	background: rgba(206, 212, 218,.5);
-	/* background: #CED4DA; */
+	background: #CED4DA;
 }
 
 .Dropdown-option.is-selected {
