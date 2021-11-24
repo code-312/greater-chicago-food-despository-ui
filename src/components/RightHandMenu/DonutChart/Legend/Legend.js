@@ -17,6 +17,10 @@ function Legend(props) {
           : "Select data to display:"}
       </h3>
       {props.legend.map((item, idx) => (
+        // if total popu
+        item.key === 'Total Population' && props.legend[0].key === "Food Insecurity" ?
+        null
+        :
         <div
           className={`${
             idx === props.selectedIndex ? "selected_item": ""
@@ -65,7 +69,7 @@ function LegendItem({legendItem, index, displayValue}) {
         </div>
       </div>
       <div className="leg__rt" disabled="true" style={{color: "lightgrey"}}>
-        {displayValue}
+        {displayValue} fuck face
       </div>
     </>
   );
