@@ -47,14 +47,14 @@ border-bottom: none;
 }
 
 .scroll button:hover {
-  background-color: #CED4DA;
+  background-color: #E7E8EC;
 }
 
 .scroll button:focus {
-  background-color: #CED4DA;
+  background-color: #E7E8EC;
 }
 
 .selected-county {
-  background-color: #CED4DA;
+  background-color: #E7E8EC;
   font-weight: 600;
 }
