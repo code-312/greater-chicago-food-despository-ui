@@ -283,7 +283,7 @@ function Donut(props) {
               ))}
             </Pie>
           </PieChart>
-          <div className='donut__centerTxt'>
+          <div className='donut__centerTxt black'>
             <h5>Total Population</h5>
             <span>
 				        {dataType === 'percentValue'

@@ -148,7 +148,7 @@ function UnequalDonut(props) {
           dataKey='value'
         />
       </PieChart>
-        <div className='donut__centerTxt'>
+        <div className='donut__centerTxt black'>
           {(data[0].key === 'Food Insecurity' || data[0].key === 'Child Food Insecurity')
           ?
             <h5>Out of Total Population</h5>
