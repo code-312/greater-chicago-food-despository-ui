@@ -88,7 +88,7 @@ align-items: center;
   bottom: 50px; 
   left: 50px;
   background-color: var(--component-background-color);
-  font-family:'hind';   /*Should we just define this for the whole body?*/
+  font-family:'hind';
   color: var(--primary-font-color);
   font-size: 0.75rem;
   box-shadow: 0px 1px 4px #00000029;
