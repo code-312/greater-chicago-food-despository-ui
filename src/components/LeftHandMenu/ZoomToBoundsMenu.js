@@ -8,11 +8,12 @@ import {DataContext} from '../../App'
 
 import './ZoomToBoundsMenu.css'
 import CardHeader from '../Utility/CardHeader/CardHeader';
+import { selectedCounty } from '../../mapbox/LayerStyles';
 
 /**
  * COMPONENT: ZoomToBoundsMenu
  */
-const ZoomToBoundsMenu = () => {
+const ZoomToBoundsMenu = () => {    
     //useSelector gets viewport state from Redux store
     const currentViewport = useSelector(state => state.viewport);
     
@@ -83,6 +84,8 @@ export const ZoomToBoundsButton = ({keyValue, label, newViewport, countyID}) => 
     const selectedFeat = useSelector(state => state.selectedFeat)
     const filters = useSelector(state => state.filters)
 
+    const { selectedCounty, selectedfilterFeat } = selectedFeat;
+    
     const onZoomToBoundsButtonClick = (vp, keyValue, countyID) => {
         const currentCounty = {
             name: keyValue, 
@@ -96,11 +99,12 @@ export const ZoomToBoundsButton = ({keyValue, label, newViewport, countyID}) => 
         selectedCounty: ['in', 'COUNTY', currentCounty.id.slice(2,5)]
         }));
     }
+
     return (
         <button
             onClick={() => onZoomToBoundsButtonClick(newViewport, keyValue, countyID)}
             data-testid={"zoom_to_bounds_button_" + keyValue}
-            className="font-normal primary-color"
+            className={`font-normal primary-color ${(keyValue === selectedCounty?.name) ? 'selected-county' : ''}`}
         >{label}</button>
     )
 }

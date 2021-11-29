@@ -11,6 +11,8 @@ import LinkToSource from './LinkToSource/LinkToSource'
 import {filterFeatChart} from '../Utility/filterFeatChart'
 import { dataOptions } from './dataOptions'
 import {DataContext} from '../../App'
+import '../../AllieAwesomeCSS.css'
+import CardHeader from '../Utility/CardHeader/CardHeader'
 
 /*
  * COMPONENT: RightHandMenu
@@ -67,18 +69,14 @@ const RightHandMenu = () => {
       {selectedCounty && dataOptions[selectedfilterFeat] ? (
         <div className='rtMenu'>
           <div className='rtBody'>
-            <h1 className='rt__title'>
-              {dataOptions[selectedfilterFeat].title === 'Race/Ethnicity' ? (
-                <>
-                  Race/Ethnicity
-                  <span style={{ fontSize: '.85rem' }}> (Census)</span>
-                </>
+            {dataOptions[selectedfilterFeat].title === 'Race/Ethnicity' ? (
+                <CardHeader text={"Race/Ethnicity"} styleOverride={{ width: "297px", marginLeft: "-16px", marginTop: "-12px"}} />
               ) : (
-                dataOptions[selectedfilterFeat].title
+                <CardHeader text={
+                  dataOptions[selectedfilterFeat].title} styleOverride={{ width: "297px", marginLeft: "-16px", marginTop: "-12px"}} />
               )}
-            </h1>
-            <p className='rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
-            <h3 className='rt__name'>
+            <p className='font-small black rt__desc'>{dataOptions[selectedfilterFeat].desc}</p>
+            <h3 className='rt__name font-bold primary-color'>
               {selectedCounty ? selectedCounty.name + ' County' : ''}
             </h3>
 
@@ -126,7 +124,7 @@ const RightHandMenu = () => {
         </div>
       ) : (
         <div className='rtMenu noCounty'>
-          <p className='rt__noCounty'>
+          <p className='rt__noCounty font-large primary-color'>
             Select a county to view {dataOptions[selectedfilterFeat].title}
           </p>
         </div>
