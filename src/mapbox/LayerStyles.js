@@ -17,11 +17,7 @@
  */
 export const county = {
     id: 'county',
-    type: 'fill',
     paint:{
-        'fill-color': countyFill,
-        "fill-opacity": 0.5, 
-        "fill-outline-color": countyOutline
     }
 };
 

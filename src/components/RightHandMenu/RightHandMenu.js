@@ -9,7 +9,7 @@ import UnequalDonut from './DonutChart/UnEqualDonut/UnequalDonut'
 import LinkToSource from './LinkToSource/LinkToSource'
 
 import {filterFeatChart} from '../Utility/filterFeatChart'
-import {dataOptions} from './dataOptions'
+import { dataOptions } from './dataOptions'
 import {DataContext} from '../../App'
 import '../../AllieAwesomeCSS.css'
 import CardHeader from '../Utility/CardHeader/CardHeader'

@@ -57,14 +57,14 @@ function LegendItem({legendItem, index, displayValue}) {
       <div className="leg__left">
         <div
           className="leg__color"
-          disabled="true"
+          disabled={true}
           style={{backgroundColor: "lightgrey"}}
         ></div>
-        <div className="font-normal primary-color" disabled="true" style={{color: "lightgrey"}}>
+        <div className="font-normal primary-color" disabled={true} style={{color: "lightgrey"}}>
           {item.key}
         </div>
       </div>
-      <div className="leg__rt" disabled="true" style={{color: "lightgrey"}}>
+      <div className="leg__rt" disabled={true} style={{color: "lightgrey"}}>
         {displayValue}
       </div>
     </>
