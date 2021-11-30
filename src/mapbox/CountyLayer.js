@@ -1,13 +1,19 @@
-import React, {useContext, useMemo} from 'react'
+import React, {useContext, useMemo, useEffect} from 'react'
 import {Source, Layer} from 'react-map-gl';
-import {useSelector} from 'react-redux';
-import {county, selectedCounty, hoverCounty} from './LayerStyles';
+import { useSelector, useDispatch } from 'react-redux'
+import {mapColors,categoryOpacityGroup} from "./Colors"
+import {selectedCounty, hoverCounty} from './LayerStyles';
+import {setSelectionDefaults} from './MapSelectionDefaults';
 
 import {DataContext} from '../App'
 import {
   getCountyAndColorDictionary,
-  retrieveCountyAndMetricDictionary,
 } from "./CountyColorsUtil";
+
+import {extractCountyAndMetricDictionary,getDataForSelector} from "./ExtractCountyDataUtil.js"
+import {
+    getExtraDataLabelDictionary,
+} from './DataSelectionUtil';
 
 const CountyLevel = () => {
   /**
@@ -15,26 +21,57 @@ const CountyLevel = () => {
    * filter = hovered/highlight zipcode/county
    */
   const filters = useSelector(state => state.filters)
-  const { countyData, counties } = useContext(DataContext)
-
+  const { countyData, counties, metaData } = useContext(DataContext)
   const selectedFeat = useSelector(state => state.selectedFeat)
+  const selectedExtraDataFeat = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeat)
+  const selectedExtraDataFeatLabel = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeatLabel)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+      setSelectionDefaults({
+          selectedFeat,
+          dispatch,
+          selectedExtraDataFeat: selectedExtraDataFeat,
+      });
+  }, [selectedFeat]);
+
+
   const extraDataFeat = useSelector(state => state.extraDataMenuFeat)
   
+  let categoryRanges = getDataForSelector({
+      selectedfilterFeat: selectedFeat.selectedfilterFeat,
+      selectedfilterSubfeat: selectedFeat.selectedfilterSubfeat,
+      selectedExtraDataFeat: extraDataFeat.selectedExtraDataFeat,
+      currentObjectToSearch: metaData.data_bins.natural_breaks,
+  });
+
+  if(categoryRanges === undefined){
+      categoryRanges = getDataForSelector({
+          selectedfilterFeat: selectedFeat.selectedfilterFeat,
+          selectedfilterSubfeat: selectedFeat.selectedfilterSubfeat,
+          selectedExtraDataFeat: getExtraDataLabelDictionary(selectedFeat.selectedfilterFeat)[extraDataFeat.selectedExtraDataFeatLabel],
+         currentObjectToSearch: metaData.data_bins.natural_breaks,
+      });
+  }
+
   const countyColorDictionary= getCountyAndColorDictionary({
-        countyValueDictionary: retrieveCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData),
-        categoryMaximumValues: [25, 50, 75, Infinity],
-        colorsForCategories: ["#D8F9DB", "#7EC484", "#48944D", "#237528"],
+        countyValueDictionary: extractCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData),
+         categoryMaximumValues: [25, 50, 75, Infinity],
+      // categoryMaximumValues: categoryRanges.slice(1),
+        opacityGroup: categoryOpacityGroup,
         minimumCategoryValue: 0,
   })
+
   const colorLayers = useMemo(
       () =>
           Object.keys(countyColorDictionary).map((countyName) => (
               <Layer
-                {...{...county, id: countyName}}
+                {...{ id: countyName, type: 'fill'}}
                 key={countyName}
                 paint={{
-                    ...county.paint,
-                    "fill-color": countyColorDictionary[countyName],
+                    "fill-outline-color": "#124c1b", 
+                    "fill-color": mapColors[selectedExtraDataFeatLabel] || mapColors["ERROR"],
+                    "fill-opacity" : countyColorDictionary[countyName]
                 }}
                 filter={["in", "NAME", countyName]}
               />
@@ -42,13 +79,12 @@ const CountyLevel = () => {
       [countyColorDictionary],
   );
 
+      /* return null; */
   return (
     <Source id="counties" type="geojson" data={counties}>
       {colorLayers}
-      <Layer {...county}></Layer>
       <Layer {...selectedCounty} filter={filters.selectedCounty}></Layer>
       <Layer {...hoverCounty} filter={filters.highlightCounty}></Layer>
-     
     </Source>
   );
 };
