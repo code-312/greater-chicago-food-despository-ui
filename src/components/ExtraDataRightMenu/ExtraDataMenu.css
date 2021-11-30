@@ -13,6 +13,7 @@
 	border-color: #1c752a;
 	border-radius: 5px;
 	font: normal normal normal 1rem futura-pt;
+	cursor: pointer;
 }
 
 .is-open .Dropdown-control{
