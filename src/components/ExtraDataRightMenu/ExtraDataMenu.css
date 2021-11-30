@@ -44,7 +44,23 @@
 	border-bottom: 1px solid #1c752a;
 }
 
-.arrow {
+.is-open .Dropdown-arrow {
+	border-color: #1c752a transparent transparent transparent;
+}
+
+.arrow {	
+	border-color: #999 transparent transparent;
+	border-style: solid;
+	border-width: 5px 5px 0;
+	content: ' ';
+	display: block;
+	height: 0;
+	margin-top: -ceil(2.5);
+	position: absolute;
+	right: 10px;
+	top: 14px;
+	width: 0;
+
 	border-width: 7px;
 	border-top-color: #1c752a;
 	margin-top: -2px;
@@ -52,7 +68,5 @@
 }
 
 .is-open .arrow {
-	margin-top: -9px;
 	border-width: 7px;
-	border-bottom-color: #1c752a;
 }
