@@ -17,8 +17,13 @@ function Legend(props) {
           : "Select data to display:"}
       </h3>
       {props.legend.map((item, idx) => (
-        <div 
-          className={`${idx === props.selectedIndex ? "selected_item": ""} leg__item ${item.value === 0 ? "unselectable" : ""}`}
+        item.key === 'Total Population' && props.legend[0].key === "Food Insecurity" ?
+        null
+        :
+        <div
+          className={`${
+            idx === props.selectedIndex ? "selected_item": ""
+          } leg__item ${item.value === 0 ? "unselectable" : ""}`}
           key={idx}
           onClick={() => props.onClickLegend(idx)}
         >
