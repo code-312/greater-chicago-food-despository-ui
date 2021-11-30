@@ -17,10 +17,13 @@ function Legend(props) {
           : "Select data to display:"}
       </h3>
       {props.legend.map((item, idx) => (
+        item.key === 'Total Population' && props.legend[0].key === "Food Insecurity" ?
+        null
+        :
         <div
           className={`${
             idx === props.selectedIndex ? "selected_item": ""
-          } leg__item`}
+          } leg__item ${item.value === 0 ? "unselectable" : ""}`}
           key={idx}
           onClick={() => props.onClickLegend(idx)}
         >
@@ -57,14 +60,14 @@ function LegendItem({legendItem, index, displayValue}) {
       <div className="leg__left">
         <div
           className="leg__color"
-          disabled="true"
+          disabled={true}
           style={{backgroundColor: "lightgrey"}}
         ></div>
-        <div className="font-normal primary-color" disabled="true" style={{color: "lightgrey"}}>
+        <div className="font-normal primary-color" disabled={true} style={{color: "lightgrey"}}>
           {item.key}
         </div>
       </div>
-      <div className="leg__rt" disabled="true" style={{color: "lightgrey"}}>
+      <div className="leg__rt" disabled={true} style={{color: "lightgrey"}}>
         {displayValue}
       </div>
     </>
