@@ -25,7 +25,6 @@ function ExtraDataMenu(props) {
 			<h3 className="extraData-title font-bold primary-color">Show data for:</h3>
       <Dropdown 
         arrowClassName='arrow'
-        // arrowClosed='arrow'
         arrowOpen='arrow'
         options={radioSelect[toggSelected]} 
         onChange={handleSelection} 
