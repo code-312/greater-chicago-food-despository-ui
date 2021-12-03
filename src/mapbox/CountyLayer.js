@@ -2,7 +2,7 @@ import React, {useContext, useMemo, useEffect} from 'react'
 import {Source, Layer} from 'react-map-gl';
 import { useSelector, useDispatch } from 'react-redux'
 import {mapColors,categoryOpacityGroup} from "./Colors"
-import {selectedCounty, hoverCounty} from './LayerStyles';
+import {county, selectedCounty, hoverCounty} from './LayerStyles';
 import {setSelectionDefaults} from './MapSelectionDefaults';
 
 
