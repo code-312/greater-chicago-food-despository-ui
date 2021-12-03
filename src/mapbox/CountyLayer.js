@@ -81,7 +81,7 @@ const CountyLevel = () => {
 
  
   return (
-    <Source id="counties" type="geojson" data={illinois_counties.counties}>
+    <Source id="counties" type="geojson" data={counties}>
       {colorLayers} 
       <Layer {...county}></Layer>
       <Layer {...selectedCounty} filter={filters.selectedCounty}></Layer>
