@@ -1,23 +1,23 @@
 export function getCountyAndColorDictionary({
-  countyValueDictionary,
-  colorsForCategories,
-  categoryMaximumValues,
-  minimumCategoryValue,
+    countyValueDictionary,
+    opacityGroup,
+    categoryMaximumValues,
+    minimumCategoryValue,
 }) {
   const countyCategoryDictionary = getCategoryDictionary({
     categoryMaximumValues: categoryMaximumValues,
     valueDictionary: countyValueDictionary,
   });
-  return getColorDictionary({
-    colors: colorsForCategories,
+  return getOpacityDictionary({
+    opacityGroup: opacityGroup,
     categoryDictionary: countyCategoryDictionary,
   });
 }
 
-export function getColorDictionary({colors, categoryDictionary}) {
+export function getOpacityDictionary({opacityGroup, categoryDictionary}) {
   const categories = Object.values(categoryDictionary);
   const originalKeys = Object.keys(categoryDictionary);
-  const colorList = categories.map((category) => colors[category]);
+  const colorList = categories.map((category) => opacityGroup[category]);
 
   return getDictionary({keys: originalKeys, values: colorList});
 }
@@ -67,11 +67,83 @@ function getDictionary({keys, values}) {
   return newDictionary;
 }
 
-export function retrieveCountyAndMetricDictionary() {
-  /* NOTE: the county names must match the county names in the data parameter of
-   the Source component in the map. Example:
- <Source id="counties" type="geojson" data={illinois_counties.counties}>
-*/
+export function retrieveCountyAndMetricDictionary({ selectedfilterFeat, selectedfilterSubfeat }, selectedExtraDataFeat, countyData) {
+  let countyMetricDict = {};
+
+  if (countyData) {
+    for (const county in countyData) {
+      let countyName_Key = countyData[county].NAME.substring(0,countyData[county].NAME.length - 17);
+      if (selectedfilterFeat) {
+        switch (selectedfilterFeat) {
+          case 'poverty_data':
+            countyMetricDict[countyName_Key] = countyData[county][selectedfilterFeat][selectedfilterSubfeat];
+            break;
+
+          case 'insecurity_data':
+            countyMetricDict[countyName_Key] = countyData[county][selectedfilterFeat][selectedfilterSubfeat];
+            break;
+          case 'race_data':
+            if(selectedExtraDataFeat.includes("latino")){
+                selectedExtraDataFeat =  "hispanic_or_latino"
+            }
+            if(["race_unknown"].includes(selectedExtraDataFeat)){
+                selectedExtraDataFeat = "race_twoplus_total"
+            }
+
+            countyMetricDict[countyName_Key] = countyData[county][selectedfilterFeat][selectedExtraDataFeat];
+            break;
+          
+          case 'snap_data':
+            if(selectedExtraDataFeat.includes("latino")){
+                selectedExtraDataFeat = "race_hispaniclatino" 
+            }
+            if (selectedfilterSubfeat && selectedfilterSubfeat.length > 4) {
+              countyMetricDict[countyName_Key] = countyData[county][selectedfilterFeat][selectedfilterSubfeat.substring(0,4)][selectedfilterSubfeat.substring(4)][selectedExtraDataFeat];
+            };
+            break;
+          
+          case 'WIC':
+            if(selectedExtraDataFeat.includes("latino")){
+                selectedExtraDataFeat =  "hispanic_or_latino"
+            }
+
+            if(['race_twoplus_total'].includes(selectedExtraDataFeat)){
+                selectedExtraDataFeat ="race_multiracial"
+            }
+
+            if (selectedfilterSubfeat && selectedExtraDataFeat) {
+              if (selectedfilterSubfeat.substring(0,3) === 'wic' && selectedExtraDataFeat.substring !== 'wic') {
+                if (countyData[county][selectedfilterSubfeat]) {
+                  countyMetricDict[countyName_Key] = countyData[county][selectedfilterSubfeat][selectedExtraDataFeat];
+                } else {
+                  countyMetricDict[countyName_Key] = 0;
+                };
+              } else if (selectedfilterSubfeat === 'Enrollment' && selectedExtraDataFeat.substring(0,3) === 'wic') {
+                if(countyData[county][selectedExtraDataFeat.substring(0,selectedExtraDataFeat.length - 6)]) {
+                  countyMetricDict[countyName_Key] = countyData[county][selectedExtraDataFeat.substring(0,selectedExtraDataFeat.length - 6)][selectedExtraDataFeat.substring(selectedExtraDataFeat.length - 5)];
+                } else {
+                  countyMetricDict[countyName_Key] = 0;
+                };
+              };
+            };    
+            break;
+
+          default:
+            break;
+        };
+      };
+    };
+  };
+    if(Object.values(countyMetricDict).includes(undefined)){
+        throw Error(`
+CountyValue dictionary is partially undefined for 
+${JSON.stringify({selectedfilterFeat, selectedfilterSubfeat , selectedExtraDataFeat})}
+`);
+    }
+
+  return countyMetricDict;
+  /*
+  // countyMetricDict gives value of required feature as below
   return {
     //random sample data
     Hardin: 0,
@@ -177,5 +249,6 @@ export function retrieveCountyAndMetricDictionary() {
     Henry: 100,
     Grundy: 101,
   };
+  */
 }
 

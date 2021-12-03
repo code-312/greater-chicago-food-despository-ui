@@ -1,9 +1,9 @@
 # Greater Chicago Food Depository - Frontend UI
 
 ## Current Status
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3a338fa4-8edb-41a6-ac06-4e4295a895ad/deploy-status)](https://app.netlify.com/sites/gcfd/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3a338fa4-8edb-41a6-ac06-4e4295a895ad/deploy-status)](https://app.netlify.com/sites/cfc-mapping/deploys)
 
-View deployed site [here](https://gcfd.netlify.app/).
+View deployed site [here](https://cfc-mapping.netlify.app/).
 
 ## Development
 ### Local API Key Configuration

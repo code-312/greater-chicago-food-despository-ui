@@ -1,49 +1,76 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useContext} from "react";
+import {useSelector} from "react-redux";
+import {DataContext} from "../App";
+import {mapColors, categoryOpacityGroup} from "../mapbox/Colors";
+import {getExtraDataLabelDictionary} from "../mapbox/DataSelectionUtil";
+
+import {
+  extractCountyAndMetricDictionary,
+  getDataForSelector,
+} from "../mapbox/ExtractCountyDataUtil";
 
 /**
  * COMPONENT: MapColorLegend
- * This is the key/legend on the map showing the ranges represented by the colors 
+ * This is the key/legend on the map showing the ranges represented by the colors
  * of the counties & zipcodes.  This can be either numeric or percentage-based,
  * so the component should receive as inputs:
  * 1) the colors representing the selected metric
- * 2) the ranges of the bins; for mvp each bin is 25% but we still will need a range 
+ * 2) the ranges of the bins; for mvp each bin is 25% but we still will need a range
  * in case this is a numeric bin
  */
 function MapColorLegend(props) {
-
   /* For testing - remove later. These will be likely passed in as props */
-  const colors = [
-    '#D8F9DB',
-    '#7EC484',
-    '#48944D',
-    '#237528',
-  ];
+  const {metaData} = useContext(DataContext);
 
-  const ranges = [
-    '0-25%',
-    '25-50%',
-    '50-75%',
-    '75-100%'
-  ];
+  const {selectedfilterFeat, selectedfilterSubfeat} = useSelector(
+    (state) => state.selectedFeat,
+  );
+  const {selectedExtraDataFeat, selectedExtraDataFeatLabel} = useSelector(
+    (state) => state.extraDataMenuFeat,
+  );
+  const categoryRangesWithCurrentValues = getDataForSelector({
+    selectedfilterFeat,
+    selectedfilterSubfeat,
+    selectedExtraDataFeat,
+    currentObjectToSearch: metaData.data_bins.natural_breaks,
+  });
+  const categoryRanges = categoryRangesWithCurrentValues
+    ? categoryRangesWithCurrentValues
+    : getDataForSelector({
+        selectedfilterFeat,
+        selectedfilterSubfeat,
+        selectedExtraDataFeat: getExtraDataLabelDictionary(selectedfilterFeat)[
+          selectedExtraDataFeatLabel
+        ],
+        currentObjectToSearch: metaData.data_bins.natural_breaks,
+      });
 
-  const ranges_alt = [
-    '0-1533',
-    '1533-3439',
-    '3440-14564',
-    '145564-232434'
-  ];
 
+  const rangeLabels = categoryRanges
+    .map((value, i, allValues) => {
+      if (i === allValues.length - 1) {
+        return null;
+      }
+      return `${value}-${allValues[i + 1]}`;
+    })
+    .filter((range) => range !== null);
 
-  return !colors ? null : (
-    <div class="map-color-legend clearfix" >
+  return (
+    <div className="map-color-legend clearfix">
       <span>Color Key</span>
-      <div class="bin-container">
-        {colors.map((color, i) => {
+      <div className="bin-container">
+        {rangeLabels.map((range, i) => {
           return (
-            <div class="bin">
-              <div class="bin-color-sample" style={{background:color}}></div>
-              <span class="bin-label">{ranges ? ranges[i] : null}</span>
+            <div className="bin" key={range}>
+              <div
+                className="bin-color-sample"
+                style={{
+                  opacity: categoryOpacityGroup[i],
+                  background:
+                    mapColors[selectedExtraDataFeatLabel] || mapColors["ERROR"],
+                }}
+              ></div>
+              <span className="bin-label">{range}</span>
             </div>
           );
         })}

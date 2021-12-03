@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import './RadioSelect.css'
+import './../../../AllieAwesomeCSS.css'
 
 /*
  * COMPONENT: RadioSelect
@@ -35,7 +36,17 @@ function RadioSelect2(props) {
                    checked={selectFeat===idx} 
                    onChange={() => handleChange(idx)}>
             </input>
-            <h3 className='radioLabel'>{feature}</h3>
+            <h3 className='radioLabel font-normal primary-color'>
+              {feature === 'Race/Ethnicity' ? (
+                  <>
+                    Race/Ethnicity
+                    <span style={{ fontSize: '.65rem' }}> (Census)</span>
+                  </>
+                ) : (
+                  feature
+                )
+              }
+            </h3>
           </label>
         ))
       ): ''}

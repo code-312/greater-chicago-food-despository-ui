@@ -1,31 +1,34 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateVP } from '../../redux/viewportReducer';
 import { updateFilters } from './../../redux/filterReducer';
 import { updateSelectedFeat } from '../../redux/selectedFeatReducer';
 import {updateViewportToFitBounds} from '../../mapbox/Util';
+import {DataContext} from '../../App'
 
 import './ZoomToBoundsMenu.css'
+import CardHeader from '../Utility/CardHeader/CardHeader';
+import { selectedCounty } from '../../mapbox/LayerStyles';
 
 /**
  * COMPONENT: ZoomToBoundsMenu
  */
-const ZoomToBoundsMenu = () => {
+const ZoomToBoundsMenu = () => {    
     //useSelector gets viewport state from Redux store
     const currentViewport = useSelector(state => state.viewport);
     
-    const origin = {
-        latitude: 40.150196,
-        longitude: -89.367848, 
-        zoom: 6,
-    };
+    // const origin = {
+    //     latitude: 40.150196,
+    //     longitude: -89.367848, 
+    //     zoom: 6,
+    // };
 
     /**
    * Selector function
    * Returns a list of the county GeoJSON features
    */
+   const { counties } = useContext(DataContext);
    const countyFeatures = useSelector(state => {
-       const { counties } = state.illinois_counties;
         if(Object.keys(counties).length !== 0) {
             let { features } = counties;
             const sortedCountyFeatures = [...features].sort((a,b) => (a.properties.NAME > b.properties.NAME) ? 1 : -1);
@@ -59,7 +62,7 @@ const ZoomToBoundsMenu = () => {
     // list of buttons that re-orientate the map around a county
     return (
         <div className="county-list">
-            <div className="title">Select a County</div>
+            <CardHeader text="Select a County:" />
             <div className="scroll">
                 {countyButtons(countyFeatures)}
             </div>    
@@ -81,6 +84,8 @@ export const ZoomToBoundsButton = ({keyValue, label, newViewport, countyID}) => 
     const selectedFeat = useSelector(state => state.selectedFeat)
     const filters = useSelector(state => state.filters)
 
+    const { selectedCounty, selectedfilterFeat } = selectedFeat;
+    
     const onZoomToBoundsButtonClick = (vp, keyValue, countyID) => {
         const currentCounty = {
             name: keyValue, 
@@ -94,10 +99,12 @@ export const ZoomToBoundsButton = ({keyValue, label, newViewport, countyID}) => 
         selectedCounty: ['in', 'COUNTY', currentCounty.id.slice(2,5)]
         }));
     }
+
     return (
         <button
             onClick={() => onZoomToBoundsButtonClick(newViewport, keyValue, countyID)}
             data-testid={"zoom_to_bounds_button_" + keyValue}
+            className={`font-normal primary-color ${(keyValue === selectedCounty?.name) ? 'selected-county' : ''}`}
         >{label}</button>
     )
 }

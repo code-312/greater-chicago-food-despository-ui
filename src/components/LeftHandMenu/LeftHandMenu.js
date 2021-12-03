@@ -1,18 +1,16 @@
-import React from 'react';
-import ZoomToBoundsMenu from './ZoomToBoundsMenu';
-import DatasetSelector from './DatasetSelector/DatasetSelector'
-import ExtraDataMenu from '../ExtraDataRightMenu/ExtraDataMenu';
+import React from "react";
+import ZoomToBoundsMenu from "./ZoomToBoundsMenu";
+import DatasetSelector from "./DatasetSelector/DatasetSelector";
 
-import './LeftHandMenu.css'
+import "./LeftHandMenu.css";
 
 function LeftHandMenu() {
-	return (
-		<div className="left-menu">
-			<ZoomToBoundsMenu />
-			<DatasetSelector />
-			<ExtraDataMenu />
-		</div>
-	);
+  return (
+    <div className="left-menu">
+      <DatasetSelector />
+      <ZoomToBoundsMenu />
+    </div>
+  );
 }
 
 export default LeftHandMenu;
