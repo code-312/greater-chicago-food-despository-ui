@@ -197,7 +197,7 @@ const renderLabelonHover = (props) => {
 			<circle cx={ex} cy={ey} r={3} fill={fill} stroke="none" />
 
 			{/* Label name/ text at end tip of line from pie chart */}
-			<text textLength="30" x={tx} y={ty} textAnchor={textAnchor}>
+			<text textLength={value.length * 5} x={tx} y={ty} textAnchor={textAnchor}>
 				<tspan fill="#1c752a" x={tx} y={ty}>{`${payload.payload.key}`}</tspan>
 				<tspan
 					className="tspan__val"

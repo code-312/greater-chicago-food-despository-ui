@@ -79,7 +79,7 @@ const renderLabels = (props) => {
 
       {/* Label name/ text at end tip of line from pie chart */}
       <text
-        textLength='30'
+        textLength={value.length * 5}
         x={tx}
         y={ty}
         textAnchor={textAnchor}
