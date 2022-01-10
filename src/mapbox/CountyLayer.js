@@ -2,7 +2,7 @@ import React, {useContext, useMemo, useEffect} from 'react'
 import {Source, Layer} from 'react-map-gl';
 import { useSelector, useDispatch } from 'react-redux'
 import {mapColors,categoryOpacityGroup} from "./Colors"
-import {selectedCounty, hoverCounty} from './LayerStyles';
+import {selectedCounty, hoverCounty, county} from './LayerStyles';
 import {setSelectionDefaults} from './MapSelectionDefaults';
 
 import {DataContext} from '../App'
@@ -25,6 +25,7 @@ const CountyLevel = () => {
   const selectedFeat = useSelector(state => state.selectedFeat)
   const selectedExtraDataFeat = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeat)
   const selectedExtraDataFeatLabel = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeatLabel)
+  const test = useSelector(state => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -70,7 +71,7 @@ const CountyLevel = () => {
                 key={countyName}
                 paint={{
                     "fill-outline-color": "#124c1b", 
-                    "fill-color": mapColors[selectedExtraDataFeatLabel] || mapColors["ERROR"],
+                    "fill-color": mapColors[selectedExtraDataFeat] || mapColors.default,
                     "fill-opacity" : countyColorDictionary[countyName]
                 }}
                 filter={["in", "NAME", countyName]}

@@ -42,9 +42,9 @@ const Map = () => {
   const onHover = event => {
     // Extract the list of features and x,y coords from the event
     const { features, srcEvent: {offsetX, offsetY} } = event
-    
+   
     // Select the feature and corresponding countyId from the list of features if one exists
-    const countyFeature = features && features.find(f => f.layer.id === 'county')
+    const countyFeature = features && features.find(f => f.source === "counties")  
     const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode')
 
     //this object is more condensed and contains only non-serialized values -  for Redux
@@ -78,7 +78,7 @@ const Map = () => {
     const { features } = event
 
     // Select the feature and corresponding countyId from the list of features if one exists
-    const countyFeature = features && features.find(f => f.layer.id === 'county')
+    const countyFeature = features && features.find(f => f.source === "counties")
     const zipCodeFeature = features && features.find(f => f.layer.id === 'zipcode')
 
     //this object is more condensed and contains only non-serialized values -  for Redux
