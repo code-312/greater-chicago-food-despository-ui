@@ -67,7 +67,7 @@ function MapColorLegend(props) {
                 style={{
                   opacity: categoryOpacityGroup[i],
                   background:
-                    mapColors[selectedExtraDataFeatLabel] || mapColors["ERROR"],
+                    mapColors[selectedExtraDataFeat] || mapColors.default,
                 }}
               ></div>
               <span className="bin-label">{range}</span>
