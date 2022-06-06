@@ -24,8 +24,6 @@ const CountyLevel = () => {
   const { countyData, counties, metaData } = useContext(DataContext)
   const selectedFeat = useSelector(state => state.selectedFeat)
   const selectedExtraDataFeat = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeat)
-  const selectedExtraDataFeatLabel = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeatLabel)
-  const test = useSelector(state => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -79,7 +77,6 @@ const CountyLevel = () => {
       [countyColorDictionary],
   );
 
-      /* return null; */
   return (
     <Source id="counties" type="geojson" data={counties}>
       {colorLayers}
