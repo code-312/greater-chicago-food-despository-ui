@@ -24,8 +24,6 @@ const CountyLevel = () => {
   const { countyData, counties, metaData } = useContext(DataContext)
   const selectedFeat = useSelector(state => state.selectedFeat)
   const selectedExtraDataFeat = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeat)
-  const selectedExtraDataFeatLabel = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeatLabel)
-  const test = useSelector(state => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -57,8 +55,7 @@ const CountyLevel = () => {
 
   const countyColorDictionary= getCountyAndColorDictionary({
         countyValueDictionary: extractCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData),
-         categoryMaximumValues: [25, 50, 75, Infinity],
-      // categoryMaximumValues: categoryRanges.slice(1),
+        categoryMaximumValues: categoryRanges.slice(1),
         opacityGroup: categoryOpacityGroup,
         minimumCategoryValue: 0,
   })
@@ -80,7 +77,6 @@ const CountyLevel = () => {
       [countyColorDictionary],
   );
 
-      /* return null; */
   return (
     <Source id="counties" type="geojson" data={counties}>
       {colorLayers}

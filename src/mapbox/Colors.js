@@ -7,7 +7,7 @@ export const countyOutline = "#124c1b";
 export const zipcodeFill = "#F3AD1C";
 export const zipcodeOutline = "#a4720b";
 
-export const categoryOpacityGroup = [0.1, 0.4, 0.7, 1];
+export const categoryOpacityGroup = [0.2, 0.4, 0.6, 0.8, 1];
 export const mapColors = {
   race_asian: "#F3AD28",
   White: "#2CBA42",
