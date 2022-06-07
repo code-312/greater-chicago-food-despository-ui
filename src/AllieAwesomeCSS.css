@@ -41,14 +41,14 @@
     * Donut chart text
 */
 .font-small {
-    font: normal normal normal 0.625rem/0.625rem 'Hind';
+    font: normal normal normal 0.875rem/0.875rem 'Hind';
     letter-spacing: 0px;
     opacity: 1;
 }
 
 /* I'm useful :)  */
 .black {
-    color: black;
+    color: #26272a;
 }
 
 /* I'm useful :)  */

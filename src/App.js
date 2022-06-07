@@ -1,17 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {useDispatch} from "react-redux";
 
 
 import RightHandMenu from "./components/RightHandMenu/RightHandMenu";
 import Map from "./mapbox/Map";
+import MapColorLegend from "./components/MapColorLegend";
 import LeftHandMenu from "./components/LeftHandMenu/LeftHandMenu";
 import "./App.css";
 
 const App = () => {
-  //all data is received at once so it is not helpful to complicate it 
   const zipcodes = require("./fetched_data/zipLayer.json");
   const countyData = require('./fetched_data/countyData.json');
   const counties = require('./fetched_data/countyLayer.json')
-  return <DataLayer data={{zipcodes,countyData,counties}}/>;
+  const metaData = require('./fetched_data/metaData.json')
+  return <DataLayer data={{zipcodes,countyData,counties, metaData}}/>;
 };
 
 export const DataContext = React.createContext();

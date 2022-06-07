@@ -32,7 +32,6 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  background: #fff;
   border-bottom: 1px solid #CED4DA !important;
   border-right: none;
   border-top: none;
@@ -47,14 +46,14 @@ border-bottom: none;
 }
 
 .scroll button:hover {
-  background-color: #CED4DA;
+  background-color: #E7E8EC;
 }
 
 .scroll button:focus {
-  background-color: #CED4DA;
+  background-color: #E7E8EC;
 }
 
 .selected-county {
-  background-color: #CED4DA;
+  background-color: #E7E8EC;
   font-weight: 600;
 }

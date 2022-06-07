@@ -31,8 +31,8 @@
 
 .radioLabel {
   padding-left: 10px;
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 0.875rem;
+  font-weight: 400;
   margin: 0;
   display: inline-block;
 }
