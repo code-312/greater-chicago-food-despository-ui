@@ -5,7 +5,6 @@ import {mapColors, categoryOpacityGroup} from "../mapbox/Colors";
 import {getExtraDataLabelDictionary} from "../mapbox/DataSelectionUtil";
 
 import {
-  extractCountyAndMetricDictionary,
   getDataForSelector,
 } from "../mapbox/ExtractCountyDataUtil";
 

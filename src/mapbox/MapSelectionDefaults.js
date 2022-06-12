@@ -63,5 +63,7 @@ export function setSelectionDefaults({
       setSubFeature(defaultFeatures.wic_feature);
       setExtraDataFeatureDefault(defaultFeatures.wic_race);
       break;
+    default:
+      throw new Error(`Unexpected selected filter feature ${selectedfilterFeat}`);
   }
 }

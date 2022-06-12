@@ -251,16 +251,3 @@ ${JSON.stringify({selectedfilterFeat, selectedfilterSubfeat , selectedExtraDataF
   };
   */
 }
-
-function getScaledLightnessLevel({
-  value,
-  maxValue = 1,
-  minValue = 0,
-  maxLightness,
-  minLightness,
-}) {
-  //lightness from the hsl() color in css
-  const percent = value / (maxValue - minValue);
-  const range = maxLightness - minLightness;
-  return percent * range + minLightness;
-}
