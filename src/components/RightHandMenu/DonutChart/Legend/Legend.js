@@ -24,7 +24,9 @@ function Legend(props) {
               idx === props.selectedIndex ? "selected_item" : ""
             } leg__item ${item.value === 0 ? "unselectable" : ""}`}
             key={idx}
-            onClick={() => props.onClickLegend(idx)}
+            onClick={() =>
+              item.value !== 0 ? props.onClickLegend(idx) : undefined
+            }
           >
             <LegendItem
               legendItem={item}
