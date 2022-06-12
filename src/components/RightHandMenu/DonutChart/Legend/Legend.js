@@ -51,7 +51,7 @@ function LegendItem({ legendItem, index, displayValue }) {
             className="leg__color"
             style={{ backgroundColor: item.color }}
           ></div>
-          <div className="font-normal primary-color">{item.key}</div>
+          <div className="primary-color">{item.key}</div>
         </div>
         <div className="leg__rt">{displayValue}</div>
       </>
