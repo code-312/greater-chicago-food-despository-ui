@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { PieChart, Pie, Sector } from "recharts";
-import ExtraDataMenu from "../../../ExtraDataRightMenu/ExtraDataMenu";
-import "./UnequalDonut.css";
-import Legend from "../Legend/Legend";
+import React, { useState, useEffect } from 'react'
+import { PieChart, Pie, Sector } from 'recharts'
+import ExtraDataMenu from '../../../ExtraDataRightMenu/ExtraDataMenu'
+import './UnequalDonut.css'
+import Legend from '../Legend/Legend'
 
 // Mock Race Data; Similar Data should come in from Redux Slice
 // const data = [
@@ -23,30 +23,30 @@ const renderLabels = (props) => {
     innerRadius,
     outerRadius,
     value,
-    payload,
-  } = props;
+    payload
+  } = props
 
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + (outerRadius + 6.5) * cos;
-  const sy = cy + (outerRadius + 1) * sin;
+  const sin = Math.sin(-RADIAN * midAngle)
+  const cos = Math.cos(-RADIAN * midAngle)
+  const sx = cx + (outerRadius + 6.5) * cos 
+  const sy = cy + (outerRadius + 1) * sin
   // const mx = midAngle <= 10 || midAngle >= 350 || (midAngle >= 170 && midAngle <= 190)
   //             ? cx + (outerRadius + 30) * cos
-  //             : sx
-  const mx = sx;
-  const my = sy - (outerRadius - 10) * cos;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 15;
-  const ey = my;
-  const textAnchor = cos >= 0 ? "end" : "start";
-  const tx = ex + (cos >= 0 ? 1 : -1) * 20;
-  const ty = ey + (sin >= 0 ? 1 : -1) * 16;
+  //             : sx 
+  const mx = sx
+  const my = sy - (outerRadius - 10) * cos
+  const ex = mx + (cos >= 0 ? 1 : -1) * 15
+  const ey = my
+  const textAnchor = cos >= 0 ? 'end' : 'start'
+  const tx= ex + (cos >= 0 ? 1 : -1) * 20
+  const ty= ey + (sin >= 0 ? 1 : -1) * 16
 
   return (
     <g>
       {/* <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
         {payload.name}
         </text> */}
-
+      
       {/* Create a sector on top of pie chart with larger width (inner and outer radius) to create visual effect that it is a cell of pie */}
       <Sector
         cx={cx}
@@ -55,7 +55,7 @@ const renderLabels = (props) => {
         outerRadius={outerRadius}
         startAngle={startAngle}
         endAngle={endAngle}
-        fill="#2cba42"
+        fill='#2cba42'
       />
       <Sector
         cx={cx}
@@ -64,31 +64,33 @@ const renderLabels = (props) => {
         endAngle={endAngle}
         innerRadius={outerRadius + 4}
         outerRadius={outerRadius + 6}
-        fill="#2cba42"
+        fill='#2cba42'
       />
 
       {/* line from pie chart to label name */}
       <path
         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-        stroke="#2cba42"
-        fill="none"
+        stroke='#2cba42'
+        fill='none'
       />
 
       {/* Circle at the tip of line */}
-      <circle cx={ex} cy={ey} r={3} fill="#2cba42" stroke="none" />
+      <circle cx={ex} cy={ey} r={3} fill='#2cba42' stroke='none' />
 
       {/* Label name/ text at end tip of line from pie chart */}
-      <text x={tx} y={ty} textAnchor={textAnchor}>
-        <tspan fill="#1c752a" x={tx} y={ty}>{`${payload.payload.key}`}</tspan>
+      <text
+        x={tx}
+        y={ty}
+        textAnchor={textAnchor}
+      >
+        <tspan 
+          fill='#1c752a'
+          x={tx}
+          y={ty}>{`${payload.payload.key}`}</tspan>
         <tspan
-          className="tspan__val"
+          className='tspan__val'
           x={tx + (cos >= 0 ? -1 : 1) * 6}
-          y={ty + 10}
-        >
-          {payload.payload.percent
-            ? `${value} (${payload.payload.percent}%)`
-            : value + " %"}
-        </tspan>
+          y={ty + 10}>{payload.payload.percent ? `${value} (${payload.payload.percent}%)` : value + ' %'}</tspan>
       </text>
     </g>
   );
@@ -100,91 +102,76 @@ const renderLabels = (props) => {
  * data slice filtered as per radioSelct and ToggleSelect to be used in place of mockData
  */
 function UnequalDonut(props) {
-  const [legend, setLegend] = useState([]);
-  const [sum, setSum] = useState(0);
+  const [legend, setLegend] = useState([])
+  const [sum, setSum] = useState(0)
 
-  // ActiveIndex identifies on which cell index of pie renderActiveShape function is to be called
+  // ActiveIndex identifies on which cell index of pie renderActiveShape function is to be called 
   // fixed to 0 as 1st element is the only one requiring label and sector overlay
-  const [activeIndex] = useState(0);
+  const [activeIndex, ] = useState(0)
 
-  const {
-    data,
-    dataType,
-    radioSelect,
-    toggSelected,
-    radioClick,
-    dropDownValue,
-  } = props;
+  const { data, dataType, radioSelect, toggSelected, radioClick, dropDownValue } = props
   useEffect(() => {
     if (data) {
       let sum1 = data.reduce(function (acc, curr) {
-        return acc + curr.value;
-      }, 0);
-      const legendData = [
-        {
-          key: data[0].key,
-          value: data[0].value,
-          color: "#2cba42",
-          percent: data[0].percent !== undefined ? data[0].percent : "",
-        },
-        {
-          key: data[1].key,
-          value: sum1,
-          color: "#124c1b",
-          percent: data[1].percent !== undefined ? data[1].percent : "",
-        },
-      ];
-      setSum(sum1);
-      setLegend([...legendData]);
+        return acc + curr.value
+      }, 0)
+      const legendData =  [
+        { key: data[0].key, 
+          value: data[0].value, 
+          color: '#2cba42', 
+          percent: data[0].percent !== undefined? data[0].percent : '' },
+        { key: data[1].key, 
+          value: sum1, 
+          color: '#124c1b', 
+          percent: data[1].percent !== undefined ? data[1].percent : '' }
+      ]
+      setSum(sum1)
+      setLegend([...legendData])
     }
-  }, [data]);
+  },[data])
 
   return (
     <div>
-      <div className="donut__chart">
-        <PieChart width={273} height={250}>
-          <Pie
-            activeIndex={activeIndex}
-            activeShape={renderLabels}
-            data={data}
-            cx={130}
-            cy={125}
-            innerRadius={54}
-            outerRadius={69}
-            fill="#124c1b"
-            paddingAngle={0}
-            dataKey="value"
-          />
-        </PieChart>
-        <div className="donut__centerTxt black">
-          {data[0].key === "Food Insecurity" ||
-          data[0].key === "Child Food Insecurity" ? (
+      <div className='donut__chart'>
+      <PieChart width={273} height={250}>
+        <Pie
+          activeIndex={activeIndex}
+          activeShape={renderLabels}
+          data={data}
+          cx={130}
+          cy={125}
+          innerRadius={54}
+          outerRadius={69}
+          fill='#124c1b'
+          paddingAngle={0}
+          dataKey='value'
+        />
+      </PieChart>
+        <div className='donut__centerTxt black'>
+          {(data[0].key === 'Food Insecurity' || data[0].key === 'Child Food Insecurity')
+          ?
             <h5>Out of Total Population</h5>
-          ) : (
-            <>
+          :
+            <>  
               <h5>Total Population</h5>
-              <span>
-                {dataType === "percentValue"
-                  ? `${sum} (${data[1].percent}%)`
-                  : dataType === "percent"
-                  ? sum + " %"
-                  : sum}
-              </span>
+              <span>{dataType === 'percentValue'  ? `${sum} (${data[1].percent}%)` : dataType === 'percent' ? sum + ' %' : sum}</span>
             </>
-          )}
+          } 
         </div>
       </div>
-      {radioSelect && radioSelect[toggSelected] && (
-        <ExtraDataMenu
-          radioSelect={radioSelect}
-          toggSelected={toggSelected}
-          radioClick={radioClick}
-          dropDownValue={dropDownValue}
-        />
-      )}
+      {
+				radioSelect && radioSelect[toggSelected] && (
+					<ExtraDataMenu 
+						radioSelect={radioSelect}
+						toggSelected={toggSelected}
+						radioClick={radioClick}
+            dropDownValue={dropDownValue}
+					/>
+				)
+			}
       <Legend legend={legend} dataType={dataType} />
     </div>
-  );
+  )
 }
 
-export default UnequalDonut;
+export default UnequalDonut
