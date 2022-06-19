@@ -24,7 +24,6 @@ export function getFilterFeaturesFromSelection({
   extraDataMenuLabel = null,
   selectedCounty = null,
 }) {
-  const featOptions = getFeatOptions();
   const labelToFeatureDicitonary = {
     Census: "race_data",
     "WIC Usage": "wic_participation",

@@ -10,7 +10,7 @@
  * https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/
  */
 
- import {highlight, countyFill, countyOutline, zipcodeFill, zipcodeOutline} from './Colors'
+ import {highlight, zipcodeFill, zipcodeOutline} from './Colors'
 
 /**
  * Base styling for county layer objects

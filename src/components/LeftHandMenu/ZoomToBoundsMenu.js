@@ -8,7 +8,6 @@ import {DataContext} from '../../App'
 
 import './ZoomToBoundsMenu.css'
 import CardHeader from '../Utility/CardHeader/CardHeader';
-import { selectedCounty } from '../../mapbox/LayerStyles';
 
 /**
  * COMPONENT: ZoomToBoundsMenu
@@ -84,7 +83,7 @@ export const ZoomToBoundsButton = ({keyValue, label, newViewport, countyID}) => 
     const selectedFeat = useSelector(state => state.selectedFeat)
     const filters = useSelector(state => state.filters)
 
-    const { selectedCounty, selectedfilterFeat } = selectedFeat;
+    const { selectedCounty } = selectedFeat;
     
     const onZoomToBoundsButtonClick = (vp, keyValue, countyID) => {
         const currentCounty = {

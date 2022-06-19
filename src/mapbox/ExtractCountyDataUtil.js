@@ -28,7 +28,7 @@ export function extractCountyAndMetricDictionary(
   if( Object.values(countyMetricDict).includes(undefined)){
       const newSelectedDataFeature =  getExtraDataLabelDictionary(selectedfilterFeat)[selectedExtraDataFeatLabel]
       if(newSelectedDataFeature === selectedExtraDataFeatLabel){
-          throw new Error(`County metric is undefind for ${selectedfilterFeat,extraDataMenuFeat,selectedExtraDataFeatLabel}`)
+          throw new Error(`County metric is undefind for ${selectedfilterFeat} ${extraDataMenuFeat} ${selectedExtraDataFeatLabel}`)
       }
       selectedExtraDataFeat=  getExtraDataLabelDictionary(selectedfilterFeat)[selectedExtraDataFeatLabel]
       return  extractCountyAndMetricDictionary(selectedFeat, { selectedExtraDataFeat }, countyData)
@@ -56,18 +56,15 @@ export function getDataForSelector({
             : "poverty_population_total"
 
         return currentObjectToSearch[selectedfilterFeat][selectedfilterSubfeat];
-        break;
 
       case "insecurity_data":
         selectedfilterSubfeat =
           selectedfilterSubfeat || "insecurity_2018_child";
         return currentObjectToSearch[selectedfilterFeat][selectedfilterSubfeat];
-        break;
 
       case "race_data":
         selectedExtraDataFeat = selectedExtraDataFeat || "race_asian";
         return currentObjectToSearch[selectedfilterFeat][selectedExtraDataFeat];
-        break;
 
       case "snap_data":
         selectedfilterSubfeat = selectedfilterSubfeat || "2019age_18-65";
