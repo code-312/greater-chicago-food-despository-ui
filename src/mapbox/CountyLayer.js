@@ -2,7 +2,7 @@ import React, {useContext, useMemo, useEffect} from 'react'
 import {Source, Layer} from 'react-map-gl';
 import { useSelector, useDispatch } from 'react-redux'
 import {mapColors,categoryOpacityGroup} from "./Colors"
-import {selectedCounty, hoverCounty} from './LayerStyles';
+import {selectedCounty, hoverCounty, county} from './LayerStyles';
 import {setSelectionDefaults} from './MapSelectionDefaults';
 
 import {DataContext} from '../App'
@@ -24,7 +24,6 @@ const CountyLevel = () => {
   const { countyData, counties, metaData } = useContext(DataContext)
   const selectedFeat = useSelector(state => state.selectedFeat)
   const selectedExtraDataFeat = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeat)
-  const selectedExtraDataFeatLabel = useSelector(state => state.extraDataMenuFeat.selectedExtraDataFeatLabel)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -56,8 +55,7 @@ const CountyLevel = () => {
 
   const countyColorDictionary= getCountyAndColorDictionary({
         countyValueDictionary: extractCountyAndMetricDictionary(selectedFeat, extraDataFeat, countyData),
-         categoryMaximumValues: [25, 50, 75, Infinity],
-      // categoryMaximumValues: categoryRanges.slice(1),
+        categoryMaximumValues: categoryRanges.slice(1),
         opacityGroup: categoryOpacityGroup,
         minimumCategoryValue: 0,
   })
@@ -70,7 +68,7 @@ const CountyLevel = () => {
                 key={countyName}
                 paint={{
                     "fill-outline-color": "#124c1b", 
-                    "fill-color": mapColors[selectedExtraDataFeatLabel] || mapColors["ERROR"],
+                    "fill-color": mapColors[selectedExtraDataFeat] || mapColors.default,
                     "fill-opacity" : countyColorDictionary[countyName]
                 }}
                 filter={["in", "NAME", countyName]}
@@ -79,7 +77,6 @@ const CountyLevel = () => {
       [countyColorDictionary],
   );
 
-      /* return null; */
   return (
     <Source id="counties" type="geojson" data={counties}>
       {colorLayers}

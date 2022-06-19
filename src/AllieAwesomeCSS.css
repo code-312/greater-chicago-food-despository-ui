@@ -30,6 +30,12 @@
     opacity: 1;
 }
 
+.font-semibold {
+    font: normal normal 600 0.875rem/0.875rem 'Hind';
+    letter-spacing: 0px;
+    opacity: 1;
+}
+
 /* Used in:
     * Breadtext
     * Donut chart text
